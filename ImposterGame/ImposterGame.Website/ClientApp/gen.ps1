@@ -8,7 +8,9 @@ If($type -eq 'c'){
 ElseIf ($type -eq 'p'){
     $componentName = Read-Host 'Name of page component'
 
-    ng g c components/pages/$componentName  --module app
+    $pageName = $componentName + "Page"
+
+    ng g c components/pages/$pageName  --module app
 }
 ElseIf ($type -eq 's'){
     $serviceName = Read-Host 'Name of service'
