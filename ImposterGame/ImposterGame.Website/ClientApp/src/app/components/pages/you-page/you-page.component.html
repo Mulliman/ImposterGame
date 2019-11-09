@@ -1,0 +1,15 @@
+<app-header></app-header>
+
+<div class="page-container">
+    <form [formGroup]="form" (ngSubmit)="submitForm(form.value)">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Name" formControlName="name" required>
+            <mat-error *ngIf="name?.errors && name?.errors['required']">Name is required</mat-error>
+            <mat-error *ngIf="name?.errors && name?.errors['pattern']">Name is must only be letters or numbers</mat-error>
+        </mat-form-field>
+        <button class="submit-btn" color="primary" mat-raised-button type="submit"
+            [disabled]="!form.valid">Submit</button>
+    </form>
+</div>
+
+<app-footer></app-footer>

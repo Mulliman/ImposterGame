@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  pages: {
+    home: "",
+    you: "you",
+    game: "game",
+    newRound: "new-round",
+    chooseGrid: "choose-grid",
+    round: "round",
+    chooseImposter: "choose-imposter",
+    imposterGuess: "imposter-guess",
+    roundScores: "round-scores"
+}
 };
 
 /*
