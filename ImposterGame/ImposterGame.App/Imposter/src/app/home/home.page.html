@@ -1,9 +1,68 @@
 <app-header></app-header>
 
-<ion-content>
-  <div class="ion-padding">
-    
-  </div>
+<ion-content fullscreen padding scroll-y="false">
+  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" pager="true" #HomeSlider>
+
+      <ion-slide>
+          <div>
+            <h1>Imposter!</h1>
+            <h3>Can you fit in the group despite not knowing what the rest of the group know?</h3>
+
+            <ion-button (click)="swipeNext()">Learn to play</ion-button>
+          </div>
+        </ion-slide>
+
+    <ion-slide>
+      <div>
+        <p>At the start of each round, the host will select a category. This category contains a selection of words of
+          which one will be selected to be the secret word.</p>
+        <p>Most players will see this secret word highlighted on their gird, however one player will not. This person is
+          the imposter.</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>
+        <p>Once the round has started each player must say a word that relates to the secret word. As the imposter
+          doesn't know what the secret word is, they must try to blend in with the answer that they choose.</p>
+        <p>Answers must be clear enough to prove that you are not the imposter, but you don't want to be so specific so
+          that the imposter can guess what the secret word is.</p>
+        <p>Players can answer at any time. Answering first reduce other user's suspicion of you, do you want to risk
+          being the last to answer?</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>
+        <p>When all players have answered, players can then interrogate each other to try and determine who the imposter
+          is.</p>
+        <p>The imposter needs to use this time to prove that they know what the answer is, without saying what it is. By
+          deflecting accusations to other users can you avoid suspicion while also picking up clues to help you fins
+          the secret word?</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>
+        <p>After the interrogation has finished each player must then select the user that they think is the imposter.
+        </p>
+        <p>If you are sure of your accusation, you can wager more points. If you are correct you will get all of those
+          points added to your total.</p>
+        <p>However, if you guess wrong the imposter will get those points instead. Do you trust your gut?</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>
+        <p>Once all wagers are placed, the votes will be tallied. Have you successfully found the imposter?</p>
+        <p>The imposter will be revealed. Once revealed, the imposter has a chance to guess the correct answer.</p>
+        <p>If the imposter guesses the secret word correctly, the clues given by other user were clearly poor. The
+          imposter will get one bonus point per player.</p>
+        <p>If the imposter does not guess the secret word, each player gets one bonus point each.</p>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
 </ion-content>
 
 <app-footer></app-footer>

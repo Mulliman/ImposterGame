@@ -1,3 +1,4 @@
 <ion-footer>
-  <ion-button expand="full" size="large">Leave game</ion-button>
+  <ion-button *ngIf="!hasJoinedGame" expand="full" size="large">Play game</ion-button>
+  <ion-button *ngIf="hasJoinedGame" expand="full" size="large">Leave game</ion-button>
 </ion-footer>

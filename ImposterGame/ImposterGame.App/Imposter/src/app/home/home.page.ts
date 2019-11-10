@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  @ViewChild('HomeSlider', { static: true }) slides: IonSlides;
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    slidesPerView: 1,
+    pager: true,
+  };
+
+  constructor() { }
+
+  swipeNext() {
+    this.slides.slideNext();
+  }
 }
