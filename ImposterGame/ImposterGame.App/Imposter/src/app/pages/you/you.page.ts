@@ -1,15 +1,55 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { BaseGamePage } from '../baseGamePage';
+import { PlayerService } from 'src/app/services/player.service';
+import { GameService } from 'src/app/services/game.service';
+import { AppPagesService } from 'src/app/services/app-pages.service';
+import { BaseGameFormPage } from '../baseGameFormPage';
 
 @Component({
   selector: 'app-you',
   templateUrl: './you.page.html',
   styleUrls: ['./you.page.scss'],
 })
-export class YouPage implements OnInit {
+export class YouPage extends BaseGameFormPage {
+  
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(playerService: PlayerService,
+    gameService: GameService,
+    appPages: AppPagesService,
+    formBuilder: FormBuilder) {
+    super(playerService, gameService, appPages, formBuilder);
   }
 
+  setAllowedStates(): string[] {
+    // No game setup yet, so all states are technically allowed.
+    return null;
+  }
+
+  gamePageOnInit() {
+    
+  }
+
+  instantiateForm() {
+    this.form = this.formBuilder.group({
+      name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(15)]]
+    });
+  }
+
+  async saveName() {
+    try {
+
+      if(!this.form.valid){
+        return;
+      }
+
+      let name = this.form.get("name").value;
+      await this.playerService.setCurrentPlayer(name);
+
+      alert("Saved");
+    } catch (e) {
+      alert("Error saving name.");
+      console.log(e);
+    }
+  }
 }

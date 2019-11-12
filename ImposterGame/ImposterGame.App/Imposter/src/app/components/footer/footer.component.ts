@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
+import { AppPagesService } from 'src/app/services/app-pages.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,10 +10,22 @@ import { GameService } from 'src/app/services/game.service';
 export class FooterComponent implements OnInit {
   hasJoinedGame: boolean;
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService,
+    private appPages: AppPagesService) { }
 
   async ngOnInit() {
     this.hasJoinedGame = this.gameService.hasJoinedGame;
   }
 
+  playGame(){
+    this.appPages.goToYouPage();
+  }
+
+  async leaveGame(){
+
+    // TODO Call API
+
+    this.appPages.goToHomePage();
+
+  }
 }

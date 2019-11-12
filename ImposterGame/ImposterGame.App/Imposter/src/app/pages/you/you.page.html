@@ -1,7 +1,27 @@
 <app-header></app-header>
 
-<ion-content>
+<ion-content fullscreen padding scroll-y="false" class="ion-padding">
+
+  <ion-row justify-content-center align-items-center class="full-page-row">
+
+    <div class="ion-text-center">
+      <ion-text>
+        <h1>Who are you?</h1>
+      </ion-text>
+
+      <form [formGroup]="form">
+        <ion-item>
+          <ion-label color="primary" position="floating">Name</ion-label>
+          <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <app-error-message [control]="'name'"></app-error-message>
+      </form>
+    </div>
+
+  </ion-row>
 
 </ion-content>
 
-<app-footer></app-footer>
+<ion-footer>
+  <ion-button [disabled]="!form.valid" expand="full" size="large" (click)="saveName()">Start!</ion-button>
+</ion-footer>
