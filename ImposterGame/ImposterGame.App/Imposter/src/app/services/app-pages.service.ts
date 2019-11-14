@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameModel } from './game.service';
 import { PlayerModel } from './player.service';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -10,28 +11,34 @@ export class AppPagesService {
 
   public routes = {
     home: "home",
-    you: "you"
+    you: "you",
+    newGame: "new-game"
   }
 
-  constructor(private router: Router) {
+  constructor(private navController: NavController) {
   }
 
-  ensureOnMostAppropriatePage(player: PlayerModel, game: GameModel) {
+  async ensureOnMostAppropriatePage(player: PlayerModel, game: GameModel) {
+    console.log("ensureOnMostAppropriatePage");
     if (!player) {
-      this.goToYouPage();
+      await this.goToYouPage();
       return;
     }
 
     // TODO: Add other states here.
 
-    this.goToHomePage();
+    //await this.goToNewGamePage();
   }
 
-  goToHomePage() {
-    this.router.navigate([`/${this.routes.home}`]);
+  async goToHomePage() {
+    await this.navController.navigateForward([`/${this.routes.home}`]);
   }
 
-  goToYouPage() {
-    this.router.navigate([`/${this.routes.you}`]);
+  async goToYouPage() {
+    await this.navController.navigateForward([`/${this.routes.you}`]);
+  }
+
+  async goToNewGamePage() {
+    await this.navController.navigateForward([`/${this.routes.newGame}`]);
   }
 }

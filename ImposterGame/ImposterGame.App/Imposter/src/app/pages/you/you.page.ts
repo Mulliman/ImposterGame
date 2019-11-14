@@ -13,7 +13,6 @@ import { BaseGameFormPage } from '../baseGameFormPage';
 })
 export class YouPage extends BaseGameFormPage {
   
-
   constructor(playerService: PlayerService,
     gameService: GameService,
     appPages: AppPagesService,
@@ -27,7 +26,9 @@ export class YouPage extends BaseGameFormPage {
   }
 
   gamePageOnInit() {
-    
+    this.form.patchValue({
+      name: this.player.name
+    });
   }
 
   instantiateForm() {
@@ -46,10 +47,18 @@ export class YouPage extends BaseGameFormPage {
       let name = this.form.get("name").value;
       await this.playerService.setCurrentPlayer(name);
 
-      alert("Saved");
+      await this.appPages.goToNewGamePage();
     } catch (e) {
       alert("Error saving name.");
       console.log(e);
     }
+  }
+
+  async goToNewGame(){
+    await this.appPages.goToNewGamePage();
+  }
+
+  async leaveGame(){
+    await this.gameService.leaveGame(this.player, this.currentGame.gameCode);
   }
 }

@@ -1,10 +1,10 @@
 <app-header></app-header>
 
-<ion-content fullscreen padding scroll-y="false" class="ion-padding">
+<ion-content fullscreen scroll-y="false" class="ion-padding">
 
-  <ion-row justify-content-center align-items-center class="full-page-row">
+  <ion-row class="full-page-row ion-justify-content-center ion-align-items-center">
 
-    <div class="ion-text-center">
+    <div class="ion-text-center" *ngIf="!currentGame">
       <ion-text>
         <h1>Who are you?</h1>
       </ion-text>
@@ -18,10 +18,20 @@
       </form>
     </div>
 
+    <div class="ion-text-center" *ngIf="currentGame">
+      <ion-text>
+        <h1>Hi {{player.name}}</h1>
+        <h3>If you want to change your name, you need to leave the current game.</h3>
+      </ion-text>
+
+      <ion-button expand="block" (click)="leaveGame()">Leave Game</ion-button>
+    </div>
+
   </ion-row>
 
 </ion-content>
 
 <ion-footer>
-  <ion-button [disabled]="!form.valid" expand="full" size="large" (click)="saveName()">Start!</ion-button>
+  <ion-button *ngIf="currentGame" expand="full" size="large" (click)="goToNewGame()">Start!</ion-button>
+  <ion-button *ngIf="!currentGame" [disabled]="!form.valid" expand="full" size="large" (click)="saveName()">Start!</ion-button>
 </ion-footer>

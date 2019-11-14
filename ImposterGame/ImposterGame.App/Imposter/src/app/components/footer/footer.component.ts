@@ -17,15 +17,15 @@ export class FooterComponent implements OnInit {
     this.hasJoinedGame = this.gameService.hasJoinedGame;
   }
 
-  playGame(){
-    this.appPages.goToYouPage();
+  async playGame(){
+    await this.appPages.goToYouPage();
   }
 
   async leaveGame(){
 
     // TODO Call API
 
-    this.appPages.goToHomePage();
+    await this.appPages.goToHomePage();
 
   }
 }

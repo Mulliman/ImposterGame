@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<ion-content fullscreen padding class="ion-padding">
+
+  <ion-row justify-content-center align-items-center class="full-page-row">
+
+    <div class="ion-text-center">
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Host Game</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p>If you host a game you will be be in charge of setting up each new round. You can let others join your game
+            by sharing the code that is generated when your create a new game.</p>
+
+          <ion-button (click)="hostGame()" expand="block">Host Game</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Join Game</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p>To join an existing game, ask your host for the 5 digit code on their screen.</p>
+
+          <form [formGroup]="form">
+            <ion-item>
+              <ion-label color="primary" position="floating">Game Code</ion-label>
+              <ion-input formControlName="gameCode" type="text"></ion-input>
+            </ion-item>
+            <app-error-message [control]="form.get('gameCode')"></app-error-message>
+          </form>
+
+          <ion-button [disabled]="!form.valid" (click)="joinGame()" expand="block">Join Game</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+  </ion-row>
+
+</ion-content>

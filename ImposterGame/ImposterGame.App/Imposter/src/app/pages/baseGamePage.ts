@@ -20,19 +20,19 @@ export abstract class BaseGamePage implements OnInit {
 
     async ngOnInit() {
         this.player = await this.playerService.getCurrentPlayer();
-        if (!this.player)
+        if (this.allowedStates && !this.player)
         {
             this.appPages.goToYouPage();
             return;
         } 
 
         this.currentGame = await this.gameService.getCurrentGame();
-        if (!this.currentGame) {
+        if (this.allowedStates && !this.currentGame) {
             this.appPages.goToHomePage();
             return;
         }
 
-        this.setAllowedStates();
+        this.allowedStates = this.setAllowedStates();
 
         if(!this.isInAllowedState())
         {
@@ -51,10 +51,15 @@ export abstract class BaseGamePage implements OnInit {
 
     isInAllowedState(){
         if(!this.allowedStates){
+            console.log("In allowed state - No States");
             return true;
         }
 
-        return this.allowedStates.includes(this.currentGame.state);
+        var isInAllowedState = this.allowedStates.includes(this.currentGame.state);
+
+        console.log("In allowed state?", isInAllowedState, this.currentGame.state);
+
+        return isInAllowedState;
     }
 
     redirectToMostAppropriatePage(){
