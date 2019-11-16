@@ -1,13 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
+import { BaseGamePage } from '../pages/baseGamePage';
+import { PlayerService } from '../services/player.service';
+import { GameService } from '../services/game.service';
+import { AppPagesService } from '../services/app-pages.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-
+export class HomePage extends BaseGamePage {
+  
   @ViewChild('HomeSlider', { static: true }) slides: IonSlides;
 
   slideOpts = {
@@ -17,7 +21,22 @@ export class HomePage {
     pager: true,
   };
 
-  constructor() { }
+  constructor(playerService: PlayerService,
+    gameService: GameService,
+    appPages: AppPagesService) {
+    super(playerService, gameService, appPages);
+  }
+
+  setAllowedStates(): string[] {
+    return null;
+  }
+
+  async gamePageOnInit() {
+    // The user can't use the home page if already playing.
+    if(this.currentGame){
+      await this.appPages.ensureOnMostAppropriatePage(this.player, this.currentGame);
+    }
+  }
 
   swipeNext() {
     this.slides.slideNext();

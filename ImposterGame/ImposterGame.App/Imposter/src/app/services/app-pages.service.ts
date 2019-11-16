@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { GameModel } from './game.service';
 import { PlayerModel } from './player.service';
 import { NavController } from '@ionic/angular';
+import { GameStates } from '../model/GameStates';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,8 @@ export class AppPagesService {
       return;
     }
 
-    if(!game){
-      await this.goToNewGamePage();
+    if(game.state == GameStates.roundPending){
+      await this.goToNewRoundPage();
       return;
     }
 
@@ -56,9 +57,5 @@ export class AppPagesService {
 
   async goToNewRoundPage() {
     await this.navController.navigateForward([`/${this.routes.newRound}`]);
-  }
-
-  async goToChooseGridPage() {
-    await this.navController.navigateForward([`/${this.routes.chooseGrid}`]);
   }
 }

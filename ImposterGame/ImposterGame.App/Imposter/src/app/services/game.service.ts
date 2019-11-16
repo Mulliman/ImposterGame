@@ -16,7 +16,7 @@ export class GameService {
   readonly GameKey: string = "imposter.game";
 
   public get hasJoinedGame(): boolean { return !!this.currentGame; }
-  public currentGame: GameModel;
+  private currentGame: GameModel;
 
   constructor() { }
 
