@@ -55,6 +55,10 @@ export abstract class BaseGamePage implements OnInit {
             return true;
         }
 
+        if(!this.currentGame){
+            return false;
+        }
+
         var isInAllowedState = this.allowedStates.includes(this.currentGame.state);
 
         console.log("In allowed state?", isInAllowedState, this.currentGame.state);

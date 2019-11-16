@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
+import { GameService, GameModel } from 'src/app/services/game.service';
 import { AppPagesService } from 'src/app/services/app-pages.service';
+import { PlayerService, PlayerModel } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,12 +10,18 @@ import { AppPagesService } from 'src/app/services/app-pages.service';
 })
 export class FooterComponent implements OnInit {
   hasJoinedGame: boolean;
+  player: PlayerModel;
+  game: GameModel;
 
-  constructor(private gameService: GameService,
+  constructor(private playerService: PlayerService,
+    private gameService: GameService,
     private appPages: AppPagesService) { }
 
   async ngOnInit() {
-    this.hasJoinedGame = this.gameService.hasJoinedGame;
+    this.player = await this.playerService.getCurrentPlayer();
+    this.game = await this.gameService.getCurrentGame();
+
+    this.hasJoinedGame = !!this.game;
   }
 
   async playGame(){
@@ -22,10 +29,12 @@ export class FooterComponent implements OnInit {
   }
 
   async leaveGame(){
+    try{
+      await this.gameService.leaveGame(this.player, this.game.gameCode);
+      this.hasJoinedGame = false;
+      await this.appPages.goToHomePage();
+    }catch (e){
 
-    // TODO Call API
-
-    await this.appPages.goToHomePage();
-
+    }
   }
 }

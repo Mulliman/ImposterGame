@@ -4,12 +4,14 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
+import { ChooseGridComponent } from './modals/choose-grid/choose-grid.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    ChooseGridComponent
   ],
   imports: [
     IonicModule.forRoot(), 
@@ -18,7 +20,8 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
     exports: [
       HeaderComponent,
       FooterComponent,
-      ErrorMessageComponent
+      ErrorMessageComponent,
+      ChooseGridComponent
     ]
 })
 export class ComponentsModule { }

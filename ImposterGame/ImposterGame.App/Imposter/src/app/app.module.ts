@@ -15,9 +15,12 @@ import { HeaderComponent } from './components/header/header.component';
   declarations: [AppComponent],
   entryComponents: [HeaderComponent],
   imports: [BrowserModule,
-     IonicModule.forRoot(),
+     IonicModule.forRoot({
+      mode: 'ios'
+    }),
      AppRoutingModule,
-     ComponentsModule],
+     ComponentsModule,
+    ],
   providers: [
     StatusBar,
     SplashScreen,

@@ -12,8 +12,10 @@ export class AppPagesService {
   public routes = {
     home: "home",
     you: "you",
-    newGame: "new-game"
-  }
+    newGame: "new-game",
+    newRound: "new-round",
+    chooseGrid: "choose-grid"
+  };
 
   constructor(private navController: NavController) {
   }
@@ -22,6 +24,16 @@ export class AppPagesService {
     console.log("ensureOnMostAppropriatePage");
     if (!player) {
       await this.goToYouPage();
+      return;
+    }
+
+    if(!game){
+      await this.goToNewGamePage();
+      return;
+    }
+
+    if(!game){
+      await this.goToNewGamePage();
       return;
     }
 
@@ -40,5 +52,13 @@ export class AppPagesService {
 
   async goToNewGamePage() {
     await this.navController.navigateForward([`/${this.routes.newGame}`]);
+  }
+
+  async goToNewRoundPage() {
+    await this.navController.navigateForward([`/${this.routes.newRound}`]);
+  }
+
+  async goToChooseGridPage() {
+    await this.navController.navigateForward([`/${this.routes.chooseGrid}`]);
   }
 }

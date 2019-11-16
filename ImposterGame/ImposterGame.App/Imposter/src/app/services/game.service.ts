@@ -5,6 +5,7 @@ import { GameStates } from '../model/GameStates';
 export class GameModel {
   state: string;
   gameCode: string;
+  isHost: boolean;
 }
 
 @Injectable({
@@ -23,10 +24,15 @@ export class GameService {
     try {
       // TODO: call the services;
 
-      return {
+      this.currentGame = {
         state: GameStates.roundPending,
-        gameCode: "TEST"
+        gameCode: "TEST",
+        isHost: true
       };
+
+      localStorage.setItem(this.GameKey, JSON.stringify(this.currentGame));
+
+      return this.currentGame;
     } catch (e) {
       console.error("Host Game Error", e);
       throw e;
@@ -37,10 +43,15 @@ export class GameService {
     try {
       // TODO: call the services;
 
-      return {
+      this.currentGame = {
         state: GameStates.roundPending,
-        gameCode: "TEST"
+        gameCode: "TEST",
+        isHost: false
       };
+
+      localStorage.setItem(this.GameKey, JSON.stringify(this.currentGame));
+
+      return this.currentGame;
     } catch (e) {
       console.error("Host Game Error", e);
       throw e;
