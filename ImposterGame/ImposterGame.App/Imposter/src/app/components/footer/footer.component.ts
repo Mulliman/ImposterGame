@@ -12,6 +12,7 @@ export class FooterComponent implements OnInit {
   hasJoinedGame: boolean;
   player: PlayerModel;
   game: GameModel;
+  isLoaded: boolean;
 
   constructor(private playerService: PlayerService,
     private gameService: GameService,
@@ -22,6 +23,8 @@ export class FooterComponent implements OnInit {
     this.game = await this.gameService.getCurrentGame();
 
     this.hasJoinedGame = !!this.game;
+
+    this.isLoaded = true;
   }
 
   async playGame(){

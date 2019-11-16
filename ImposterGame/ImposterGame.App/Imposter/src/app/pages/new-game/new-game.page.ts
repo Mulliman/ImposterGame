@@ -38,7 +38,6 @@ export class NewGamePage extends BaseGameFormPage {
       var newGame = await this.gameService.hostGame(this.player);
 
       await this.appPages.goToNewRoundPage();
-      return;
     } catch (e) {
       alert(e);
     }
@@ -56,7 +55,6 @@ export class NewGamePage extends BaseGameFormPage {
       var newGame = await this.gameService.joinGame(this.player, gameCodeValue);
 
       await this.appPages.goToNewRoundPage();
-
     } catch (e) {
       console.log(e);
     }
