@@ -1,12 +1,31 @@
 import { Injectable } from '@angular/core';
 import { PlayerModel } from './player.service';
 import { GameStates } from '../model/GameStates';
+import { OptionGridModel } from './option-grid.service';
 
 export class GameModel {
   state: string;
   gameCode: string;
   isHost: boolean;
+  currentRound: Round;
 }
+
+export interface Round { 
+  readonly id?: string;
+  readonly word?: string;
+  impostersGuess?: string;
+  readonly isGuessCorrect?: boolean;
+  readonly allOptions?: Array<string>;
+  readonly allAnswered?: boolean;
+  readonly allAccused?: boolean;
+  isComplete?: boolean;
+  imposter: Participant;
+}
+
+export interface Participant { 
+  player: PlayerModel;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +46,11 @@ export class GameService {
       this.currentGame = {
         state: GameStates.roundPending,
         gameCode: "TEST",
-        isHost: true
+        isHost: true,
+        currentRound: null
       };
 
-      localStorage.setItem(this.GameKey, JSON.stringify(this.currentGame));
+      this.updateSavedGame(this.currentGame);
 
       return this.currentGame;
     } catch (e) {
@@ -46,10 +66,11 @@ export class GameService {
       this.currentGame = {
         state: GameStates.roundPending,
         gameCode: "TEST",
-        isHost: false
+        isHost: false,
+        currentRound: null
       };
 
-      localStorage.setItem(this.GameKey, JSON.stringify(this.currentGame));
+      this.updateSavedGame(this.currentGame);
 
       return this.currentGame;
     } catch (e) {
@@ -85,6 +106,55 @@ export class GameService {
       throw e;
     }
   }
+
+  async startNewRound(grid: OptionGridModel): Promise<GameModel> {
+    let currentGame = await this.getCurrentGame();
+
+    if (currentGame == null) {
+        throw "No game in progress";
+    }
+
+    try {
+        currentGame.currentRound = {  
+            id: "kjsbdkasdjbaskbj",
+            allOptions: grid.options,
+            word: "TEST",
+            imposter: { player: { name: "MadeUp", id: "MadeUp" }}
+        };
+        currentGame.state = GameStates.roundStarted;
+
+        this.updateSavedGame(currentGame);
+
+        return currentGame;
+    }
+    catch (e) {
+        console.log(e);
+        throw "Error starting new round.";
+    }
+  }
+
+  async submitAnswer(playerId: string, answer: string): Promise<GameModel> {
+    let currentGame = await this.getCurrentGame();
+
+    if (currentGame == null) {
+        throw "No game in progress";
+    }
+
+    try {
+        // TODO: Save the item.
+
+        return currentGame;
+    }
+    catch (e) {
+        console.log(e);
+        throw "Error starting new round.";
+    }
+}
+
+updateSavedGame(game: GameModel) {
+  localStorage.setItem(this.GameKey, JSON.stringify(game));
+  this.currentGame = game;
+}
 
   clearSavedGame() {
     localStorage.removeItem(this.GameKey);

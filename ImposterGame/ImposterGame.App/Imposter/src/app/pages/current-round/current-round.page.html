@@ -1,0 +1,118 @@
+<app-header></app-header>
+
+<ion-content padding fullscreen scroll-y="false" color="light">
+  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
+
+    <ion-slide>
+      <div class="slide-inner"  class="full-width">
+        <app-player-answer-list  class="full-width"></app-player-answer-list>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(2)">
+          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          Your Answer
+        </ion-button>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+          Option Grid
+        </ion-button>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide-inner"  class="full-width">
+        <app-option-grid *ngIf="currentRound" [options]="currentRound.allOptions"
+          [selectedOption]="isImposter ? null : currentRound.word" class="full-width">
+        </app-option-grid>
+
+        <ion-button expand="block" (click)="goToSlide(2)" *ngIf="!yourAnswer">Submit your answer</ion-button>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          Other Answers
+        </ion-button>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(2)">
+          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+          Your Answer
+        </ion-button>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide-inner"  class="full-width">
+
+        <ion-card class="white-background" *ngIf="!yourAnswer">
+          <ion-card-header>
+            <ion-card-title>Time to answer</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>When you are ready, submit (and read out) one word to prove you not the imposter.</p>
+
+            <form [formGroup]="form" class="ion-padding-bottom">
+              <ion-item class="ion-no-padding">
+                <ion-label color="primary" position="floating">Your answer</ion-label>
+                <ion-input formControlName="answer" type="text"></ion-input>
+              </ion-item>
+              <app-error-message [control]="form.get('answer')"></app-error-message>
+            </form>
+
+            <ion-button [disabled]="!form.valid" expand="block" (click)="submitAnswer()">Submit answer</ion-button>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="white-background" *ngIf="yourAnswer">
+            <ion-card-header>
+              <ion-card-title>Your Answer</ion-card-title>
+            </ion-card-header>
+  
+            <ion-card-content>
+              <p>You have answered <strong>{{yourAnswer}}</strong></p>
+
+              <p>You can now concentrate on the answers provided by the other players to try and figure out who the imposter is.</p>
+            </ion-card-content>
+          </ion-card>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          Option Grid
+        </ion-button>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+          Other Answers
+        </ion-button>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>
+
+
+
+<!-- <ion-content fullscreen>
+
+  <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
+
+
+
+    <div class="ion-padding" style="width: 100%;">
+      <ion-label>When you are ready, submit (and read out) one word to prove you not the imposter.</ion-label>
+
+      <form [formGroup]="form">
+        <ion-item>
+          <ion-label color="primary" position="floating">Type your word</ion-label>
+          <ion-input formControlName="gameCode" type="text"></ion-input>
+        </ion-item>
+        <app-error-message [control]="form.get('gameCode')"></app-error-message>
+
+        <ion-button expand="block">Submit your word</ion-button>
+      </form>
+    </div>
+
+  </ion-row>
+
+</ion-content> -->
+
+<app-footer></app-footer>

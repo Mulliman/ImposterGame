@@ -1,0 +1,19 @@
+<ion-grid class="option-grid">
+  <ion-row *ngFor="let row of rows" class="option-grid-row">
+    <ion-col *ngFor="let option of row" [ngClass]="selectedOption == option ? 'selected' : ''" class="option-grid-cell">
+      <button (click)="chooseOption(option)" *ngIf="showButtons">{{option}}</button>
+      <span *ngIf="!showButtons">{{option}}</span>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<!-- <table>
+  <tbody>
+      <tr *ngFor="let row of rows">
+          <td *ngFor="let option of row" [ngClass]="selectedOption == option ? 'selected' : ''">
+              <button (click)="chooseOption(option)" *ngIf="showButtons">{{option}}</button>
+              <span *ngIf="!showButtons">{{option}}</span>
+          </td>
+        </tr>
+  </tbody>
+</table> -->

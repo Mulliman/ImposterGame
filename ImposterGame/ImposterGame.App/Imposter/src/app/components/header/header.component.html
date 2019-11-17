@@ -1,7 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      <a href="/">Imposter!</a>
+    <!-- <ion-buttons slot="start">
+      <ion-icon name="people" slot="start"></ion-icon>
+    </ion-buttons> -->
+
+    <ion-title *ngIf="isLoaded && !isInRound">
+        Imposter!
+      </ion-title>
+
+    <ion-title *ngIf="isLoaded && isInRound && isImposter">
+      You are the Imposter!
     </ion-title>
+
+    <ion-title class="no-padding" *ngIf="isLoaded && isInRound && !isImposter">
+        You are <strong>NOT</strong> the Imposter!
+      </ion-title>
   </ion-toolbar>
 </ion-header>

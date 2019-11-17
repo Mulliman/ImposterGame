@@ -1,4 +1,4 @@
 <ion-footer *ngIf="isLoaded">
-  <ion-button class="no-margin" *ngIf="!hasJoinedGame" expand="full" (click)="playGame()">Play game</ion-button>
-  <ion-button class="no-margin" *ngIf="hasJoinedGame" expand="full" (click)="leaveGame()">Leave game</ion-button>
+  <ion-button class="no-margin" *ngIf="!hasJoinedGame" expand="full" (click)="playGame()" color="dark">Play game</ion-button>
+  <ion-button class="no-margin" *ngIf="hasJoinedGame" expand="full" (click)="leaveGame()" color="dark">Leave game</ion-button>
 </ion-footer>

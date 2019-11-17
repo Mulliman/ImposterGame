@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from 'src/app/services/game.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  isInRound: boolean;
+  isImposter: boolean;
+  isLoaded: boolean;
 
-  constructor() { }
+  constructor(private playerService: PlayerService,
+     private gameService: GameService) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    var player = await this.playerService.getCurrentPlayer();
+    var currentGame = await this.gameService.getCurrentGame();
 
+    if(!player || !currentGame || !currentGame.currentRound || !currentGame.currentRound.imposter){
+      this.isInRound = false;
+    } else{
+      this.isImposter = currentGame.currentRound.imposter.player.name === player.name;
+      this.isInRound = true;
+    }
+
+    this.isLoaded = true;
+  }
 }

@@ -26,9 +26,11 @@ export class YouPage extends BaseGameFormPage {
   }
 
   gamePageOnInit() {
-    this.form.patchValue({
-      name: this.player.name
-    });
+    if(this.player){
+      this.form.patchValue({
+        name: this.player.name
+      });
+    }
   }
 
   instantiateForm() {

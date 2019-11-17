@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export class PlayerModel {
+  id: string;
   name: string;
 }
 
@@ -16,6 +17,7 @@ export class PlayerService {
 
   async setCurrentPlayer(name: string): Promise<PlayerModel> {
     this.currentPlayer = {
+      id: name,
       name: name
     };
 

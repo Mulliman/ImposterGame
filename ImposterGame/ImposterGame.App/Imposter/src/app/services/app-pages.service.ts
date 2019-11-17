@@ -15,7 +15,7 @@ export class AppPagesService {
     you: "you",
     newGame: "new-game",
     newRound: "new-round",
-    chooseGrid: "choose-grid"
+    currentRound: "current-round"
   };
 
   constructor(private navController: NavController) {
@@ -38,6 +38,11 @@ export class AppPagesService {
       return;
     }
 
+    if(game.state == GameStates.roundStarted){
+      await this.goToCurrentRoundPage();
+      return;
+    }
+
     // TODO: Add other states here.
 
     //await this.goToNewGamePage();
@@ -57,5 +62,9 @@ export class AppPagesService {
 
   async goToNewRoundPage() {
     await this.navController.navigateForward([`/${this.routes.newRound}`]);
+  }
+
+  async goToCurrentRoundPage() {
+    await this.navController.navigateForward([`/${this.routes.currentRound}`]);
   }
 }

@@ -1,0 +1,14 @@
+.player-answer-list{
+    border: 5px solid white;
+    padding: 0;
+    margin-bottom: 16px;
+
+    ion-item{
+        background: var(--ion-color-tablecell);  
+        border:none;   
+    }
+
+    &:nth-child(even){
+        background: white;
+    }
+}

@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'you', loadChildren: './pages/you/you.module#YouPageModule' },
   { path: 'new-game', loadChildren: './pages/new-game/new-game.module#NewGamePageModule' },
   { path: 'new-round', loadChildren: './pages/new-round/new-round.module#NewRoundPageModule' },
+  { path: 'current-round', loadChildren: './pages/current-round/current-round.module#CurrentRoundPageModule' },
 ];
 
 @NgModule({

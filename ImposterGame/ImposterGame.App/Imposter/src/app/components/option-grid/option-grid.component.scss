@@ -1,0 +1,26 @@
+.option-grid{
+    border: 5px solid white;
+    padding: 0;
+    margin-bottom: 16px;
+}
+
+.option-grid-row{
+    background: #eee;
+
+    .option-grid-cell{
+        text-align: center;
+        background: var(--ion-color-tablecell);
+        padding: 10px 5px;
+        font-size: 12px;
+
+        &.selected{
+            background: var(--ion-color-warning) !important;
+        }
+    }
+}
+
+.option-grid-row:nth-child(even) .option-grid-cell:nth-child(odd), 
+.option-grid-row:nth-child(odd) .option-grid-cell:nth-child(even)
+{
+    background-color: white;
+}

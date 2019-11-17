@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BaseGamePage } from '../baseGamePage';
 import { PlayerService } from 'src/app/services/player.service';
 import { GameService } from 'src/app/services/game.service';
 import { AppPagesService } from 'src/app/services/app-pages.service';
 import { GameStates } from 'src/app/model/GameStates';
 import { OptionGridService } from 'src/app/services/option-grid.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonSlides } from '@ionic/angular';
 import { ChooseGridComponent } from 'src/app/components/modals/choose-grid/choose-grid.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { ChooseGridComponent } from 'src/app/components/modals/choose-grid/choos
   styleUrls: ['./new-round.page.scss'],
 })
 export class NewRoundPage extends BaseGamePage {
-  
+
   constructor(playerService: PlayerService,
     gameService: GameService,
     appPages: AppPagesService,
@@ -32,7 +32,9 @@ export class NewRoundPage extends BaseGamePage {
   }
 
   async startRound(){
-    alert("Start round with grid " + this.gridService.selectedOptionGrid.title);
+    await this.gameService.startNewRound(this.gridService.selectedOptionGrid);
+
+    await this.appPages.goToCurrentRoundPage();
   }
 
   async goToChooseGridPage(){
