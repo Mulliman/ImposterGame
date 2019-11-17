@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GameService, GameModel } from 'src/app/services/game.service';
 import { AppPagesService } from 'src/app/services/app-pages.service';
 import { PlayerService, PlayerModel } from 'src/app/services/player.service';
+import { ModalController } from '@ionic/angular';
+import { HelpModalComponent } from '../modals/help-modal/help-modal.component';
 
 @Component({
   selector: 'app-footer',
@@ -14,9 +16,12 @@ export class FooterComponent implements OnInit {
   game: GameModel;
   isLoaded: boolean;
 
+  @Input() helpSection: string;
+
   constructor(private playerService: PlayerService,
     private gameService: GameService,
-    private appPages: AppPagesService) { }
+    private appPages: AppPagesService,
+    private modalController: ModalController) { }
 
   async ngOnInit() {
     this.player = await this.playerService.getCurrentPlayer();
@@ -39,5 +44,15 @@ export class FooterComponent implements OnInit {
     }catch (e){
 
     }
+  }
+
+  async showHelp(){
+      const modal = await this.modalController.create({
+        component: HelpModalComponent,
+        componentProps: {
+          section: this.helpSection
+        }
+      });
+      return await modal.present();
   }
 }

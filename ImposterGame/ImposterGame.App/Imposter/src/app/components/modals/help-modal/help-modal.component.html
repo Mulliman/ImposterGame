@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Help</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <div class="segment-as-tabs ion-padding-horizontal">
+    <p class="pre-segment">Viewing tips and tricks as... </p>
+    <ion-segment [(ngModel)]="sections.selectedSection" (ionChange)="imposterSegmentChanged($event)">
+      <ion-segment-button value="{{sections.imposter}}">
+        Imposter
+      </ion-segment-button>
+      <ion-segment-button value="{{sections.others}}">
+        Other Players
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-toolbar>
+    <ion-title size="small" class="no-padding" *ngIf="isImposter" color="danger">
+      Remember, you are the Imposter!
+    </ion-title>
+
+    <ion-title size="small" class="no-padding" *ngIf="!isImposter" color="primary">
+      Remember, you are <strong>NOT</strong> the Imposter!
+    </ion-title>
+  </ion-toolbar>
+
+
+</ion-header>
+<ion-content class="ion-padding">
+
+<!-- Current Round -->
+  <div class="help-content" *ngIf="isSectionShown('current-round')">
+    <h2 class="ion-text-center">Answer stage</h2>
+
+    <h3>What to do</h3>
+
+    <ion-text *ngIf="!showImposterVariant">
+      <p>If you are <strong>NOT</strong> the imposter, your goal in this round is to try and convince your fellow
+        players
+        that you know what the secret word is.</p>
+      <p>The secret word is highlighted in yellow on your option grid. You now need to think of one word (and one word
+        only) that will let the others know that you know what the secret word is.</p>
+      <p>However, don't be too obvious! The imposter does not know what the secret word is, and they will be trying to
+        find out what it is!</p>
+      <p>You can answer in any order you want. When you have thought of your word, submit it using the app and read it
+        aloud to the other players.</p>
+    </ion-text>
+    <ion-text *ngIf="showImposterVariant">
+      <p>If <strong>you are the imposter</strong>, and your goal in this round is to try and convince your fellow players
+        that you know what the secret word is.</p>
+      <p>You do not know what the secret word is, but every other player does. Using all the options on the grid and
+        answers form other players you now need to think of one word (and one word only) that you think will let the
+        others know that you know what the secret word is.</p>
+      <p>The others are on the lookout for you, so you'll need to be cunning! You can answer at any time, do you wait
+        for
+        clues from others first or will this raise suspicion?</p>
+      <p>When you have thought of your word, submit it using the app and read it aloud to the other players.</p>
+    </ion-text>
+
+    <h3>Tips and tricks</h3>
+    <ion-text *ngIf="!showImposterVariant">
+        <ul>
+          <li>Answering earlier in a round is likely to prove that you don't need other answers to help you come up with a word.</li>
+          <li>Try not to choose an answer that is too specific as this may give the imposter a valuable clue.</li>
+        </ul>
+      </ion-text>
+      <ion-text *ngIf="showImposterVariant">
+        <ul>
+          <li>Going first is risky as you wont have any answers from other players to guide you, however going last may raise a lot of suspicion. Timing is key.</li>
+          <li>Try and give answers that could apply to a few different options. Not too many though as this could show you're bluffing.</li>
+        </ul>
+      </ion-text>
+  </div>
+
+  <!-- Choose Imposter -->
+  <div class="help-content" *ngIf="isSectionShown('choose-imposter')">
+      <h2 class="ion-text-center">Answer stage</h2>
+  
+      <h3>What to do</h3>
+  
+      <ion-text *ngIf="!showImposterVariant">
+        <p>If you are <strong>NOT</strong> the imposter, your goal in this round is to try and convince your fellow
+          players
+          that you know what the secret word is.</p>
+        <p>The secret word is highlighted in yellow on your option grid. You now need to think of one word (and one word
+          only) that will let the others know that you know what the secret word is.</p>
+        <p>However, don't be too obvious! The imposter does not know what the secret word is, and they will be trying to
+          find out what it is!</p>
+        <p>You can answer in any order you want. When you have thought of your word, submit it using the app and read it
+          aloud to the other players.</p>
+      </ion-text>
+      <ion-text *ngIf="showImposterVariant">
+        <p>If <strong>you are the imposter</strong>, and your goal in this round is to try and convince your fellow players
+          that you know what the secret word is.</p>
+        <p>You do not know what the secret word is, but every other player does. Using all the options on the grid and
+          answers form other players you now need to think of one word (and one word only) that you think will let the
+          others know that you know what the secret word is.</p>
+        <p>The others are on the lookout for you, so you'll need to be cunning! You can answer at any time, do you wait
+          for
+          clues from others first or will this raise suspicion?</p>
+        <p>When you have thought of your word, submit it using the app and read it aloud to the other players.</p>
+      </ion-text>
+  
+      <h3>Tips and tricks</h3>
+      <ion-text *ngIf="!showImposterVariant">
+          <ul>
+            <li>Answering earlier in a round is likely to prove that you don't need other answers to help you come up with a word.</li>
+            <li>Try not to choose an answer that is too specific as this may give the imposter a valuable clue.</li>
+          </ul>
+        </ion-text>
+        <ion-text *ngIf="showImposterVariant">
+          <ul>
+            <li>Going first is risky as you wont have any answers from other players to guide you, however going last may raise a lot of suspicion. Timing is key.</li>
+            <li>Try and give answers that could apply to a few different options. Not too many though as this could show you're bluffing.</li>
+          </ul>
+        </ion-text>
+    </div>
+
+</ion-content>

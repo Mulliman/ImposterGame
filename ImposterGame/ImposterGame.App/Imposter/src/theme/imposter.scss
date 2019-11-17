@@ -22,4 +22,32 @@
 }
 
 
-// Overrides
+// Segments
+
+.pre-segment{
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 4px;
+    color: var(--ion-color-primary);
+}
+
+.segment-as-tabs{
+    ion-segment-button.segment-button-checked{
+        // --border-radius: 0;
+        // --padding-top:16px;
+        // --padding-bottom:16px;
+
+        // --color: var(--ion-color-primary-tint);
+        font-weight: bold;
+    }
+
+    // .segment-as-tabs-content{
+    //     margin-top: 0;
+    //     border: 2px solid var(--ion-color-primary);
+    //     border-top-width: 2px;
+    //     padding: 8px;
+    // }
+}

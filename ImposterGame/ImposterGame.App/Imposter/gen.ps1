@@ -1,9 +1,14 @@
-$type = Read-Host 'Generate (p)age component, shared (c)omponent or (s)ervice'
+$type = Read-Host 'Generate (p)age component, shared (c)omponent, (m)odal component or (s)ervice'
 
 If($type -eq 'c'){
     $componentName = Read-Host 'Name of shared component'
 
     ionic g component components/$componentName --spec false
+}
+ElseIf($type -eq 'm'){
+    $componentName = Read-Host 'Name of modal component'
+
+    ionic g component components/modals/$componentName --spec false
 }
 ElseIf ($type -eq 'p'){
     $componentName = Read-Host 'Name of page'

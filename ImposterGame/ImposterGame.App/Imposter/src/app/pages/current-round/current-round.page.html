@@ -1,11 +1,11 @@
 <app-header></app-header>
 
-<ion-content padding fullscreen scroll-y="false" color="light">
+<ion-content padding fullscreen scroll-y="false" color="light" id="pageContent">
   <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
 
     <ion-slide>
-      <div class="slide-inner"  class="full-width">
-        <app-player-answer-list  class="full-width"></app-player-answer-list>
+      <div class="slide-inner" class="full-width">
+        <app-player-answer-list class="full-width"></app-player-answer-list>
 
         <ion-button fill="outline" size="small" (click)="goToSlide(2)">
           <ion-icon slot="start" name="arrow-round-back"></ion-icon>
@@ -20,7 +20,7 @@
     </ion-slide>
 
     <ion-slide>
-      <div class="slide-inner"  class="full-width">
+      <div class="slide-inner" class="full-width">
         <app-option-grid *ngIf="currentRound" [options]="currentRound.allOptions"
           [selectedOption]="isImposter ? null : currentRound.word" class="full-width">
         </app-option-grid>
@@ -40,7 +40,7 @@
     </ion-slide>
 
     <ion-slide>
-      <div class="slide-inner"  class="full-width">
+      <div class="slide-inner" class="full-width">
 
         <ion-card class="white-background" *ngIf="!yourAnswer">
           <ion-card-header>
@@ -48,7 +48,7 @@
           </ion-card-header>
 
           <ion-card-content>
-            <p>When you are ready, submit (and read out) one word to prove you not the imposter.</p>
+            <p>When you are ready, submit (and read out) one word to prove you are not the imposter.</p>
 
             <form [formGroup]="form" class="ion-padding-bottom">
               <ion-item class="ion-no-padding">
@@ -63,16 +63,17 @@
         </ion-card>
 
         <ion-card class="white-background" *ngIf="yourAnswer">
-            <ion-card-header>
-              <ion-card-title>Your Answer</ion-card-title>
-            </ion-card-header>
-  
-            <ion-card-content>
-              <p>You have answered <strong>{{yourAnswer}}</strong></p>
+          <ion-card-header>
+            <ion-card-title>Your Answer</ion-card-title>
+          </ion-card-header>
 
-              <p>You can now concentrate on the answers provided by the other players to try and figure out who the imposter is.</p>
-            </ion-card-content>
-          </ion-card>
+          <ion-card-content>
+            <p>You have answered <strong>{{yourAnswer}}</strong></p>
+
+            <p>You can now concentrate on the answers provided by the other players to try and figure out who the
+              imposter is.</p>
+          </ion-card-content>
+        </ion-card>
 
         <ion-button fill="outline" size="small" (click)="goToSlide(1)">
           <ion-icon slot="start" name="arrow-round-back"></ion-icon>
@@ -91,28 +92,32 @@
 
 
 
-<!-- <ion-content fullscreen>
+<ion-menu side="start" menuId="help" contentId="pageContent">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Help - Answer stage</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-title>What to do</ion-title>
+    <ion-text *ngIf="!isImposter">
+      <p>You are <strong>NOT</strong> the imposter, and your goal in this round is to try and convince your fellow players that you know what the secret word is.</p>
+      <p>The secret word is highlighted in yellow on your option grid. You now need to think of one word (and one word only) that will let the others know that you know what the secret word is.</p>
+      <p>However, don't be too obvious! The imposter does not know what the secret word is, and they will be trying to find out what it is!</p>
+      <p>You can answer in any order you want. When you have thought of your word, submit it using the app and read it aloud to the other players.</p>
+    </ion-text>
+    <ion-text *ngIf="isImposter">
+        <p><strong>You are the imposter</strong>, and your goal in this round is to try and convince your fellow players that you know what the secret word is.</p>
+        <p>You do not know what the secret word is, but every other player does. Using all the options on the grid and answers form other players you now need to think of one word (and one word only) that you think will let the others know that you know what the secret word is.</p>
+        <p>The others are on the lookout for you, so you'll need to be cunning! You can answer at any time, do you wait for clues from others first or will this raise suspicion?</p>
+        <p>When you have thought of your word, submit it using the app and read it aloud to the other players.</p>
+    </ion-text>
 
-  <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
+    <ion-title>Tips and tricks</ion-title>
+    <ion-text>
 
+    </ion-text>
+  </ion-content>
+</ion-menu>
 
-
-    <div class="ion-padding" style="width: 100%;">
-      <ion-label>When you are ready, submit (and read out) one word to prove you not the imposter.</ion-label>
-
-      <form [formGroup]="form">
-        <ion-item>
-          <ion-label color="primary" position="floating">Type your word</ion-label>
-          <ion-input formControlName="gameCode" type="text"></ion-input>
-        </ion-item>
-        <app-error-message [control]="form.get('gameCode')"></app-error-message>
-
-        <ion-button expand="block">Submit your word</ion-button>
-      </form>
-    </div>
-
-  </ion-row>
-
-</ion-content> -->
-
-<app-footer></app-footer>
+<app-footer [helpSection]="'current-round'"></app-footer>
