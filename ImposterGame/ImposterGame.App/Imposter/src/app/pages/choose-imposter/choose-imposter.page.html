@@ -1,0 +1,89 @@
+<app-header></app-header>
+
+<ion-content padding fullscreen scroll-y="false" color="light" id="pageContent">
+  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #ChooseImposterSlider>
+
+    <ion-slide>
+      <div class="slide-inner" class="full-width">
+        <app-option-grid *ngIf="currentRound" [options]="currentRound.allOptions"
+          [selectedOption]="isImposter ? null : currentRound.word" class="full-width">
+        </app-option-grid>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+          Answers
+          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide-inner" class="full-width">
+
+        <div class="choose-step-1">
+          <h2 *ngIf="!isImposter">First select who you think was the imposter?</h2>
+          <h2 *ngIf="isImposter">Who do you think had the worst answer?</h2>
+
+          <app-player-answer-list [clickable]="true" (onPlayerSelected)="setSelectedPlayer($event)" class="full-width">
+          </app-player-answer-list>
+
+          <ion-button [disabled]="!selectedImposter" (click)="goToSlide(2)" expand="block">
+            Select imposter
+            <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          Option Grid
+        </ion-button>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide-inner" class="full-width">
+
+        <div *ngIf="!selectedImposter" class="choose-step-2">
+          <h3>Please select a imposter first...</h3>
+
+          <ion-button (click)="goToSlide(1)" expand="block">
+            <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+            Go back
+          </ion-button>
+        </div>
+
+        <div *ngIf="selectedImposter" class="choose-step-2">
+          <h2>You have selected {{selectedImposter.name}} as the imposter.</h2>
+
+          <p>Now select your wager; the more you bet, the more you win. However, if you are wrong the imposter will get the points!</p>
+
+          <ion-list class="list-with-background">
+              <ion-item lines="none" class="ion-no-padding" [ngClass]="selectedWager == 1 ? 'selectedItem' : ''" (click)="setWager(1)">
+                <ion-label>I'm not sure</ion-label>
+                <ion-note slot="end" color="primary">1 point</ion-note>
+              </ion-item>
+              <ion-item lines="none" class="ion-no-padding" [ngClass]="selectedWager == 2 ? 'selectedItem' : ''" (click)="setWager(2)">
+                <ion-label>I think I know</ion-label>
+                <ion-note slot="end" color="primary">2 points</ion-note>
+              </ion-item>
+              <ion-item lines="none" class="ion-no-padding" [ngClass]="selectedWager == 3 ? 'selectedItem' : ''" (click)="setWager(3)">
+                <ion-label>I definitely know!</ion-label>
+                <ion-note slot="end" color="primary">3 points</ion-note>
+              </ion-item>
+            </ion-list>
+        </div>
+
+        <div *ngIf="selectedWager" class="choose-step-3">
+          <ion-button expand="block" (click)="submitAnswer()">Submit answer</ion-button>
+        </div>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          Change answer
+        </ion-button>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>
+
+<app-footer [helpSection]="'current-round'"></app-footer>

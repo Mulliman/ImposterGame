@@ -61,4 +61,12 @@ export class CurrentRoundPage extends BaseGameFormPage {
 
     await this.gameService.submitAnswer(this.player.id, this.yourAnswer);
   }
+
+  async simulateRoundEnd(){
+    this.currentGame.state = GameStates.roundAnswered;
+
+    this.gameService.updateSavedGame(this.currentGame);
+
+    await this.appPages.goToChooseImposterPage();
+  }
 }

@@ -15,7 +15,8 @@ export class AppPagesService {
     you: "you",
     newGame: "new-game",
     newRound: "new-round",
-    currentRound: "current-round"
+    currentRound: "current-round",
+    chooseImposter: "choose-imposter"
   };
 
   constructor(private navController: NavController) {
@@ -66,5 +67,9 @@ export class AppPagesService {
 
   async goToCurrentRoundPage() {
     await this.navController.navigateForward([`/${this.routes.currentRound}`]);
+  }
+
+  async goToChooseImposterPage() {
+    await this.navController.navigateForward([`/${this.routes.chooseImposter}`]);
   }
 }

@@ -22,6 +22,32 @@
 }
 
 
+// Lists
+
+.list-with-background{
+    border: 5px solid white;
+    padding: 0;
+    margin-bottom: 16px;
+
+    ion-item{
+        background: var(--ion-color-tablecell);  
+        border:none;  
+
+        &.selectedItem{
+            --background: var(--ion-color-warning);
+        }
+
+        ion-label{
+            padding-left: 8px;
+        }
+    }
+
+    &:nth-child(even){
+        background: white;
+    }
+}
+
+
 // Segments
 
 .pre-segment{
@@ -51,3 +77,4 @@
     //     padding: 8px;
     // }
 }
+

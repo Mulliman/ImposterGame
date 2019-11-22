@@ -1,14 +1,14 @@
-<ion-list class="player-answer-list">
-  <ion-item lines="none" class="ion-no-padding">
+<ion-list class="player-answer-list list-with-background">
+  <ion-item lines="none" class="ion-no-padding" [ngClass]="selectedPlayerName == 'Sam' ? 'selectedItem' : ''" (click)="selectImposter({player: {name: 'Sam'}})">
     <ion-label>Sam</ion-label>
     <ion-note slot="end" color="primary">Someword</ion-note>
   </ion-item>
-  <ion-item lines="none" class="ion-no-padding">
+  <ion-item lines="none" class="ion-no-padding" [ngClass]="selectedPlayerName == 'Sam2' ? 'selectedItem' : ''" (click)="selectImposter({player: {name: 'Sam2'}})">
     <ion-label>Sam2</ion-label>
     <ion-note slot="end" color="primary">Another word</ion-note>
   </ion-item>
-  <ion-item lines="none" class="ion-no-padding">
+  <ion-item lines="none" class="ion-no-padding" [ngClass]="selectedPlayerName == 'Sam3' ? 'selectedItem' : ''" (click)="selectImposter({player: {name: 'Sam3'}})">
     <ion-label>Sam3</ion-label>
-    <ion-note slot="end" color="light">Waiting...</ion-note>
+    <ion-note slot="end" color="light">WORD</ion-note>
   </ion-item>
 </ion-list>
