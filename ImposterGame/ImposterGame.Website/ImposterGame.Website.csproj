@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ImposterGame.Game\ImposterGame.Game.csproj" />
     <ProjectReference Include="..\ImposterGame.Model\ImposterGame.Model.csproj" />
   </ItemGroup>
 

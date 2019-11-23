@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ImposterGame.Model\ImposterGame.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="OptionGrids\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.0.1" />
+  </ItemGroup>
+
+</Project>
