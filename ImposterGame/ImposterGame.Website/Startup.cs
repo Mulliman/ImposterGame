@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ImposterGame.Game;
 using ImposterGame.Game.OptionGrids;
+using ImposterGame.Game.Players;
 using ImposterGame.OptionGrids;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,8 @@ namespace ImposterGame.Website
             services.AddControllers();
 
             services.AddSingleton(new OptionGridService(new[] { new HardcodedGridProvider() }));
+            services.AddTransient<IPlayerService, InMemoryPlayerService>();
+            services.AddTransient<IGameService, InMemoryGameService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

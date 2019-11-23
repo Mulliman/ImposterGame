@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ImposterGame.Game
 {
-    public class InMemoryGameService
+    public class InMemoryGameService : IGameService
     {
         private readonly IMemoryCache _memoryCache;
 

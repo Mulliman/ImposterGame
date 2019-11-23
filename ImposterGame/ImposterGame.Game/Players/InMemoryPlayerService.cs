@@ -3,7 +3,7 @@ using System;
 
 namespace ImposterGame.Game.Players
 {
-    public class InMemoryPlayerService
+    public class InMemoryPlayerService : IPlayerService
     {
         private readonly IMemoryCache _memoryCache;
 
