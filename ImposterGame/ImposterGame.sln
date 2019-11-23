@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.Model", "Impos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.Game", "ImposterGame.Game\ImposterGame.Game.csproj", "{874A91DB-3601-4142-9687-5976183D74C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.OptionGrids", "ImposterGame.OptionGrids\ImposterGame.OptionGrids.csproj", "{65F4AD93-7232-4023-A7D9-58AD15E1F80B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{874A91DB-3601-4142-9687-5976183D74C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{874A91DB-3601-4142-9687-5976183D74C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{874A91DB-3601-4142-9687-5976183D74C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65F4AD93-7232-4023-A7D9-58AD15E1F80B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65F4AD93-7232-4023-A7D9-58AD15E1F80B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65F4AD93-7232-4023-A7D9-58AD15E1F80B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65F4AD93-7232-4023-A7D9-58AD15E1F80B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
