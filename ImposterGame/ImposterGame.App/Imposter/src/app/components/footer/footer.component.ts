@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GameService, GameModel } from 'src/app/services/game.service';
 import { AppPagesService } from 'src/app/services/app-pages.service';
-import { PlayerService, PlayerModel } from 'src/app/services/player.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { ModalController } from '@ionic/angular';
 import { HelpModalComponent } from '../modals/help-modal/help-modal.component';
+import { IPlayer } from 'src/server';
 
 @Component({
   selector: 'app-footer',
@@ -12,7 +13,7 @@ import { HelpModalComponent } from '../modals/help-modal/help-modal.component';
 })
 export class FooterComponent implements OnInit {
   hasJoinedGame: boolean;
-  player: PlayerModel;
+  player: IPlayer;
   game: GameModel;
   isLoaded: boolean;
 

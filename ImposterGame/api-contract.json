@@ -1,0 +1,80 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Imposter API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/PlayerApi/Create": {
+      "post": {
+        "tags": [
+          "PlayerApi"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IPlayer"
+            }
+          }
+        }
+      }
+    },
+    "/api/PlayerApi/Get": {
+      "get": {
+        "tags": [
+          "PlayerApi"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IPlayer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IPlayer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

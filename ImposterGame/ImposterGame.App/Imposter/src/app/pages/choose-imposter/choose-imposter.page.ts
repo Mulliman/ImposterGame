@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Round, GameService } from 'src/app/services/game.service';
 import { IonSlides } from '@ionic/angular';
-import { PlayerService, PlayerModel } from 'src/app/services/player.service';
+import { PlayerService } from 'src/app/services/player.service';
 import { FormBuilder } from '@angular/forms';
 import { AppPagesService } from 'src/app/services/app-pages.service';
 import { GameStates } from 'src/app/model/GameStates';
 import { BaseGamePage } from '../baseGamePage';
+import { IPlayer } from 'src/server';
 
 @Component({
   selector: 'app-choose-imposter',
@@ -17,7 +18,7 @@ export class ChooseImposterPage extends BaseGamePage {
   currentRound: Round;
   isImposter: boolean;
   yourAnswer: string;
-  selectedImposter: PlayerModel;
+  selectedImposter: IPlayer;
   selectedWager: number;
 
   @ViewChild('ChooseImposterSlider', { static: true }) slides: IonSlides;
@@ -47,7 +48,7 @@ export class ChooseImposterPage extends BaseGamePage {
     await this.slides.slideTo(num);
   }
 
-  setSelectedPlayer(player: PlayerModel) {
+  setSelectedPlayer(player: IPlayer) {
     this.selectedImposter = player;
   }
 

@@ -1,7 +1,8 @@
 import { Injectable, OnInit } from "@angular/core";
-import { PlayerModel, PlayerService } from '../services/player.service';
+import { PlayerService } from '../services/player.service';
 import { GameModel, GameService } from '../services/game.service';
 import { AppPagesService } from '../services/app-pages.service';
+import { IPlayer } from 'src/server';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,7 @@ export abstract class BaseGamePage implements OnInit {
 
     isLoaded = false;
 
-    player:PlayerModel;
+    player:IPlayer;
     currentGame:GameModel;
     allowedStates: string[];
 

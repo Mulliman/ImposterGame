@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { PlayerModel } from './player.service';
 import { GameStates } from '../model/GameStates';
 import { OptionGridModel } from './option-grid.service';
+import { IPlayer } from 'src/server';
 
 export class GameModel {
   state: string;
@@ -23,7 +23,7 @@ export interface Round {
 }
 
 export interface Participant { 
-  player: PlayerModel;
+  player: IPlayer;
 }
 
 
@@ -39,7 +39,7 @@ export class GameService {
 
   constructor() { }
 
-  async hostGame(player: PlayerModel): Promise<GameModel> {
+  async hostGame(player: IPlayer): Promise<GameModel> {
     try {
       // TODO: call the services;
 
@@ -59,7 +59,7 @@ export class GameService {
     }
   }
 
-  async joinGame(player: PlayerModel, gameCode: string): Promise<GameModel> {
+  async joinGame(player: IPlayer, gameCode: string): Promise<GameModel> {
     try {
       // TODO: call the services;
 
@@ -96,7 +96,7 @@ export class GameService {
     return game;
   }
 
-  async leaveGame(player: PlayerModel, gameCode: string): Promise<void> {
+  async leaveGame(player: IPlayer, gameCode: string): Promise<void> {
     try {
       // TODO: Call APIs
 

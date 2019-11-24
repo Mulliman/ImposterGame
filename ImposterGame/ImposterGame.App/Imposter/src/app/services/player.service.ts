@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-
-export class PlayerModel {
-  id: string;
-  name: string;
-}
+import { PlayerApiService } from 'src/server/api/playerApi.service';
+import { IPlayer } from 'src/server';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +8,27 @@ export class PlayerModel {
 export class PlayerService {
   readonly PlayerKey = "imposter.player";
 
-  currentPlayer: PlayerModel;
+  currentPlayer: IPlayer;
 
-  constructor() { }
+  constructor(private playerApi: PlayerApiService) { }
 
-  async setCurrentPlayer(name: string): Promise<PlayerModel> {
-    this.currentPlayer = {
-      id: name,
-      name: name
-    };
+  async setCurrentPlayer(name: string): Promise<IPlayer> {
 
-    // TODO: Call the API to save this on server.
+    try{  
+      var response = await this.playerApi.apiPlayerApiCreatePost(name).toPromise();
+  
+      this.currentPlayer = response;
 
-    localStorage.setItem(this.PlayerKey, JSON.stringify(this.currentPlayer));
-
-    return this.currentPlayer;
+      localStorage.setItem(this.PlayerKey, JSON.stringify(this.currentPlayer));
+  
+      return this.currentPlayer;
+    } catch (e){
+      console.log(e);
+      alert("Error saving your name");
+    }    
   }
 
-  async getCurrentPlayer(): Promise<PlayerModel> {
+  async getCurrentPlayer(): Promise<IPlayer> {
     if (this.currentPlayer) {
       return this.currentPlayer;
     }
@@ -37,14 +37,24 @@ export class PlayerService {
       return null;
     }
 
-    var localPlayer = JSON.parse(localStorage.getItem(this.PlayerKey)) as PlayerModel;
+    var localPlayer = JSON.parse(localStorage.getItem(this.PlayerKey)) as IPlayer;
 
     if (!localPlayer) {
       return null;
     }
 
-    return localPlayer;
+    try{
+      var serverPlayer = await this.playerApi.apiPlayerApiGetGet(localPlayer.id).toPromise();
 
-    // TODO: Get from the server.
+      if(!serverPlayer){
+        return null;
+      }
+  
+      return serverPlayer;
+    }
+    catch (e){
+      console.log(e);
+      alert("Error getting your details from the server");
+    }
   }
 }

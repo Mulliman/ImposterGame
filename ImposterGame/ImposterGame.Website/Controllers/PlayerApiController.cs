@@ -11,11 +11,11 @@ namespace ImposterGame.Website.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PlayerController : Controller
+    public class PlayerApiController : Controller
     {
         private readonly IPlayerService _service;
 
-        public PlayerController(IPlayerService service)
+        public PlayerApiController(IPlayerService service)
         {
             _service = service;
         }
