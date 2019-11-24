@@ -23,8 +23,10 @@ export class NewGamePage extends BaseGameFormPage {
     return null;
   }
 
-  gamePageOnInit() {
-
+  async gamePageOnInit() {
+    if(!this.player){
+      await this.appPages.goToYouPage();
+    }
   }
 
   instantiateForm() {
