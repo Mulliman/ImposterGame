@@ -5,6 +5,34 @@
     "version": "v1"
   },
   "paths": {
+    "/api/GameApi/Host": {
+      "post": {
+        "tags": [
+          "GameApi"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "playerId",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IGame"
+            }
+          }
+        }
+      }
+    },
     "/api/PlayerApi/Create": {
       "post": {
         "tags": [
@@ -72,6 +100,160 @@
         },
         "name": {
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IAccusation": {
+      "type": "object",
+      "properties": {
+        "playerId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "playerName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "wager": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "IRoundParticipant": {
+      "type": "object",
+      "properties": {
+        "player": {
+          "$ref": "#/definitions/IPlayer"
+        },
+        "isImposter": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "answer": {
+          "type": "string"
+        },
+        "hasAnswered": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "accusation": {
+          "$ref": "#/definitions/IAccusation"
+        },
+        "scoredPoints": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "IRound": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true
+        },
+        "word": {
+          "type": "string",
+          "readOnly": true
+        },
+        "impostersGuess": {
+          "type": "string"
+        },
+        "isGuessCorrect": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "allOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IRoundParticipant"
+          },
+          "readOnly": true
+        },
+        "imposter": {
+          "$ref": "#/definitions/IRoundParticipant"
+        },
+        "allAnswered": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "allAccused": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isComplete": {
+          "type": "boolean"
+        }
+      }
+    },
+    "IScoreboardRow": {
+      "type": "object",
+      "properties": {
+        "player": {
+          "$ref": "#/definitions/IPlayer"
+        },
+        "score": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "currentRoundScore": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "IGame": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "easyCode": {
+          "type": "string"
+        },
+        "host": {
+          "$ref": "#/definitions/IPlayer"
+        },
+        "players": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPlayer"
+          }
+        },
+        "currentRound": {
+          "$ref": "#/definitions/IRound"
+        },
+        "previousRounds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IRound"
+          }
+        },
+        "scores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IScoreboardRow"
+          },
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true
+        },
+        "canLeaveWithoutRoundCancellation": {
+          "type": "boolean",
           "readOnly": true
         }
       }

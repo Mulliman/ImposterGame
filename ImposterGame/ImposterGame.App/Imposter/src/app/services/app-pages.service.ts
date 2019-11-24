@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { GameModel } from './game.service';
 import { NavController } from '@ionic/angular';
 import { GameStates } from '../model/GameStates';
-import { IPlayer } from 'src/server';
+import { IPlayer, IGame } from 'src/server';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class AppPagesService {
   constructor(private navController: NavController) {
   }
 
-  async ensureOnMostAppropriatePage(player: IPlayer, game: GameModel) {
+  async ensureOnMostAppropriatePage(player: IPlayer, game: IGame) {
     console.log("ensureOnMostAppropriatePage");
     if (!player) {
       await this.goToYouPage();

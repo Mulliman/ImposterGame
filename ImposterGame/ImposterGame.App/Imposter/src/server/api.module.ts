@@ -3,6 +3,7 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
+import { GameApiService } from './api/gameApi.service';
 import { PlayerApiService } from './api/playerApi.service';
 
 @NgModule({
@@ -10,6 +11,7 @@ import { PlayerApiService } from './api/playerApi.service';
   declarations: [],
   exports:      [],
   providers: [
+    GameApiService,
     PlayerApiService ]
 })
 export class ApiModule {

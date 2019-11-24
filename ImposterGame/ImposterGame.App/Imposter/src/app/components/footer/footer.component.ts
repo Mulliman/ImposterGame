@@ -5,6 +5,7 @@ import { PlayerService } from 'src/app/services/player.service';
 import { ModalController } from '@ionic/angular';
 import { HelpModalComponent } from '../modals/help-modal/help-modal.component';
 import { IPlayer } from 'src/server';
+import { Game } from 'src/app/model/Game';
 
 @Component({
   selector: 'app-footer',
@@ -14,7 +15,7 @@ import { IPlayer } from 'src/server';
 export class FooterComponent implements OnInit {
   hasJoinedGame: boolean;
   player: IPlayer;
-  game: GameModel;
+  game: Game;
   isLoaded: boolean;
 
   @Input() helpSection: string;
@@ -39,7 +40,7 @@ export class FooterComponent implements OnInit {
 
   async leaveGame(){
     try{
-      await this.gameService.leaveGame(this.player, this.game.gameCode);
+      await this.gameService.leaveGame(this.player, this.game.easyCode);
       this.hasJoinedGame = false;
       await this.appPages.goToHomePage();
     }catch (e){

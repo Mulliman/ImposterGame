@@ -6,6 +6,7 @@ using ImposterGame.Game;
 using ImposterGame.Game.OptionGrids;
 using ImposterGame.Game.Players;
 using ImposterGame.OptionGrids;
+using ImposterGame.Website.Controllers.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -66,6 +67,8 @@ namespace ImposterGame.Website
             });
 
             app.UseCors("defaultcors");
+
+            app.UseMiddleware<ApiExceptionMiddleware>();
 
             if (env.IsDevelopment())
             {

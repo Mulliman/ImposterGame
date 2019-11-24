@@ -3,6 +3,7 @@ import { PlayerService } from '../services/player.service';
 import { GameModel, GameService } from '../services/game.service';
 import { AppPagesService } from '../services/app-pages.service';
 import { IPlayer } from 'src/server';
+import { Game } from '../model/Game';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,7 @@ export abstract class BaseGamePage implements OnInit {
     isLoaded = false;
 
     player:IPlayer;
-    currentGame:GameModel;
+    currentGame:Game;
     allowedStates: string[];
 
     constructor(protected playerService: PlayerService,

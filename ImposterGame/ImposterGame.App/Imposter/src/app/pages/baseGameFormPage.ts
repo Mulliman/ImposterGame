@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import { PlayerService } from '../services/player.service';
-import { GameModel, GameService } from '../services/game.service';
+import { GameService } from '../services/game.service';
 import { AppPagesService } from '../services/app-pages.service';
 import { BaseGamePage } from './baseGamePage';
 import { FormGroup, FormBuilder } from '@angular/forms';

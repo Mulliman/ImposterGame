@@ -61,6 +61,6 @@ export class YouPage extends BaseGameFormPage {
   }
 
   async leaveGame(){
-    await this.gameService.leaveGame(this.player, this.currentGame.gameCode);
+    await this.gameService.leaveGame(this.player, this.currentGame.easyCode);
   }
 }

@@ -6,6 +6,7 @@ import { AppPagesService } from 'src/app/services/app-pages.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { GameStates } from 'src/app/model/GameStates';
 import { IonSlides } from '@ionic/angular';
+import { IRound } from 'src/server';
 
 @Component({
   selector: 'app-current-round',
@@ -14,7 +15,7 @@ import { IonSlides } from '@ionic/angular';
 })
 export class CurrentRoundPage extends BaseGameFormPage {
 
-  currentRound: Round;
+  currentRound: IRound;
   isImposter: boolean;
   yourAnswer: string;
 
@@ -63,9 +64,9 @@ export class CurrentRoundPage extends BaseGameFormPage {
   }
 
   async simulateRoundEnd(){
-    this.currentGame.state = GameStates.roundAnswered;
+    //this.currentGame.state = GameStates.roundAnswered;
 
-    this.gameService.updateSavedGame(this.currentGame);
+    this.gameService.setCurrentGame(this.currentGame);
 
     await this.appPages.goToChooseImposterPage();
   }

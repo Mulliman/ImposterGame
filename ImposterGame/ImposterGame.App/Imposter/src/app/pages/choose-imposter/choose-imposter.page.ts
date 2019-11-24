@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { AppPagesService } from 'src/app/services/app-pages.service';
 import { GameStates } from 'src/app/model/GameStates';
 import { BaseGamePage } from '../baseGamePage';
-import { IPlayer } from 'src/server';
+import { IPlayer, IRound } from 'src/server';
 
 @Component({
   selector: 'app-choose-imposter',
@@ -15,7 +15,7 @@ import { IPlayer } from 'src/server';
 })
 export class ChooseImposterPage extends BaseGamePage {
 
-  currentRound: Round;
+  currentRound: IRound;
   isImposter: boolean;
   yourAnswer: string;
   selectedImposter: IPlayer;
