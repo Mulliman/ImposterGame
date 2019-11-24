@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { PlayerModel, PlayerService } from '../services/player.service';
+import { PlayerService } from '../services/player.service';
 import { GameModel, GameService } from '../services/game.service';
 import { AppPagesService } from '../services/app-pages.service';
 import { BaseGamePage } from './baseGamePage';
