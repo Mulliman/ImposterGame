@@ -32,11 +32,11 @@ namespace ImposterGame.Website
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMemoryCache();
 
             services.AddSingleton(new OptionGridService(new[] { new HardcodedGridProvider() }));
             services.AddTransient<IPlayerService, InMemoryPlayerService>();
             services.AddTransient<IGameService, InMemoryGameService>();
-            services.AddTransient<IMemoryCache, MemoryCache>();
 
             services.AddSwaggerGen(c =>
             {

@@ -20,10 +20,11 @@ namespace ImposterGame.Game.Players
 
             var cacheEntry = _memoryCache.GetOrCreate(GetCacheKeyForPlayer(player), entry =>
             {
+                entry.AbsoluteExpiration = DateTime.UtcNow.AddDays(10);
                 return player;
             });
 
-            return player;
+            return cacheEntry;
         }
 
         public Player GetPlayer(Guid id)
