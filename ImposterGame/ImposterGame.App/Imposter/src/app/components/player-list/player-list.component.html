@@ -1,0 +1,5 @@
+<ion-list class="player-list list-with-background" *ngIf="players && currentPlayer">
+  <ion-item *ngFor="let player of players" lines="none" class="ion-no-padding" [ngClass]="player.id == currentPlayer.id ? 'selectedItem' : ''">
+    <ion-label>{{player.name}}</ion-label>
+  </ion-item>
+</ion-list>

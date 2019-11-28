@@ -2,47 +2,75 @@
 
 <ion-content fullscreen padding class="ion-padding">
 
-  <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
-    <div class="ion-text-center">
+  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
 
-      <ion-card *ngIf="currentGame.isHost && !this.gridService.selectedOptionGrid">
-        <ion-card-header>
-          <ion-card-title>Choose a grid for the next round</ion-card-title>
-        </ion-card-header>
+    <ion-slide>
+      <div class="slide-inner" class="full-width">
+        <app-player-list *ngIf="currentGame" [players]="currentGame.players" [currentPlayer]="player" class="full-width"></app-player-list>
 
-        <ion-card-content>
-          <p>Before the next round starts you need to choose the topic to use.</p>
+        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+          Choose Grid
+        </ion-button>
+      </div>
+    </ion-slide>
 
-          <ion-button (click)="goToChooseGridPage()" expand="block">Choose grid</ion-button>
-        </ion-card-content>
-      </ion-card>
+    <ion-slide>
+      <div class="slide-inner" class="full-width">
+        <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
+          <div class="ion-text-center">
 
-      <ion-card *ngIf="currentGame.isHost && this.gridService.selectedOptionGrid">
-        <ion-card-header>
-          <ion-card-title>You have chosen "{{this.gridService.selectedOptionGrid.title}}"</ion-card-title>
-        </ion-card-header>
+            <ion-card *ngIf="currentGame.isHost && !this.gridService.selectedOptionGrid">
+              <ion-card-header>
+                <ion-card-title>Choose a grid for the next round</ion-card-title>
+              </ion-card-header>
 
-        <ion-card-content>
-          <p>Make sure all of your players are ready, and then start the round.</p>
+              <ion-card-content>
+                <p>Before the next round starts you need to choose the topic to use.</p>
 
-          <ion-button (click)="startRound()" expand="block">Start new round</ion-button>
+                <ion-button (click)="goToChooseGridPage()" expand="block">Choose grid</ion-button>
+              </ion-card-content>
+            </ion-card>
 
-          <ion-button (click)="goToChooseGridPage()" expand="block">Choose a different grid</ion-button>
-        </ion-card-content>
-      </ion-card>
+            <ion-card *ngIf="currentGame.isHost && this.gridService.selectedOptionGrid">
+              <ion-card-header>
+                <ion-card-title>You have chosen "{{this.gridService.selectedOptionGrid.title}}"</ion-card-title>
+              </ion-card-header>
 
-      <ion-card *ngIf="!currentGame.isHost">
-        <ion-card-header>
-          <ion-card-title>Waiting for host.</ion-card-title>
-        </ion-card-header>
+              <ion-card-content>
+                <p>Make sure all of your players are ready, and then start the round.</p>
 
-        <ion-card-content>
-          <p>The host is currently choosing the grid to use for the next round. This page will automatically refresh when the round starts.</p>
-        </ion-card-content>
-      </ion-card>
+                <ion-button (click)="startRound()" expand="block">Start new round</ion-button>
 
-    </div>
-  </ion-row>
+                <ion-button (click)="goToChooseGridPage()" expand="block">Choose a different grid</ion-button>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-card *ngIf="!currentGame.isHost">
+              <ion-card-header>
+                <ion-card-title>Waiting for host.</ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <p>The host is currently choosing the grid to use for the next round. This page will automatically
+                  refresh
+                  when the round starts.</p>
+              </ion-card-content>
+            </ion-card>
+
+            <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+              <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+              Players
+            </ion-button>
+          </div>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+
+
+
 
 </ion-content>
 

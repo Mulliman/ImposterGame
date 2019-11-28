@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
     var player = await this.playerService.getCurrentPlayer();
-    var currentGame = await this.gameService.getCurrentGame();
+    var currentGame = await this.gameService.getCurrentGame(player);
 
     if(!player || !currentGame || !currentGame.currentRound || !currentGame.currentRound.imposter){
       this.isInRound = false;

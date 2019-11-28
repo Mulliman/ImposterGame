@@ -27,7 +27,7 @@ export class FooterComponent implements OnInit {
 
   async ngOnInit() {
     this.player = await this.playerService.getCurrentPlayer();
-    this.game = await this.gameService.getCurrentGame();
+    this.game = await this.gameService.getCurrentGame(this.player);
 
     this.hasJoinedGame = !!this.game;
 

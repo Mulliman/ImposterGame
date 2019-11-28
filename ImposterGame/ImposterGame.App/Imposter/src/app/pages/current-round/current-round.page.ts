@@ -60,7 +60,7 @@ export class CurrentRoundPage extends BaseGameFormPage {
 
     this.yourAnswer = this.form.value.answer;
 
-    await this.gameService.submitAnswer(this.player.id, this.yourAnswer);
+    await this.gameService.submitAnswer(this.player, this.yourAnswer);
   }
 
   async simulateRoundEnd(){

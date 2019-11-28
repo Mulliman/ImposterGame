@@ -1,19 +1,24 @@
 <ion-footer *ngIf="isLoaded">
-  <ion-toolbar *ngIf="hasJoinedGame">
-      <ion-buttons slot="secondary" *ngIf="helpSection">
-          <ion-button (click)="showHelp()">
-            <ion-icon name="help-circle"></ion-icon> Tips &amp; Tricks
-          </ion-button>
-        </ion-buttons>
+  <div *ngIf="game" color="secondary" class="game-code-footer no-padding">
+      <h4>Your game code: {{game.easyCode}}</h4>
+  </div>
 
-        <ion-buttons slot="primary">
-          <ion-button (click)="leaveGame()">
-            Leave Game<ion-icon name="walk"></ion-icon>
-          </ion-button>
-        </ion-buttons>
+  <ion-toolbar *ngIf="hasJoinedGame">
+    <ion-buttons slot="secondary" *ngIf="helpSection">
+      <ion-button (click)="showHelp()">
+        <ion-icon name="help-circle"></ion-icon> Tips &amp; Tricks
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary">
+      <ion-button (click)="leaveGame()">
+        Leave Game<ion-icon name="walk"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
-  <ion-button class="no-margin" *ngIf="!hasJoinedGame" expand="full" (click)="playGame()" color="dark">Play game</ion-button>
-</ion-footer> 
+  <ion-button class="no-margin" *ngIf="!hasJoinedGame" expand="full" (click)="playGame()" color="dark">Play game
+  </ion-button>
+</ion-footer>
 
 <!-- <ion-footer *ngIf="isLoaded">
     <ion-button class="no-margin" *ngIf="!hasJoinedGame" expand="full" (click)="playGame()" color="dark">Play game</ion-button>

@@ -28,7 +28,7 @@ export abstract class BaseGamePage implements OnInit {
             return;
         } 
 
-        this.currentGame = await this.gameService.getCurrentGame();
+        this.currentGame = await this.gameService.getCurrentGame(this.player);
         if (this.allowedStates && !this.currentGame) {
             this.appPages.goToHomePage();
             return;

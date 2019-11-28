@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BaseGamePage } from '../baseGamePage';
 import { PlayerService } from 'src/app/services/player.service';
 import { GameService } from 'src/app/services/game.service';
@@ -7,6 +7,7 @@ import { GameStates } from 'src/app/model/GameStates';
 import { OptionGridService } from 'src/app/services/option-grid.service';
 import { ModalController, IonSlides } from '@ionic/angular';
 import { ChooseGridComponent } from 'src/app/components/modals/choose-grid/choose-grid.component';
+import { Game } from 'src/app/model/Game';
 
 @Component({
   selector: 'app-new-round',
@@ -14,6 +15,15 @@ import { ChooseGridComponent } from 'src/app/components/modals/choose-grid/choos
   styleUrls: ['./new-round.page.scss'],
 })
 export class NewRoundPage extends BaseGamePage {
+
+  @ViewChild('NewRoundSlider', { static: true }) slides: IonSlides;
+
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400,
+    slidesPerView: 1
+  };
+  subscription: any;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -28,11 +38,15 @@ export class NewRoundPage extends BaseGamePage {
   }
 
   async gamePageOnInit() {
+    this.subscription = this.gameService.gameContext.onPlayersChanged.subscribe((game: Game) => this.currentGame = game);
+  }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   async startRound(){
-    await this.gameService.startNewRound(this.gridService.selectedOptionGrid);
+    await this.gameService.startNewRound(this.player, this.gridService.selectedOptionGrid);
 
     await this.appPages.goToCurrentRoundPage();
   }
@@ -44,5 +58,9 @@ export class NewRoundPage extends BaseGamePage {
         component: ChooseGridComponent
       });
       return await modal.present();
+  }
+
+  async goToSlide(num: number) {
+    await this.slides.slideTo(num);
   }
 }

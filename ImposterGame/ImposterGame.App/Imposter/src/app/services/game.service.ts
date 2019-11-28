@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { GameStates } from '../model/GameStates';
 import { OptionGridModel } from './option-grid.service';
-import { IPlayer, GameApiService, IGame } from 'src/server';
+import { IPlayer, GameApiService, IGame, JoinGameModel } from 'src/server';
 import { UiService } from './ui.service';
-import { Game } from '../model/Game';
+import * as signalR from "@aspnet/signalr";
+import { AppPagesService } from './app-pages.service';
+import { GameFactory, Game } from '../model/Game';
 
 export class GameModel {
   state: string;
@@ -28,17 +30,98 @@ export interface Participant {
   player: IPlayer;
 }
 
+export class GameContext {
+
+  public onPlayersChanged = new EventEmitter<Game>();
+
+  private currentGame: Game;
+  private hubConnection: signalR.HubConnection;
+  private isConnectionActive: boolean = false;
+  private callback: (game: Game) => void;
+
+  constructor(private uiService: UiService, private appPages: AppPagesService) {
+  }
+
+  async start(game: Game, onUpdatedCallback: (game: Game) => void) {
+    if (!this.isConnectionActive) {
+      this.currentGame = game;
+      this.callback = onUpdatedCallback;
+      await this.startConnection(game.id);
+    }
+  }
+
+  async disconnect() {
+    if (this.isConnectionActive && this.hubConnection) {
+      await this.hubConnection.stop();
+    }
+  }
+
+  private async startConnection(gameId: string) {
+    if (this.isConnectionActive) {
+      return;
+    }
+
+    this.isConnectionActive = true;
+
+    try {
+      this.hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/hubs/gamehub")
+        .build();
+
+      await this.hubConnection
+        .start()
+        .then(() => console.log('Connection started'))
+        .catch(err => console.log('Error while starting connection: ' + err))
+
+      await this.delay(100);
+
+
+    } catch (e) {
+      console.error("Error connecting", e);
+      this.isConnectionActive = false;
+    }
+
+    try {
+      await this.hubConnection.invoke("AddToGroup", gameId);
+    } catch (e) {
+      console.error("Error joining group", e);
+      this.isConnectionActive = false;
+    }
+
+    // Add listeners here.
+    this.addOnNewPlayerListener();
+  }
+
+  public addOnNewPlayerListener = () => {
+    this.hubConnection.on('NewPlayer', (data) => {
+      this.currentGame = data;
+
+      this.onPlayersChanged.emit(this.currentGame);
+      this.callback(this.currentGame);
+    });
+  }
+
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(() => resolve(), ms));
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
   readonly GameKey: string = "imposter.game";
+  public readonly gameContext: GameContext;
 
   public get hasJoinedGame(): boolean { return !!this.currentGame; }
   private currentGame: Game;
 
-  constructor(private gameApi: GameApiService, private uiService: UiService) { }
+  constructor(private gameApi: GameApiService,
+     private uiService: UiService,
+      private appPages: AppPagesService) {
+    this.gameContext = new GameContext(uiService, appPages);
+  }
 
   async hostGame(player: IPlayer): Promise<Game> {
     try {
@@ -49,34 +132,31 @@ export class GameService {
       return this.currentGame;
     } catch (e) {
       console.error("Host Game Error", e);
-      this.uiService.errorToast("The was an error starting your game.", "Please check your connection and try again.")
+      this.uiService.errorToast("The was an error starting your game.", "Please check your connection and try again.");
       throw e;
     }
   }
 
   async joinGame(player: IPlayer, gameCode: string): Promise<Game> {
     try {
-      // TODO: call the services;
+      var joinModel: JoinGameModel = {
+        gameCode: gameCode,
+        playerId: player.id
+      }
 
-      this.currentGame = {
-        state: GameStates.roundPending,
-        //gameCode: "TEST",
-        //isHost: false,
-        currentRound: null,
-        currentPlayer: {},
-        isHost: false
-      };
+      var serverGame = await this.gameApi.apiGameApiJoinPost(joinModel).toPromise();
 
-      this.setCurrentGameFromServerGame(this.currentGame, player);
+      this.setCurrentGameFromServerGame(serverGame, player);
 
       return this.currentGame;
     } catch (e) {
       console.error("Host Game Error", e);
+      this.uiService.errorToast("The was an error joining this game.", "Please check your code is correct and your connection and try again.");
       throw e;
     }
   }
 
-  async getCurrentGame(): Promise<Game> {
+  async getCurrentGame(player: IPlayer): Promise<Game> {
     if (this.currentGame) {
       return this.currentGame;
     }
@@ -88,9 +168,16 @@ export class GameService {
       return null;
     }
 
-    // TODO: Get from server
+    var serverGame = await this.gameApi.apiGameApiGetGameGet(game.id).toPromise();
 
-    return game;
+    if (!serverGame) {
+      this.clearSavedGame();
+      return null;
+    }
+
+    this.setCurrentGameFromServerGame(serverGame, player);
+
+    return this.currentGame;
   }
 
   async leaveGame(player: IPlayer, gameCode: string): Promise<void> {
@@ -104,8 +191,8 @@ export class GameService {
     }
   }
 
-  async startNewRound(grid: OptionGridModel): Promise<Game> {
-    let currentGame = await this.getCurrentGame();
+  async startNewRound(player: IPlayer, grid: OptionGridModel): Promise<Game> {
+    let currentGame = await this.getCurrentGame(player);
 
     if (currentGame == null) {
       throw "No game in progress";
@@ -130,8 +217,8 @@ export class GameService {
     }
   }
 
-  async submitAnswer(playerId: string, answer: string): Promise<IGame> {
-    let currentGame = await this.getCurrentGame();
+  async submitAnswer(player: IPlayer, answer: string): Promise<IGame> {
+    let currentGame = await this.getCurrentGame(player);
 
     if (currentGame == null) {
       throw "No game in progress";
@@ -149,9 +236,7 @@ export class GameService {
   }
 
   setCurrentGameFromServerGame(serverGame: IGame, player: IPlayer) {
-    this.currentGame = serverGame as Game;
-    this.currentGame.isHost = this.currentGame.host.id == player.id;
-    this.currentGame.currentPlayer = player;
+    this.currentGame = GameFactory.fromServerGame(serverGame, player)
 
     this.setCurrentGame(this.currentGame);
   }

@@ -4,3 +4,4 @@ export * from './iPlayer';
 export * from './iRound';
 export * from './iRoundParticipant';
 export * from './iScoreboardRow';
+export * from './joinGameModel';

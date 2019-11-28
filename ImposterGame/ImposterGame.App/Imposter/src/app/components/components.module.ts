@@ -9,6 +9,7 @@ import { OptionGridComponent } from './option-grid/option-grid.component';
 import { PlayerAnswerListComponent } from './player-answer-list/player-answer-list.component';
 import { HelpModalComponent } from './modals/help-modal/help-modal.component';
 import { FormsModule } from '@angular/forms';
+import { PlayerListComponent } from './player-list/player-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     ChooseGridComponent,
     OptionGridComponent,
     PlayerAnswerListComponent,
-    HelpModalComponent
+    HelpModalComponent,
+    PlayerListComponent
   ],
   imports: [
     IonicModule.forRoot(), 
@@ -32,7 +34,8 @@ import { FormsModule } from '@angular/forms';
       ChooseGridComponent,
       OptionGridComponent,
       PlayerAnswerListComponent,
-      HelpModalComponent
+      HelpModalComponent,
+      PlayerListComponent
     ],
     entryComponents: [HelpModalComponent]
 })
