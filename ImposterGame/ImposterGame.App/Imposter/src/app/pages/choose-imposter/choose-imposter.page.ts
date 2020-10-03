@@ -40,8 +40,8 @@ export class ChooseImposterPage extends BaseGamePage {
   }
 
   gamePageOnInit() {
-    this.currentRound = this.currentGame.currentRound;
-    this.isImposter = this.currentRound.imposter.player.name == this.player.name;
+    this.currentRound = this.gameContext.currentGame.currentRound;
+    this.isImposter = this.currentRound.imposter.player.name == this.playerService.currentPlayer.name;
   }
 
   async goToSlide(num: number) {

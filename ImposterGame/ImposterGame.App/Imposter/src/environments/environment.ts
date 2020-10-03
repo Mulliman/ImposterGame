@@ -2,8 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// apiBaseUrl: "https://api.imposter.local",
+// apiBaseUrl: "https://imposterapi.azurewebsites.net"
+// apiBaseUrl: "https://localhost:44387"
+
 export const environment = {
-  production: false
+  production: false,
+  apiBaseUrl: "https://localhost:44387"
 };
 
 /*

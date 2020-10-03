@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GameService, GameModel } from 'src/app/services/game.service';
+import { GameService, GameModel, GameContext } from 'src/app/services/game.service';
 import { AppPagesService } from 'src/app/services/app-pages.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { ModalController } from '@ionic/angular';
@@ -15,7 +15,7 @@ import { Game } from 'src/app/model/Game';
 export class FooterComponent implements OnInit {
   hasJoinedGame: boolean;
   player: IPlayer;
-  game: Game;
+  gameContext: GameContext;
   isLoaded: boolean;
 
   @Input() helpSection: string;
@@ -27,9 +27,9 @@ export class FooterComponent implements OnInit {
 
   async ngOnInit() {
     this.player = await this.playerService.getCurrentPlayer();
-    this.game = await this.gameService.getCurrentGame(this.player);
+    this.gameContext = await this.gameService.getCurrentGameContext(this.player);
 
-    this.hasJoinedGame = !!this.game;
+    this.hasJoinedGame = !!this.gameContext;
 
     this.isLoaded = true;
   }
@@ -40,7 +40,7 @@ export class FooterComponent implements OnInit {
 
   async leaveGame(){
     try{
-      await this.gameService.leaveGame(this.player, this.game.easyCode);
+      await this.gameService.leaveGame(this.player, this.gameContext.currentGame.easyCode);
       this.hasJoinedGame = false;
       await this.appPages.goToHomePage();
     }catch (e){

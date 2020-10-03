@@ -24,7 +24,7 @@ export class NewGamePage extends BaseGameFormPage {
   }
 
   async gamePageOnInit() {
-    if(!this.player){
+    if(!this.playerService.currentPlayer){
       await this.appPages.goToYouPage();
     }
   }
@@ -37,8 +37,10 @@ export class NewGamePage extends BaseGameFormPage {
 
   async hostGame() {
     try {
-      var newGame = await this.gameService.hostGame(this.player);
+      var newGame = await this.gameService.hostGame(this.playerService.currentPlayer);
 
+      console.log("Hosted Game", newGame);
+      
       await this.appPages.goToNewRoundPage();
     } catch (e) {
       alert(e);
@@ -48,15 +50,22 @@ export class NewGamePage extends BaseGameFormPage {
   async joinGame() {
     try {
       if (!this.form.valid) {
+        console.log("join game form invalid", gameCodeValue);
         return;
       }
 
       var field = this.form.value.gameCode;
       var gameCodeValue = field;
 
-      var newGame = await this.gameService.joinGame(this.player, gameCodeValue);
+      console.log("join game", gameCodeValue);
+
+      var newGame = await this.gameService.joinGame(this.playerService.currentPlayer, gameCodeValue);
+
+      console.log("joined game", newGame);
 
       await this.appPages.goToNewRoundPage();
+
+      console.log("gone to new round");
     } catch (e) {
       console.log(e);
     }

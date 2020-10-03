@@ -16,6 +16,8 @@ import { Game } from 'src/app/model/Game';
 })
 export class NewRoundPage extends BaseGamePage {
 
+  states = [GameStates.roundPending];
+
   @ViewChild('NewRoundSlider', { static: true }) slides: IonSlides;
 
   slideOpts = {
@@ -30,29 +32,43 @@ export class NewRoundPage extends BaseGamePage {
     appPages: AppPagesService,
     protected gridService: OptionGridService,
     public modalController: ModalController) {
+
     super(playerService, gameService, appPages);
+    console.log("Constructed New Round");
   }
 
-  setAllowedStates(): string[] {
-    return [GameStates.roundPending, GameStates.roundCompleted];
+  setAllowedStates(): Array<string> {
+    console.log("setAllowedStates - " + GameStates.roundPending);
+    console.log("setAllowedStates - " + GameStates.roundCompleted);
+
+    var pend = GameStates.roundPending;
+    var completed = GameStates.roundCompleted;
+  
+    //return null;
+return null;
+// return [pend, completed];
+
+    //return null;// [GameStates.roundPending, GameStates.roundCompleted];
   }
 
   async gamePageOnInit() {
-    this.subscription = this.gameService.gameContext.onPlayersChanged.subscribe((game: Game) => this.currentGame = game);
+    console.log("new round", this.gameContext.currentGame);
+
+    // this.subscription = this.gameService.gameContext.onPlayersChanged.subscribe((game: Game) => this.currentGame = game);
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   async startRound(){
-    await this.gameService.startNewRound(this.player, this.gridService.selectedOptionGrid);
+    await this.gameService.startNewRound(this.playerService.currentPlayer, this.gridService.selectedOptionGrid);
 
     await this.appPages.goToCurrentRoundPage();
   }
 
   async goToChooseGridPage(){
-    console.log("goToChooseGridPage");
+    console.log("new round - goToChooseGridPage");
     
       const modal = await this.modalController.create({
         component: ChooseGridComponent

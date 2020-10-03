@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -24,7 +25,7 @@
     <ProjectReference Include="..\ImposterGame.OptionGrids\ImposterGame.OptionGrids.csproj" />
   </ItemGroup>
 
-  <Target Name="SwaggerToFile" AfterTargets="AfterBuild">
+  <Target Name="SwaggerToFile" Condition="'$(Configuration)' == 'Debug'" AfterTargets="AfterBuild">
     <Exec Command="dotnet swagger tofile  --serializeasv2 --output ../api-contract.json $(OutputPath)$(AssemblyName).dll v1" />
     <Exec Command="powershell.exe -NonInteractive -executionpolicy Unrestricted -command &quot;..\api-generate-angular-clients.ps1&quot;" />
   </Target>

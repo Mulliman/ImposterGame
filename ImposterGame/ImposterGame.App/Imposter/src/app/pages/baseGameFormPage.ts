@@ -20,7 +20,11 @@ export abstract class BaseGameFormPage extends BaseGamePage {
         protected formBuilder: FormBuilder) {
         super(playerService, gameService, appPages);
 
+        console.log("Base Game ctor");
+
         this.instantiateForm();
+
+        console.log("Base Game ctor form instantiated");
     }
 
     abstract setAllowedStates(): string[];

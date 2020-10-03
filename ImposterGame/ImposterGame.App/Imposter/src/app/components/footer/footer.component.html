@@ -1,6 +1,6 @@
 <ion-footer *ngIf="isLoaded">
-  <div *ngIf="game" color="secondary" class="game-code-footer no-padding">
-      <h4>Your game code: {{game.easyCode}}</h4>
+  <div *ngIf="gameContext" color="secondary" class="game-code-footer no-padding">
+      <h4>Your game code: {{gameContext.currentGame.easyCode}}</h4>
   </div>
 
   <ion-toolbar *ngIf="hasJoinedGame">

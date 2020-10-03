@@ -39,8 +39,8 @@ export class CurrentRoundPage extends BaseGameFormPage {
   }
 
   gamePageOnInit() {
-    this.currentRound = this.currentGame.currentRound;
-    this.isImposter = this.currentRound.imposter.player.name == this.player.name;
+    this.currentRound = this.gameContext.currentGame.currentRound;
+    this.isImposter = this.currentRound.imposter.player.name == this.playerService.currentPlayer.name;
   }
 
   instantiateForm() {
@@ -60,13 +60,13 @@ export class CurrentRoundPage extends BaseGameFormPage {
 
     this.yourAnswer = this.form.value.answer;
 
-    await this.gameService.submitAnswer(this.player, this.yourAnswer);
+    await this.gameService.submitAnswer(this.playerService.currentPlayer, this.yourAnswer);
   }
 
   async simulateRoundEnd(){
     //this.currentGame.state = GameStates.roundAnswered;
 
-    this.gameService.setCurrentGame(this.currentGame);
+    //this.gameService.setCurrentGame(this.gameService.currentGame);
 
     await this.appPages.goToChooseImposterPage();
   }

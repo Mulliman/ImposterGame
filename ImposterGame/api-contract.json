@@ -95,6 +95,26 @@
         }
       }
     },
+    "/api/GameApi/Test": {
+      "get": {
+        "tags": [
+          "GameApi"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "/api/PlayerApi/Create": {
       "post": {
         "tags": [

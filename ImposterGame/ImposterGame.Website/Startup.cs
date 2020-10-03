@@ -7,6 +7,7 @@ using ImposterGame.Game.OptionGrids;
 using ImposterGame.Game.Players;
 using ImposterGame.OptionGrids;
 using ImposterGame.Website.Controllers.Exceptions;
+using ImposterGame.Website.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,9 +33,17 @@ namespace ImposterGame.Website
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("defaultcors", builder =>
+            {
+                builder.AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .WithOrigins(Configuration.GetValue<string>("AllowedClientUrls"))
+                       .AllowCredentials();
+            }));
+
             services.AddControllers();
             services.AddMemoryCache();
-
+            
             services.AddSingleton(new OptionGridService(new[] { new HardcodedGridProvider() }));
             services.AddTransient<IPlayerService, InMemoryPlayerService>();
             services.AddTransient<IGameService, InMemoryGameService>();
@@ -43,13 +52,8 @@ namespace ImposterGame.Website
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Imposter API", Version = "v1" });
             });
-
-            services.AddCors(o => o.AddPolicy("defaultcors", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+            
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,16 +79,22 @@ namespace ImposterGame.Website
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                endpoints.MapHub<GameHub>("/hubs/gamehub");
             });
+
+            
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
         }
     }
 }

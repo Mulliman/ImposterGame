@@ -12,6 +12,7 @@ import { ComponentsModule } from './components/components.module';
 import { HeaderComponent } from './components/header/header.component';
 import { BASE_PATH, PlayerApiService, GameApiService } from 'src/server';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: BASE_PATH, useValue: "http://api.imposter.local" },
+    { provide: BASE_PATH, useValue: environment.apiBaseUrl },
 
     // APIs
     PlayerApiService,

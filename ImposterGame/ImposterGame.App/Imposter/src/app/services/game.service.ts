@@ -6,6 +6,7 @@ import { UiService } from './ui.service';
 import * as signalR from "@aspnet/signalr";
 import { AppPagesService } from './app-pages.service';
 import { GameFactory, Game } from '../model/Game';
+import { environment } from 'src/environments/environment';
 
 export class GameModel {
   state: string;
@@ -34,17 +35,22 @@ export class GameContext {
 
   public onPlayersChanged = new EventEmitter<Game>();
 
-  private currentGame: Game;
+  currentGame: Game;
   private hubConnection: signalR.HubConnection;
   private isConnectionActive: boolean = false;
   private callback: (game: Game) => void;
 
-  constructor(private uiService: UiService, private appPages: AppPagesService) {
+  constructor(private uiService: UiService,
+     private appPages: AppPagesService,
+     private gamePersister: GamePersister) {
   }
 
   async start(game: Game, onUpdatedCallback: (game: Game) => void) {
     if (!this.isConnectionActive) {
       this.currentGame = game;
+
+      this.gamePersister.setCurrentGame(game);
+
       this.callback = onUpdatedCallback;
       await this.startConnection(game.id);
     }
@@ -56,8 +62,21 @@ export class GameContext {
     }
   }
 
+  async updateGameFromServer(serverGame: IGame){
+    var game = GameFactory.fromServerGame(serverGame, this.currentGame.currentPlayer);
+
+    this.updateGame(game);
+  }
+
+  async updateGame(game: Game){
+    this.currentGame = game;
+
+    this.gamePersister.setCurrentGame(game);
+  }
+
   private async startConnection(gameId: string) {
     if (this.isConnectionActive) {
+      console.log("startConnection - already active");
       return;
     }
 
@@ -65,7 +84,7 @@ export class GameContext {
 
     try {
       this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl("/hubs/gamehub")
+        .withUrl(environment.apiBaseUrl + "/hubs/gamehub")
         .build();
 
       await this.hubConnection
@@ -75,26 +94,28 @@ export class GameContext {
 
       await this.delay(100);
 
-
     } catch (e) {
       console.error("Error connecting", e);
       this.isConnectionActive = false;
     }
 
     try {
-      await this.hubConnection.invoke("AddToGroup", gameId);
+       await this.hubConnection.invoke("AddToGroup", gameId);
     } catch (e) {
       console.error("Error joining group", e);
       this.isConnectionActive = false;
     }
 
     // Add listeners here.
-    this.addOnNewPlayerListener();
+     this.addOnNewPlayerListener();
   }
 
   public addOnNewPlayerListener = () => {
+    console.log("addOnNewPlayerListener");
+
     this.hubConnection.on('NewPlayer', (data) => {
-      this.currentGame = data;
+      console.log("addOnNewPlayerListener - NewPlayer", data);
+      this.currentGame = GameFactory.fromServerGame(data, this.currentGame.currentPlayer);
 
       this.onPlayersChanged.emit(this.currentGame);
       this.callback(this.currentGame);
@@ -106,30 +127,74 @@ export class GameContext {
   }
 }
 
+export class GamePersister{
+  readonly GameKey: string = "imposter.game";
+
+  getCurrentGame(){
+    let game = JSON.parse(localStorage.getItem(this.GameKey)) as Game;
+
+    if(!game){
+      this.clearSavedGame();
+      return null;
+    }
+
+    return game;
+  }
+
+  setCurrentGame(game: Game) {
+    localStorage.setItem(this.GameKey, JSON.stringify(game));
+  }
+
+  clearSavedGame() {
+    localStorage.removeItem(this.GameKey);
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  readonly GameKey: string = "imposter.game";
   public readonly gameContext: GameContext;
+  public readonly gamePersister: GamePersister;
 
-  public get hasJoinedGame(): boolean { return !!this.currentGame; }
-  private currentGame: Game;
+  // public get hasJoinedGame(): boolean { return !!this.currentGame; }
+  // currentGame: Game;
 
   constructor(private gameApi: GameApiService,
      private uiService: UiService,
       private appPages: AppPagesService) {
-    this.gameContext = new GameContext(uiService, appPages);
+
+    this.gamePersister = new GamePersister();
   }
 
-  async hostGame(player: IPlayer): Promise<Game> {
+  async getCurrentGameContext(player: IPlayer) : Promise<GameContext>{
+    if(this.gameContext){
+      return this.gameContext;
+    }
+
+    var game = await this.getCurrentGame(player);
+
+    if(!game){
+      return null;
+    }
+
+    return this.createNewContext(game);
+  }
+
+  async createNewContext(game: Game){
+    var gameContext = new GameContext(this.uiService, this.appPages, new GamePersister());
+    gameContext.start(game, (g) => console.log(g));
+    
+    return gameContext;
+  }
+
+  async hostGame(player: IPlayer): Promise<GameContext> {
     try {
       var serverGame = await this.gameApi.apiGameApiHostPost(player.id).toPromise();
+      var game = GameFactory.fromServerGame(serverGame, player);
 
-      this.setCurrentGameFromServerGame(serverGame, player);
-
-      return this.currentGame;
+      return this.createNewContext(game);
     } catch (e) {
       console.error("Host Game Error", e);
       this.uiService.errorToast("The was an error starting your game.", "Please check your connection and try again.");
@@ -137,7 +202,7 @@ export class GameService {
     }
   }
 
-  async joinGame(player: IPlayer, gameCode: string): Promise<Game> {
+  async joinGame(player: IPlayer, gameCode: string): Promise<GameContext> {
     try {
       var joinModel: JoinGameModel = {
         gameCode: gameCode,
@@ -146,9 +211,9 @@ export class GameService {
 
       var serverGame = await this.gameApi.apiGameApiJoinPost(joinModel).toPromise();
 
-      this.setCurrentGameFromServerGame(serverGame, player);
+      var game = GameFactory.fromServerGame(serverGame, player);
 
-      return this.currentGame;
+      return this.createNewContext(game);
     } catch (e) {
       console.error("Host Game Error", e);
       this.uiService.errorToast("The was an error joining this game.", "Please check your code is correct and your connection and try again.");
@@ -156,65 +221,66 @@ export class GameService {
     }
   }
 
-  async getCurrentGame(player: IPlayer): Promise<Game> {
-    if (this.currentGame) {
-      return this.currentGame;
-    }
+  private async getCurrentGame(player: IPlayer): Promise<Game> {
+    // if (this.currentGame) {
+    //   return this.currentGame;
+    // }
 
-    let game = JSON.parse(localStorage.getItem(this.GameKey)) as Game;
+    var game = this.gamePersister.getCurrentGame();
 
     if (!game) {
-      this.clearSavedGame();
       return null;
     }
 
     var serverGame = await this.gameApi.apiGameApiGetGameGet(game.id).toPromise();
 
     if (!serverGame) {
-      this.clearSavedGame();
+      this.gamePersister.clearSavedGame();
       return null;
     }
 
-    this.setCurrentGameFromServerGame(serverGame, player);
+    var game = GameFactory.fromServerGame(serverGame, game.currentPlayer);
 
-    return this.currentGame;
+    return game;
   }
 
   async leaveGame(player: IPlayer, gameCode: string): Promise<void> {
-    try {
-      // TODO: Call APIs
+    // try {
+    //   // TODO: Call APIs
 
-      this.clearSavedGame();
-    } catch (e) {
-      console.error("Leave Game Error", e);
-      throw e;
-    }
+    //   this.clearSavedGame();
+    // } catch (e) {
+    //   console.error("Leave Game Error", e);
+    //   throw e;
+    // }
   }
 
   async startNewRound(player: IPlayer, grid: OptionGridModel): Promise<Game> {
-    let currentGame = await this.getCurrentGame(player);
+    // let currentGame = await this.getCurrentGame(player);
 
-    if (currentGame == null) {
-      throw "No game in progress";
-    }
+    // if (currentGame == null) {
+    //   throw "No game in progress";
+    // }
 
-    try {
-      currentGame.currentRound = {
-        id: "kjsbdkasdjbaskbj",
-        allOptions: grid.options,
-        word: "TEST",
-        imposter: { player: { name: "MadeUp", id: "MadeUp" } }
-      };
-      //currentGame.state = GameStates.roundStarted;
+    // try {
+    //   currentGame.currentRound = {
+    //     id: "kjsbdkasdjbaskbj",
+    //     allOptions: grid.options,
+    //     word: "TEST",
+    //     imposter: { player: { name: "MadeUp", id: "MadeUp" } }
+    //   };
+    //   //currentGame.state = GameStates.roundStarted;
 
-      this.setCurrentGame(currentGame);
+    //   this.setCurrentGame(currentGame);
 
-      return currentGame;
-    }
-    catch (e) {
-      console.log(e);
-      throw "Error starting new round.";
-    }
+    //   return currentGame;
+    // }
+    // catch (e) {
+    //   console.log(e);
+    //   throw "Error starting new round.";
+    // }
+
+    return null;
   }
 
   async submitAnswer(player: IPlayer, answer: string): Promise<IGame> {
@@ -233,22 +299,5 @@ export class GameService {
       console.log(e);
       throw "Error starting new round.";
     }
-  }
-
-  setCurrentGameFromServerGame(serverGame: IGame, player: IPlayer) {
-    this.currentGame = GameFactory.fromServerGame(serverGame, player)
-
-    this.setCurrentGame(this.currentGame);
-  }
-
-  setCurrentGame(game: Game) {
-    this.currentGame = game;
-
-    localStorage.setItem(this.GameKey, JSON.stringify(this.currentGame));
-  }
-
-  clearSavedGame() {
-    localStorage.removeItem(this.GameKey);
-    this.currentGame = null;
   }
 }

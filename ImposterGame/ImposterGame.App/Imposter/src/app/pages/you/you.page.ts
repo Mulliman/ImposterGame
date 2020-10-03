@@ -26,9 +26,9 @@ export class YouPage extends BaseGameFormPage {
   }
 
   gamePageOnInit() {
-    if(this.player){
+    if(this.playerService.currentPlayer){
       this.form.patchValue({
-        name: this.player.name
+        name: this.playerService.currentPlayer.name
       });
     }
   }
@@ -61,6 +61,6 @@ export class YouPage extends BaseGameFormPage {
   }
 
   async leaveGame(){
-    await this.gameService.leaveGame(this.player, this.currentGame.easyCode);
+    await this.gameService.leaveGame(this.playerService.currentPlayer, this.gameContext.currentGame.easyCode);
   }
 }

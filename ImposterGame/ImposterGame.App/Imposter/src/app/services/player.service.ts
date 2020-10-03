@@ -13,7 +13,6 @@ export class PlayerService {
   currentPlayer: IPlayer;
   isAlreadyFetching: boolean;
 
-
   constructor(private playerApi: PlayerApiService, private uiService: UiService) {
     console.log("PlayerService constructed");
    }

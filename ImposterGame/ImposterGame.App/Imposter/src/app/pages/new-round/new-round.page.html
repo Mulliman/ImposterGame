@@ -1,12 +1,12 @@
 <app-header></app-header>
 
-<ion-content fullscreen padding class="ion-padding">
+<ion-content fullscreen padding class="ion-padding" >
 
-  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
+  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #NewRoundSlider >
 
-    <ion-slide>
+    <ion-slide *ngIf="gameContext">
       <div class="slide-inner" class="full-width">
-        <app-player-list *ngIf="currentGame" [players]="currentGame.players" [currentPlayer]="player" class="full-width"></app-player-list>
+        <app-player-list *ngIf="gameContext.currentGame" [players]="gameContext.currentGame.players" [currentPlayer]="playerService.currentPlayer" class="full-width"></app-player-list>
 
         <ion-button fill="outline" size="small" (click)="goToSlide(1)">
           <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
@@ -15,12 +15,12 @@
       </div>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide *ngIf="gameContext">
       <div class="slide-inner" class="full-width">
         <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
           <div class="ion-text-center">
 
-            <ion-card *ngIf="currentGame.isHost && !this.gridService.selectedOptionGrid">
+            <ion-card *ngIf="gameContext.currentGame.isHost && !this.gridService.selectedOptionGrid">
               <ion-card-header>
                 <ion-card-title>Choose a grid for the next round</ion-card-title>
               </ion-card-header>
@@ -32,7 +32,7 @@
               </ion-card-content>
             </ion-card>
 
-            <ion-card *ngIf="currentGame.isHost && this.gridService.selectedOptionGrid">
+            <ion-card *ngIf="gameContext.currentGame.isHost && this.gridService.selectedOptionGrid">
               <ion-card-header>
                 <ion-card-title>You have chosen "{{this.gridService.selectedOptionGrid.title}}"</ion-card-title>
               </ion-card-header>
@@ -46,7 +46,7 @@
               </ion-card-content>
             </ion-card>
 
-            <ion-card *ngIf="!currentGame.isHost">
+            <ion-card *ngIf="!gameContext.currentGame.isHost">
               <ion-card-header>
                 <ion-card-title>Waiting for host.</ion-card-title>
               </ion-card-header>
@@ -68,9 +68,6 @@
     </ion-slide>
 
   </ion-slides>
-
-
-
 
 </ion-content>
 

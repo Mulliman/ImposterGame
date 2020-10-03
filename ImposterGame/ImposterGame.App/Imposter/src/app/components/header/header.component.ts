@@ -17,12 +17,16 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
     var player = await this.playerService.getCurrentPlayer();
-    var currentGame = await this.gameService.getCurrentGame(player);
+    var currentGameContext = await this.gameService.getCurrentGameContext(player);
+    var hasImposterSet = !currentGameContext 
+    || !currentGameContext.currentGame 
+    || !currentGameContext.currentGame.currentRound 
+    || !currentGameContext.currentGame.currentRound.imposter;
 
-    if(!player || !currentGame || !currentGame.currentRound || !currentGame.currentRound.imposter){
+    if(!player || hasImposterSet){
       this.isInRound = false;
     } else{
-      this.isImposter = currentGame.currentRound.imposter.player.name === player.name;
+      this.isImposter = currentGameContext.currentGame.currentRound.imposter.player.name === player.name;
       this.isInRound = true;
     }
 

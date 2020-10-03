@@ -25,12 +25,12 @@ namespace ImposterGame.Website.Controllers
         private readonly IHubContext<GameHub> _hubContext;
 
         public GameApiController(IGameService gameService,
-            IPlayerService playerService)
-            //IHubContext<GameHub> hubcontext)
+            IPlayerService playerService,
+            IHubContext<GameHub> hubcontext)
         {
             _gameService = gameService;
             _playerService = playerService;
-            //_hubContext = hubcontext;
+            _hubContext = hubcontext;
         }
 
         [HttpPost("[action]")]
@@ -62,6 +62,11 @@ namespace ImposterGame.Website.Controllers
 
             var updatedGame = _gameService.JoinGame(game, player);
 
+            await _hubContext.Clients.Groups(GameHub.GetGroupName(updatedGame.Id)).SendAsync("NewPlayer", game);
+
+            //await _hubContext.Clients.All.GameUpdate(game);
+            //await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).GameUpdate(game);
+
             //await GameHub.StartRound(_hubContext.Clients, updatedGame.Id, updatedGame);
 
             //await _hubContext.Clients.Groups(GameHub.GetGroupName(updatedGame.Id)).SendAsync(GameHub.GameUpdatedMethodName, game);
@@ -80,6 +85,12 @@ namespace ImposterGame.Website.Controllers
             }
 
             return game;
+        }
+
+        [HttpGet("[action]")]
+        public string Test()
+        {
+            return "Hello, World!";
         }
     }
 }
