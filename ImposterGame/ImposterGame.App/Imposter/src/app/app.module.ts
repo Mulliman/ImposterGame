@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { HeaderComponent } from './components/header/header.component';
-import { BASE_PATH, PlayerApiService, GameApiService } from 'src/server';
+import { BASE_PATH, PlayerApiService, GameApiService, OptionGridsApiService, RoundApiService } from 'src/server';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -33,7 +33,9 @@ import { environment } from 'src/environments/environment';
 
     // APIs
     PlayerApiService,
-    GameApiService
+    GameApiService,
+    OptionGridsApiService,
+    RoundApiService
   ],
   bootstrap: [AppComponent]
 })

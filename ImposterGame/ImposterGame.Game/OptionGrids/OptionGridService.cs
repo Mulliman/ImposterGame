@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImposterGame.Game.OptionGrids
 {
-    public class OptionGridService
+    public class OptionGridService : IOptionGridService
     {
         private readonly IEnumerable<IOptionGridProvider> _optionGridProviders;
         private Dictionary<Guid, IOptionGridGroup> _allGridGroups;
@@ -20,7 +20,7 @@ namespace ImposterGame.Game.OptionGrids
 
         public async Task<IOptionGrid> GetOptionGrid(Guid id)
         {
-            if(_allGrids.ContainsKey(id))
+            if (_allGrids.ContainsKey(id))
             {
                 return _allGrids[id];
             }
@@ -44,7 +44,7 @@ namespace ImposterGame.Game.OptionGrids
 
         public async Task<IEnumerable<IOptionGrid>> GetAllOptionGrids()
         {
-            if(_allGrids != null)
+            if (_allGrids != null)
             {
                 return _allGrids.Select(gg => gg.Value); ;
             }

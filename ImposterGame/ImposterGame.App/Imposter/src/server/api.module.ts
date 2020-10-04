@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { GameApiService } from './api/gameApi.service';
+import { OptionGridsApiService } from './api/optionGridsApi.service';
 import { PlayerApiService } from './api/playerApi.service';
+import { RoundApiService } from './api/roundApi.service';
 
 @NgModule({
   imports:      [],
@@ -12,7 +14,9 @@ import { PlayerApiService } from './api/playerApi.service';
   exports:      [],
   providers: [
     GameApiService,
-    PlayerApiService ]
+    OptionGridsApiService,
+    PlayerApiService,
+    RoundApiService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {

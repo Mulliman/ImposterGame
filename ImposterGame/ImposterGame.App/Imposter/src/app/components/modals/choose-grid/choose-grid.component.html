@@ -12,11 +12,11 @@
 
     <ion-slide *ngFor="let group of gridGroups">
       <div class="slide-inner">
-        <h1>{{group.title}}</h1>
+        <h1>{{group.name}}</h1>
 
         <ion-list>
           <ion-item class="ion-no-padding" *ngFor="let grid of group.optionGrids" (click)="selectGrid(grid)">
-              <ion-label>{{grid.title}}</ion-label>
+              <ion-label>{{grid.name}}</ion-label>
             <!-- <button item-right (click)="selectGrid(grid)">{{grid.title}}</button> -->
             <ion-note slot="end" color="medium">Choose</ion-note>
           </ion-item>

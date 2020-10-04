@@ -39,6 +39,7 @@ export class CurrentRoundPage extends BaseGameFormPage {
   }
 
   gamePageOnInit() {
+    console.log("CurrentRoundPage");
     this.currentRound = this.gameContext.currentGame.currentRound;
     this.isImposter = this.currentRound.imposter.player.name == this.playerService.currentPlayer.name;
   }

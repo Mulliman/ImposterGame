@@ -256,29 +256,29 @@ export class GameService {
   }
 
   async startNewRound(player: IPlayer, grid: OptionGridModel): Promise<Game> {
-    // let currentGame = await this.getCurrentGame(player);
+    let currentGame = await this.getCurrentGame(player);
 
-    // if (currentGame == null) {
-    //   throw "No game in progress";
-    // }
+    if (currentGame == null) {
+      throw "No game in progress";
+    }
 
-    // try {
-    //   currentGame.currentRound = {
-    //     id: "kjsbdkasdjbaskbj",
-    //     allOptions: grid.options,
-    //     word: "TEST",
-    //     imposter: { player: { name: "MadeUp", id: "MadeUp" } }
-    //   };
-    //   //currentGame.state = GameStates.roundStarted;
+    try {
+      currentGame.currentRound = {
+        id: "kjsbdkasdjbaskbj",
+        allOptions: grid.options,
+        word: "TEST",
+        imposter: { player: { name: "MadeUp", id: "MadeUp" } }
+      };
+      //currentGame.state = GameStates.roundStarted;
 
-    //   this.setCurrentGame(currentGame);
+      //this.setCurrentGame(currentGame);
 
-    //   return currentGame;
-    // }
-    // catch (e) {
-    //   console.log(e);
-    //   throw "Error starting new round.";
-    // }
+      return currentGame;
+    }
+    catch (e) {
+      console.log(e);
+      throw "Error starting new round.";
+    }
 
     return null;
   }
