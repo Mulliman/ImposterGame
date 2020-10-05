@@ -21,17 +21,17 @@ namespace ImposterGame.Website.Controllers
         private readonly IGameService _gameService;
         private readonly IPlayerService _playerService;
         private readonly IOptionGridService _optionGridService;
-        private readonly IHubContext<GameHub> _hubContext;
+        private readonly IGameNotifier _gameNotifier;
 
         public RoundApiController(IGameService gameService,
             IPlayerService playerService,
             IOptionGridService optionGridService,
-            IHubContext<GameHub> hubcontext)
+            IGameNotifier gameNotifier)
         {
             _gameService = gameService;
             _playerService = playerService;
             _optionGridService = optionGridService;
-            _hubContext = hubcontext;
+            _gameNotifier = gameNotifier;
         }
 
         [HttpPost("[action]")]
@@ -39,7 +39,8 @@ namespace ImposterGame.Website.Controllers
         {
             var game = await StartNewRound(gameId, gridId);
 
-            await _hubContext.Clients.Group(GameHub.GetGroupName(game.Id)).SendAsync("StartRound", game);
+            //await _hubContext.Clients.Group(GameHub.GetGroupName(game.Id)).SendAsync("StartRound", game);
+            await _gameNotifier.SendNewRoundStarted(game);
 
             return game;
         }

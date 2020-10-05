@@ -48,7 +48,9 @@ export class PlayerService {
       return null;
     }
 
-    return this.getFromServer(localPlayer);
+    this.currentPlayer = await this.getFromServer(localPlayer);
+
+    return this.currentPlayer;
   }
 
   private async getFromServer(localPlayer: IPlayer): Promise<IPlayer> {

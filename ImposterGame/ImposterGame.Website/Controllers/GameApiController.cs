@@ -23,14 +23,15 @@ namespace ImposterGame.Website.Controllers
         private readonly IGameService _gameService;
         private readonly IPlayerService _playerService;
         private readonly IHubContext<GameHub> _hubContext;
+        private readonly IGameNotifier _gameNotifier;
 
         public GameApiController(IGameService gameService,
             IPlayerService playerService,
-            IHubContext<GameHub> hubcontext)
+            IGameNotifier gameNotifier)
         {
             _gameService = gameService;
             _playerService = playerService;
-            _hubContext = hubcontext;
+            _gameNotifier = gameNotifier;
         }
 
         [HttpPost("[action]")]
@@ -62,7 +63,7 @@ namespace ImposterGame.Website.Controllers
 
             var updatedGame = _gameService.JoinGame(game, player);
 
-            await _hubContext.Clients.Groups(GameHub.GetGroupName(updatedGame.Id)).SendAsync(GameHub.NewPlayerMethodName, game);
+            await _gameNotifier.SendPlayerJoined(updatedGame);
 
             return updatedGame;
         }

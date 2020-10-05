@@ -11,6 +11,9 @@ export class GameFactory{
         game.isHost = serverGame.host.id == player.id;
         game.currentPlayer = player;
 
+        console.log("fromServerGame - server game", serverGame);
+        console.log("fromServerGame - updated game", game);
+        
         return game;
     }
 }

@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { GameStates } from '../model/GameStates';
 import { OptionGridModel } from './option-grid.service';
-import { IPlayer, GameApiService, IGame, JoinGameModel } from 'src/server';
+import { IPlayer, GameApiService, IGame, JoinGameModel, RoundApiService } from 'src/server';
 import { UiService } from './ui.service';
 import * as signalR from "@aspnet/signalr";
 import { AppPagesService } from './app-pages.service';
@@ -62,10 +62,12 @@ export class GameContext {
     }
   }
 
-  async updateGameFromServer(serverGame: IGame){
+  async updateGameFromServer(serverGame: IGame) : Promise<Game>{
     var game = GameFactory.fromServerGame(serverGame, this.currentGame.currentPlayer);
 
-    this.updateGame(game);
+    await this.updateGame(game);
+
+    return game;
   }
 
   async updateGame(game: Game){
@@ -115,9 +117,15 @@ export class GameContext {
 
     this.hubConnection.on('NewPlayer', (data) => {
       console.log("addOnNewPlayerListener - NewPlayer", data);
-      this.currentGame = GameFactory.fromServerGame(data, this.currentGame.currentPlayer);
 
+      this.updateGameFromServer(data);
+      console.log("addOnNewPlayerListener - Current game updated", this.currentGame);
+      
+
+      console.log("addOnNewPlayerListener - pre onPlayersChanged.emit");
       this.onPlayersChanged.emit(this.currentGame);
+      console.log("addOnNewPlayerListener - post onPlayersChanged.emit");
+
       this.callback(this.currentGame);
     });
   }
@@ -155,13 +163,14 @@ export class GamePersister{
 })
 export class GameService {
 
-  public readonly gameContext: GameContext;
+  private gameContext: GameContext;
   public readonly gamePersister: GamePersister;
 
   // public get hasJoinedGame(): boolean { return !!this.currentGame; }
   // currentGame: Game;
 
   constructor(private gameApi: GameApiService,
+    private roundApi: RoundApiService,
      private uiService: UiService,
       private appPages: AppPagesService) {
 
@@ -179,7 +188,9 @@ export class GameService {
       return null;
     }
 
-    return this.createNewContext(game);
+    this.gameContext = await this.createNewContext(game);
+
+    return this.gameContext;
   }
 
   async createNewContext(game: Game){
@@ -256,31 +267,27 @@ export class GameService {
   }
 
   async startNewRound(player: IPlayer, grid: OptionGridModel): Promise<Game> {
-    let currentGame = await this.getCurrentGame(player);
+    let currentGameContext = await this.getCurrentGameContext(player);
 
-    if (currentGame == null) {
+    if (currentGameContext == null) {
       throw "No game in progress";
     }
 
     try {
-      currentGame.currentRound = {
-        id: "kjsbdkasdjbaskbj",
-        allOptions: grid.options,
-        word: "TEST",
-        imposter: { player: { name: "MadeUp", id: "MadeUp" } }
-      };
-      //currentGame.state = GameStates.roundStarted;
+      console.log("startNewRound - posting new round");
+      
+      var serverGame = await this.roundApi.apiRoundApiNewRoundPost(currentGameContext.currentGame.id, grid.id).toPromise();
+      console.log("startNewRound - new round started", serverGame);
 
-      //this.setCurrentGame(currentGame);
+      currentGameContext.currentGame = await this.gameContext.updateGameFromServer(serverGame);
+      console.log("startNewRound - current game updated", currentGameContext.currentGame);
 
-      return currentGame;
+      return currentGameContext.currentGame;
     }
     catch (e) {
       console.log(e);
       throw "Error starting new round.";
     }
-
-    return null;
   }
 
   async submitAnswer(player: IPlayer, answer: string): Promise<IGame> {

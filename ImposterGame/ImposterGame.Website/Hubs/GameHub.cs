@@ -15,34 +15,50 @@ namespace ImposterGame.Website.Hubs
 
         public async Task SendGameUpdate(Guid gameId, IGame game)
         {
-            await SendGameUpdate((IHubClients)Clients, gameId, game);
-        }
-
-        public static async Task SendGameUpdate(IHubClients clients, Guid gameId, IGame game)
-        {
-            await clients.Group(GetGroupName(gameId)).SendAsync(GameUpdatedMethodName, game);
-        }
-
-        public async Task SendPlayerJoined(Guid gameId, IGame game)
-        {
-            await SendPlayerJoined((IHubClients)Clients, gameId, game);
-        }
-
-        public static async Task SendPlayerJoined(IHubClients clients, Guid gameId, IGame game)
-        {
-            await clients.Group(GetGroupName(gameId)).SendAsync(NewPlayerMethodName, game);
+            await Clients.Group(GetGroupName(gameId)).SendAsync(GameUpdatedMethodName, game);
         }
 
         public async Task StartRound(Guid gameId, IGame game)
         {
-            await StartRound((IHubClients)Clients, gameId, game);
+            await Clients.Group(GetGroupName(gameId)).SendAsync(StartRoundMethodName, game);
         }
 
-        public static async Task StartRound(IHubClients clients, Guid gameId, IGame game)
+        public async Task SendPlayerJoined(Guid gameId, IGame game)
         {
-            await clients.Group(GetGroupName(gameId)).SendAsync(StartRoundMethodName, game);
+            await Clients.Group(GetGroupName(gameId)).SendAsync(NewPlayerMethodName, game);
         }
 
+        #region old
+        //public async Task SendGameUpdate(Guid gameId, IGame game)
+        //{
+        //    await SendGameUpdate((IHubClients)Clients, gameId, game);
+        //}
+
+        //public static async Task SendGameUpdate(IHubClients clients, Guid gameId, IGame game)
+        //{
+        //    await clients.Group(GetGroupName(gameId)).SendAsync(GameUpdatedMethodName, game);
+        //}
+
+        //public async Task SendPlayerJoined(Guid gameId, IGame game)
+        //{
+        //    await SendPlayerJoined((IHubClients)Clients, gameId, game);
+        //}
+
+        //public static async Task SendPlayerJoined(IHubClients clients, Guid gameId, IGame game)
+        //{
+        //    await clients.Group(GetGroupName(gameId)).SendAsync(NewPlayerMethodName, game);
+        //}
+
+        //public async Task StartRound(Guid gameId, IGame game)
+        //{
+        //    await StartRound((IHubClients)Clients, gameId, game);
+        //}
+
+        //public static async Task StartRound(IHubClients clients, Guid gameId, IGame game)
+        //{
+        //    await clients.Group(GetGroupName(gameId)).SendAsync(StartRoundMethodName, game);
+        //}
+        #endregion
 
         public Task AddToGroup(Guid gameId)
         => Groups.AddToGroupAsync(Context.ConnectionId, GetGroupName(gameId));

@@ -53,7 +53,7 @@ namespace ImposterGame.Game.Rounds
             foreach (var player in players)
             {
                 var isImposter = imposter.Name == player.Name;
-                // TODO round.Participants.Add(new RoundParticipant(player, isImposter));
+                round.Participants.Add(new RoundParticipant(player, isImposter));
             }
 
             return round;

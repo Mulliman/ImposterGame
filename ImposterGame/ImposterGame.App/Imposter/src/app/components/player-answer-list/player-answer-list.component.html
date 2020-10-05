@@ -1,4 +1,4 @@
-<ion-list class="player-answer-list list-with-background">
+<!-- <ion-list class="player-answer-list list-with-background">
   <ion-item lines="none" class="ion-no-padding" [ngClass]="selectedPlayerName == 'Sam' ? 'selectedItem' : ''" (click)="selectImposter({player: {name: 'Sam'}})">
     <ion-label>Sam</ion-label>
     <ion-note slot="end" color="primary">Someword</ion-note>
@@ -10,5 +10,14 @@
   <ion-item lines="none" class="ion-no-padding" [ngClass]="selectedPlayerName == 'Sam3' ? 'selectedItem' : ''" (click)="selectImposter({player: {name: 'Sam3'}})">
     <ion-label>Sam3</ion-label>
     <ion-note slot="end" color="light">WORD</ion-note>
+  </ion-item>
+</ion-list> -->
+
+<ion-list class="player-answer-list list-with-background" *ngIf="participants">
+  <ion-item *ngFor="let participant of participants" lines="none" class="ion-no-padding" 
+  [ngClass]="selectedPlayerName == participant.player.name ? 'selectedItem' : ''" 
+  (click)="selectImposter({player: {name: participant.player.name}})">
+    <ion-label>{{participant.player.name}}</ion-label>
+    <ion-note slot="end" color="light">{{participant.answer}}</ion-note>
   </ion-item>
 </ion-list>

@@ -5,7 +5,11 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <app-player-answer-list class="full-width"></app-player-answer-list>
+        <app-player-answer-list 
+        *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.currentRound" 
+        [participants]="gameContext.currentGame.currentRound.participants" 
+        class="full-width">
+      </app-player-answer-list>
 
         <ion-button fill="outline" size="small" (click)="goToSlide(2)">
           <ion-icon slot="start" name="arrow-round-back"></ion-icon>

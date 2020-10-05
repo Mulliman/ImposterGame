@@ -14,6 +14,7 @@ export class PlayerListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('app-player-list', this.players, this.currentPlayer);
   }
 
   selectImposter(participant: any){

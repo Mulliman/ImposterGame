@@ -28,6 +28,10 @@ export abstract class BaseGamePage implements OnInit {
         }
 
     async ngOnInit() {
+        
+    }
+
+    async ionViewWillEnter(){
         await this.playerService.getCurrentPlayer();
         if (this.allowedStates && !this.playerService.currentPlayer)
         {
@@ -67,6 +71,11 @@ export abstract class BaseGamePage implements OnInit {
         console.log("Base game loaded");
         
         this.isLoaded = true;
+    }
+
+    ngOnDestroy() {
+        this.isLoaded = false;
+        this.gameContext = null;
     }
 
     abstract setAllowedStates(): string[];

@@ -6,8 +6,7 @@
 
     <ion-slide *ngIf="gameContext">
       <div class="slide-inner" class="full-width">
-        <app-player-list *ngIf="gameContext.currentGame" [players]="gameContext.currentGame.players" [currentPlayer]="playerService.currentPlayer" class="full-width"></app-player-list>
-
+        <app-player-list *ngIf="gameContext.currentGame" [players]="gameContext.currentGame.players" [currentPlayer]="gameContext.currentGame.currentPlayer" class="full-width"></app-player-list>
         <ion-button fill="outline" size="small" (click)="goToSlide(1)">
           <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
           Choose Grid

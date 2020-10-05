@@ -25,11 +25,13 @@ export class AppPagesService {
   async ensureOnMostAppropriatePage(player: IPlayer, gameContext: GameContext) {
     console.log("ensureOnMostAppropriatePage");
     if (!player) {
+      console.log("No player, go to you page");
       await this.goToYouPage();
       return;
     }
 
     if(!gameContext || !gameContext.currentGame){
+      console.log("No game context or current game, go to new game");
       await this.goToNewGamePage();
       return;
     }
@@ -44,6 +46,7 @@ export class AppPagesService {
     }
 
     if(currentGame.state == GameStates.roundStarted){
+      console.log("state is roundStarted, go to round page");
       await this.goToCurrentRoundPage();
       return;
     }

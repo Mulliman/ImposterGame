@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Round } from 'src/app/services/game.service';
-import { IPlayer } from 'src/server';
+import { IPlayer, IRoundParticipant } from 'src/server';
 
 @Component({
   selector: 'app-player-answer-list',
@@ -9,7 +9,7 @@ import { IPlayer } from 'src/server';
 })
 export class PlayerAnswerListComponent implements OnInit {
 
-  @Input() participants: any[];
+  @Input() participants: IRoundParticipant[];
   @Input() clickable: boolean;
   @Output() onPlayerSelected = new EventEmitter<IPlayer>();
 

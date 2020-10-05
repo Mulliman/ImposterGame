@@ -44,6 +44,7 @@ namespace ImposterGame.Website
             services.AddControllers();
             services.AddMemoryCache();
             
+            services.AddTransient<IGameNotifier, GameNotifier>();
             services.AddSingleton<IOptionGridService>(new OptionGridService(new[] { new HardcodedGridProvider() }));
             services.AddTransient<IPlayerService, InMemoryPlayerService>();
             services.AddTransient<IGameService, InMemoryGameService>();
