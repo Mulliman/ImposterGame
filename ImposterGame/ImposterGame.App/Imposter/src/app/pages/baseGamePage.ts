@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from "@angular/core";
 import { PlayerService } from '../services/player.service';
-import { GameModel, GameService, GameContext } from '../services/game.service';
+import { GameModel, GameService } from '../services/game.service';
+import { GameContext } from "../services/gamecontext.service";
 import { AppPagesService } from '../services/app-pages.service';
 import { IPlayer } from 'src/server';
 import { Game } from '../model/Game';
@@ -43,7 +44,7 @@ export abstract class BaseGamePage implements OnInit {
 
         this.gameContext = await this.gameService.getCurrentGameContext(this.playerService.currentPlayer);
         if(this.gameContext){
-            this.gameContext.onGameUdated.subscribe((game: Game) => this.gamePageOnContextUpdated());
+            this.gameContext.onGameUpdated.subscribe((game: Game) => this.gamePageOnContextUpdated());
           }
 
         if (this.allowedStates && !this.gameContext) {
@@ -65,7 +66,7 @@ export abstract class BaseGamePage implements OnInit {
     ngOnDestroy() {
         this.isLoaded = false;
         if(this.gameContext){
-            this.gameContext.onGameUdated.unsubscribe();
+            this.gameContext.onGameUpdated.unsubscribe();
         }
         this.gameContext = null;
     }

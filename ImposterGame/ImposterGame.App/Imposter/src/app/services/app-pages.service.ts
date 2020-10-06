@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { GameModel, GameContext } from './game.service';
+import { GameModel } from './game.service';
+import { GameContext } from "./gamecontext.service";
 import { NavController } from '@ionic/angular';
 import { GameStates } from '../model/GameStates';
 import { IPlayer, IGame } from 'src/server';

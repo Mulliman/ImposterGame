@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService, GameContext } from 'src/app/services/game.service';
+import { GameService } from 'src/app/services/game.service';
+import { GameContext } from "src/app/services/gamecontext.service";
 import { PlayerService } from 'src/app/services/player.service';
 import { IPlayer } from 'src/server';
 import { Game } from 'src/app/model/Game';
@@ -24,7 +25,7 @@ export class HeaderComponent implements OnInit {
     this.initComponent(currentGameContext, player);
 
     if(currentGameContext){
-      currentGameContext.onGameUdated.subscribe((game: Game) => this.initComponent(currentGameContext, player));
+      currentGameContext.onGameUpdated.subscribe((game: Game) => this.initComponent(currentGameContext, player));
     }
   }
 

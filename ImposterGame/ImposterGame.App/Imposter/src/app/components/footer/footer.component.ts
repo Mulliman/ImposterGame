@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GameService, GameModel, GameContext } from 'src/app/services/game.service';
+import { GameService, GameModel } from 'src/app/services/game.service';
+import { GameContext } from "src/app/services/gamecontext.service";
 import { AppPagesService } from 'src/app/services/app-pages.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { ModalController } from '@ionic/angular';
@@ -29,7 +30,7 @@ export class FooterComponent implements OnInit {
     this.player = await this.playerService.getCurrentPlayer();
     this.gameContext = await this.gameService.getCurrentGameContext(this.player);
 
-    this.hasJoinedGame = !!this.gameContext;
+    this.hasJoinedGame = this.gameContext.hasGameStarted;
 
     this.isLoaded = true;
   }
