@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { GameStates } from '../model/GameStates';
 import { OptionGridModel } from './option-grid.service';
-import { IPlayer, GameApiService, IGame, JoinGameModel, RoundApiService } from 'src/server';
+import { IPlayer, GameApiService, IGame, JoinGameModel, RoundApiService, AddAnswerModel } from 'src/server';
 import { UiService } from './ui.service';
 import * as signalR from "@aspnet/signalr";
 import { AppPagesService } from './app-pages.service';
@@ -33,7 +33,10 @@ export interface Participant {
 
 export class GameContext {
 
+  public onGameUdated = new EventEmitter<Game>();
   public onPlayersChanged = new EventEmitter<Game>();
+  public onRoundStarted = new EventEmitter<Game>();
+  public onAllAnswered = new EventEmitter<Game>();
 
   currentGame: Game;
   private hubConnection: signalR.HubConnection;
@@ -109,7 +112,9 @@ export class GameContext {
     }
 
     // Add listeners here.
-     this.addOnNewPlayerListener();
+    this.addOnNewPlayerListener();
+    await this.addStartRoundListener();
+    this.addOnAllAnsweredListener();
   }
 
   public addOnNewPlayerListener = () => {
@@ -121,11 +126,34 @@ export class GameContext {
       this.updateGameFromServer(data);
       console.log("addOnNewPlayerListener - Current game updated", this.currentGame);
       
-
       console.log("addOnNewPlayerListener - pre onPlayersChanged.emit");
+      this.onGameUdated.emit(this.currentGame);
       this.onPlayersChanged.emit(this.currentGame);
       console.log("addOnNewPlayerListener - post onPlayersChanged.emit");
 
+      this.callback(this.currentGame);
+    });
+  }
+
+  public async addStartRoundListener() : Promise<void> {
+    this.hubConnection.on('StartRound', async (data) => {
+      this.updateGameFromServer(data);
+      this.onGameUdated.emit(this.currentGame);
+      this.onRoundStarted.emit(this.currentGame);
+
+      console.log("signalr - StartRound data", data);
+      console.log("signalr - StartRound data", this.currentGame);
+      await this.appPages.goToCurrentRoundPage();
+
+      this.callback(this.currentGame);
+    });
+  }
+
+  public addOnAllAnsweredListener = () => {
+    this.hubConnection.on('AllAnswered', (data) => {
+      this.updateGameFromServer(data);
+      this.onGameUdated.emit(this.currentGame);
+      this.onAllAnswered.emit(this.currentGame);
       this.callback(this.currentGame);
     });
   }
@@ -195,7 +223,7 @@ export class GameService {
 
   async createNewContext(game: Game){
     var gameContext = new GameContext(this.uiService, this.appPages, new GamePersister());
-    gameContext.start(game, (g) => console.log(g));
+    gameContext.start(game, (g) => console.log("updated signalr", g));
     
     return gameContext;
   }
@@ -291,16 +319,23 @@ export class GameService {
   }
 
   async submitAnswer(player: IPlayer, answer: string): Promise<IGame> {
-    let currentGame = await this.getCurrentGame(player);
+    let currentGameContext = await this.getCurrentGameContext(player);
 
-    if (currentGame == null) {
+    if (currentGameContext == null) {
       throw "No game in progress";
     }
 
     try {
-      // TODO: Save the item.
+      var model = {
+        gameId: currentGameContext.currentGame.id,
+        playerId: player.id,
+        word: answer
+      } as AddAnswerModel;
 
-      return currentGame;
+      var serverGame = await this.roundApi.apiRoundApiAddAnswerPost(model).toPromise();
+      currentGameContext.currentGame = await this.gameContext.updateGameFromServer(serverGame);
+
+      return currentGameContext.currentGame;
     }
     catch (e) {
       console.log(e);

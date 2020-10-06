@@ -223,6 +223,40 @@
           }
         }
       }
+    },
+    "/api/RoundApi/AddAnswer": {
+      "post": {
+        "tags": [
+          "RoundApi"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AddAnswerModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IGame"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -459,6 +493,22 @@
           "items": {
             "$ref": "#/definitions/IOptionGridGroup"
           }
+        }
+      }
+    },
+    "AddAnswerModel": {
+      "type": "object",
+      "properties": {
+        "gameId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "playerId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "word": {
+          "type": "string"
         }
       }
     }

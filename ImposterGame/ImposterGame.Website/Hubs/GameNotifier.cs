@@ -22,5 +22,10 @@ namespace ImposterGame.Website.Hubs
         {
             await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.StartRoundMethodName, game);
         }
+
+        public async Task SendAllAnswered(IGame game)
+        {
+            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.AllAnsweredMethodName, game);
+        }
     }
 }

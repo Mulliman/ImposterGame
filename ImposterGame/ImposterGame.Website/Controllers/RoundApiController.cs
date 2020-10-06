@@ -8,6 +8,7 @@ using ImposterGame.Game.OptionGrids;
 using ImposterGame.Game.Players;
 using ImposterGame.Model;
 using ImposterGame.Website.Hubs;
+using ImposterGame.Website.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -39,7 +40,6 @@ namespace ImposterGame.Website.Controllers
         {
             var game = await StartNewRound(gameId, gridId);
 
-            //await _hubContext.Clients.Group(GameHub.GetGroupName(game.Id)).SendAsync("StartRound", game);
             await _gameNotifier.SendNewRoundStarted(game);
 
             return game;
@@ -62,6 +62,35 @@ namespace ImposterGame.Website.Controllers
             }
 
             return _gameService.StartNewRound(game, grid);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IGame> AddAnswer([FromBody] AddAnswerModel model)
+        {
+            var game = _gameService.GetGame(model.GameId);
+
+            if (game == null)
+            {
+                throw new GameDoesNotExistException(model.GameId);
+            }
+
+            var participant = game.CurrentRound.Participants.FirstOrDefault(p => p.Player.Id == model.PlayerId);
+
+            if (participant == null)
+            {
+                throw new PlayerDoesNotExistException(model.PlayerId);
+            }
+
+            participant.Answer = model.Word;
+
+            var savedGame = _gameService.SaveGame(game);
+
+            if (game.CurrentRound.AllAnswered)
+            {
+                await _gameNotifier.SendAllAnswered(savedGame);
+            }
+
+            return savedGame;
         }
     }
 }

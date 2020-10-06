@@ -1,3 +1,4 @@
+export * from './addAnswerModel';
 export * from './allOptionGridsModel';
 export * from './iAccusation';
 export * from './iGame';

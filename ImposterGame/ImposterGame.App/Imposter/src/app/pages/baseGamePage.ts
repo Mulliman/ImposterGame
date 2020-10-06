@@ -41,46 +41,43 @@ export abstract class BaseGamePage implements OnInit {
             return;
         } 
 
-        console.log("has player");
-
         this.gameContext = await this.gameService.getCurrentGameContext(this.playerService.currentPlayer);
+        if(this.gameContext){
+            this.gameContext.onGameUdated.subscribe((game: Game) => this.gamePageOnContextUpdated());
+          }
 
-        //await this.gameService.getCurrentGame(this.playerService.currentPlayer);
         if (this.allowedStates && !this.gameContext) {
-
-            console.log("No game, go to game page");
-
             await this.appPages.goToNewGamePage();
             return;
         }
 
-        console.log("has player and game");
-
         if(!this.isInAllowedState())
         {
-            console.log("state is invalid");
-
             await this.redirectToMostAppropriatePage();
             return;
         }
 
-        console.log("state is valid");
-
         await this.gamePageOnInit();
-
-        console.log("Base game loaded");
         
         this.isLoaded = true;
     }
 
     ngOnDestroy() {
         this.isLoaded = false;
+        if(this.gameContext){
+            this.gameContext.onGameUdated.unsubscribe();
+        }
         this.gameContext = null;
     }
 
     abstract setAllowedStates(): string[];
 
     abstract async gamePageOnInit();
+
+    async gamePageOnContextUpdated()
+    {
+        console.log("gamePageOnUpdated");
+    }
 
     isInAllowedState() : boolean{
 
