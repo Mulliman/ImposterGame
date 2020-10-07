@@ -8,6 +8,7 @@ import { AppPagesService } from './app-pages.service';
 import { GameFactory, Game } from '../model/Game';
 import { GameContext } from './gamecontext.service';
 import { GamePersister } from './gamepersister.service';
+import { Subscription } from 'rxjs';
 
 //#region Move these models somewhen
 
@@ -40,33 +41,29 @@ export interface Participant {
   providedIn: 'root'
 })
 export class GameService {
-
-  public readonly gamePersister: GamePersister;
-
-  // public get hasJoinedGame(): boolean { return !!this.currentGame; }
-  // currentGame: Game;
-
+  protected subscriptions = new Subscription();
+  
   constructor(private gameApi: GameApiService,
     private roundApi: RoundApiService,
     private uiService: UiService,
     private appPages: AppPagesService,
-    private gameContext: GameContext) {
-
-    this.gamePersister = new GamePersister();
+    private gameContext: GameContext,
+    private gamePersister: GamePersister) {
   }
 
   async getCurrentGameContext(player: IPlayer): Promise<GameContext> {
-    if (this.gameContext) {
+    if (this.gameContext.isGameInitialised) {
       return this.gameContext;
     }
 
     var game = await this.getCurrentGame(player);
 
     if (!game) {
+      // If no game present, return an empty non-started gameContext.
       return this.gameContext;
     }
 
-    await this.gameContext.start(game);
+    await this.gameContext.initialiseGame(game);
 
     return this.gameContext;
   }
@@ -78,9 +75,9 @@ export class GameService {
       var serverGame = await this.gameApi.apiGameApiHostPost(player.id).toPromise();
       var game = GameFactory.fromServerGame(serverGame, player);
 
-      await this.gameContext.start(game);
+      await this.gameContext.initialiseGame(game);
       this.subscribeToGameEvents();
-      
+
       return this.gameContext;
     } catch (e) {
       console.error("Host Game Error", e);
@@ -99,12 +96,12 @@ export class GameService {
       var serverGame = await this.gameApi.apiGameApiJoinPost(joinModel).toPromise();
       var game = GameFactory.fromServerGame(serverGame, player);
 
-      await this.gameContext.start(game);
+      await this.gameContext.initialiseGame(game);
       this.subscribeToGameEvents();
 
       return this.gameContext;
     } catch (e) {
-      console.error("Host Game Error", e);
+      console.error("Join Game Error", e);
       this.uiService.errorToast("The was an error joining this game.", "Please check your code is correct and your connection and try again.");
       throw e;
     }
@@ -112,8 +109,13 @@ export class GameService {
 
   subscribeToGameEvents(){
     // When a round starts, move every user to the current round page. 
-    this.gameContext.onRoundStarted.subscribe(() => this.appPages.goToCurrentRoundPage());
+    this.subscriptions.add(this.gameContext.onRoundStarted.subscribe(() => this.appPages.goToCurrentRoundPage()));
   }
+
+  // unsubscribeToGameEvents(){
+  //   // When a round starts, move every user to the current round page. 
+  //   this.gameContext.onRoundStarted.unsubscribe();
+  // }
 
   //#endregion
 
@@ -132,7 +134,7 @@ export class GameService {
       var serverGame = await this.roundApi.apiRoundApiNewRoundPost(currentGameContext.currentGame.id, grid.id).toPromise();
       console.log("startNewRound - new round started", serverGame);
 
-      currentGameContext.currentGame = await this.gameContext.updateGameFromServer(serverGame);
+      await this.gameContext.updateGameFromServer(serverGame);
       console.log("startNewRound - current game updated", currentGameContext.currentGame);
 
       return currentGameContext.currentGame;
@@ -158,13 +160,13 @@ export class GameService {
       } as AddAnswerModel;
 
       var serverGame = await this.roundApi.apiRoundApiAddAnswerPost(model).toPromise();
-      currentGameContext.currentGame = await this.gameContext.updateGameFromServer(serverGame);
+      await this.gameContext.updateGameFromServer(serverGame);
 
       return currentGameContext.currentGame;
     }
     catch (e) {
       console.log(e);
-      throw "Error starting new round.";
+      throw "Error submitting answer.";
     }
   }
 
@@ -203,4 +205,8 @@ export class GameService {
 
     return game;
   }
+
+  async ngOnDestroy () {
+    this.subscriptions.unsubscribe();
+   }
 }

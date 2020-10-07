@@ -5,6 +5,7 @@ import { GameContext } from "../services/gamecontext.service";
 import { AppPagesService } from '../services/app-pages.service';
 import { IPlayer } from 'src/server';
 import { Game } from '../model/Game';
+import { Subscription } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,7 @@ export abstract class BaseGamePage implements OnInit {
     // currentGame:Game;
     gameContext: GameContext;
     allowedStates: string[];
+    protected subscriptions = new Subscription();
 
     constructor(protected playerService: PlayerService,
         protected gameService: GameService,
@@ -44,7 +46,7 @@ export abstract class BaseGamePage implements OnInit {
 
         this.gameContext = await this.gameService.getCurrentGameContext(this.playerService.currentPlayer);
         if(this.gameContext){
-            this.gameContext.onGameUpdated.subscribe((game: Game) => this.gamePageOnContextUpdated());
+            this.subscriptions.add(this.gameContext.onGameUpdated.subscribe((game: Game) => this.gamePageOnContextUpdated()));
           }
 
         if (this.allowedStates && !this.gameContext) {
@@ -65,10 +67,9 @@ export abstract class BaseGamePage implements OnInit {
 
     ngOnDestroy() {
         this.isLoaded = false;
-        if(this.gameContext){
-            this.gameContext.onGameUpdated.unsubscribe();
+        if(this.gameContext && this.subscriptions){
+            this.subscriptions.unsubscribe();
         }
-        this.gameContext = null;
     }
 
     abstract setAllowedStates(): string[];

@@ -13,6 +13,11 @@ namespace ImposterGame.Website.Hubs
             _hubContext = context;
         }
 
+        public async Task SendGameUpdated(IGame game)
+        {
+            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.GameUpdatedMethodName, game);
+        }
+
         public async Task SendPlayerJoined(IGame game)
         {
             await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.NewPlayerMethodName, game);

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header/header.component';
@@ -10,6 +10,12 @@ import { PlayerAnswerListComponent } from './player-answer-list/player-answer-li
 import { HelpModalComponent } from './modals/help-modal/help-modal.component';
 import { FormsModule } from '@angular/forms';
 import { PlayerListComponent } from './player-list/player-list.component';
+import { Subscription } from 'rxjs';
+import { PlayerService } from '../services/player.service';
+import { GameService } from '../services/game.service';
+import { IPlayer } from 'src/server';
+import { GameContext } from '../services/gamecontext.service';
+import { Game } from '../model/Game';
 
 @NgModule({
   declarations: [

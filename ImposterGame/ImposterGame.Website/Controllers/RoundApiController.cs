@@ -89,6 +89,10 @@ namespace ImposterGame.Website.Controllers
             {
                 await _gameNotifier.SendAllAnswered(savedGame);
             }
+            else
+            {
+                await _gameNotifier.SendGameUpdated(savedGame);
+            }
 
             return savedGame;
         }

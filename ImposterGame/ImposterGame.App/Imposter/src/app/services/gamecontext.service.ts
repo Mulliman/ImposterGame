@@ -15,41 +15,51 @@ export class GameContext {
     public onRoundStarted = new EventEmitter<Game>();
     public onAllAnswered = new EventEmitter<Game>();
 
-    currentGame: Game;
+    private _currentGame: Game;
+
+    public get currentGame(): Game{
+        return this._currentGame;
+    }
+
     private hubConnection: signalR.HubConnection;
     private isConnectionActive: boolean = false;
 
     constructor(private gamePersister: GamePersister) {
     }
 
-    async start(game: Game) {
+    async initialiseGame(game: Game) {
+        console.log("initialiseGame");
+
         if (!this.isConnectionActive) {
-            this.currentGame = game;
+            this._currentGame = game;
             this.gamePersister.setCurrentGame(game);
-            //this.callback = onUpdatedCallback;
+
             await this.startConnection(game.id);
+
             this.onGameUpdated.emit(this.currentGame);
         }
     }
-    get hasGameStarted(): boolean {
-        return Boolean(this.currentGame);
+    get isGameInitialised(): boolean {
+        return Boolean(this._currentGame);
     }
 
     //#region Update Game Context
     async updateGameFromServer(serverGame: IGame): Promise<Game> {
         var game = GameFactory.fromServerGame(serverGame, this.currentGame.currentPlayer);
         await this.updateGame(game);
-        return game;
+        return this._currentGame;
     }
     async updateGame(game: Game) {
-        this.currentGame = game;
-        this.gamePersister.setCurrentGame(game);
-        this.onGameUpdated.emit(this.currentGame);
+        this._currentGame = game;
+        this.gamePersister.setCurrentGame(this._currentGame);
+        this.onGameUpdated.emit(this._currentGame);
     }
     //#endregion
 
     //#region Signalr
     private async startConnection(gameId: string) {
+        console.log("startConnection");
+
         if (this.isConnectionActive) {
             console.log("startConnection - already active");
             return;
@@ -70,6 +80,7 @@ export class GameContext {
             this.isConnectionActive = false;
         }
         try {
+            console.log('Add to group');
             await this.hubConnection.invoke("AddToGroup", gameId);
         }
         catch (e) {
@@ -79,18 +90,28 @@ export class GameContext {
         await this.addListeners();
     }
     async addListeners() {
+        this.addGameUpdateListener();
         this.addOnNewPlayerListener();
         this.addStartRoundListener();
         this.addOnAllAnsweredListener();
     }
     async disconnect() {
+        console.log('disconnect called');
         if (this.isConnectionActive && this.hubConnection) {
+            console.log('disconnect - active and has connection');
             await this.hubConnection.stop();
+            console.log('disconnect - connection stopped');
         }
     }
     //#endregion
 
     //#region Listeners
+    public addGameUpdateListener = () => {
+        this.hubConnection.on('GameUpdate', (data) => {
+            this.updateGameFromServer(data);
+            this.onGameUpdated.emit(this.currentGame);
+        });
+    };
     public addOnNewPlayerListener = () => {
         this.hubConnection.on('NewPlayer', (data) => {
             this.updateGameFromServer(data);

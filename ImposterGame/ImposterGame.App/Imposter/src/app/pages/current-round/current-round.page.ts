@@ -39,18 +39,25 @@ export class CurrentRoundPage extends BaseGameFormPage {
   }
 
   gamePageOnInit() {
-    console.log("CurrentRoundPage", this.gameContext.currentGame);
+    console.log("CurrentRoundPage", this.gameContext);
     this.setScopeFromGameContext();
   }
 
   async gamePageOnContextUpdated(){
+    console.log("gamePageOnContextUpdated", this.gameContext);
+
     this.setScopeFromGameContext();
   }
 
   setScopeFromGameContext(){
-    console.log("setScopeFromGameContext", this.gameContext.currentGame.currentRound);
+    console.log("setScopeFromGameContext");
 
-    if(this.gameContext.currentGame.currentRound && this.gameContext.currentGame.currentRound.imposter && this.gameContext.currentGame.currentRound.imposter.player)
+    var hasRequiredData = this.gameContext.currentGame 
+      && this.gameContext.currentGame.currentRound 
+      && this.gameContext.currentGame.currentRound.imposter 
+      && this.gameContext.currentGame.currentRound.imposter.player
+
+    if(hasRequiredData)
       {
         console.log("setScopeFromGameContext - setting");
 
