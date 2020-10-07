@@ -52,8 +52,6 @@ return null;
   }
 
   async gamePageOnInit() {
-    console.log("new round", this.gameContext.currentGame);
-
     // this.subscription = this.gameService.gameContext.onPlayersChanged.subscribe((game: Game) => this.currentGame = game);
   }
 
@@ -67,9 +65,7 @@ return null;
     await this.appPages.goToCurrentRoundPage();
   }
 
-  async goToChooseGridPage(){
-    console.log("new round - goToChooseGridPage");
-    
+  async goToChooseGridPage(){    
       const modal = await this.modalController.create({
         component: ChooseGridComponent
       });

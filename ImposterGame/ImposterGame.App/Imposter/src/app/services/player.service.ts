@@ -14,7 +14,6 @@ export class PlayerService {
   isAlreadyFetching: boolean;
 
   constructor(private playerApi: PlayerApiService, private uiService: UiService) {
-    console.log("PlayerService constructed");
    }
 
   async setCurrentPlayer(name: string): Promise<IPlayer> {
@@ -28,7 +27,7 @@ export class PlayerService {
   
       return this.currentPlayer;
     } catch (e){
-      console.log(e);
+      console.error(e);
       this.uiService.errorToast("There was an error connecting with the server.", "You could not be created at this time, please try again.");
     }    
   }
@@ -65,7 +64,7 @@ export class PlayerService {
       return serverPlayer;
     }
     catch (e){
-      console.log(e);
+      console.error(e);
       this.uiService.errorToast("There was an error connecting with the server.", "Please check your network connection and try again.");
     }
   }

@@ -4,16 +4,18 @@
       <ion-icon name="people" slot="start"></ion-icon>
     </ion-buttons> -->
 
-    <ion-title *ngIf="isLoaded && !isInRound">
+    <ion-title *ngIf="isLoaded && (!this.currentGameContext.currentGame || this.currentGameContext.currentGame.isImposter == null)">
         Imposter!
       </ion-title>
 
-    <ion-title class="no-padding"  *ngIf="isLoaded && isInRound && isImposter">
+    <ion-title class="no-padding"  *ngIf="isLoaded && this.currentGameContext.currentGame && this.currentGameContext.currentGame.isImposter == true">
       You are the Imposter!
     </ion-title>
 
-    <ion-title class="no-padding" *ngIf="isLoaded && isInRound && !isImposter">
+    <ion-title class="no-padding" *ngIf="isLoaded && this.currentGameContext.currentGame && this.currentGameContext.currentGame.isImposter == false">
         You are <strong>NOT</strong> the Imposter!
       </ion-title>
+
+
   </ion-toolbar>
 </ion-header>

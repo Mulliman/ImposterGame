@@ -2,6 +2,7 @@ import { IGame, IPlayer } from 'src/server';
 
 export interface Game extends IGame{
     isHost: boolean;
+    isImposter?: boolean;
     currentPlayer: IPlayer;
 }
 
@@ -10,10 +11,16 @@ export class GameFactory{
         var game = serverGame as Game;
         game.isHost = serverGame.host.id == player.id;
         game.currentPlayer = player;
+        game.isImposter = this.isCurrentlyImposter(game, player);
 
-        console.log("fromServerGame - server game", serverGame);
-        console.log("fromServerGame - updated game", game);
-        
         return game;
+    }
+
+    static isCurrentlyImposter(game: Game, player: IPlayer ){
+        if(!game.currentRound || !game.currentRound.imposter || !game.currentRound.imposter.player){
+            return null;
+        }
+
+        return game.currentRound.imposter.player.name == player.name;
     }
 }

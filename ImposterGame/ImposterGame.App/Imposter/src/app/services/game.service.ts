@@ -129,13 +129,9 @@ export class GameService {
     }
 
     try {
-      console.log("startNewRound - posting new round");
-
       var serverGame = await this.roundApi.apiRoundApiNewRoundPost(currentGameContext.currentGame.id, grid.id).toPromise();
-      console.log("startNewRound - new round started", serverGame);
 
       await this.gameContext.updateGameFromServer(serverGame);
-      console.log("startNewRound - current game updated", currentGameContext.currentGame);
 
       return currentGameContext.currentGame;
     }

@@ -28,8 +28,6 @@ export class GameContext {
     }
 
     async initialiseGame(game: Game) {
-        console.log("initialiseGame");
-
         if (!this.isConnectionActive) {
             this._currentGame = game;
             this.gamePersister.setCurrentGame(game);
@@ -58,10 +56,7 @@ export class GameContext {
 
     //#region Signalr
     private async startConnection(gameId: string) {
-        console.log("startConnection");
-
         if (this.isConnectionActive) {
-            console.log("startConnection - already active");
             return;
         }
         this.isConnectionActive = true;
@@ -80,7 +75,6 @@ export class GameContext {
             this.isConnectionActive = false;
         }
         try {
-            console.log('Add to group');
             await this.hubConnection.invoke("AddToGroup", gameId);
         }
         catch (e) {
@@ -96,11 +90,9 @@ export class GameContext {
         this.addOnAllAnsweredListener();
     }
     async disconnect() {
-        console.log('disconnect called');
+        
         if (this.isConnectionActive && this.hubConnection) {
-            console.log('disconnect - active and has connection');
             await this.hubConnection.stop();
-            console.log('disconnect - connection stopped');
         }
     }
     //#endregion

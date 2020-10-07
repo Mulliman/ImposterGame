@@ -20,9 +20,7 @@ export class OptionGridComponent implements OnInit {
   
   constructor() { }
 
-  async ngOnInit() {
-    console.log("OptionGridComponent ionViewWillEnter", this.options);
-    
+  async ngOnInit() {    
     this.rows = chunkArray(this.options, this.columns);
 
     this.isLoaded = true;

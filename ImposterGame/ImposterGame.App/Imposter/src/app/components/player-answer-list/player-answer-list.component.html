@@ -18,6 +18,6 @@
   [ngClass]="selectedPlayerName == participant.player.name ? 'selectedItem' : ''" 
   (click)="selectImposter({player: {name: participant.player.name}})">
     <ion-label>{{participant.player.name}}</ion-label>
-    <ion-note slot="end" color="light">{{participant.answer}}</ion-note>
+    <ion-note slot="end" color="primary">{{participant.answer}}</ion-note>
   </ion-item>
 </ion-list>

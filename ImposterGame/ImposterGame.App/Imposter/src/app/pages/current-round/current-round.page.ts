@@ -39,7 +39,6 @@ export class CurrentRoundPage extends BaseGameFormPage {
   }
 
   gamePageOnInit() {
-    console.log("CurrentRoundPage", this.gameContext);
     this.setScopeFromGameContext();
   }
 
@@ -58,12 +57,10 @@ export class CurrentRoundPage extends BaseGameFormPage {
       && this.gameContext.currentGame.currentRound.imposter.player
 
     if(hasRequiredData)
-      {
-        console.log("setScopeFromGameContext - setting");
-
-        this.currentRound = this.gameContext.currentGame.currentRound;
-        this.isImposter = this.currentRound.imposter.player.name == this.playerService.currentPlayer.name;
-      }
+    {
+      this.currentRound = this.gameContext.currentGame.currentRound;
+      this.isImposter = this.currentRound.imposter.player.name == this.playerService.currentPlayer.name;
+    }
   }
 
   instantiateForm() {

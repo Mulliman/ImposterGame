@@ -16,6 +16,8 @@ export abstract class BaseGamePage implements OnInit {
 
     isLoaded = false;
 
+    ticks: number;
+
     // player:IPlayer;
     // currentGame:Game;
     gameContext: GameContext;
@@ -25,8 +27,6 @@ export abstract class BaseGamePage implements OnInit {
     constructor(protected playerService: PlayerService,
         protected gameService: GameService,
         protected appPages: AppPagesService) { 
-            console.log("Base Game ctor");
-
             this.allowedStates = this.setAllowedStates();
         }
 
@@ -35,6 +35,10 @@ export abstract class BaseGamePage implements OnInit {
     }
 
     async ionViewWillEnter(){
+        this.ticks = new Date().getTime();
+
+        console.log("ionViewWillEnter ticks set to - " + this.ticks);
+        
         await this.playerService.getCurrentPlayer();
         if (this.allowedStates && !this.playerService.currentPlayer)
         {
@@ -78,7 +82,7 @@ export abstract class BaseGamePage implements OnInit {
 
     async gamePageOnContextUpdated()
     {
-        console.log("gamePageOnUpdated");
+        console.log("gamePageOnUpdated - BASE");
     }
 
     isInAllowedState() : boolean{
