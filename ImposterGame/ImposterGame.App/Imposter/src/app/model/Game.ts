@@ -1,4 +1,4 @@
-import { IGame, IPlayer } from 'src/server';
+import { IGame, IPlayer, IRoundParticipant } from 'src/server';
 
 export interface Game extends IGame{
     isHost: boolean;
@@ -22,5 +22,49 @@ export class GameFactory{
         }
 
         return game.currentRound.imposter.player.name == player.name;
+    }
+}
+
+export class GameHelpers{
+    public static getPlayerFromId(game: Game, playerId:string) : IPlayer{
+        if(!game || !game.players){
+            return null;
+        }
+
+        var matchingPlayers = game.players.filter(p => p.id == playerId);
+
+        if(!matchingPlayers){
+            return null;
+        }
+
+        return matchingPlayers[0];
+    }
+
+    public static getPlayersParticipant(game: Game) : IRoundParticipant{
+        if(!game || !game.currentPlayer){
+            return null;
+        }
+
+        if(!game.currentRound || !game.currentRound.participants){
+            return null;
+        }
+
+        var matchingPlayers = game.currentRound.participants.filter(p => p.player && p.player.id == game.currentPlayer.id);
+
+        if(!matchingPlayers){
+            return null;
+        }
+
+        return matchingPlayers[0];
+    }
+
+    public static hasAccused(game: Game) : boolean{
+        var participant = this.getPlayersParticipant(game);
+
+        if(!participant){
+            return false;
+        }
+
+        return !!participant.accusation;
     }
 }

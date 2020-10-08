@@ -14,9 +14,9 @@
 </ion-list> -->
 
 <ion-list class="player-answer-list list-with-background" *ngIf="participants">
-  <ion-item *ngFor="let participant of participants" lines="none" class="ion-no-padding" 
+  <ion-item *ngFor="let participant of participants | notIncludingPlayer: hideThisPlayerName" lines="none" class="ion-no-padding" 
   [ngClass]="selectedPlayerName == participant.player.name ? 'selectedItem' : ''" 
-  (click)="selectImposter({player: {name: participant.player.name}})">
+  (click)="selectImposter(participant)">
     <ion-label>{{participant.player.name}}</ion-label>
     <ion-note slot="end" color="primary">{{participant.answer}}</ion-note>
   </ion-item>

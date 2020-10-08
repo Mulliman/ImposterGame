@@ -6,7 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { ChooseGridComponent } from './modals/choose-grid/choose-grid.component';
 import { OptionGridComponent } from './option-grid/option-grid.component';
-import { PlayerAnswerListComponent } from './player-answer-list/player-answer-list.component';
+import { PlayerAnswerListComponent, NotIncludingPlayerPipe } from './player-answer-list/player-answer-list.component';
 import { HelpModalComponent } from './modals/help-modal/help-modal.component';
 import { FormsModule } from '@angular/forms';
 import { PlayerListComponent } from './player-list/player-list.component';
@@ -24,6 +24,7 @@ import { Game } from '../model/Game';
     ErrorMessageComponent,
     ChooseGridComponent,
     OptionGridComponent,
+    NotIncludingPlayerPipe,
     PlayerAnswerListComponent,
     HelpModalComponent,
     PlayerListComponent

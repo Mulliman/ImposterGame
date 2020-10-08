@@ -1,3 +1,4 @@
+export * from './accusationModel';
 export * from './addAnswerModel';
 export * from './allOptionGridsModel';
 export * from './iAccusation';

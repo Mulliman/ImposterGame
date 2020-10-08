@@ -6,6 +6,7 @@ using ImposterGame.Game;
 using ImposterGame.Game.Exceptions;
 using ImposterGame.Game.OptionGrids;
 using ImposterGame.Game.Players;
+using ImposterGame.Game.Rounds;
 using ImposterGame.Model;
 using ImposterGame.Website.Hubs;
 using ImposterGame.Website.Models;
@@ -88,6 +89,46 @@ namespace ImposterGame.Website.Controllers
             if (game.CurrentRound.AllAnswered)
             {
                 await _gameNotifier.SendAllAnswered(savedGame);
+            }
+            else
+            {
+                await _gameNotifier.SendGameUpdated(savedGame);
+            }
+
+            return savedGame;
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IGame> MakeAccusation([FromBody] AccusationModel model)
+        {
+            var game = _gameService.GetGame(model.GameId);
+
+            if (game == null)
+            {
+                throw new GameDoesNotExistException(model.GameId);
+            }
+
+            var participant = game.CurrentRound.Participants.FirstOrDefault(p => p.Player.Id == model.PlayerId);
+
+            if (participant == null)
+            {
+                throw new PlayerDoesNotExistException(model.PlayerId);
+            }
+
+            var accusedParticipant = game.CurrentRound.Participants.FirstOrDefault(p => p.Player.Id == model.AccusedPlayerId);
+
+            if (accusedParticipant == null)
+            {
+                throw new PlayerDoesNotExistException(model.AccusedPlayerId);
+            }
+
+            participant.Accusation = new Accusation(accusedParticipant, model.Wager);
+
+            var savedGame = _gameService.SaveGame(game);
+
+            if (savedGame.CurrentRound.AllAccused)
+            {
+                await _gameNotifier.SendAllAccused(savedGame);
             }
             else
             {

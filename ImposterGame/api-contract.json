@@ -257,6 +257,40 @@
           }
         }
       }
+    },
+    "/api/RoundApi/MakeAccusation": {
+      "post": {
+        "tags": [
+          "RoundApi"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccusationModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IGame"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -509,6 +543,27 @@
         },
         "word": {
           "type": "string"
+        }
+      }
+    },
+    "AccusationModel": {
+      "type": "object",
+      "properties": {
+        "gameId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "playerId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "accusedPlayerId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "wager": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     }

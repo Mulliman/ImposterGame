@@ -52,6 +52,12 @@ export class AppPagesService {
       return;
     }
 
+    if(currentGame.state == GameStates.roundAnswered){
+      console.log("state is roundAnswered, go to choose imposter page");
+      await this.goToChooseImposterPage();
+      return;
+    }
+
     // TODO: Add other states here.
 
     //await this.goToNewGamePage();

@@ -7,6 +7,7 @@ import { AppPagesService } from 'src/app/services/app-pages.service';
 import { GameStates } from 'src/app/model/GameStates';
 import { BaseGamePage } from '../baseGamePage';
 import { IPlayer, IRound } from 'src/server';
+import { GameHelpers } from 'src/app/model/Game';
 
 @Component({
   selector: 'app-choose-imposter',
@@ -20,6 +21,7 @@ export class ChooseImposterPage extends BaseGamePage {
   yourAnswer: string;
   selectedImposter: IPlayer;
   selectedWager: number;
+  hasSubmitted: boolean;
 
   @ViewChild('ChooseImposterSlider', { static: true }) slides: IonSlides;
 
@@ -42,14 +44,30 @@ export class ChooseImposterPage extends BaseGamePage {
   gamePageOnInit() {
     this.currentRound = this.gameContext.currentGame.currentRound;
     this.isImposter = this.currentRound.imposter.player.name == this.playerService.currentPlayer.name;
+
+    var currentParticipant = GameHelpers.getPlayersParticipant(this.gameContext.currentGame);
+
+    if(currentParticipant.accusation){
+      this.selectedImposter = GameHelpers.getPlayerFromId(this.gameContext.currentGame, currentParticipant.accusation.playerId);
+
+      if(this.selectedImposter){
+        this.goToSlide(2);
+      }
+
+      this.selectedWager = currentParticipant.accusation.wager;
+    }
+    
+    this.hasSubmitted = GameHelpers.hasAccused(this.gameContext.currentGame);
   }
 
   async goToSlide(num: number) {
     await this.slides.slideTo(num);
   }
 
-  setSelectedPlayer(player: IPlayer) {
-    this.selectedImposter = player;
+  setSelectedPlayer(selectedPlayer: IPlayer) {
+    console.log("setSelectedPlayer", selectedPlayer);
+
+    this.selectedImposter = selectedPlayer;
   }
 
   setWager(amount: number) {
@@ -57,6 +75,7 @@ export class ChooseImposterPage extends BaseGamePage {
   }
 
   async submitAnswer() {
-    
+    await this.gameService.submitAccusation(this.playerService.currentPlayer, this.selectedImposter.id, this.selectedWager);
+    this.hasSubmitted = true;
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GameStates } from '../model/GameStates';
 import { OptionGridModel } from './option-grid.service';
-import { IPlayer, GameApiService, IGame, JoinGameModel, RoundApiService, AddAnswerModel } from 'src/server';
+import { IPlayer, GameApiService, IGame, JoinGameModel, RoundApiService, AddAnswerModel, AccusationModel } from 'src/server';
 import { UiService } from './ui.service';
 import * as signalR from "@aspnet/signalr";
 import { AppPagesService } from './app-pages.service';
@@ -110,6 +110,7 @@ export class GameService {
   subscribeToGameEvents(){
     // When a round starts, move every user to the current round page. 
     this.subscriptions.add(this.gameContext.onRoundStarted.subscribe(() => this.appPages.goToCurrentRoundPage()));
+    this.subscriptions.add(this.gameContext.onAllAnswered.subscribe(() => this.appPages.goToChooseImposterPage()));
   }
 
   // unsubscribeToGameEvents(){
@@ -167,6 +168,47 @@ export class GameService {
   }
 
   //#endregion
+
+  //#region Accusing Stage
+
+  async submitAccusation(player: IPlayer, accusedPlayerId: string, wager: number): Promise<IGame> {
+
+    if(!accusedPlayerId){
+      this.uiService.errorToast("You still need to accuse a player.");
+      return;
+    }
+
+    if(!wager){
+      this.uiService.errorToast("You still need to make a wager.", "The more you wager, the point points you can gain. If you guess incorrectly, the imposter will get these points.");
+      return;
+    }
+    
+    let currentGameContext = await this.getCurrentGameContext(player);
+
+    if (currentGameContext == null) {
+      throw "No game in progress";
+    }
+
+    try {
+      var model = {
+        gameId: currentGameContext.currentGame.id,
+        playerId: player.id,
+        accusedPlayerId: accusedPlayerId,
+        wager: wager
+      } as AccusationModel;
+
+      var serverGame = await this.roundApi.apiRoundApiMakeAccusationPost(model).toPromise();
+      await this.gameContext.updateGameFromServer(serverGame);
+
+      return currentGameContext.currentGame;
+    }
+    catch (e) {
+      console.log(e);
+      throw "Error submitting answer.";
+    }
+  }
+
+  //#endregion 
 
   //#region Leaving
 

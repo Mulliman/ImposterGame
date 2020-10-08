@@ -20,14 +20,26 @@
       <div class="slide-inner" class="full-width">
 
         <div class="choose-step-1">
-          <h2 *ngIf="!isImposter">First select who you think was the imposter?</h2>
-          <h2 *ngIf="isImposter">Who do you think had the worst answer?</h2>
+          <h2 *ngIf="!isImposter && !hasSubmitted">First select who you think was the imposter?</h2>
+          <h2 *ngIf="isImposter && !hasSubmitted">Who do you think had the worst answer?</h2>
+          <h2 *ngIf="hasSubmitted">You have already made your accusation!</h2>
 
-          <app-player-answer-list [clickable]="true" (onPlayerSelected)="setSelectedPlayer($event)" class="full-width">
+          <app-player-answer-list 
+            *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.currentRound && !hasSubmitted" 
+            [participants]="gameContext.currentGame.currentRound.participants" 
+            [clickable]="true"
+            [selectedPlayerName]="selectedImposter ? selectedImposter.name : null"
+            [hideThisPlayerName]="playerService.currentPlayer.name"
+            (onPlayerSelected)="setSelectedPlayer($event)"
+            class="full-width">
           </app-player-answer-list>
 
-          <ion-button [disabled]="!selectedImposter" (click)="goToSlide(2)" expand="block">
+          <ion-button *ngIf="!hasSubmitted" [disabled]="!selectedImposter" (click)="goToSlide(2)" expand="block">
             Select imposter
+            <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="hasSubmitted" (click)="goToSlide(2)" expand="block">
+            View accusation
             <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
           </ion-button>
         </div>
@@ -51,7 +63,7 @@
           </ion-button>
         </div>
 
-        <div *ngIf="selectedImposter" class="choose-step-2">
+        <div *ngIf="selectedImposter  && !hasSubmitted" class="choose-step-2">
           <h2>You have selected {{selectedImposter.name}} as the imposter.</h2>
 
           <p>Now select your wager; the more you bet, the more you win. However, if you are wrong the imposter will get the points!</p>
@@ -72,14 +84,22 @@
             </ion-list>
         </div>
 
-        <div *ngIf="selectedWager" class="choose-step-3">
+        <div *ngIf="selectedWager && !hasSubmitted" class="choose-step-3">
           <ion-button expand="block" (click)="submitAnswer()">Submit answer</ion-button>
         </div>
+        
 
-        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+        <div *ngIf="hasSubmitted">
+          <h2>You have accused {{selectedImposter.name}}.</h2>
+          <h2>You have wagered {{selectedWager}} points.</h2>
+
+          <p>Please wait for the remaining players to make their accusations.</p>
+        </div>
+
+        <!-- <ion-button fill="outline" size="small" (click)="goToSlide(1)">
           <ion-icon slot="start" name="arrow-round-back"></ion-icon>
           Change answer
-        </ion-button>
+        </ion-button> -->
       </div>
     </ion-slide>
 
