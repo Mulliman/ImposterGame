@@ -137,5 +137,24 @@ namespace ImposterGame.Website.Controllers
 
             return savedGame;
         }
+
+        [HttpPost("[action]")]
+        public async Task<IGame> ScoreRound(Guid gameId, string guess)
+        {
+            var game = _gameService.GetGame(gameId);
+
+            if (game == null)
+            {
+                throw new GameDoesNotExistException(gameId);
+            }
+
+            game.ScoreRound(guess);
+
+            var savedGame = _gameService.SaveGame(game);
+
+            await _gameNotifier.SendScoringComplete(savedGame);
+
+            return savedGame;
+        }
     }
 }

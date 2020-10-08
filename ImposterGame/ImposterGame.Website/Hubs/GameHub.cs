@@ -14,7 +14,8 @@ namespace ImposterGame.Website.Hubs
         public const string StartRoundMethodName = "StartRound";
         public const string AllAnsweredMethodName = "AllAnswered";
         public const string AllAccusedMethodName = "AllAccused";
-        
+        public const string ScoringCompleteMethodName = "ScoringComplete";
+
         public async Task SendGameUpdate(Guid gameId, IGame game)
         {
             await Clients.Group(GetGroupName(gameId)).SendAsync(GameUpdatedMethodName, game);
@@ -38,6 +39,11 @@ namespace ImposterGame.Website.Hubs
         public async Task SendAllAccused(Guid gameId, IGame game)
         {
             await Clients.Group(GetGroupName(gameId)).SendAsync(AllAccusedMethodName, game);
+        }
+
+        public async Task SendScoringComplete(Guid gameId, IGame game)
+        {
+            await Clients.Group(GetGroupName(gameId)).SendAsync(ScoringCompleteMethodName, game);
         }
 
         #region old

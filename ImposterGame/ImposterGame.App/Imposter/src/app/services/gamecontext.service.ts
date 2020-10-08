@@ -14,6 +14,8 @@ export class GameContext {
     public onPlayersChanged = new EventEmitter<Game>();
     public onRoundStarted = new EventEmitter<Game>();
     public onAllAnswered = new EventEmitter<Game>();
+    public onAllAccused = new EventEmitter<Game>();
+    public onRoundComplete = new EventEmitter<Game>();
 
     private _currentGame: Game;
 
@@ -88,6 +90,8 @@ export class GameContext {
         this.addOnNewPlayerListener();
         this.addStartRoundListener();
         this.addOnAllAnsweredListener();
+        this.addOnAllAccusedListener();
+        this.addOnScoringCompleteListener();
     }
     async disconnect() {
         
@@ -122,6 +126,19 @@ export class GameContext {
             this.onAllAnswered.emit(this.currentGame);
         });
     };
+    public addOnAllAccusedListener = () => {
+        this.hubConnection.on('AllAccused', (data) => {
+            this.updateGameFromServer(data);
+            this.onAllAccused.emit(this.currentGame);
+        });
+    };
+    public addOnScoringCompleteListener = () => {
+        this.hubConnection.on('ScoringComplete', (data) => {
+            this.updateGameFromServer(data);
+            this.onRoundComplete.emit(this.currentGame);
+        });
+    };
+    
     //#endregion
 
     async delay(ms: number) {

@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<ion-content fullscreen padding class="ion-padding">
+
+  <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
+
+    <div class="ion-text-center" *ngIf="gameContext.currentGame && gameContext.currentGame.isImposter">
+
+      <div *ngIf="gameContext.currentGame.currentRound.imposter.player.name == playerService.currentPlayer.name">
+        <h1>
+          You were discovered!
+        </h1>
+        <h2>But don't worry you can still get a bonus point if you guess the word.</h2>
+        <h2>What do you think the word was?</h2>
+      </div>
+      
+      <div *ngIf="gameContext.currentGame.currentRound.imposter.player.name != playerService.currentPlayer.name">
+        <h1>
+          You were successful!
+        </h1>
+        <h2>Get a bonus point if you guess the word correctly.</h2>
+        <h2>What do you think the word was?</h2>
+      </div>
+      
+      <app-option-grid *ngIf="gameContext.currentGame.currentRound" 
+        [options]="gameContext.currentGame.currentRound.allOptions"
+        [selectedOption]="selectedOption"
+        [showButtons]="true"
+        (onAnswerSelected)="answerSelected($event)"
+         class="full-width">
+      </app-option-grid>
+
+      <ion-button expand="block" (click)="submitAnswer()" *ngIf="selectedOption">Submit your answer</ion-button>
+
+    </div>
+
+    <div class="ion-text-center" *ngIf="gameContext.currentGame && !gameContext.currentGame.isImposter">
+
+      <h1>The imposter was {{gameContext.currentGame.currentRound.imposter.player.name}}</h1>
+      <h2>Waiting for imposter to choose their answer.</h2>
+      <h2>If they guess incorrectly you will get a bonus point.</h2>
+
+    </div>
+
+  </ion-row>
+
+</ion-content>
+
+<app-footer></app-footer>

@@ -111,6 +111,8 @@ export class GameService {
     // When a round starts, move every user to the current round page. 
     this.subscriptions.add(this.gameContext.onRoundStarted.subscribe(() => this.appPages.goToCurrentRoundPage()));
     this.subscriptions.add(this.gameContext.onAllAnswered.subscribe(() => this.appPages.goToChooseImposterPage()));
+    this.subscriptions.add(this.gameContext.onAllAccused.subscribe(() => this.appPages.goToImposterGuessPage()));
+    this.subscriptions.add(this.gameContext.onRoundComplete.subscribe(() => this.appPages.goToRoundScoresPage()));
   }
 
   // unsubscribeToGameEvents(){
@@ -198,6 +200,31 @@ export class GameService {
       } as AccusationModel;
 
       var serverGame = await this.roundApi.apiRoundApiMakeAccusationPost(model).toPromise();
+      await this.gameContext.updateGameFromServer(serverGame);
+
+      return currentGameContext.currentGame;
+    }
+    catch (e) {
+      console.log(e);
+      throw "Error submitting answer.";
+    }
+  }
+
+  async submitImposterGuessAndScoreRound(player: IPlayer, answer: string): Promise<IGame> {
+
+    if(!answer){
+      this.uiService.errorToast("You still need to choose the word.");
+      return;
+    }
+    
+    let currentGameContext = await this.getCurrentGameContext(player);
+
+    if (currentGameContext == null) {
+      throw "No game in progress";
+    }
+
+    try {
+      var serverGame = await this.roundApi.apiRoundApiScoreRoundPost(currentGameContext.currentGame.id, answer).toPromise();
       await this.gameContext.updateGameFromServer(serverGame);
 
       return currentGameContext.currentGame;

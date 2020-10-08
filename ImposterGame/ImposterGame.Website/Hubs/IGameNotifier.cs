@@ -10,5 +10,6 @@ namespace ImposterGame.Website.Hubs
         Task SendGameUpdated(IGame game);
         Task SendNewRoundStarted(IGame game);
         Task SendPlayerJoined(IGame game);
+        Task SendScoringComplete(IGame game);
     }
 }

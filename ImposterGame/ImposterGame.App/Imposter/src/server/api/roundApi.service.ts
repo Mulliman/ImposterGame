@@ -206,4 +206,56 @@ export class RoundApiService {
         );
     }
 
+    /**
+     * 
+     * 
+     * @param gameId 
+     * @param guess 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiRoundApiScoreRoundPost(gameId?: string, guess?: string, observe?: 'body', reportProgress?: boolean): Observable<IGame>;
+    public apiRoundApiScoreRoundPost(gameId?: string, guess?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<IGame>>;
+    public apiRoundApiScoreRoundPost(gameId?: string, guess?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<IGame>>;
+    public apiRoundApiScoreRoundPost(gameId?: string, guess?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (gameId !== undefined && gameId !== null) {
+            queryParameters = queryParameters.set('gameId', <any>gameId);
+        }
+        if (guess !== undefined && guess !== null) {
+            queryParameters = queryParameters.set('guess', <any>guess);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.post<IGame>(`${this.basePath}/api/RoundApi/ScoreRound`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
 }

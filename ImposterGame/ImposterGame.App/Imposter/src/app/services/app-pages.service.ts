@@ -17,7 +17,9 @@ export class AppPagesService {
     newGame: "new-game",
     newRound: "new-round",
     currentRound: "current-round",
-    chooseImposter: "choose-imposter"
+    chooseImposter: "choose-imposter",
+    imposterGuess: "imposter-guess",
+    goToRoundScores: "round-scores"
   };
 
   constructor(private navController: NavController) {
@@ -91,5 +93,15 @@ export class AppPagesService {
   async goToChooseImposterPage() {
     console.log("goToChooseImposterPage");
     await this.navController.navigateForward([`/${this.routes.chooseImposter}`]);
+  }
+
+  async goToImposterGuessPage() {
+    console.log("goToImposterGuessPage");
+    await this.navController.navigateForward([`/${this.routes.imposterGuess}`]);
+  }
+
+  async goToRoundScoresPage() {
+    console.log("goToRoundScores");
+    await this.navController.navigateForward([`/${this.routes.goToRoundScores}`]);
   }
 }

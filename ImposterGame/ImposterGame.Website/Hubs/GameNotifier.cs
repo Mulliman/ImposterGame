@@ -37,5 +37,10 @@ namespace ImposterGame.Website.Hubs
         {
             await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.AllAccusedMethodName, game);
         }
+
+        public async Task SendScoringComplete(IGame game)
+        {
+            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.ScoringCompleteMethodName, game);
+        }
     }
 }

@@ -291,6 +291,39 @@
           }
         }
       }
+    },
+    "/api/RoundApi/ScoreRound": {
+      "post": {
+        "tags": [
+          "RoundApi"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "gameId",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "guess",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IGame"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

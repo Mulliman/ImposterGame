@@ -9,6 +9,8 @@ const routes: Routes = [
   { path: 'new-round', loadChildren: './pages/new-round/new-round.module#NewRoundPageModule' },
   { path: 'current-round', loadChildren: './pages/current-round/current-round.module#CurrentRoundPageModule' },
   { path: 'choose-imposter', loadChildren: './pages/choose-imposter/choose-imposter.module#ChooseImposterPageModule' },
+  { path: 'imposter-guess', loadChildren: './pages/imposter-guess/imposter-guess.module#ImposterGuessPageModule' },
+  { path: 'round-scores', loadChildren: './pages/round-scores/round-scores.module#RoundScoresPageModule' },
 ];
 
 @NgModule({
