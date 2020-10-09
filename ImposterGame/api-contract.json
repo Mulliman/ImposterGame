@@ -385,6 +385,22 @@
         }
       }
     },
+    "IPlayerScore": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "score": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
     "IRound": {
       "type": "object",
       "properties": {
@@ -400,7 +416,11 @@
         "impostersGuess": {
           "type": "string"
         },
-        "isGuessCorrect": {
+        "isImpostersGuessCorrect": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "wasImposterFound": {
           "type": "boolean",
           "readOnly": true
         },
@@ -431,22 +451,13 @@
         },
         "isComplete": {
           "type": "boolean"
-        }
-      }
-    },
-    "IScoreboardRow": {
-      "type": "object",
-      "properties": {
-        "player": {
-          "$ref": "#/definitions/IPlayer"
         },
-        "score": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "currentRoundScore": {
-          "format": "int32",
-          "type": "integer"
+        "roundScores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPlayerScore"
+          },
+          "readOnly": true
         }
       }
     },
@@ -478,10 +489,10 @@
             "$ref": "#/definitions/IRound"
           }
         },
-        "scores": {
+        "gameScores": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IScoreboardRow"
+            "$ref": "#/definitions/IPlayerScore"
           },
           "readOnly": true
         },

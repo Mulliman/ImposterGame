@@ -6,7 +6,7 @@ export * from './iGame';
 export * from './iOptionGrid';
 export * from './iOptionGridGroup';
 export * from './iPlayer';
+export * from './iPlayerScore';
 export * from './iRound';
 export * from './iRoundParticipant';
-export * from './iScoreboardRow';
 export * from './joinGameModel';

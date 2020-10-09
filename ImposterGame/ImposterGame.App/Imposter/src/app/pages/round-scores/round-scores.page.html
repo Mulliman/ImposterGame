@@ -1,9 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>round-scores</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
-<ion-content>
-  <h1>TODO: ROUND SCORES</h1>
+<ion-content padding fullscreen scroll-y="false" color="light" id="pageContent">
+  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #ScoresSlider>
+
+    <ion-slide>
+      <div class="slide-inner" class="full-width">
+        <app-scoreboard 
+        *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.currentRound" 
+        [scores]="gameContext.currentGame.currentRound.roundScores" 
+        [currentPlayer]="gameContext.currentGame.currentPlayer.name"
+        class="full-width">
+      </app-scoreboard>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          Game scores
+        </ion-button>
+      </div>
+    </ion-slide>
+
+    <!-- <ion-slide>
+      <div class="slide-inner" class="full-width">
+        <app-scoreboard 
+          *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame" 
+          [scores]="gameContext.currentGame.gameScores" 
+          [currentPlayer]="gameContext.currentGame.currentPlayer.name"
+          class="full-width">
+        </app-scoreboard>
+
+        <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+          Round scores
+        </ion-button>
+      </div>
+    </ion-slide> -->
+
+
+  </ion-slides>
 </ion-content>
+
+<app-footer></app-footer>

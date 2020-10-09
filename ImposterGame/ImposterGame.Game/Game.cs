@@ -41,7 +41,7 @@ namespace ImposterGame.Game
 
         public IList<IRound> PreviousRounds { get; set; }
 
-        public IEnumerable<IScoreboardRow> Scores => GetScoreboard();
+        public IEnumerable<IPlayerScore> GameScores => GetScoreboard();
 
         public string State => GetState();
 
@@ -112,31 +112,31 @@ namespace ImposterGame.Game
             CurrentRound.IsComplete = true;
         }
 
-        private IEnumerable<IScoreboardRow> GetScoreboard()
+        private IEnumerable<IPlayerScore> GetScoreboard()
         {
-            var dict = Players.ToDictionary(p => p, p => new ScoreboardRow(p, 0, 0));
-
-            foreach (var roundParticipant in PreviousRounds.SelectMany(r => r.Participants))
+            if(CurrentRound == null || !CurrentRound.IsComplete)
             {
-                if (dict.ContainsKey(roundParticipant.Player))
+                return null;
+            }
+
+            var dict = Players.ToDictionary(p => p.Id, p => new PlayerScore(p, 0));
+
+            var previousScores = PreviousRounds.SelectMany(r => r.RoundScores);
+            var currentScores = CurrentRound.RoundScores;
+
+            var allScores = previousScores.Concat(currentScores);
+
+            foreach (var roundScore in allScores)
+            {
+                var key = roundScore.Id;
+
+                if (dict.ContainsKey(key))
                 {
-                    dict[roundParticipant.Player].Score += roundParticipant.ScoredPoints;
+                    dict[key].Score += roundScore.Score;
                 }
             }
 
-            if (CurrentRound != null && CurrentRound.Participants.Any(p => p.ScoredPoints > 0))
-            {
-                foreach (var participant in CurrentRound.Participants)
-                {
-                    if (dict.ContainsKey(participant.Player))
-                    {
-                        dict[participant.Player].Score += participant.ScoredPoints;
-                        dict[participant.Player].CurrentRoundScore += participant.ScoredPoints;
-                    }
-                }
-            }
-
-            return dict.OrderBy(d => d.Value.Score).Select(d => d.Value);
+            return dict.Select(d => d.Value).OrderBy(s => s.Score);
         }
 
         public bool CanLeaveWithoutRoundCancellation => CurrentRound == null || CurrentRound.IsComplete;

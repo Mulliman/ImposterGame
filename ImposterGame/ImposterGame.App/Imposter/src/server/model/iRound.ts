@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { IPlayerScore } from './iPlayerScore';
 import { IRoundParticipant } from './iRoundParticipant';
 
 
@@ -16,11 +17,13 @@ export interface IRound {
     readonly id?: string;
     readonly word?: string;
     impostersGuess?: string;
-    readonly isGuessCorrect?: boolean;
+    readonly isImpostersGuessCorrect?: boolean;
+    readonly wasImposterFound?: boolean;
     readonly allOptions?: Array<string>;
     readonly participants?: Array<IRoundParticipant>;
     imposter?: IRoundParticipant;
     readonly allAnswered?: boolean;
     readonly allAccused?: boolean;
     isComplete?: boolean;
+    readonly roundScores?: Array<IPlayerScore>;
 }

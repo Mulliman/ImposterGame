@@ -16,6 +16,7 @@ import { GameService } from '../services/game.service';
 import { IPlayer } from 'src/server';
 import { GameContext } from '../services/gamecontext.service';
 import { Game } from '../model/Game';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { Game } from '../model/Game';
     NotIncludingPlayerPipe,
     PlayerAnswerListComponent,
     HelpModalComponent,
-    PlayerListComponent
+    PlayerListComponent,
+    ScoreboardComponent,
   ],
   imports: [
     IonicModule.forRoot(), 
@@ -42,7 +44,8 @@ import { Game } from '../model/Game';
       OptionGridComponent,
       PlayerAnswerListComponent,
       HelpModalComponent,
-      PlayerListComponent
+      PlayerListComponent,
+      ScoreboardComponent,
     ],
     entryComponents: [HelpModalComponent]
 })

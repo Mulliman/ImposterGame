@@ -1,14 +1,15 @@
-﻿using ImposterGame.Model;
+﻿using ImposterGame.Game.Scorers;
+using ImposterGame.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ImposterGame.Game.Rounds
 {
     public class Round : IRound
     {
-        private const int DefaultAmountOfRoundOptions = 15;
+        private const int DefaultAmountOfRoundOptions = 16;
+        private AccusationStatistics _accusationStatistics;
 
         private Round()
         {
@@ -21,13 +22,50 @@ namespace ImposterGame.Game.Rounds
 
         public string ImpostersGuess { get; set; }
 
-        public bool IsGuessCorrect => Word != null && ImpostersGuess != null && Word.Equals(ImpostersGuess, StringComparison.OrdinalIgnoreCase);
+        public bool IsImpostersGuessCorrect => Word != null && ImpostersGuess != null && Word.Equals(ImpostersGuess, StringComparison.OrdinalIgnoreCase);
+
+        public bool WasImposterFound => AccusationStatistics != null 
+            && AccusationStatistics.SuspectedImposter != null 
+            && AccusationStatistics.SuspectedImposter == Imposter;
+
+        public IAccusationStatistics AccusationStatistics
+        {
+            get
+            {
+                if(_accusationStatistics != null)
+                {
+                    return _accusationStatistics;
+                }
+
+                if (!AllAccused)
+                {
+                    return null;
+                }
+
+                var accusedParticipants = new List<AccusationStatisticsParticipant>();
+
+                var groups = Participants.GroupBy(p => p.Accusation.PlayerId);
+
+                foreach (var group in groups)
+                {
+                    var participant = Participants.FirstOrDefault(p => p.Player.Id == group.Key);
+
+                    accusedParticipants.Add(new AccusationStatisticsParticipant(participant, group.Select(g => g.Player.Name)));
+                }
+
+                _accusationStatistics = new AccusationStatistics(accusedParticipants);
+
+                return _accusationStatistics;
+            }
+        }
 
         public IList<string> AllOptions { get; private set; }
 
         public IList<IRoundParticipant> Participants { get; private set; }
 
         public IRoundParticipant Imposter => Participants.First(p => p.IsImposter);
+
+        public IEnumerable<IPlayerScore> RoundScores => Participants.Select(p => new PlayerScore(p.Player, p.ScoredPoints));
 
         public bool AllAnswered => Participants.All(p => p.HasAnswered);
 

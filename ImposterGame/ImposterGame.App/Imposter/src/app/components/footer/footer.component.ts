@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { GameService, GameModel } from 'src/app/services/game.service';
 import { GameContext } from "src/app/services/gamecontext.service";
 import { AppPagesService } from 'src/app/services/app-pages.service';
@@ -8,6 +8,7 @@ import { HelpModalComponent } from '../modals/help-modal/help-modal.component';
 import { IPlayer } from 'src/server';
 import { Game } from 'src/app/model/Game';
 import { BaseGameComponent } from '../BaseGameComponent';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-footer',
@@ -22,7 +23,8 @@ export class FooterComponent extends BaseGameComponent {
   constructor(playerService: PlayerService,
     gameService: GameService,
     private appPages: AppPagesService,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+    private uiService: UiService) {
     super(playerService, gameService);
   }
 
@@ -52,5 +54,21 @@ export class FooterComponent extends BaseGameComponent {
       }
     });
     return await modal.present();
+  }
+
+  copyCode(){
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = this.currentGameContext.currentGame.easyCode;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+
+    this.uiService.successToast("Game code copied to clipboard.");
   }
 }

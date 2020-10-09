@@ -12,7 +12,9 @@ namespace ImposterGame.Model
 
         string ImpostersGuess { get; set; }
 
-        bool IsGuessCorrect { get; }
+        bool IsImpostersGuessCorrect { get; }
+
+        bool WasImposterFound { get; }
 
         IList<string> AllOptions { get; }
 
@@ -25,5 +27,6 @@ namespace ImposterGame.Model
         bool AllAccused { get; }
 
         bool IsComplete { get; set; }
+        IEnumerable<IPlayerScore> RoundScores { get; }
     }
 }

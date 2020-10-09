@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 import { IPlayer } from './iPlayer';
+import { IPlayerScore } from './iPlayerScore';
 import { IRound } from './iRound';
-import { IScoreboardRow } from './iScoreboardRow';
 
 
 export interface IGame { 
@@ -21,7 +21,7 @@ export interface IGame {
     players?: Array<IPlayer>;
     currentRound?: IRound;
     previousRounds?: Array<IRound>;
-    readonly scores?: Array<IScoreboardRow>;
+    readonly gameScores?: Array<IPlayerScore>;
     readonly state?: string;
     readonly canLeaveWithoutRoundCancellation?: boolean;
 }

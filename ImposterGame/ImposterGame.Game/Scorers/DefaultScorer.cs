@@ -10,7 +10,9 @@ namespace ImposterGame.Game.Scorers
     /// Default scoring scheme of:
     /// 
     /// Normal player gets their wager if they guess correctly.
-    /// Imposter gets 1 bonus point per correct guess if they guess the word.
+    /// Normal player gets 1 team point if they find the imposter.
+    /// Imposter gets 1 point if they are not identified.
+    /// Imposter gets 1 bonus point if they guess the word.
     /// Imposter gets wager if player guesses incorrectly and the imposter guesses the word.
     /// 
     /// </summary>
@@ -22,26 +24,41 @@ namespace ImposterGame.Game.Scorers
 
             var imposter = round.Imposter;
             var imposterId = round.Imposter.Player.Id;
-            var isImposterGuessCorrect = round.IsGuessCorrect;
+            var isImposterGuessCorrect = round.IsImpostersGuessCorrect;
 
             foreach (var nonImposter in round.Participants.Where(p => !p.IsImposter))
             {
-                var guessedCorrectly = nonImposter.Accusation.PlayerId == imposterId;
+                var accuserGuessedCorrectly = nonImposter.Accusation.PlayerId == imposterId;
                 var wager = nonImposter.Accusation.Wager;
 
-                if (guessedCorrectly)
+                // Normal player gets 1 team point if they find the imposter.
+                if (!round.WasImposterFound)
                 {
-                    nonImposter.ScoredPoints = nonImposter.Accusation.Wager;
-
-                    if (isImposterGuessCorrect)
-                    {
-                        imposter.ScoredPoints += 1;
-                    }
+                    nonImposter.ScoredPoints += 1;
                 }
-                else if (isImposterGuessCorrect)
+
+                if (accuserGuessedCorrectly)
                 {
+                    // Normal player gets their wager if they guess correctly.
+                    nonImposter.ScoredPoints = nonImposter.Accusation.Wager;
+                }
+                else if (isImposterGuessCorrect && isImposterGuessCorrect)
+                {
+                    // Imposter gets wager if player guesses incorrectly and the imposter guesses the word.
                     imposter.ScoredPoints += wager;
                 }
+            }
+
+            // Imposter gets 1 point if they are not identified.
+            if (!round.WasImposterFound)
+            {
+                imposter.ScoredPoints += 1;
+            }
+
+            // Imposter gets 1 bonus point if they guess the word.
+            if (isImposterGuessCorrect)
+            {
+                imposter.ScoredPoints += 1;
             }
 
             return round;
