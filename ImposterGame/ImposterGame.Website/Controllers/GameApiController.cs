@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ImposterGame.Game;
+using ImposterGame.Game.Exceptions;
 using ImposterGame.Game.Players;
 using ImposterGame.Model;
 using ImposterGame.Website.Controllers.Exceptions;
@@ -22,7 +23,6 @@ namespace ImposterGame.Website.Controllers
     {
         private readonly IGameService _gameService;
         private readonly IPlayerService _playerService;
-        private readonly IHubContext<GameHub> _hubContext;
         private readonly IGameNotifier _gameNotifier;
 
         public GameApiController(IGameService gameService,
@@ -79,6 +79,38 @@ namespace ImposterGame.Website.Controllers
             }
 
             return game;
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IGame> Leave([FromBody]JoinGameModel model)
+        {
+            var player = _playerService.GetPlayer(model.PlayerId);
+
+            if (player == null)
+            {
+                throw new PlayerDoesNotExistException(model.PlayerId);
+            }
+
+            var game = _gameService.GetGame(model.GameCode);
+            var gameId = game.Id;
+
+            var mustCancelRound = !game.CanLeaveWithoutRoundCancellation;
+            var mustCancelGame = game.Host.Id == model.PlayerId;
+
+            var updatedGame = _gameService.LeaveGame(game, player);
+
+            await _gameNotifier.SendPlayerJoined(updatedGame);
+
+            if (mustCancelGame)
+            {
+                await _gameNotifier.SendGameCancelled(gameId);
+            }
+            else if(mustCancelRound)
+            {
+                await _gameNotifier.SendRoundCancelled(updatedGame);
+            }
+
+            return updatedGame;
         }
 
         [HttpGet("[action]")]

@@ -1,5 +1,6 @@
 ﻿using ImposterGame.Model;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Threading.Tasks;
 
 namespace ImposterGame.Website.Hubs
@@ -15,32 +16,65 @@ namespace ImposterGame.Website.Hubs
 
         public async Task SendGameUpdated(IGame game)
         {
-            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.GameUpdatedMethodName, game);
+            if (game != null)
+            {
+                await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.GameUpdatedMethodName, game);
+            }
         }
 
         public async Task SendPlayerJoined(IGame game)
         {
-            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.NewPlayerMethodName, game);
+            if (game != null)
+            {
+                await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.NewPlayerMethodName, game);
+            }
         }
 
         public async Task SendNewRoundStarted(IGame game)
         {
-            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.StartRoundMethodName, game);
+            if (game != null)
+            {
+                await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.StartRoundMethodName, game);
+            }
         }
 
         public async Task SendAllAnswered(IGame game)
         {
-            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.AllAnsweredMethodName, game);
+            if (game != null)
+            {
+                await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.AllAnsweredMethodName, game);
+            }
         }
 
         public async Task SendAllAccused(IGame game)
         {
-            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.AllAccusedMethodName, game);
+            if (game != null)
+            {
+                await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.AllAccusedMethodName, game);
+            }
         }
 
         public async Task SendScoringComplete(IGame game)
         {
-            await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.ScoringCompleteMethodName, game);
+            if (game != null)
+            {
+                await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.ScoringCompleteMethodName, game);
+            }
         }
+
+        public async Task SendRoundCancelled(IGame game)
+        {
+            if (game != null)
+            {
+                await _hubContext.Clients.Groups(GameHub.GetGroupName(game.Id)).SendAsync(GameHub.RoundCancelledMethodName, game);
+            }
+        }
+
+        public async Task SendGameCancelled(Guid gameId)
+        {
+            await _hubContext.Clients.Groups(GameHub.GetGroupName(gameId)).SendAsync(GameHub.GameCancelledMethodName);
+        }
+
+
     }
 }

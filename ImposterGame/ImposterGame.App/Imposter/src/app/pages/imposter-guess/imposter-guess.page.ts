@@ -3,6 +3,7 @@ import { BaseGamePage } from '../baseGamePage';
 import { PlayerService } from 'src/app/services/player.service';
 import { GameService } from 'src/app/services/game.service';
 import { AppPagesService } from 'src/app/services/app-pages.service';
+import { GameStates } from 'src/app/model/GameStates';
 
 @Component({
   selector: 'app-imposter-guess',
@@ -21,7 +22,7 @@ export class ImposterGuessPage extends BaseGamePage {
   }
 
   setAllowedStates(): string[] {
-    return null; // [GameStates.roundAnswered];
+    return [GameStates.roundAnswered];
   }
 
   gamePageOnInit() {

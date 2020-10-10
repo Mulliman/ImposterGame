@@ -57,7 +57,8 @@ export class PlayerService {
       var serverPlayer = await this.playerApi.apiPlayerApiGetGet(localPlayer.id).toPromise();
 
       if(!serverPlayer){
-        this.uiService.errorToast("There was an error finding your account on the server.", "Please clear you browsing data for this website.");
+        this.uiService.errorToast("There was an error finding your account on the server.", "Clearing stored data.");
+        localStorage.removeItem(this.PlayerKey);
         return null;
       }
   
@@ -67,5 +68,10 @@ export class PlayerService {
       console.error(e);
       this.uiService.errorToast("There was an error connecting with the server.", "Please check your network connection and try again.");
     }
+  }
+
+  clearSavedPlayer() {
+    localStorage.removeItem(this.PlayerKey);
+    this.currentPlayer = null;
   }
 }

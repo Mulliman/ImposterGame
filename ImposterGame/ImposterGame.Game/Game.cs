@@ -39,6 +39,8 @@ namespace ImposterGame.Game
 
         public IRound CurrentRound { get; set; }
 
+        public IRound PreviousRound { get; set; }
+
         public IList<IRound> PreviousRounds { get; set; }
 
         public IEnumerable<IPlayerScore> GameScores => GetScoreboard();
@@ -110,21 +112,21 @@ namespace ImposterGame.Game
 
             CurrentRound = Scorer.AddScoresToRound(CurrentRound);
             CurrentRound.IsComplete = true;
+
+            PreviousRounds.Add(CurrentRound);
+            PreviousRound = CurrentRound;
+
+            CurrentRound = null;
         }
 
         private IEnumerable<IPlayerScore> GetScoreboard()
         {
-            if(CurrentRound == null || !CurrentRound.IsComplete)
-            {
-                return null;
-            }
-
             var dict = Players.ToDictionary(p => p.Id, p => new PlayerScore(p, 0));
 
             var previousScores = PreviousRounds.SelectMany(r => r.RoundScores);
-            var currentScores = CurrentRound.RoundScores;
+            var currentScores =  CurrentRound?.RoundScores;
 
-            var allScores = previousScores.Concat(currentScores);
+            var allScores = CurrentRound != null ? previousScores.Concat(currentScores) : previousScores;
 
             foreach (var roundScore in allScores)
             {
@@ -136,7 +138,7 @@ namespace ImposterGame.Game
                 }
             }
 
-            return dict.Select(d => d.Value).OrderBy(s => s.Score);
+            return dict.Select(d => d.Value).OrderByDescending(s => s.Score);
         }
 
         public bool CanLeaveWithoutRoundCancellation => CurrentRound == null || CurrentRound.IsComplete;

@@ -38,25 +38,13 @@ export class NewRoundPage extends BaseGamePage {
   }
 
   setAllowedStates(): Array<string> {
-    console.log("setAllowedStates - " + GameStates.roundPending);
-    console.log("setAllowedStates - " + GameStates.roundCompleted);
-
-    var pend = GameStates.roundPending;
-    var completed = GameStates.roundCompleted;
-  
-    //return null;
-return null;
-// return [pend, completed];
-
-    //return null;// [GameStates.roundPending, GameStates.roundCompleted];
+    return this.states;
   }
 
   async gamePageOnInit() {
-    // this.subscription = this.gameService.gameContext.onPlayersChanged.subscribe((game: Game) => this.currentGame = game);
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
   }
 
   async startRound(){

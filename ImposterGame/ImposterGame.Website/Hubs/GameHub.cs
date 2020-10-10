@@ -15,6 +15,8 @@ namespace ImposterGame.Website.Hubs
         public const string AllAnsweredMethodName = "AllAnswered";
         public const string AllAccusedMethodName = "AllAccused";
         public const string ScoringCompleteMethodName = "ScoringComplete";
+        public const string RoundCancelledMethodName = "RoundCancelled";
+        public const string GameCancelledMethodName = "GameCancelled";
 
         public async Task SendGameUpdate(Guid gameId, IGame game)
         {
@@ -46,37 +48,15 @@ namespace ImposterGame.Website.Hubs
             await Clients.Group(GetGroupName(gameId)).SendAsync(ScoringCompleteMethodName, game);
         }
 
-        #region old
-        //public async Task SendGameUpdate(Guid gameId, IGame game)
-        //{
-        //    await SendGameUpdate((IHubClients)Clients, gameId, game);
-        //}
+        public async Task SendRoundCancelled(Guid gameId, IGame game)
+        {
+            await Clients.Group(GetGroupName(gameId)).SendAsync(RoundCancelledMethodName, game);
+        }
 
-        //public static async Task SendGameUpdate(IHubClients clients, Guid gameId, IGame game)
-        //{
-        //    await clients.Group(GetGroupName(gameId)).SendAsync(GameUpdatedMethodName, game);
-        //}
-
-        //public async Task SendPlayerJoined(Guid gameId, IGame game)
-        //{
-        //    await SendPlayerJoined((IHubClients)Clients, gameId, game);
-        //}
-
-        //public static async Task SendPlayerJoined(IHubClients clients, Guid gameId, IGame game)
-        //{
-        //    await clients.Group(GetGroupName(gameId)).SendAsync(NewPlayerMethodName, game);
-        //}
-
-        //public async Task StartRound(Guid gameId, IGame game)
-        //{
-        //    await StartRound((IHubClients)Clients, gameId, game);
-        //}
-
-        //public static async Task StartRound(IHubClients clients, Guid gameId, IGame game)
-        //{
-        //    await clients.Group(GetGroupName(gameId)).SendAsync(StartRoundMethodName, game);
-        //}
-        #endregion
+        public async Task SendGameCancelled(Guid gameId, IGame game)
+        {
+            await Clients.Group(GetGroupName(gameId)).SendAsync(GameCancelledMethodName, game);
+        }
 
         public Task AddToGroup(Guid gameId)
         => Groups.AddToGroupAsync(Context.ConnectionId, GetGroupName(gameId));

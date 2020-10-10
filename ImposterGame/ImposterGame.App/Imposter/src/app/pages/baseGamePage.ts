@@ -18,8 +18,6 @@ export abstract class BaseGamePage implements OnInit {
 
     ticks: number;
 
-    // player:IPlayer;
-    // currentGame:Game;
     gameContext: GameContext;
     allowedStates: string[];
     protected subscriptions = new Subscription();
@@ -38,6 +36,7 @@ export abstract class BaseGamePage implements OnInit {
         this.ticks = new Date().getTime();
 
         console.log("ionViewWillEnter ticks set to - " + this.ticks);
+        console.log("ionViewWillEnter location = " + window.location.href);
         
         await this.playerService.getCurrentPlayer();
         if (this.allowedStates && !this.playerService.currentPlayer)
@@ -51,7 +50,7 @@ export abstract class BaseGamePage implements OnInit {
         this.gameContext = await this.gameService.getCurrentGameContext(this.playerService.currentPlayer);
         if(this.gameContext){
             this.subscriptions.add(this.gameContext.onGameUpdated.subscribe((game: Game) => this.gamePageOnContextUpdated()));
-          }
+        }
 
         if (this.allowedStates && !this.gameContext) {
             await this.appPages.goToNewGamePage();
@@ -93,41 +92,17 @@ export abstract class BaseGamePage implements OnInit {
         }
 
         if(!this.gameContext || !this.gameContext.currentGame){
-        //     console.log("In allowed state - No game");
-        //     debugger;
-             return false;
+            return false;
         }
 
-        return true;
+        console.log("Check In allowed state");
 
-        // console.log("Check In allowed state");
+        var isInAllowedState = this.states.includes(this.gameContext.currentGame.state);
 
-        // var isInAllowedState = this.states.includes(this.currentGame.state);
+        console.log("In allowed state?", isInAllowedState, this.gameContext.currentGame.state);
 
-        // console.log("In allowed state?", isInAllowedState, this.currentGame.state);
-
-        // return isInAllowedState;
+        return isInAllowedState;
     }
-
-    // isInAllowedState(){
-    //     if(!this.allowedStates){
-    //         console.log("In allowed state - No States");
-    //         return true;
-    //     }
-
-    //     if(!this.currentGame){
-    //         console.log("In allowed state - No gane");
-    //         return false;
-    //     }
-
-    //     console.log("Check In allowed state");
-
-    //     var isInAllowedState = this.allowedStates.includes(this.currentGame.state);
-
-    //     console.log("In allowed state?", isInAllowedState, this.currentGame.state);
-
-    //     return isInAllowedState;
-    // }
 
     async redirectToMostAppropriatePage(){
         await this.appPages.ensureOnMostAppropriatePage(this.playerService.currentPlayer, this.gameContext);

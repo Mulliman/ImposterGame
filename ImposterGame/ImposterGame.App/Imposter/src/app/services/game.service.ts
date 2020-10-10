@@ -42,6 +42,7 @@ export interface Participant {
 })
 export class GameService {
   protected subscriptions = new Subscription();
+  protected hasSubscribedToGameEvents: boolean;
   
   constructor(private gameApi: GameApiService,
     private roundApi: RoundApiService,
@@ -64,6 +65,7 @@ export class GameService {
     }
 
     await this.gameContext.initialiseGame(game);
+    this.subscribeToGameEvents();
 
     return this.gameContext;
   }
@@ -108,11 +110,24 @@ export class GameService {
   }
 
   subscribeToGameEvents(){
+    var self = this;
+
+    if(this.hasSubscribedToGameEvents){
+      return;
+    }
+
     // When a round starts, move every user to the current round page. 
-    this.subscriptions.add(this.gameContext.onRoundStarted.subscribe(() => this.appPages.goToCurrentRoundPage()));
+    this.subscriptions.add(this.gameContext.onRoundStarted.subscribe(() => {console.log("onRoundStarted"); this.appPages.goToCurrentRoundPage()}));
     this.subscriptions.add(this.gameContext.onAllAnswered.subscribe(() => this.appPages.goToChooseImposterPage()));
     this.subscriptions.add(this.gameContext.onAllAccused.subscribe(() => this.appPages.goToImposterGuessPage()));
     this.subscriptions.add(this.gameContext.onRoundComplete.subscribe(() => this.appPages.goToRoundScoresPage()));
+    this.subscriptions.add(this.gameContext.onRoundCancelled.subscribe(() => this.appPages.goToNewRoundPage()));
+    this.subscriptions.add(this.gameContext.onGameCancelled.subscribe(async () => {
+      await this.gameContext.endGame();
+      this.appPages.reloadApp();
+    }));
+
+    this.hasSubscribedToGameEvents = true;
   }
 
   // unsubscribeToGameEvents(){
@@ -240,14 +255,19 @@ export class GameService {
   //#region Leaving
 
   async leaveGame(player: IPlayer, gameCode: string): Promise<void> {
-    // try {
-    //   // TODO: Call APIs
+    try {
+      var leaveModel = {
+        gameCode: gameCode,
+        playerId: player.id
+      } as JoinGameModel;
 
-    //   this.clearSavedGame();
-    // } catch (e) {
-    //   console.error("Leave Game Error", e);
-    //   throw e;
-    // }
+      await this.gameApi.apiGameApiLeavePost(leaveModel).toPromise();
+
+      this.gameContext.endGame();
+    } catch (e) {
+      console.error("Leave Game Error", e);
+      throw e;
+    }
   }
 
   //#endregion

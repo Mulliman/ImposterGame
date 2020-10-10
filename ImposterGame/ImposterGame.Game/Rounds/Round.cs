@@ -65,7 +65,7 @@ namespace ImposterGame.Game.Rounds
 
         public IRoundParticipant Imposter => Participants.First(p => p.IsImposter);
 
-        public IEnumerable<IPlayerScore> RoundScores => Participants.Select(p => new PlayerScore(p.Player, p.ScoredPoints));
+        public IEnumerable<IPlayerScore> RoundScores => Participants.Select(p => new PlayerScore(p.Player, p.ScoredPoints)).OrderByDescending(p => p.Score);
 
         public bool AllAnswered => Participants.All(p => p.HasAnswered);
 

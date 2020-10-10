@@ -5,9 +5,11 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
+        <h2>Round Scores</h2>
+
         <app-scoreboard 
-        *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.currentRound" 
-        [scores]="gameContext.currentGame.currentRound.roundScores" 
+        *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.previousRound" 
+        [scores]="gameContext.currentGame.previousRound.roundScores" 
         [currentPlayer]="gameContext.currentGame.currentPlayer.name"
         class="full-width">
       </app-scoreboard>
@@ -19,8 +21,10 @@
       </div>
     </ion-slide>
 
-    <!-- <ion-slide>
+    <ion-slide>
       <div class="slide-inner" class="full-width">
+        <h2>Game Scores</h2>
+
         <app-scoreboard 
           *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame" 
           [scores]="gameContext.currentGame.gameScores" 
@@ -33,10 +37,13 @@
           Round scores
         </ion-button>
       </div>
-    </ion-slide> -->
-
-
+    </ion-slide>
   </ion-slides>
+
+  <ion-button (click)="goToNextRound()" color="dark">
+    <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+    Next Round
+  </ion-button>
 </ion-content>
 
-<app-footer></app-footer>
+<app-footer [hideChangeNameButton]="true"></app-footer>

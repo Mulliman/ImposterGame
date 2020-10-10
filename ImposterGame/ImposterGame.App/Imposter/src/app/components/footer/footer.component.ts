@@ -19,6 +19,10 @@ export class FooterComponent extends BaseGameComponent {
   isLoaded: boolean;
 
   @Input() helpSection: string;
+  @Input() hidePlayButton: boolean;
+  @Input() hideChangeNameButton: boolean;
+
+  showChangeName: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -30,6 +34,10 @@ export class FooterComponent extends BaseGameComponent {
 
   protected async updateScope() {
     this.isLoaded = true;
+
+    this.showChangeName = !!(!this.hideChangeNameButton
+      && ((!this.currentGameContext.currentGame || this.currentGameContext.currentGame.canLeaveWithoutRoundCancellation)
+      && this.player));
   }
 
   async playGame() {
@@ -38,11 +46,45 @@ export class FooterComponent extends BaseGameComponent {
 
   async leaveGame() {
     try {
-      await this.gameService.leaveGame(this.player, this.currentGameContext.currentGame.easyCode);
-      await this.appPages.goToHomePage();
+      var scope = this;
+
+      const isHost = this.currentGameContext.currentGame
+        && this.currentGameContext.currentGame.host.id == this.playerService.currentPlayer.id;
+
+      if (isHost) {
+        this.uiService.confirm("Finish Game", "You are the host, if you leave you will stop the game for everybody. Are you sure?", async function () {
+          await scope.gameService.leaveGame(scope.playerService.currentPlayer, scope.currentGameContext.currentGame.easyCode);
+          scope.playerService.clearSavedPlayer();
+          await scope.appPages.reloadApp();
+        });
+      } else {
+        const isMidGame =
+          this.currentGameContext.currentGame
+          && this.currentGameContext.currentGame.currentRound
+          && !this.currentGameContext.currentGame.currentRound.isComplete;
+
+        const message = isMidGame
+          ? "If you leave the game now, the round will be cancelled for everyone! Are you sure you want to leave this game?"
+          : `Are you sure you want to leave this game?`;
+
+        this.uiService.confirm("Leave Game", message, async function () {
+          await scope.gameService.leaveGame(scope.playerService.currentPlayer, scope.currentGameContext.currentGame.easyCode);
+          scope.playerService.clearSavedPlayer();
+          await scope.appPages.reloadApp();
+        });
+      }
     } catch (e) {
       console.error("Leave game error", e);
     }
+  }
+
+  async clearPlayer(){
+    var scope = this;
+
+    this.uiService.confirm("Are you sure you want change your name?", "", async function () {
+      await scope.playerService.clearSavedPlayer();
+      await scope.appPages.reloadApp();
+    });
   }
 
   async showHelp() {
@@ -56,7 +98,7 @@ export class FooterComponent extends BaseGameComponent {
     return await modal.present();
   }
 
-  copyCode(){
+  copyCode() {
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';

@@ -10,11 +10,11 @@ import { ScoreboardComponent  } from 'src/app/components/scoreboard/scoreboard.c
 @Component({
   selector: 'app-round-scores',
   templateUrl: './round-scores.page.html',
-  styleUrls: ['./round-scores.page.scss'],
+  styleUrls: ['./round-scores.page.scss']
 })
 export class RoundScoresPage extends BaseGamePage {
 
-  states: Array<string> = [GameStates.roundCompleted];
+  states: Array<string> = [GameStates.roundCompleted, GameStates.roundPending];
 
   @ViewChild('ScoresSlider', { static: true }) slides: IonSlides;
 
@@ -42,5 +42,9 @@ export class RoundScoresPage extends BaseGamePage {
 
   async goToSlide(num: number) {
     await this.slides.slideTo(num);
+  }
+
+  async goToNextRound(){
+    await this.appPages.goToNewRoundPage();
   }
 }

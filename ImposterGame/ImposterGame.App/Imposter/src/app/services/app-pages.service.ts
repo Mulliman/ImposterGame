@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameModel } from './game.service';
 import { GameContext } from "./gamecontext.service";
@@ -22,7 +23,12 @@ export class AppPagesService {
     goToRoundScores: "round-scores"
   };
 
-  constructor(private navController: NavController) {
+  constructor(private navController: NavController,
+    @Inject(DOCUMENT) private document: Document) {
+  }
+
+  reloadApp(){
+    this.document.location.href = '/';
   }
 
   async ensureOnMostAppropriatePage(player: IPlayer, gameContext: GameContext) {
@@ -67,41 +73,47 @@ export class AppPagesService {
 
   async goToHomePage() {
     console.log("goToHomePage");
-    await this.navController.navigateForward([`/${this.routes.home}`]);
+    await this.navController.navigateForward([`/${this.routes.home}`], this.getNoCachingParams());
   }
 
   async goToYouPage() {
     console.log("goToYouPage");
-    await this.navController.navigateForward([`/${this.routes.you}`]);
+    await this.navController.navigateForward([`/${this.routes.you}`], this.getNoCachingParams());
   }
 
   async goToNewGamePage() {
     console.log("goToNewGamePage");
-    await this.navController.navigateForward([`/${this.routes.newGame}`]);
+    await this.navController.navigateForward([`/${this.routes.newGame}`], this.getNoCachingParams());
   }
 
   async goToNewRoundPage() {
     console.log("goToNewRoundPage");
-    await this.navController.navigateForward([`/${this.routes.newRound}`]);
+    await this.navController.navigateForward([`/${this.routes.newRound}`], this.getNoCachingParams());
   }
 
   async goToCurrentRoundPage() {
     console.log("goToCurrentRoundPage");
-    await this.navController.navigateForward([`/${this.routes.currentRound}`]);
+    await this.navController.navigateForward([`/${this.routes.currentRound}`], this.getNoCachingParams());
   }
 
   async goToChooseImposterPage() {
     console.log("goToChooseImposterPage");
-    await this.navController.navigateForward([`/${this.routes.chooseImposter}`]);
+    await this.navController.navigateForward([`/${this.routes.chooseImposter}`], this.getNoCachingParams());
   }
 
   async goToImposterGuessPage() {
     console.log("goToImposterGuessPage");
-    await this.navController.navigateForward([`/${this.routes.imposterGuess}`]);
+    await this.navController.navigateForward([`/${this.routes.imposterGuess}`], this.getNoCachingParams());
   }
 
   async goToRoundScoresPage() {
     console.log("goToRoundScores");
-    await this.navController.navigateForward([`/${this.routes.goToRoundScores}`]);
+    //await this.navController.navigateForward([`/${this.routes.goToRoundScores}`]);
+
+    this.document.location.href = `/${this.routes.goToRoundScores}`;
+  }
+
+  private getNoCachingParams(){
+    return {queryParams: { nocache: new Date().getTime() }};
   }
 }

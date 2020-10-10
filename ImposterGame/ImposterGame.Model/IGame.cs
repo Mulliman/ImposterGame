@@ -16,6 +16,8 @@ namespace ImposterGame.Model
 
         IRound CurrentRound { get; set; }
 
+        IRound PreviousRound { get; set; }
+
         IList<IRound> PreviousRounds { get; set; }
 
         IEnumerable<IPlayerScore> GameScores { get; }

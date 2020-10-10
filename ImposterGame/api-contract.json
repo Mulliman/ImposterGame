@@ -95,6 +95,40 @@
         }
       }
     },
+    "/api/GameApi/Leave": {
+      "post": {
+        "tags": [
+          "GameApi"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JoinGameModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IGame"
+            }
+          }
+        }
+      }
+    },
     "/api/GameApi/Test": {
       "get": {
         "tags": [
@@ -481,6 +515,9 @@
           }
         },
         "currentRound": {
+          "$ref": "#/definitions/IRound"
+        },
+        "previousRound": {
           "$ref": "#/definitions/IRound"
         },
         "previousRounds": {

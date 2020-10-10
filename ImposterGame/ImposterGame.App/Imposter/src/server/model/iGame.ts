@@ -20,6 +20,7 @@ export interface IGame {
     host?: IPlayer;
     players?: Array<IPlayer>;
     currentRound?: IRound;
+    previousRound?: IRound;
     previousRounds?: Array<IRound>;
     readonly gameScores?: Array<IPlayerScore>;
     readonly state?: string;

@@ -41,7 +41,14 @@ namespace ImposterGame.Website
                        .AllowCredentials();
             }));
 
-            services.AddControllers();
+            services.AddControllers(options => options.CacheProfiles.Add("DefaultNoCache",
+                new CacheProfile()
+                {
+                    Duration = 0,
+                    Location = ResponseCacheLocation.None,
+                    NoStore = true
+                })
+            );
             services.AddMemoryCache();
             
             services.AddTransient<IGameNotifier, GameNotifier>();
