@@ -6,6 +6,7 @@ import { AppPagesService } from 'src/app/services/app-pages.service';
 import { IonSlides } from '@ionic/angular';
 import { BaseGamePage } from '../baseGamePage';
 import { ScoreboardComponent  } from 'src/app/components/scoreboard/scoreboard.component';
+import { IRound, IPlayer } from 'src/server';
 
 @Component({
   selector: 'app-round-scores',
@@ -38,6 +39,13 @@ export class RoundScoresPage extends BaseGamePage {
 
   async gamePageOnInit() {
     
+  }
+
+  isUserGuessCorrect(previousRound: IRound, player: IPlayer){
+    var imposterName = previousRound.imposter.player.name;
+    var participant = previousRound.participants.filter((p) => p.player.id == player.id)[0];
+
+    return imposterName == participant.accusation.playerName;
   }
 
   async goToSlide(num: number) {

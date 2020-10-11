@@ -37,7 +37,7 @@ namespace ImposterGame.Website
             {
                 builder.AllowAnyMethod()
                        .AllowAnyHeader()
-                       .WithOrigins(Configuration.GetValue<string>("AllowedClientUrls"))
+                       .WithOrigins(Configuration.GetValue<string>("AllowedClientUrls").Split("|"))
                        .AllowCredentials();
             }));
 

@@ -3,6 +3,7 @@ import { IGame, IPlayer, IRoundParticipant } from 'src/server';
 export interface Game extends IGame{
     isHost: boolean;
     isImposter?: boolean;
+    wasImposterLastRound?: boolean;
     currentPlayer: IPlayer;
 }
 
@@ -12,7 +13,7 @@ export class GameFactory{
         game.isHost = serverGame.host.id == player.id;
         game.currentPlayer = player;
         game.isImposter = this.isCurrentlyImposter(game, player);
-
+        game.wasImposterLastRound = this.wasImposterLastRound(game, player);
         return game;
     }
 
@@ -22,6 +23,14 @@ export class GameFactory{
         }
 
         return game.currentRound.imposter.player.name == player.name;
+    }
+
+    static wasImposterLastRound(game: Game, player: IPlayer ){
+        if(!game.previousRound || !game.previousRound.imposter || !game.previousRound.imposter.player){
+            return null;
+        }
+
+        return game.previousRound.imposter.player.name == player.name;
     }
 }
 
