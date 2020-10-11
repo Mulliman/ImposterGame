@@ -14,9 +14,9 @@ export abstract class BaseGameFormPage extends BaseGamePage {
 
     get controls() { return this.form.controls; }
 
-    constructor(protected playerService: PlayerService,
-        protected gameService: GameService,
-        protected appPages: AppPagesService,
+    constructor(playerService: PlayerService,
+        gameService: GameService,
+        appPages: AppPagesService,
         protected formBuilder: FormBuilder) {
         super(playerService, gameService, appPages);
 

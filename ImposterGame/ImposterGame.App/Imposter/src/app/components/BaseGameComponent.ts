@@ -9,8 +9,8 @@ import { Subscription } from 'rxjs';
 export abstract class BaseGameComponent implements OnInit {
 
   protected subscriptions = new Subscription();
-  protected player: IPlayer;
-  protected currentGameContext: GameContext;
+  public player: IPlayer;
+  public currentGameContext: GameContext;
 
   constructor(protected playerService: PlayerService, protected gameService: GameService) { }
 

@@ -18,13 +18,13 @@ export abstract class BaseGamePage implements OnInit {
 
     ticks: number;
 
-    gameContext: GameContext;
+    public gameContext: GameContext;
     allowedStates: string[];
     protected subscriptions = new Subscription();
 
-    constructor(protected playerService: PlayerService,
-        protected gameService: GameService,
-        protected appPages: AppPagesService) { 
+    constructor(public playerService: PlayerService,
+        public gameService: GameService,
+        public appPages: AppPagesService) { 
             this.allowedStates = this.setAllowedStates();
         }
 

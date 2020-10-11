@@ -30,7 +30,7 @@ export class NewRoundPage extends BaseGamePage {
   constructor(playerService: PlayerService,
     gameService: GameService,
     appPages: AppPagesService,
-    protected gridService: OptionGridService,
+    public gridService: OptionGridService,
     public modalController: ModalController) {
 
     super(playerService, gameService, appPages);

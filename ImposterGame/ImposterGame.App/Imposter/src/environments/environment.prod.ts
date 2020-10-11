@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: "https://api.imposter.local"
+  apiBaseUrl: "https://imposterapi.azurewebsites.net"
 };
