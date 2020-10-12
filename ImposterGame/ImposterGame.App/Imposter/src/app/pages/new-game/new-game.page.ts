@@ -29,6 +29,10 @@ export class NewGamePage extends BaseGameFormPage {
     }
   }
 
+  async gamePageOnLeave(){
+    
+  }
+
   instantiateForm() {
     this.form = this.formBuilder.group({
       gameCode: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(5)]]

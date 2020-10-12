@@ -29,6 +29,10 @@ export class ImposterGuessPage extends BaseGamePage {
     this.isLoaded = true;
   }
 
+  async gamePageOnLeave(){
+    
+  }
+
   async answerSelected(answer: string) {
     console.log("answerSelected", answer);
     this.selectedOption = answer;

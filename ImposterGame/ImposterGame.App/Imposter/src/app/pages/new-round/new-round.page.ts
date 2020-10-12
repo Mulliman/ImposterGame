@@ -44,6 +44,10 @@ export class NewRoundPage extends BaseGamePage {
   async gamePageOnInit() {
   }
 
+  async gamePageOnLeave(){
+    
+  }
+
   ngOnDestroy() {
   }
 

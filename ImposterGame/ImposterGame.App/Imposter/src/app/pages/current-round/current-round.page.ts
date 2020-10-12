@@ -42,6 +42,10 @@ export class CurrentRoundPage extends BaseGameFormPage {
     this.setScopeFromGameContext();
   }
 
+  async gamePageOnLeave(){
+    
+  }
+
   async gamePageOnContextUpdated(){
     console.log("gamePageOnContextUpdated", this.gameContext);
 

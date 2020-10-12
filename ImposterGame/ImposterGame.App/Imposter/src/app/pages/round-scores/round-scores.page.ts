@@ -41,6 +41,10 @@ export class RoundScoresPage extends BaseGamePage {
     
   }
 
+  async gamePageOnLeave(){
+    
+  }
+
   isUserGuessCorrect(previousRound: IRound, player: IPlayer){
     var imposterName = previousRound.imposter.player.name;
     var participant = previousRound.participants.filter((p) => p.player.id == player.id)[0];

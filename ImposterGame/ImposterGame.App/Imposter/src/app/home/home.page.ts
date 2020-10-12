@@ -38,6 +38,10 @@ export class HomePage extends BaseGamePage {
     }
   }
 
+  async gamePageOnLeave(){
+    
+  }
+
   swipeNext() {
     this.slides.slideNext();
   }

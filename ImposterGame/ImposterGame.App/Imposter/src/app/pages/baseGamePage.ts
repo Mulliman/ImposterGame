@@ -68,6 +68,11 @@ export abstract class BaseGamePage implements OnInit {
         this.isLoaded = true;
     }
 
+    async ionViewWillLeave(){
+        this.isLoaded = false;
+        await this.gamePageOnLeave();
+    }
+
     ngOnDestroy() {
         this.isLoaded = false;
         if(this.gameContext && this.subscriptions){
@@ -78,6 +83,8 @@ export abstract class BaseGamePage implements OnInit {
     abstract setAllowedStates(): string[];
 
     abstract async gamePageOnInit();
+
+    abstract async gamePageOnLeave();
 
     async gamePageOnContextUpdated()
     {
