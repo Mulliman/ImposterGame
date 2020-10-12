@@ -123,7 +123,7 @@
         </ion-list>
 
         <ion-button fill="outline" size="small" (click)="goToSlide(1)">
-          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
           Round scores
         </ion-button>
       </div>
@@ -140,13 +140,13 @@
         class="full-width">
       </app-scoreboard>
 
-      <ion-button fill="outline" size="small" (click)="goToSlide(1)">
-        <ion-icon slot="start" name="arrow-round-forward"></ion-icon>
-        Results
+      <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+        <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+        Round Overview
       </ion-button>
 
         <ion-button fill="outline" size="small" (click)="goToSlide(2)">
-          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
           Game scores
         </ion-button>
       </div>
@@ -164,7 +164,7 @@
         </app-scoreboard>
 
         <ion-button fill="outline" size="small" (click)="goToSlide(1)">
-          <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
+          <ion-icon slot="start" name="arrow-round-back"></ion-icon>
           Round scores
         </ion-button>
       </div>
