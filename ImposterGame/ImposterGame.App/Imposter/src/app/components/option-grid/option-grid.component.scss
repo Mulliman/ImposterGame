@@ -14,7 +14,8 @@
         font-size: 12px;
 
         &.selected{
-            background: var(--ion-color-warning) !important;
+            background: var(--ion-color-secondary) !important;
+            color: white;
         }
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Round, GameService } from 'src/app/services/game.service';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, IonCard } from '@ionic/angular';
 import { PlayerService } from 'src/app/services/player.service';
 import { FormBuilder } from '@angular/forms';
 import { AppPagesService } from 'src/app/services/app-pages.service';
@@ -62,7 +62,7 @@ export class ChooseImposterPage extends BaseGamePage {
     
     this.hasSubmitted = GameHelpers.hasAccused(this.gameContext.currentGame);
 
-    this.timerInterval = setInterval(() => this.timer++, 1000);
+    // this.timerInterval = setInterval(() => this.timer++, 1000);
   }
 
   getDisplayTime() 

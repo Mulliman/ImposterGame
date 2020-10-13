@@ -1,3 +1,5 @@
+//@import "./variables.scss";
+
 .full-page-row{
     height: 100%;
 }
@@ -10,6 +12,10 @@
     margin: 0 !important;
 }
 
+.no-margin-bottom{
+    margin: 0 !important;
+}
+
 .no-padding{
     padding: 0 !important;
 }
@@ -18,9 +24,40 @@
 // Backgrounds
 
 .white-background{
-    background-color: #FFF!important;
+    background-color: #FFF !important;
 }
 
+.green-gradient{
+    // background: var(--ion-color-secondary);
+    background: linear-gradient(165deg, var(--ion-color-secondary) 0%, var(--ion-color-dark-green) 100%);
+}
+
+ion-content, ion-title, ion-toolbar { --background: transparent;}
+ion-title {
+    color: var(--ion-color-white); 
+  }
+
+ion-card{
+    --background: #FFF !important;
+    margin-bottom: 12px !important;
+
+    ion-card-header{
+        padding:16px 12px 12px;
+    }
+
+    ion-card-title{
+        font-size: 1.4rem;
+        
+    }
+
+    ion-card-content{
+        padding:12px !important;
+    }
+
+    ion-card-content.no-padding-top{
+        padding-top: 0 !important;
+    }
+}
 
 // Lists
 
@@ -34,11 +71,20 @@
         border:none;  
 
         &.selectedItem{
-            --background: var(--ion-color-warning);
+            --background: var(--ion-color-light-green);
+            
+            ion-label{
+                --color:var(--ion-color-tertiary);
+                font-weight: bold;
+            }
         }
 
         ion-label{
-            padding-left: 8px;
+            padding-left: 10px;
+        }
+
+        ion-note{
+            margin-right: 2px;
         }
     }
 
@@ -47,6 +93,14 @@
     }
 }
 
+// Slider
+
+.slider-button{
+    --color: var(--ion-color-light-tint);
+    --border-color: var(--ion-color-light-tint);
+    --background: transparent;
+    margin-top: 0;
+}
 
 // Segments
 

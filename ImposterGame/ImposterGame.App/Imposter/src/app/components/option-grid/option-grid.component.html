@@ -1,4 +1,4 @@
-<ion-grid class="option-grid">
+<ion-grid class="option-grid no-margin-bottom">
   <ion-row *ngFor="let row of rows" class="option-grid-row">
     <ion-col *ngFor="let option of row" [ngClass]="selectedOption == option ? 'selected' : ''" class="option-grid-cell">
       <button (click)="chooseOption(option)" *ngIf="showButtons">{{option}}</button>

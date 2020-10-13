@@ -1,20 +1,20 @@
-<ion-footer *ngIf="isLoaded">
-  <div *ngIf="currentGameContext && currentGameContext.currentGame" 
+<div *ngIf="isLoaded && currentGameContext && currentGameContext.currentGame" 
   color="secondary" 
-  class="game-code-footer no-padding"
-  (click)="copyCode()">
-      <h4>Your game code: {{currentGameContext.currentGame.easyCode}}</h4>
+  class="game-code-footer no-padding">
+      <!-- <h4><span>Your game code: {{currentGameContext.currentGame.easyCode}}</span></h4> -->
+      <ion-button size="small" color="tertiary" (click)="copyCode()">Your game code: {{currentGameContext.currentGame.easyCode}}</ion-button>
   </div>
 
-  <ion-toolbar *ngIf="this.currentGameContext.currentGame">
+<ion-footer no-border *ngIf="isLoaded">
+    <ion-toolbar *ngIf="this.currentGameContext.currentGame">
     <ion-buttons slot="secondary" *ngIf="helpSection">
-      <ion-button (click)="showHelp()">
+      <ion-button color="light" (click)="showHelp()">
         <ion-icon name="help-circle"></ion-icon> Tips &amp; Tricks
       </ion-button>
     </ion-buttons>
 
     <ion-buttons slot="primary">
-      <ion-button (click)="leaveGame()">
+      <ion-button color="light" (click)="leaveGame()">
         Leave Game<ion-icon name="walk"></ion-icon>
       </ion-button>
     </ion-buttons>

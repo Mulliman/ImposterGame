@@ -1,14 +1,30 @@
 .game-code-footer{
     padding:0;
     margin: 0;
-    background: var(--ion-color-secondary);
-    cursor: pointer;
+    text-align: center;
+
+    ion-button{
+        // --background: var(--ion-color-light-shade);
+        // --color: var(--ion-color-secondary);
+        margin: 0 0 12px 0;
+    }
 
     h4{
         text-align: center;
-        color: white;
-        padding:8px 0;
-        margin: 0;
+        // color: white;
+        padding:12px 0;
+        
         font-size: 0.8rem;
+
+        a{
+            
+            cursor: pointer;
+            padding:10px;
+            border-radius: 10px;
+        }
     }
+}
+
+ion-footer{
+    box-shadow: 0 0 40px rgba(0,0,0, 0.2);
 }

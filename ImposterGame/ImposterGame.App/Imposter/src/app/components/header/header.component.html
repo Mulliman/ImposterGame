@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
     <!-- <ion-buttons slot="start">
       <ion-icon name="people" slot="start"></ion-icon>
@@ -8,7 +8,7 @@
         Imposter!
       </ion-title>
 
-    <ion-title class="no-padding"  *ngIf="isLoaded && this.currentGameContext.currentGame && this.currentGameContext.currentGame.isImposter == true">
+    <ion-title  class="no-padding"  *ngIf="isLoaded && this.currentGameContext.currentGame && this.currentGameContext.currentGame.isImposter == true">
       You are the Imposter!
     </ion-title>
 
