@@ -27,8 +27,9 @@
         <ion-card>
           <div class="choose-step-1">
             <ion-card-header>
+              <ion-card-subtitle>Step 1 of 2</ion-card-subtitle>
               <ion-card-title *ngIf="!isImposter && !hasSubmitted">
-                First select who you think was the imposter?
+                Who you think was the imposter?
               </ion-card-title>
               <ion-card-title *ngIf="isImposter && !hasSubmitted">Who do you think had the worst answer?
               </ion-card-title>
@@ -66,6 +67,7 @@
       <div class="slide-inner full-width">
         <ion-card *ngIf="!selectedImposter && !hasSubmitted">
           <ion-card-header>
+            <ion-card-subtitle>Step 2 of 2</ion-card-subtitle>
             <ion-card-title>
               Please select a imposter first...
             </ion-card-title>
@@ -80,6 +82,7 @@
 
         <ion-card *ngIf="selectedImposter && !hasSubmitted">
           <ion-card-header>
+            <ion-card-subtitle>Step 2 of 2</ion-card-subtitle>
             <ion-card-title>
               You have selected {{selectedImposter.name}} as the imposter.
             </ion-card-title>

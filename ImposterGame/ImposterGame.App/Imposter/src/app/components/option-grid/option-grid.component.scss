@@ -9,13 +9,15 @@
 
     .option-grid-cell{
         text-align: center;
-        background: var(--ion-color-tablecell);
+        background: var(--ion-color-tablecell-tint);
         padding: 10px 5px;
         font-size: 12px;
 
         &.selected{
             background: var(--ion-color-secondary) !important;
             color: white;
+            font-weight: bolder;
+            text-shadow: 0 0 5px var(--ion-color-dark-green);;
         }
     }
 }
