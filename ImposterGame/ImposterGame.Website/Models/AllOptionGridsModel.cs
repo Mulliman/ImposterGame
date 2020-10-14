@@ -1,9 +1,5 @@
-﻿using ImposterGame.Game.Options;
-using ImposterGame.Model;
-using System;
+﻿using ImposterGame.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ImposterGame.Website.Models
 {

@@ -1,0 +1,35 @@
+{
+  "id": "2661ddb8-7aa6-40d1-8378-486400329ee7",
+  "name": "Inventions",
+  "options": [
+      "Antibiotics",
+      "Battery",
+      "Camera",
+      "Car",
+      "Clock",
+      "Compass",
+      "Computer",
+      "Contraceptives",
+      "Drones",
+      "Electricity",
+      "Gunpowder",
+      "Internet",
+      "Language",
+      "Matches",
+      "Paper",
+      "Plane",
+      "Radio",
+      "Refrigerator",
+      "Religion",
+      "Soap",
+      "Spectacles",
+      "Steam Engine",
+      "Telephone",
+      "TV",
+      "Wheel"
+  ],
+  "groups": [
+    "All",
+    "Educational"
+  ]
+}

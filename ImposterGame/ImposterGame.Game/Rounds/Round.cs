@@ -24,15 +24,15 @@ namespace ImposterGame.Game.Rounds
 
         public bool IsImpostersGuessCorrect => Word != null && ImpostersGuess != null && Word.Equals(ImpostersGuess, StringComparison.OrdinalIgnoreCase);
 
-        public bool WasImposterFound => AccusationStatistics != null 
-            && AccusationStatistics.SuspectedImposter != null 
+        public bool WasImposterFound => AccusationStatistics != null
+            && AccusationStatistics.SuspectedImposter != null
             && AccusationStatistics.SuspectedImposter == Imposter;
 
         public IAccusationStatistics AccusationStatistics
         {
             get
             {
-                if(_accusationStatistics != null)
+                if (_accusationStatistics != null)
                 {
                     return _accusationStatistics;
                 }

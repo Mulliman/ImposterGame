@@ -1,0 +1,30 @@
+{
+  "id": "1c6f6bc4-dd81-49b2-ae7b-3551db5cf5bf",
+  "name": "Vegetables",
+  "options": [
+    "Asparagus",
+    "Aubergine",
+    "Bean",
+    "Beetroot",
+    "Broccoli",
+    "Butternut Squash",
+    "Cabbage",
+    "Carrot",
+    "Cauliflower",
+    "Cucumber",
+    "Leek",
+    "Lettuce",
+    "Onion",
+    "Parsnip",
+    "Pea",
+    "Potato",
+    "Spinach",
+    "Sprout",
+    "Sweetcorn",
+    "Turnip"
+  ],
+  "groups": [
+    "All",
+    "Food & Drink"
+  ]
+}

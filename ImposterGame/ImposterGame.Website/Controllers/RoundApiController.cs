@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ImposterGame.Game;
+﻿using ImposterGame.Game;
 using ImposterGame.Game.Exceptions;
 using ImposterGame.Game.OptionGrids;
 using ImposterGame.Game.Players;
@@ -10,9 +6,10 @@ using ImposterGame.Game.Rounds;
 using ImposterGame.Model;
 using ImposterGame.Website.Hubs;
 using ImposterGame.Website.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ImposterGame.Website.Controllers
 {
@@ -57,7 +54,7 @@ namespace ImposterGame.Website.Controllers
 
             var grid = await _optionGridService.GetOptionGrid(gridId);
 
-            if(grid == null)
+            if (grid == null)
             {
                 throw new GridDoesNotExistException(gridId);
             }

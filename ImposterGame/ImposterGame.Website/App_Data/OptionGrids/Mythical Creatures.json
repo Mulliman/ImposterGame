@@ -1,0 +1,31 @@
+{
+  "id": "daddf388-9ace-47f6-8a0a-83ad6c05eff6",
+  "name": "Mythical Creatures",
+  "options": [
+    "Cyclops",
+    "Werewolf",
+    "Loch Ness Monster",
+    "Pegasus",
+    "Unicorn",
+    "Mermaid",
+    "Dragon",
+    "Phoenix",
+    "Sphinx",
+    "Troll",
+    "Vampire",
+    "Fairy",
+    "Elf",
+    "Abominable Snowman",
+    "Leprechaun",
+    "Poltergeist",
+    "Bigfoot",
+    "Siren",
+    "Angel",
+    "Goblin",
+    "Demon"
+  ],
+  "groups": [
+    "All",
+    "General"
+  ]
+}

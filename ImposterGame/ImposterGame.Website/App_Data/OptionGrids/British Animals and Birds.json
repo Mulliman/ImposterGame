@@ -1,0 +1,30 @@
+{
+  "id": "ada0e40e-793b-4353-8b4f-720e3aac0c51",
+  "name": "British Animals and Birds",
+  "options": [
+    "Badger",
+    "Chicken",
+    "Cow",
+    "Deer",
+    "Duck",
+    "Fox",
+    "Hare",
+    "Horse",
+    "Mole",
+    "Mouse",
+    "Otter",
+    "Owl",
+    "Pheasant",
+    "Pig",
+    "Pigeon",
+    "Pony",
+    "Rabbit",
+    "Sheep",
+    "Squirrel",
+    "Swan"
+  ],
+  "groups": [
+    "All",
+    "Animals"
+  ]
+}

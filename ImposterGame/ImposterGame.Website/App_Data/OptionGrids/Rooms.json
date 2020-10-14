@@ -1,0 +1,27 @@
+{
+  "id": "ce9df681-4002-4626-8404-6ddb5c36276e",
+  "name": "Rooms",
+  "options": [
+      "Lounge",
+      "Kitchen",
+      "Bathroom",
+      "Office",
+      "Nursery",
+      "Greenhouse",
+      "Conservatory",
+      "Dining Room",
+      "Library",
+      "Bedroom",
+      "Porch",
+      "Shed",
+      "Hallway",
+      "Attic",
+      "Basement",
+      "Garage",
+      "Pantry"
+  ],
+  "groups": [
+    "All",
+    "General"
+  ]
+}

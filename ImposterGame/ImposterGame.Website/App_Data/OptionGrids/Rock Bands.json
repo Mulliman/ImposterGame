@@ -1,0 +1,41 @@
+{
+  "id": "2ad0e564-e41f-4a82-8bb2-f326d699cb03",
+  "name": "Rock Bands",
+  "options": [
+    "Black Sabbath",
+    "Blur",
+    "Coldplay",
+    "Elbow",
+    "Evanescence",
+    "Fall Out Boy",
+    "Foo Fighters",
+    "Imagine Dragons",
+    "Kings of Leon",
+    "Kiss",
+    "KoRn",
+    "Metallica",
+    "Muse",
+    "My Chemical Romance",
+    "Nickelback",
+    "Nirvana",
+    "Oasis",
+    "Panic! At The Disco",
+    "Queen",
+    "Red Hot Chili Peppers",
+    "Snow patrol",
+    "T. Rex",
+    "The 1975",
+    "The Beatles",
+    "The Cure",
+    "The Eagles",
+    "The Killers",
+    "The Rolling Stones",
+    "The Sex Pistols",
+    "The Smiths",
+    "U2"
+  ],
+  "groups": [
+    "All",
+    "Music"
+  ]
+}

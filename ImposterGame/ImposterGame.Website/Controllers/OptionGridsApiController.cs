@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
 using ImposterGame.Game.OptionGrids;
 using ImposterGame.Website.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ImposterGame.Website.Controllers
 {
@@ -20,7 +20,7 @@ namespace ImposterGame.Website.Controllers
         public async Task<AllOptionGridsModel> GetAllGridData()
         {
             var grids = await _optionGridService.GetAllOptionGrids();
-            var groups =  await _optionGridService.GetAllOptionGridGroups();
+            var groups = await _optionGridService.GetAllOptionGridGroups();
 
             return new AllOptionGridsModel
             {

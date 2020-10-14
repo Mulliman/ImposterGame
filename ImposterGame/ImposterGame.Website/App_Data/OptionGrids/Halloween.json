@@ -1,0 +1,32 @@
+{
+  "id": "aeec03bc-4933-4e9a-8bc3-c9de9bb0ef80",
+  "name": "Halloween",
+  "options": [
+    "Blood",
+    "Bonfire",
+    "Broomstick",
+    "Candy",
+    "Cobweb",
+    "Ghost",
+    "Goblin",
+    "Graveyard",
+    "Haunted House",
+    "Horns",
+    "Mask",
+    "Mummy",
+    "Ouiji Board",
+    "Pumpkin",
+    "Skeleton",
+    "Spider",
+    "Tricks",
+    "Vampire",
+    "Witch",
+    "Wizard",
+    "Zombie"
+  ],
+  "groups": [
+    "All",
+    "General",
+    "Celebrations"
+  ]
+}

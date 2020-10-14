@@ -1,11 +1,10 @@
-﻿using ImposterGame.Model;
+﻿using ImposterGame.Game.Exceptions;
+using ImposterGame.Game.Rounds;
+using ImposterGame.Game.Scorers;
+using ImposterGame.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using ImposterGame.Game.Scorers;
-using ImposterGame.Game.Rounds;
-using ImposterGame.Game.Exceptions;
 
 namespace ImposterGame.Game
 {
@@ -124,7 +123,7 @@ namespace ImposterGame.Game
             var dict = Players.ToDictionary(p => p.Id, p => new PlayerScore(p, 0));
 
             var previousScores = PreviousRounds.SelectMany(r => r.RoundScores);
-            var currentScores =  CurrentRound?.RoundScores;
+            var currentScores = CurrentRound?.RoundScores;
 
             var allScores = CurrentRound != null ? previousScores.Concat(currentScores) : previousScores;
 

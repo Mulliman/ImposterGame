@@ -1,0 +1,34 @@
+{
+  "id": "d10b6b0a-1388-4097-8e78-949c4f116bc0",
+  "name": "Countries",
+  "options": [
+      "Brazil",
+      "Canada",
+      "China",
+      "Egypt",
+      "England",
+      "France",
+      "Germany",
+      "Greece",
+      "India",
+      "Iran",
+      "Ireland",
+      "Israel",
+      "Italy",
+      "Jamaica",
+      "Japan",
+      "Kenya",
+      "Mexico",
+      "Nigeria",
+      "Norway",
+      "Russia",
+      "Scotland",
+      "Spain",
+      "Sweden",
+      "USA"
+  ],
+  "groups": [
+    "All",
+    "Educational"
+  ]
+}

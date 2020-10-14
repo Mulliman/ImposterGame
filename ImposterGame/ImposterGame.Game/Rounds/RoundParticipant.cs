@@ -12,7 +12,7 @@ namespace ImposterGame.Game.Rounds
 
         public IPlayer Player { get; }
 
-        public bool IsImposter { get;  }
+        public bool IsImposter { get; }
 
         public string Answer { get; set; }
 

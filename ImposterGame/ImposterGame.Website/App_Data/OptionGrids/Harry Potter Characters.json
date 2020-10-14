@@ -1,19 +1,18 @@
 {
-  "id": "CA74B95F-890C-41C2-A969-86E84BC59CBD",
+  "id": "c801492c-be5f-4e0e-a81f-d7d94e25dd2c",
   "name": "Harry Potter Characters",
   "options": [
     "Harry Potter",
-    "Hermione Grainger",
+    "Hermione Granger",
     "Ron Weasley",
     "Luna Lovegood",
-    "Fred Weasley",
-    "George Weasley",
+    "Fred/George Weasley",
     "Ginny Weasley",
     "Draco Malfoy",
     "Albus Dumbledore",
-    "Serverus Snape",
+    "Severus Snape",
     "Sirius Black",
-    "Voldemort",
+    "Lord Voldemort",
     "Bellatrix Lestrange",
     "Rubeus Hagrid",
     "Dobby",
@@ -22,10 +21,14 @@
     "Minerva McGonagall",
     "Dolores Umbridge",
     "James Potter",
-    "Lily Potter"
+    "Lily Potter",
+    "Neville Longbottom",
+    "Moaning Myrtle"
   ],
   "groups": [
+    "All",
     "Books",
-    "Films"
+    "Films & TV",
+    "People"
   ]
 }

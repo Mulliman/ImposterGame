@@ -1,0 +1,30 @@
+{
+  "id": "97a5c50a-4b44-4aaf-9b38-a591289f31ac",
+  "name": "School Subjects",
+  "options": [
+      "Biology",
+      "Business Studies",
+      "Chemistry",
+      "English Lit.",
+      "Food Tech",
+      "French",
+      "Geography",
+      "History",
+      "IT",
+      "Latin",
+      "Mathematics",
+      "Media Studies",
+      "Music",
+      "PE",
+      "Philosophy",
+      "Religious Studies",
+      "Spanish",
+      "Textiles",
+      "Woodwork"
+  ],
+  "groups": [
+    "All",
+    "General",
+    "Educational"
+  ]
+}

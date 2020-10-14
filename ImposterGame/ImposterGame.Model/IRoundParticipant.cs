@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ImposterGame.Model
+﻿namespace ImposterGame.Model
 {
     public interface IRoundParticipant
     {

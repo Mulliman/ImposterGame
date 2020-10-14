@@ -1,13 +1,10 @@
 ﻿using ImposterGame.Game.OptionGrids;
 using ImposterGame.Model;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ImposterGame.OptionGrids.FileBased
@@ -29,7 +26,7 @@ namespace ImposterGame.OptionGrids.FileBased
         {
             var files = Directory.GetFiles(rootFolderPath, "*", SearchOption.AllDirectories);
 
-            foreach(var fileName in files)
+            foreach (var fileName in files)
             {
                 using (StreamReader file = File.OpenText(fileName))
                 {
@@ -47,11 +44,11 @@ namespace ImposterGame.OptionGrids.FileBased
 
             var gridNameMap = new Dictionary<string, List<OptionGrid>>();
 
-            foreach(var grid in AllOptionGrids)
+            foreach (var grid in AllOptionGrids)
             {
-                foreach(var group in grid.Value.Groups)
+                foreach (var group in grid.Value.Groups)
                 {
-                    if(!gridNameMap.ContainsKey(group))
+                    if (!gridNameMap.ContainsKey(group))
                     {
                         gridNameMap[group] = new List<OptionGrid>();
                     }
@@ -89,7 +86,7 @@ namespace ImposterGame.OptionGrids.FileBased
 
         public async Task<IOptionGridGroup> GetOptionGridGroup(Guid id)
         {
-            if(!AllOptionGridGroups.ContainsKey(id))
+            if (!AllOptionGridGroups.ContainsKey(id))
             {
                 return null;
             }

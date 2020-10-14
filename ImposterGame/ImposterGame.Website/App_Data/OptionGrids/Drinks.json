@@ -1,0 +1,31 @@
+{
+  "id": "58b2eac9-2453-47a3-a9db-f08df5db1d80",
+  "name": "Drinks",
+  "options": [
+    "Coffee",
+    "Wine",
+    "Hot Chocolate",
+    "Smoothie",
+    "Tea",
+    "Beer",
+    "Milkshake",
+    "Orange Juice",
+    "Lemonade",
+    "Milk",
+    "Cola",
+    "Vodka",
+    "Water",
+    "Mohito",
+    "Champagne",
+    "Prosecco",
+    "Apple Juice",
+    "Butterbeer",
+    "J20",
+    "Ribena",
+    "Pimms"
+  ],
+  "groups": [
+    "All",
+    "Food & Drink"
+  ]
+}

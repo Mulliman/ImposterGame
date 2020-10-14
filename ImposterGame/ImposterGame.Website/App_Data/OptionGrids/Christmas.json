@@ -1,0 +1,32 @@
+{
+  "id": "4936a9bf-5031-4bd8-b332-5afa4c71af99",
+  "name": "Christmas",
+  "options": [
+    "Baubles",
+    "Chestnuts",
+    "Holly",
+    "Tinsel",
+    "Presents",
+    "Turkey",
+    "Christmas Pudding",
+    "Eggnog",
+    "Mulled Wine",
+    "Snowman",
+    "Father Christmas",
+    "Elves",
+    "Jesus",
+    "Carols",
+    "Reindeer",
+    "Sleigh",
+    "Jingle Bells",
+    "Mince Pies",
+    "Nativity",
+    "Stocking",
+    "Wrapping Paper"
+  ],
+  "groups": [
+    "All",
+    "General",
+    "Celebrations"
+  ]
+}

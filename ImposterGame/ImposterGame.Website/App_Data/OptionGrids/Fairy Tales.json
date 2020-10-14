@@ -1,0 +1,29 @@
+{
+  "id": "c0f986d8-66aa-43a4-b57f-0d9e5b200f95",
+  "name": "Fairy Tales",
+  "options": [
+    "Cinderella",
+    "Frog Prince",
+    "Gingerbread Man",
+    "Goldilocks & The 3 Bears",
+    "Hansel & Gretel",
+    "Jack and the Beanstalk",
+    "Princess and the Pea",
+    "Puss In Boots",
+    "Rapunzel",
+    "Red Riding Hood",
+    "Rumpelstiltskin",
+    "Sleeping Beauty",
+    "Snow Queen",
+    "The Boy Who Cried Wolf",
+    "The Hare & Tortoise",
+    "Three Little Pigs",
+    "Thumbelina",
+    "Ugly Duckling"
+  ],
+  "groups": [
+    "All",
+    "Books",
+    "Childrens"
+  ]
+}

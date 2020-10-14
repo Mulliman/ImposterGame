@@ -1,8 +1,6 @@
 ﻿using ImposterGame.Model;
 using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ImposterGame.Game
 {
@@ -66,7 +64,7 @@ namespace ImposterGame.Game
                 game.CancelCurrentRound();
             }
 
-            if(game.Host.Id == player.Id)
+            if (game.Host.Id == player.Id)
             {
                 DestroyGame(game);
 

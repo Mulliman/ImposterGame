@@ -1,0 +1,33 @@
+{
+  "id": "67cde340-ccc4-4031-9af3-a6082b487282",
+  "name": "Harry Potter Objects",
+  "options": [
+    "Wand",
+    "Deluminator",
+    "Sword",
+    "Parchment",
+    "Marauders Map",
+    "Wizards Chess",
+    "Philosophers Stone",
+    "Sorting Hat",
+    "Broomstick",
+    "Quill",
+    "Cauldron",
+    "Hogwarts Express",
+    "Howler",
+    "Portrait",
+    "Knight Bus",
+    "Snitch",
+    "Chocolate Frog",
+    "Diary",
+    "Glasses",
+    "Flying Car",
+    "Hogwarts Castle",
+    "Cloak"
+  ],
+  "groups": [
+    "All",
+    "Books",
+    "Films & TV"
+  ]
+}

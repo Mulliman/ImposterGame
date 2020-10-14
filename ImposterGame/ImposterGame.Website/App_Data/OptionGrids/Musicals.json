@@ -1,0 +1,35 @@
+{
+  "id": "49262e09-4498-4223-bbe0-8f85f413a7ae",
+  "name": "Musicals",
+  "options": [
+    "Cabaret",
+    "Cats",
+    "Chicago",
+    "Chitty Chitty Bang Bang",
+    "Grease",
+    "Hairspray",
+    "Hamilton",
+    "Joseph and the Technicolour Dreamcoat",
+    "Les Miserables",
+    "Little Shop of Horrors",
+    "Mamma Mia",
+    "Matilda",
+    "Oliver",
+    "Phantom of the Opera",
+    "Sister Act",
+    "Sweeny Todd",
+    "The Book of Mormon",
+    "The Lion King",
+    "The Sound of Music",
+    "Thriller",
+    "Waitress",
+    "We Will Rock You",
+    "West Side Story",
+    "Wicked"
+  ],
+  "groups": [
+    "All",
+    "General",
+    "Films & TV"
+  ]
+}

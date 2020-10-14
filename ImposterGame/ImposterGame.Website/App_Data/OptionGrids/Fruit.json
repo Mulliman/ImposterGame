@@ -1,0 +1,30 @@
+{
+  "id": "b66930a0-f00d-4587-928f-236235437809",
+  "name": "Fruit",
+  "options": [
+    "Apricot",
+    "Avocado",
+    "Banana",
+    "Blueberry",
+    "Cherry",
+    "Grape",
+    "Grapefruit",
+    "Kiwi",
+    "Lemon",
+    "Lime",
+    "Melon",
+    "Orange",
+    "Peach",
+    "Pear",
+    "Pineapple",
+    "Plum",
+    "Pomegranate",
+    "Raspberry",
+    "Strawberry",
+    "Tomato"
+  ],
+  "groups": [
+    "All",
+    "Food & Drink"
+  ]
+}

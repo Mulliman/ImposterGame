@@ -1,0 +1,41 @@
+{
+  "id": "25e39030-d81b-40bf-99b8-b0bd1383effc",
+  "name": "Pop Stars",
+  "options": [
+    "Amy Winehouse",
+    "Aretha Franklin",
+    "Ariana Grande",
+    "Avril Lavigne",
+    "Avril Lavigne",
+    "Beyonce",
+    "Britney Spears",
+    "Celine Dion",
+    "Cher",
+    "Christina Aguilera",
+    "Diana Ross",
+    "Janet Jackson",
+    "Jennifer Lopez",
+    "Kate Bush",
+    "Katy Perry",
+    "Kylie Minogue",
+    "Lady Gaga",
+    "Lana Del Rey",
+    "Madonna",
+    "Mariah Carey",
+    "Missy Elliott",
+    "Mylie Cyrus",
+    "Nicki Minaj",
+    "Paloma Faith",
+    "Pink",
+    "Rihanna",
+    "Shakira",
+    "Shirley Bassey",
+    "Sia",
+    "Taylor Swift",
+    "Whitney Houston"
+  ],
+  "groups": [
+    "All",
+    "Music"
+  ]
+}

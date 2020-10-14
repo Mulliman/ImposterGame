@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using ImposterGame.Game;
+﻿using ImposterGame.Game;
 using ImposterGame.Game.Exceptions;
 using ImposterGame.Game.Players;
 using ImposterGame.Model;
 using ImposterGame.Website.Controllers.Exceptions;
 using ImposterGame.Website.Hubs;
 using ImposterGame.Website.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Threading.Tasks;
 
 namespace ImposterGame.Website.Controllers
 {
@@ -105,7 +99,7 @@ namespace ImposterGame.Website.Controllers
             {
                 await _gameNotifier.SendGameCancelled(gameId);
             }
-            else if(mustCancelRound)
+            else if (mustCancelRound)
             {
                 await _gameNotifier.SendRoundCancelled(updatedGame);
             }

@@ -1,0 +1,26 @@
+{
+  "id": "0c6b476c-58cf-4d06-a8d8-0f7999f8cfb9",
+  "name": "Colours",
+  "options": [
+    "Red",
+    "Yellow",
+    "Blue",
+    "Green",
+    "Orange",
+    "Purple",
+    "Brown",
+    "Pink",
+    "Gold",
+    "Silver",
+    "Grey",
+    "White",
+    "Black",
+    "Maroon",
+    "Beige",
+    "Navy"
+  ],
+  "groups": [
+    "All",
+    "General"
+  ]
+}

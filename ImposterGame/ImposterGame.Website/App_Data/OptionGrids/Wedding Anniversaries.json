@@ -1,0 +1,31 @@
+{
+  "id": "562e46f3-7ada-4723-bf32-84fa5b28cecb",
+  "name": "Wedding Anniversaries",
+  "options": [
+    "Emerald",
+    "Wood",
+    "Bronze",
+    "Crystal",
+    "Pearl",
+    "China",
+    "Gold",
+    "Flowers",
+    "Coral",
+    "Paper",
+    "Ruby",
+    "Silk",
+    "Tin",
+    "Cotton",
+    "Diamond",
+    "Leather",
+    "Wool",
+    "Lace",
+    "Sapphire",
+    "Platinum"
+  ],
+  "groups": [
+    "All",
+    "General",
+    "Celebrations"
+  ]
+}

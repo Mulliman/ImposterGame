@@ -1,5 +1,5 @@
-﻿using System;
-using ImposterGame.Model;
+﻿using ImposterGame.Model;
+using System;
 
 namespace ImposterGame.Game
 {

@@ -1,0 +1,42 @@
+{
+  "id": "9e6933ff-35fa-4aa4-942b-35d487760ac9",
+  "name": "Actors",
+  "options": [
+    "Arnold Schwarzenegger",
+    "Benedict Cumberbatch",
+    "Brad Pitt",
+    "Bruce Willis",
+    "Colin Firth",
+    "Daniel Craig",
+    "Daniel Radcliffe",
+    "Dwayne 'The Rock' Johnson",
+    "Eddie Murphy",
+    "Ewan McGreggor",
+    "George Clooney",
+    "Harrison Ford",
+    "Heath Ledger",
+    "Hugh Grant",
+    "Hugh Jackman",
+    "Idris Elba",
+    "Jackie Chan",
+    "Joaquin Phoenix",
+    "Johnny Depp",
+    "Leonardo DiCaprio",
+    "Matt Damon",
+    "Mike Myers",
+    "Orlando Bloom",
+    "Patrick Stewart",
+    "Ryan Reynolds",
+    "Steve Carrell",
+    "Sylvester Stallone",
+    "Tom Cruise",
+    "Tom Hanks",
+    "Tom Hardy",
+    "Will Smith"
+  ],
+  "groups": [
+    "All",
+    "People",
+    "Films & TV"
+  ]
+}

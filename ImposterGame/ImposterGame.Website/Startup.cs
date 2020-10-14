@@ -1,24 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using ImposterGame.Game;
 using ImposterGame.Game.OptionGrids;
 using ImposterGame.Game.Players;
-using ImposterGame.OptionGrids;
 using ImposterGame.Website.Controllers.Exceptions;
 using ImposterGame.Website.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System.IO;
 
 namespace ImposterGame.Website
 {
@@ -54,7 +46,7 @@ namespace ImposterGame.Website
                 })
             );
             services.AddMemoryCache();
-            
+
             services.AddTransient<IGameNotifier, GameNotifier>();
             var path = Path.Combine(_env.ContentRootPath, "App_Data/OptionGrids");
             services.AddSingleton<IOptionGridService>(new OptionGridService(new[] { new ImposterGame.OptionGrids.FileBased.FileBasedGridProvider(path) }));
@@ -65,7 +57,7 @@ namespace ImposterGame.Website
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Imposter API", Version = "v1" });
             });
-            
+
             services.AddSignalR();
         }
 
@@ -102,7 +94,7 @@ namespace ImposterGame.Website
                 endpoints.MapHub<GameHub>("/hubs/gamehub");
             });
 
-            
+
 
             //app.UseEndpoints(endpoints =>
             //{

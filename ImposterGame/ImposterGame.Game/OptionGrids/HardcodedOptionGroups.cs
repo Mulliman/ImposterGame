@@ -14,11 +14,11 @@ namespace ImposterGame.Game.Options
         {
             AllOptionGrids.Add(grid.Id, grid);
 
-            foreach(var group in groups)
+            foreach (var group in groups)
             {
                 var hasOptionGroup = AllOptionGridGroups.ContainsKey(group.Id);
 
-                if(!hasOptionGroup)
+                if (!hasOptionGroup)
                 {
                     AllOptionGridGroups.Add(group.Id, group);
                 }

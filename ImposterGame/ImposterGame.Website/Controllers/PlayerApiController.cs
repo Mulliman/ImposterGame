@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ImposterGame.Game.Players;
+﻿using ImposterGame.Game.Players;
 using ImposterGame.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ImposterGame.Website.Controllers
 {

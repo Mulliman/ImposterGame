@@ -1,5 +1,4 @@
-﻿using ImposterGame.Game.Players;
-using ImposterGame.Model;
+﻿using ImposterGame.Model;
 using System;
 
 namespace ImposterGame.Game.Scorers
