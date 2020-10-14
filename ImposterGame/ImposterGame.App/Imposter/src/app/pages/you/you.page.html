@@ -1,37 +1,30 @@
 <app-header></app-header>
 
-<ion-content fullscreen scroll-y="false" class="ion-padding">
+<ion-content fullscreen scroll-y="false" class="ion-padding green-gradient">
 
   <ion-row class="full-page-row ion-justify-content-center ion-align-items-center">
 
-    <div class="ion-text-center" *ngIf="!gameContext || (gameContext && !gameContext.currentGame)">
-      <ion-text>
-        <h1>Who are you?</h1>
-      </ion-text>
+    <ion-card class="no-margin-top" *ngIf="!gameContext || (gameContext && !gameContext.currentGame)">
+      <ion-card-header>
+        <ion-card-title text-center>Who are you?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="no-padding-top">
+        <form [formGroup]="form" class="margin-bottom imposter-form">
+          <ion-item no-margin no-padding>
+            <ion-label color="primary" position="floating">Name</ion-label>
+            <ion-input formControlName="name" type="text"></ion-input>
+          </ion-item>
+          <app-error-message [control]="'name'"></app-error-message>
+        </form>
 
-      <form [formGroup]="form">
-        <ion-item>
-          <ion-label color="primary" position="floating">Name</ion-label>
-          <ion-input formControlName="name" type="text"></ion-input>
-        </ion-item>
-        <app-error-message [control]="'name'"></app-error-message>
-      </form>
-    </div>
-
-    <!-- <div class="ion-text-center" *ngIf="gameContext.currentGame">
-      <ion-text>
-        <h1>Hi {{playerService.currentPlayer.name}}</h1>
-        <h3>If you want to change your name, you need to leave the current game.</h3>
-      </ion-text>
-
-      <ion-button expand="block" (click)="leaveGame()">Leave Game</ion-button>
-    </div> -->
-
+        <ion-button *ngIf="!gameContext || (gameContext && !gameContext.currentGame)" [disabled]="!form.valid" expand="block" (click)="saveName()">Start!</ion-button>
+      </ion-card-content>
+    </ion-card>
   </ion-row>
 
 </ion-content>
 
 <ion-footer>
-  <ion-button *ngIf="!gameContext || (gameContext && gameContext.currentGame)" expand="full" size="large" (click)="goToNewGame()">Start!</ion-button>
-  <ion-button *ngIf="!gameContext || (gameContext && !gameContext.currentGame)" [disabled]="!form.valid" expand="full" size="large" (click)="saveName()">Start!</ion-button>
+  <!-- <ion-button *ngIf="!gameContext || (gameContext && gameContext.currentGame)" expand="full" size="large" (click)="goToNewGame()">Start!</ion-button> -->
+  
 </ion-footer>

@@ -8,16 +8,28 @@
     width: 100%;
 }
 
+.margin-bottom{
+    margin-bottom: 12px;
+}
+
 .no-margin{
     margin: 0 !important;
 }
 
 .no-margin-bottom{
-    margin: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.no-margin-top{
+    margin-top: 0 !important;
 }
 
 .no-padding{
     padding: 0 !important;
+}
+
+.small-margin-top{
+    margin-top: 8px !important;
 }
 
 
@@ -29,7 +41,7 @@
 
 .green-gradient{
     // background: var(--ion-color-secondary);
-    background: linear-gradient(165deg, var(--ion-color-dark) 0%, var(--ion-color-dark-green) 100%);
+    background: linear-gradient(165deg, var(--ion-color-dark) 0%, var(--ion-color-dark-green) 100%) !important;
 }
 
 ion-content, ion-title, ion-toolbar { --background: transparent;}
@@ -57,6 +69,33 @@ ion-card{
     ion-card-content.no-padding-top{
         padding-top: 0 !important;
     }
+
+    ion-card-content.single-paragraph-and-button{
+        p{
+            margin-bottom: 12px !important;
+        }
+    }
+
+    ion-card-content.multi-paragraph{
+        p{
+            margin-bottom: 12px;
+        }
+
+        p:last-child {
+          margin-bottom: 2px;
+        }
+    }
+}
+
+.fix-scroll-offset{
+    padding-bottom: 50px;
+}
+
+// Forms
+
+form.imposter-form{
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 // Lists

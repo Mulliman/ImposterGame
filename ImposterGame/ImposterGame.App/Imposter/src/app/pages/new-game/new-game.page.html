@@ -6,14 +6,13 @@
 
     <div class="ion-text-center">
 
-      <ion-card>
+      <ion-card class="small-margin-top">
         <ion-card-header>
           <ion-card-title>Host Game</ion-card-title>
         </ion-card-header>
 
-        <ion-card-content>
-          <p>If you host a game you will be be in charge of setting up each new round. You can let others join your game
-            by sharing the code that is generated when your create a new game.</p>
+        <ion-card-content  class="no-padding-top single-paragraph-and-button">
+          <p>The host chooses grids and coordinate when a round starts.</p>
 
           <ion-button (click)="hostGame()" expand="block">Host Game</ion-button>
         </ion-card-content>
@@ -25,10 +24,10 @@
           <ion-card-title>Join Game</ion-card-title>
         </ion-card-header>
 
-        <ion-card-content>
-          <p>To join an existing game, ask your host for the 5 digit code on their screen.</p>
+        <ion-card-content  class="no-padding-top">
+          <p>Ask your host for the 5 digit game code.</p>
 
-          <form [formGroup]="form">
+          <form [formGroup]="form" class="margin-bottom imposter-form">
             <ion-item>
               <ion-label color="primary" position="floating">Game Code</ion-label>
               <ion-input formControlName="gameCode" type="text"></ion-input>
