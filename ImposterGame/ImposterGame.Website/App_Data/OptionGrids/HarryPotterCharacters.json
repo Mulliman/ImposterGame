@@ -1,0 +1,31 @@
+{
+  "id": "CA74B95F-890C-41C2-A969-86E84BC59CBD",
+  "name": "Harry Potter Characters",
+  "options": [
+    "Harry Potter",
+    "Hermione Grainger",
+    "Ron Weasley",
+    "Luna Lovegood",
+    "Fred Weasley",
+    "George Weasley",
+    "Ginny Weasley",
+    "Draco Malfoy",
+    "Albus Dumbledore",
+    "Serverus Snape",
+    "Sirius Black",
+    "Voldemort",
+    "Bellatrix Lestrange",
+    "Rubeus Hagrid",
+    "Dobby",
+    "Remus Lupin",
+    "Peter Pettigrew",
+    "Minerva McGonagall",
+    "Dolores Umbridge",
+    "James Potter",
+    "Lily Potter"
+  ],
+  "groups": [
+    "Books",
+    "Films"
+  ]
+}

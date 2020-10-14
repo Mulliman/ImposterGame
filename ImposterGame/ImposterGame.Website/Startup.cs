@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ImposterGame.Game;
@@ -23,9 +24,12 @@ namespace ImposterGame.Website
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -52,7 +56,8 @@ namespace ImposterGame.Website
             services.AddMemoryCache();
             
             services.AddTransient<IGameNotifier, GameNotifier>();
-            services.AddSingleton<IOptionGridService>(new OptionGridService(new[] { new HardcodedGridProvider() }));
+            var path = Path.Combine(_env.ContentRootPath, "App_Data/OptionGrids");
+            services.AddSingleton<IOptionGridService>(new OptionGridService(new[] { new ImposterGame.OptionGrids.FileBased.FileBasedGridProvider(path) }));
             services.AddTransient<IPlayerService, InMemoryPlayerService>();
             services.AddTransient<IGameService, InMemoryGameService>();
 

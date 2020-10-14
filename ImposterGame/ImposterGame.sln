@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImposterGame.Website", "ImposterGame.Website\ImposterGame.Website.csproj", "{6568F3B7-6062-4605-826F-21A55989D4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.Model", "ImposterGame.Model\ImposterGame.Model.csproj", "{8745AB9D-C3BE-491B-B6FB-97730B91ACA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImposterGame.Model", "ImposterGame.Model\ImposterGame.Model.csproj", "{8745AB9D-C3BE-491B-B6FB-97730B91ACA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.Game", "ImposterGame.Game\ImposterGame.Game.csproj", "{874A91DB-3601-4142-9687-5976183D74C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImposterGame.Game", "ImposterGame.Game\ImposterGame.Game.csproj", "{874A91DB-3601-4142-9687-5976183D74C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.OptionGrids", "ImposterGame.OptionGrids\ImposterGame.OptionGrids.csproj", "{65F4AD93-7232-4023-A7D9-58AD15E1F80B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImposterGame.OptionGrids", "ImposterGame.OptionGrids\ImposterGame.OptionGrids.csproj", "{65F4AD93-7232-4023-A7D9-58AD15E1F80B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.OptionGrids.FileBased", "ImposterGame.OptionGrids.FileBased\ImposterGame.OptionGrids.FileBased.csproj", "{F8D83218-31DE-43FA-A687-5C7733AE3FFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{65F4AD93-7232-4023-A7D9-58AD15E1F80B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65F4AD93-7232-4023-A7D9-58AD15E1F80B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65F4AD93-7232-4023-A7D9-58AD15E1F80B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D83218-31DE-43FA-A687-5C7733AE3FFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D83218-31DE-43FA-A687-5C7733AE3FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D83218-31DE-43FA-A687-5C7733AE3FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D83218-31DE-43FA-A687-5C7733AE3FFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
