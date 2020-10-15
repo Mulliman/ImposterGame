@@ -1,0 +1,31 @@
+{
+  "id": "136336A9-741A-408C-BDAC-59C62A49CA8E",
+  "name": "Film Genres",
+  "options": [
+    "Horror",
+    "Action",
+    "Thriller",
+    "Sci-Fi",
+    "Romantic Comedy",
+    "Western",
+    "Comedy",
+    "Christmas",
+    "Gangster",
+    "Foreign Language",
+    "War",
+    "Documentary",
+    "Musical",
+    "Animation",
+    "Zombie",
+    "Sport",
+    "Crime",
+    "Period Drama",
+    "Fantasy",
+    "Silent",
+    "Superhero"
+      ],
+  "groups": [
+    "All",
+    "Films & TV"
+      ]
+}

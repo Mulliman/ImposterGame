@@ -1,0 +1,39 @@
+{
+  "id": "980B32AF-8E15-4287-B58C-305B354D70DE",
+  "name": "Phobias",
+  "options": [
+    "Ghosts",
+    "Spiders",
+    "Monsters",
+    "Rats",
+    "Bats",
+    "Snakes",
+    "Germs",
+    "Clowns",
+    "Needles",
+    "Dogs",
+    "Birds",
+    "Insects",
+    "Children",
+    "Roller Coasters",
+    "Deep Water",
+    "Heights",
+    "Eels",
+    "Dark",
+    "13",
+    "Flying",
+    "Small Spaces",
+    "Blood",
+    "Vomiting",
+    "Strangers",
+    "Fire",
+    "Commitment",
+    "Public Speaking",
+    "Thunderstorms",
+    "Holes"
+      ],
+  "groups": [
+    "All",
+    "General"
+      ]
+}

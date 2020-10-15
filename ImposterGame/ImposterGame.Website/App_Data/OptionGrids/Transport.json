@@ -1,0 +1,42 @@
+{
+  "id": "7B052614-C666-4ED6-BCFF-7288D5CF4243",
+  "name": "Transport",
+  "options": [
+    "Aeroplane",
+    "Car",
+    "Tank",
+    "Helicoptor",
+    "Cruise Ship",
+    "Hovercraft",
+    "Motorbike",
+    "Bus",
+    "Segway",
+    "Tram",
+    "Jet Ski",
+    "Hot Air Balloon",
+    "Train",
+    "Spaceship",
+    "Magic Carpet",
+    "Broomstick",
+    "Bicycle",
+    "Unicycle",
+    "Go Kart",
+    "Wheelbarrow",
+    "Boat",
+    "Scooter",
+    "Skateboard",
+    "Rollerskates",
+    "Kayak",
+    "Paraglider",
+    "Ferry",
+    "Monotrail",
+    "Carriage",
+    "Tractor",
+    "Caravan",
+    "Horse"
+      ],
+  "groups": [
+    "All",
+    "General"
+      ]
+}

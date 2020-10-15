@@ -1,0 +1,41 @@
+{
+  "id": "71EAB893-7520-4DD1-9B8F-CC3FFFBC65D9",
+  "name": "Zoo",
+  "options": [
+    "Elephant",
+    "Giraffe",
+    "Koala",
+    "Tiger",
+    "Lion",
+    "Leopard",
+    "Meerkat",
+    "Buffalo",
+    "Ostrich",
+    "Eagle",
+    "Parrot",
+    "Scorpion",
+    "Alligator",
+    "Cobra",
+    "Zebra",
+    "Gorilla",
+    "Chimpanzee",
+    "Lemur",
+    "Brown Bear",
+    "Rhino",
+    "Cheetah",
+    "Flamingo",
+    "Hyena",
+    "Warthog",
+    "Camel",
+    "Penguin",
+    "Red Panda",
+    "Capybara",
+    "Sloth",
+    "Wallaby",
+    "Komodo Dragon"
+      ],
+  "groups": [
+    "All",
+    "Animals"
+      ]
+}

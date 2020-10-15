@@ -1,0 +1,32 @@
+{
+  "id": "B90917E6-AE25-4400-B67A-3779EEF75C81",
+  "name": "Celebrations",
+  "options": [
+    "Christmas Day",
+    "Father's Day",
+    "St Patrick's Day",
+    "Easter",
+    "St George's Day",
+    "April Fool's Day",
+    "Boxing Day",
+    "Valentine's Day",
+    "Pancake Day",
+    "Bonfire Night",
+    "Mother's Day",
+    "New Year's Eve",
+    "Ramadan",
+    "Halloween",
+    "Birthday",
+    "Steak and Blowjob Day",
+    "Lent",
+    "Remembrance Day",
+    "Chinese New Year",
+    "Hanukkah",
+    "Talk Like a Pirate Day"
+      ],
+  "groups": [
+    "All",
+    "General",
+    "Celebrations"
+      ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "9AFBACF6-2105-4F42-BAFB-23177E3B3A96",
+  "name": "Geography",
+  "options": [
+    "Lake",
+    "Sea",
+    "Valley",
+    "Mountain",
+    "River",
+    "Desert",
+    "Forest",
+    "Jungle",
+    "Island",
+    "Glacier",
+    "Waterfall",
+    "Volcano",
+    "Cave",
+    "Arctic",
+    "Swamp",
+    "Rock",
+    "Coast",
+    "Pond",
+    "Rapids",
+    "Beach"
+      ],
+  "groups": [
+    "All",
+    "Educational"
+      ]
+}
