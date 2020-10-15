@@ -28,6 +28,11 @@
     padding: 0 !important;
 }
 
+.no-padding-bottom{
+    padding-bottom: 0 !important;
+    --padding-bottom: 0 !important;
+}
+
 .small-margin-top{
     margin-top: 8px !important;
 }
@@ -133,7 +138,27 @@ form.imposter-form{
     }
 }
 
+.split-section{
+    display: flex;
+}
+
+.scroll-section{
+
+}
+
+.fixed-section{
+
+}
+
 // Slider
+
+.full-height-slides{
+    height:100%;
+}
+
+.full-height-slides-with-game-code{
+    height:95%;
+}
 
 .slider-button{
     --color: var(--ion-color-light-tint);

@@ -17,6 +17,7 @@ import { IPlayer } from 'src/server';
 import { GameContext } from '../services/gamecontext.service';
 import { Game } from '../model/Game';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { GameCodeComponent } from './game-code/game-code.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
     HelpModalComponent,
     PlayerListComponent,
     ScoreboardComponent,
+    GameCodeComponent
   ],
   imports: [
     IonicModule.forRoot(), 
@@ -46,6 +48,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
       HelpModalComponent,
       PlayerListComponent,
       ScoreboardComponent,
+      GameCodeComponent
     ],
     entryComponents: [HelpModalComponent]
 })

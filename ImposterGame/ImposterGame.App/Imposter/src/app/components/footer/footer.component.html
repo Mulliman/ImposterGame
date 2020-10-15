@@ -1,9 +1,4 @@
-<div *ngIf="isLoaded && currentGameContext && currentGameContext.currentGame" 
-  color="secondary" 
-  class="game-code-footer no-padding">
-      <!-- <h4><span>Your game code: {{currentGameContext.currentGame.easyCode}}</span></h4> -->
-      <ion-button size="small" color="tertiary" (click)="copyCode()">Your game code: {{currentGameContext.currentGame.easyCode}}</ion-button>
-  </div>
+
 
 <ion-footer no-border *ngIf="isLoaded">
     <ion-toolbar *ngIf="this.currentGameContext.currentGame">

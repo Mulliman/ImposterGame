@@ -97,20 +97,4 @@ export class FooterComponent extends BaseGameComponent {
     });
     return await modal.present();
   }
-
-  copyCode() {
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = this.currentGameContext.currentGame.easyCode;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
-
-    this.uiService.successToast("Game code copied to clipboard.");
-  }
 }

@@ -13,7 +13,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { BASE_PATH, PlayerApiService, GameApiService, OptionGridsApiService, RoundApiService } from 'src/server';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Animation, NavOptions } from '@ionic/core';
+import { Animation, NavOptions,IonicAnimation } from '@ionic/core';
+import { createAnimation } from '@ionic/core';
+import { TransitionOptions, getIonPageElement } from '@ionic/core/dist/collection/utils/transition';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,3 +43,4 @@ import { Animation, NavOptions } from '@ionic/core';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
