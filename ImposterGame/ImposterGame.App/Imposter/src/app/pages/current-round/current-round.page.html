@@ -1,22 +1,30 @@
 <app-header></app-header>
 
-<ion-content padding fullscreen scroll-y="false" color="light" id="pageContent">
-  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
+<ion-content padding fullscreen scroll-y="false" class="green-gradient" id="pageContent">
+  <ion-slides class="full-height-slides-with-game-code" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <app-player-answer-list 
-        *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.currentRound" 
-        [participants]="gameContext.currentGame.currentRound.participants" 
-        class="full-width">
-      </app-player-answer-list>
+        <ion-card *ngIf="gameContext" class="no-margin-top">
+          <ion-card-header class="no-padding-bottom">
+            <ion-card-subtitle>Answers</ion-card-subtitle>
+          </ion-card-header>
 
-        <ion-button fill="outline" size="small" (click)="goToSlide(2)">
+          <ion-card-content class="no-padding-top">
+            <app-player-answer-list 
+              *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.currentRound" 
+              [participants]="gameContext.currentGame.currentRound.participants" 
+              class="full-width">
+            </app-player-answer-list>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button fill="outline" class="slider-button" size="small" (click)="goToSlide(2)">
           <ion-icon slot="start" name="arrow-round-back"></ion-icon>
           Your Answer
         </ion-button>
 
-        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+        <ion-button fill="outline" class="slider-button" size="small" (click)="goToSlide(1)">
           <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
           Option Grid
         </ion-button>
@@ -25,18 +33,26 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <app-option-grid *ngIf="currentRound" [options]="currentRound.allOptions"
-          [selectedOption]="isImposter ? null : currentRound.word" class="full-width">
-        </app-option-grid>
+        <ion-card *ngIf="gameContext" class="no-margin-top">
+          <ion-card-header class="no-padding-bottom">
+            <ion-card-subtitle>Option Grid</ion-card-subtitle>
+          </ion-card-header>
 
-        <ion-button expand="block" (click)="goToSlide(2)" *ngIf="!yourAnswer">Submit your answer</ion-button>
+          <ion-card-content class="no-padding-top">
+            <app-option-grid *ngIf="currentRound" [options]="currentRound.allOptions"
+              [selectedOption]="isImposter ? null : currentRound.word" class="full-width">
+            </app-option-grid>
 
-        <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+            <!-- <ion-button expand="block" (click)="goToSlide(2)" *ngIf="!yourAnswer">Submit your answer</ion-button> -->
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button fill="outline" class="slider-button" size="small" (click)="goToSlide(0)">
           <ion-icon slot="start" name="arrow-round-back"></ion-icon>
           Other Answers
         </ion-button>
 
-        <ion-button fill="outline" size="small" (click)="goToSlide(2)">
+        <ion-button fill="outline" class="slider-button" size="small" (click)="goToSlide(2)">
           <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
           Your Answer
         </ion-button>
@@ -45,8 +61,7 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-
-        <ion-card class="white-background" *ngIf="!yourAnswer">
+        <ion-card class="white-background" *ngIf="!yourAnswer" class="no-margin-top">
           <ion-card-header>
             <ion-card-title>Time to answer</ion-card-title>
           </ion-card-header>
@@ -54,7 +69,7 @@
           <ion-card-content>
             <p>When you are ready, submit (and read out) one word to prove you are not the imposter.</p>
 
-            <form [formGroup]="form" class="ion-padding-bottom">
+            <form [formGroup]="form" class="ion-padding-bottom imposter-form">
               <ion-item class="ion-no-padding">
                 <ion-label color="primary" position="floating">Your answer</ion-label>
                 <ion-input formControlName="answer" type="text"></ion-input>
@@ -79,12 +94,12 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-button fill="outline" size="small" (click)="goToSlide(1)">
+        <ion-button fill="outline" class="slider-button" size="small" (click)="goToSlide(1)">
           <ion-icon slot="start" name="arrow-round-back"></ion-icon>
           Option Grid
         </ion-button>
 
-        <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+        <ion-button fill="outline" class="slider-button" size="small" (click)="goToSlide(0)">
           <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
           Other Answers
         </ion-button>
@@ -92,6 +107,8 @@
     </ion-slide>
 
   </ion-slides>
+
+  <app-game-code></app-game-code>
 </ion-content>
 
 <app-footer [helpSection]="'current-round'"></app-footer>

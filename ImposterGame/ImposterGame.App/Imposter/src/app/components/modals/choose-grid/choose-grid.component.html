@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding fullscreen scroll-y="false">
-  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" pager="true" *ngIf="showSlides">
+<ion-content padding fullscreen>
+  <ion-slides slidesPerView="1" [options]="slideOpts" pager="true" *ngIf="showSlides" class="pager-top choose-grid-slides">
 
     <ion-slide *ngFor="let group of gridGroups">
       <div class="slide-inner">

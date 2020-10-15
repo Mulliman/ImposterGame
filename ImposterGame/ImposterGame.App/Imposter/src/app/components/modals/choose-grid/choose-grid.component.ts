@@ -17,8 +17,9 @@ export class ChooseGridComponent implements OnInit {
     speed: 400,
     slidesPerView: 1,
     pager: true,
+    loop: true,
+    autoHeight: true
   };
-
 
   constructor(private gridService: OptionGridService,
     private modalController: ModalController) {

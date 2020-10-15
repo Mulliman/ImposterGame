@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<ion-content fullscreen scroll-y="false" id="pageContent">
+<ion-content fullscreen scroll-y="false" id="pageContent" class="green-gradient">
   <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #ChooseImposterSlider>
 
     <ion-slide>
@@ -119,15 +119,17 @@
         <ion-card *ngIf="hasSubmitted">
           <ion-card-header>
             <ion-card-title>
-              You accusation
+              Your accusation
             </ion-card-title>
           </ion-card-header>
           <ion-card-content class="no-padding-top">
-            <h2>You have accused {{selectedImposter.name}}.</h2>
-            <h2>You have wagered {{selectedWager}} points.</h2>
-            <p>Please wait for the remaining players to make their accusations.</p>
+            <h2 class="big text-margin-small">You have accused <strong><ion-text color="primary">{{selectedImposter.name}}</ion-text></strong>.</h2>
+            <h2 class="big text-margin-small">You have wagered <strong><ion-text color="primary">{{selectedWager}}</ion-text></strong> points.</h2>
+            <!-- <p class="big text-margin-small">...</p> -->
           </ion-card-content>
         </ion-card>
+
+        <ion-text class="under-card" color="light" *ngIf="hasSubmitted">Please wait for the remaining players to make their accusations...</ion-text>
       </div>
     </ion-slide>
 

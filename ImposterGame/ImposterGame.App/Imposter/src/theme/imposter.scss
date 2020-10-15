@@ -37,6 +37,17 @@
     margin-top: 8px !important;
 }
 
+.side-padding{
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.under-card{
+    margin-top: 18px;
+    margin-left: 48px;
+    margin-right: 48px;
+    display: block;
+}
 
 // Backgrounds
 
@@ -52,6 +63,12 @@
 ion-content, ion-title, ion-toolbar { --background: transparent;}
 ion-title {
     color: var(--ion-color-white); 
+  }
+
+  ion-button{
+      &.top-button{
+          margin-bottom: 12px;
+      }
   }
 
 ion-card{
@@ -142,15 +159,46 @@ form.imposter-form{
     display: flex;
 }
 
-.scroll-section{
+// TEXT
 
+.small{
+    font-size: 0.8rem !important;
 }
 
-.fixed-section{
+.smaller{
+    font-size: 0.9rem !important;
+}
 
+.bigger{
+    font-size: 1.2rem !important;
+}
+
+.big{
+    font-size: 1.4rem !important;
+}
+
+.text-margin-small{
+    padding-bottom: 6px;
+}
+
+.text-margin{
+    padding-bottom: 12px;
 }
 
 // Slider
+
+.pager-top {
+    padding-top: 15px;
+
+    ion-list{
+        margin-bottom: 0;
+    }
+
+    .swiper-pagination {
+        top:0;
+        bottom:inherit;
+    }
+}
 
 .full-height-slides{
     height:100%;

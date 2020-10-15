@@ -2,11 +2,11 @@
 
 <ion-content fullscreen padding class="ion-padding green-gradient" >
 
-  <ion-slides class="full-height-slides-with-game-code " style="flex-grow: 1;" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
+  <ion-slides class="full-height-slides-with-game-code" style="flex-grow: 1;" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
 
     <ion-slide *ngIf="gameContext">
       <div class="slide-inner" class="full-width">
-        <ion-card *ngIf="gameContext.currentGame.isHost && !this.gridService.selectedOptionGrid">
+        <ion-card *ngIf="gameContext.currentGame.isHost">
           <ion-card-header class="no-padding-bottom">
             <ion-card-subtitle>Players</ion-card-subtitle>
           </ion-card-header>
@@ -36,21 +36,22 @@
               <ion-card-content>
                 <p>Before the next round starts you need to choose the topic to use.</p>
 
-                <ion-button (click)="goToChooseGridPage()" expand="block">Choose grid</ion-button>
+                <ion-button (click)="goToChooseGridPage()" margin-top expand="block">Choose grid</ion-button>
               </ion-card-content>
             </ion-card>
 
             <ion-card *ngIf="gameContext.currentGame.isHost && this.gridService.selectedOptionGrid">
               <ion-card-header>
-                <ion-card-title>You have chosen "{{this.gridService.selectedOptionGrid.name}}"</ion-card-title>
+                <ion-card-subtitle>You have chosen</ion-card-subtitle>
+                <ion-card-title>"{{this.gridService.selectedOptionGrid.name}}"</ion-card-title>
               </ion-card-header>
 
               <ion-card-content>
                 <p>Make sure all of your players are ready, and then start the round.</p>
 
-                <ion-button (click)="startRound()" expand="block">Start new round</ion-button>
+                <ion-button (click)="startRound()" expand="block" margin-top class="top-button">Start new round</ion-button>
 
-                <ion-button (click)="goToChooseGridPage()" expand="block">Choose a different grid</ion-button>
+                <ion-button (click)="goToChooseGridPage()" expand="block" color="light">Choose a different grid</ion-button>
               </ion-card-content>
             </ion-card>
 
@@ -66,7 +67,7 @@
               </ion-card-content>
             </ion-card>
 
-            <ion-button fill="outline" size="small" (click)="goToSlide(0)">
+            <ion-button fill="outline" class="slider-button" size="small" (click)="goToSlide(0)">
               <ion-icon slot="start" name="arrow-round-back"></ion-icon>
               Players
             </ion-button>
