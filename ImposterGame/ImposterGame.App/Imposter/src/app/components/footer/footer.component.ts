@@ -21,6 +21,7 @@ export class FooterComponent extends BaseGameComponent {
   @Input() helpSection: string;
   @Input() hidePlayButton: boolean;
   @Input() hideChangeNameButton: boolean;
+  @Input() showNextRoundButton: boolean;
 
   showChangeName: boolean;
 
@@ -96,5 +97,9 @@ export class FooterComponent extends BaseGameComponent {
       }
     });
     return await modal.present();
+  }
+  
+  async goToNextRound(){
+    await this.appPages.goToNewRoundPage();
   }
 }

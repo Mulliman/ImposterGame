@@ -34,7 +34,7 @@ export class RoundScoresPage extends BaseGamePage {
   }
 
   setAllowedStates(): Array<string> {
-    return this.states;
+    return null; // this.states;
   }
 
   async gamePageOnInit() {
@@ -54,9 +54,5 @@ export class RoundScoresPage extends BaseGamePage {
 
   async goToSlide(num: number) {
     await this.slides.slideTo(num);
-  }
-
-  async goToNextRound(){
-    await this.appPages.goToNewRoundPage();
   }
 }

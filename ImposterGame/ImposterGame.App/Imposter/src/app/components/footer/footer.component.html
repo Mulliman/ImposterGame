@@ -1,16 +1,20 @@
-
-
 <ion-footer no-border *ngIf="isLoaded">
     <ion-toolbar *ngIf="this.currentGameContext.currentGame">
     <ion-buttons slot="secondary" *ngIf="helpSection">
       <ion-button color="light" (click)="showHelp()">
-        <ion-icon name="help-circle"></ion-icon> Tips &amp; Tricks
+        <ion-icon name="help-circle"></ion-icon> Tips &amp; tricks
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="secondary" *ngIf="!helpSection && showNextRoundButton">
+      <ion-button color="warning" (click)="goToNextRound()">
+        <ion-icon name="sync"></ion-icon> Next round
       </ion-button>
     </ion-buttons>
 
     <ion-buttons slot="primary">
       <ion-button color="light" (click)="leaveGame()">
-        Leave Game<ion-icon name="walk"></ion-icon>
+        Leave game<ion-icon name="walk"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

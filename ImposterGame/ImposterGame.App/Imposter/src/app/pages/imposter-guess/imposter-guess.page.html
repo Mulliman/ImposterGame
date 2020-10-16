@@ -1,47 +1,53 @@
 <app-header></app-header>
 
-<ion-content fullscreen padding class="ion-padding">
+<ion-content fullscreen padding class="ion-padding green-gradient" *ngIf="isLoaded">
 
-  <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
+  <ion-row justify-content-center align-items-center class="full-page-row no-margin" *ngIf="isLoaded">
 
-    <div class="ion-text-center" *ngIf="gameContext.currentGame && gameContext.currentGame.isImposter">
-
-      <div *ngIf="gameContext.currentGame.currentRound.imposter.player.name == playerService.currentPlayer.name">
-        <h1>
+    <ion-card class="no-margin" text-center *ngIf="gameContext.currentGame && gameContext.currentGame.isImposter">
+      <ion-card-header>
+        <ion-card-title *ngIf="gameContext.currentGame.currentRound.imposter.player.name == playerService.currentPlayer.name">
           You were discovered!
-        </h1>
-        <h2>But don't worry you can still get a bonus point if you guess the word.</h2>
-        <h2>What do you think the word was?</h2>
-      </div>
-      
-      <div *ngIf="gameContext.currentGame.currentRound.imposter.player.name != playerService.currentPlayer.name">
-        <h1>
+        </ion-card-title>
+        <ion-card-title *ngIf="gameContext.currentGame.currentRound.imposter.player.name != playerService.currentPlayer.name">
           You were successful!
-        </h1>
-        <h2>Get a bonus point if you guess the word correctly.</h2>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="no-padding-top">
+          <!-- <h2 *ngIf="gameContext.currentGame.currentRound.imposter.player.name == playerService.currentPlayer.name" 
+          class="big text-margin-small">But don't worry you can still get a bonus point if you guess the word.</h2> -->
+          <h2 *ngIf="gameContext.currentGame.currentRound.imposter.player.name != playerService.currentPlayer.name" 
+          class="big text-margin-small">Get a bonus point if you guess the word correctly.</h2>
+
         <h2>What do you think the word was?</h2>
-      </div>
-      
-      <app-option-grid *ngIf="gameContext.currentGame.currentRound" 
-        [options]="gameContext.currentGame.currentRound.allOptions"
-        [selectedOption]="selectedOption"
-        [showButtons]="true"
-        (onAnswerSelected)="answerSelected($event)"
-         class="full-width">
-      </app-option-grid>
 
-      <ion-button expand="block" (click)="submitAnswer()" *ngIf="selectedOption">Submit your answer</ion-button>
+        <app-option-grid *ngIf="gameContext.currentGame.currentRound" 
+          [options]="gameContext.currentGame.currentRound.allOptions"
+          [selectedOption]="selectedOption"
+          [showButtons]="true"
+          (onAnswerSelected)="answerSelected($event)"
+          class="full-width">
+        </app-option-grid>
 
+        <ion-button expand="block" (click)="submitAnswer()" [disabled]="!selectedOption">Submit your answer</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <div *ngIf="gameContext.currentGame && !gameContext.currentGame.isImposter">
+      <ion-card class="no-margin-top" text-center >
+        <ion-card-header>
+          <ion-card-title>
+            The imposter was {{gameContext.currentGame.currentRound.imposter.player.name}}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="no-padding-top">
+            <h2 class="big text-margin-small">Waiting for imposter to guess the secret word...</h2>
+        </ion-card-content>
+      </ion-card>
+  
+      <ion-text class="under-card" color="light">If the imposter guesses incorrectly you will get a bonus point.</ion-text>
     </div>
-
-    <div class="ion-text-center" *ngIf="gameContext.currentGame && !gameContext.currentGame.isImposter">
-
-      <h1>The imposter was {{gameContext.currentGame.currentRound.imposter.player.name}}</h1>
-      <h2>Waiting for imposter to choose their answer.</h2>
-      <h2>If they guess incorrectly you will get a bonus point.</h2>
-
-    </div>
-
+    
   </ion-row>
 
 </ion-content>

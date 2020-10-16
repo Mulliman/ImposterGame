@@ -43,7 +43,7 @@
               [selectedOption]="isImposter ? null : currentRound.word" class="full-width">
             </app-option-grid>
 
-            <!-- <ion-button expand="block" (click)="goToSlide(2)" *ngIf="!yourAnswer">Submit your answer</ion-button> -->
+            <ion-button expand="block" size="small" (click)="goToSlide(2)" *ngIf="!yourAnswer">Submit your answer<ion-icon slot="end" name="arrow-round-forward"></ion-icon></ion-button>
           </ion-card-content>
         </ion-card>
 

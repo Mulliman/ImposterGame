@@ -10,14 +10,35 @@
     .option-grid-cell{
         text-align: center;
         background: var(--ion-color-tablecell-tint);
-        padding: 10px 5px;
-        font-size: 12px;
+        padding: 3px;
+        vertical-align: middle;
 
-        &.selected{
+        @media (min-height: 600px) {
+            &{
+                padding: 7px 5px;
+            }
+        }
+
+        &.selected, &.selected button{
             background: var(--ion-color-secondary) !important;
             color: white;
-            font-weight: bolder;
+            // font-weight: bolder;
             text-shadow: 0 0 5px var(--ion-color-dark-green);;
+        }
+
+        span, button{
+            background: transparent;
+            height: 100%;
+            margin: 0 !important;
+            padding: 0 !important;
+            outline: none !important;
+            font-size: 11px;
+
+            @media (min-height: 600px) {
+                &{
+                    font-size: 12px;
+                }
+            }
         }
     }
 }

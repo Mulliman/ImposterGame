@@ -2,4 +2,9 @@ ion-footer{
     box-shadow: 0 0 25px rgba(0,0,0,0.33);
     z-index: 2; 
     // background: var(--ion-color-dark-green);
+
+    ion-icon{
+        padding-left:3px;
+        padding-right: 3px;
+    }
 }
