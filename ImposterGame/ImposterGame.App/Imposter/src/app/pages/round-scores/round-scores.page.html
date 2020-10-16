@@ -20,7 +20,7 @@
                 <ion-label text-center text-wrap class="almost-black">
                   The secret word was <strong>'{{gameContext.currentGame.previousRound.word}}'</strong>.
                 </ion-label>
-                <ion-icon class="almost-black" name="brush" slot="start"></ion-icon>
+                <ion-icon class="almost-black" name="search" slot="start"></ion-icon>
               </ion-item>
 
               <!-- IMPOSTER -->
@@ -28,7 +28,7 @@
                 <ion-label text-center text-wrap  class="almost-black">
                   <strong>You</strong> were the imposter!
                 </ion-label>
-                <ion-icon class="almost-black" name="eye-off" slot="start"></ion-icon>
+                <ion-icon class="almost-black" name="body" slot="start"></ion-icon>
               </ion-item>
 
               <!-- IMPOSTER FOUND? -->
@@ -56,7 +56,7 @@
 
               <ion-item *ngIf="!gameContext.currentGame.previousRound.isImpostersGuessCorrect">
                 <ion-label text-center text-wrap color="danger">
-                  <p>You did not guess the secret word.</p>
+                  <p>You did not guess the secret word. You guessed "{{gameContext.currentGame.previousRound.impostersGuess}}".</p>
                 </ion-label>
                 <ion-icon color="danger" name="thumbs-down" slot="start"></ion-icon>
               </ion-item>
@@ -71,7 +71,7 @@
                 <ion-label text-center text-wrap  class="almost-black">
                   The secret word was <strong>'{{gameContext.currentGame.previousRound.word}}'</strong>.
                 </ion-label>
-                <ion-icon class="almost-black" name="brush" slot="start"></ion-icon>
+                <ion-icon class="almost-black" name="search" slot="start"></ion-icon>
               </ion-item>
 
               <!-- IMPOSTER -->
@@ -80,7 +80,7 @@
                   <strong>{{gameContext.currentGame.previousRound.imposter.player.name}}</strong> was the imposter!
                   
                 </ion-label>
-                <ion-icon class="almost-black" name="eye-off" slot="start"></ion-icon>
+                <ion-icon class="almost-black" name="body" slot="start"></ion-icon>
               </ion-item>
 
               <!-- PLAYER GUESSED IMPOSTER? -->
@@ -116,7 +116,7 @@
               <!-- IMPOSTER GUESSED WORD? -->
               <ion-item *ngIf="!gameContext.currentGame.previousRound.isImpostersGuessCorrect">
                 <ion-label text-center text-wrap color="success">
-                  <p>The imposter did not guess the secret word.</p>
+                  <p>The imposter did not guess the secret word. They guessed "{{gameContext.currentGame.previousRound.impostersGuess}}".</p>
                 </ion-label>
                 <ion-icon color="success" name="thumbs-up" slot="start"></ion-icon>
               </ion-item>
