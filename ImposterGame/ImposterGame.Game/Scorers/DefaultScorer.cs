@@ -30,7 +30,7 @@ namespace ImposterGame.Game.Scorers
                 var wager = nonImposter.Accusation.Wager;
 
                 // Normal player gets 1 team point if they find the imposter.
-                if (!round.WasImposterFound)
+                if (round.WasImposterFound)
                 {
                     nonImposter.ScoredPoints += 1;
                 }
@@ -38,7 +38,7 @@ namespace ImposterGame.Game.Scorers
                 if (accuserGuessedCorrectly)
                 {
                     // Normal player gets their wager if they guess correctly.
-                    nonImposter.ScoredPoints = nonImposter.Accusation.Wager;
+                    nonImposter.ScoredPoints += nonImposter.Accusation.Wager;
                 }
                 else if (isImposterGuessCorrect && isImposterGuessCorrect)
                 {

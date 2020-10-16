@@ -18,6 +18,7 @@ import { GameContext } from '../services/gamecontext.service';
 import { Game } from '../model/Game';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { GameCodeComponent } from './game-code/game-code.component';
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GameCodeComponent } from './game-code/game-code.component';
     HelpModalComponent,
     PlayerListComponent,
     ScoreboardComponent,
-    GameCodeComponent
+    GameCodeComponent,
+    TimerComponent
   ],
   imports: [
     IonicModule.forRoot(), 
@@ -48,7 +50,8 @@ import { GameCodeComponent } from './game-code/game-code.component';
       HelpModalComponent,
       PlayerListComponent,
       ScoreboardComponent,
-      GameCodeComponent
+      GameCodeComponent,
+      TimerComponent
     ],
     entryComponents: [HelpModalComponent]
 })

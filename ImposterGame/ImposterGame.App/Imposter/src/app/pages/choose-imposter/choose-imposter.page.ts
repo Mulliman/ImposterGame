@@ -16,9 +16,6 @@ import { GameHelpers } from 'src/app/model/Game';
 })
 export class ChooseImposterPage extends BaseGamePage {
 
-  timerInterval;
-  timer: number = 1;
-  
   currentRound: IRound;
   isImposter: boolean;
   yourAnswer: string;
@@ -61,20 +58,9 @@ export class ChooseImposterPage extends BaseGamePage {
     }
     
     this.hasSubmitted = GameHelpers.hasAccused(this.gameContext.currentGame);
-
-    // this.timerInterval = setInterval(() => this.timer++, 1000);
   }
 
-  getDisplayTime() 
-  {
-    var minutes = Math.floor(this.timer / 60);
-    var seconds = this.timer - minutes * 60; 
-
-    return this.padStringLeft(minutes, "0", 2) + ":" + this.padStringLeft(seconds, "0", 2);
-  };
-
   async gamePageOnLeave(){
-    clearInterval(this.timerInterval);
   }
 
   async goToSlide(num: number) {
@@ -94,9 +80,5 @@ export class ChooseImposterPage extends BaseGamePage {
   async submitAnswer() {
     await this.gameService.submitAccusation(this.playerService.currentPlayer, this.selectedImposter.id, this.selectedWager);
     this.hasSubmitted = true;
-  }
-
-  private padStringLeft(string,pad,length) {
-    return (new Array(length+1).join(pad)+string).slice(-length);
   }
 }

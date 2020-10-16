@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<ion-content fullscreen scroll-y="false" id="pageContent" class="green-gradient">
-  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" #ChooseImposterSlider>
+<ion-content fullscreen padding-bottom scroll-y="false" id="pageContent" class="green-gradient">
+  <ion-slides class="full-height-slides-with-game-code" slidesPerView="1" [options]="slideOpts" #ChooseImposterSlider>
 
     <ion-slide>
       <div class="slide-inner full-width">
@@ -29,9 +29,9 @@
             <ion-card-header>
               <ion-card-subtitle>Step 1 of 2</ion-card-subtitle>
               <ion-card-title *ngIf="!isImposter && !hasSubmitted">
-                Who you think was the imposter?
+                Who do you think was the imposter?
               </ion-card-title>
-              <ion-card-title *ngIf="isImposter && !hasSubmitted">Who do you think had the worst answer?
+              <ion-card-title *ngIf="isImposter && !hasSubmitted">Who will you pin the blame on?
               </ion-card-title>
               <ion-card-title *ngIf="hasSubmitted">You have already made your accusation!</ion-card-title>
             </ion-card-header>
@@ -80,7 +80,7 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-card *ngIf="selectedImposter && !hasSubmitted">
+        <ion-card *ngIf="selectedImposter && !hasSubmitted && !isImposter">
           <ion-card-header>
             <ion-card-subtitle>Step 2 of 2</ion-card-subtitle>
             <ion-card-title>
@@ -116,6 +116,22 @@
           </ion-card-content>
         </ion-card>
 
+        <ion-card *ngIf="selectedImposter && !hasSubmitted && isImposter">
+          <ion-card-header>
+            <ion-card-subtitle>Step 2 of 2</ion-card-subtitle>
+            <ion-card-title>
+              You have thrown {{selectedImposter.name}} under the bus!
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="no-padding-top">
+            <p>As you are the imposter, you don't set a wager.</p>
+
+            <div *ngIf="!hasSubmitted" class="choose-step-3">
+              <ion-button expand="block" (click)="setWager(5);submitAnswer()">Submit answer</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
         <ion-card *ngIf="hasSubmitted">
           <ion-card-header>
             <ion-card-title>
@@ -124,8 +140,7 @@
           </ion-card-header>
           <ion-card-content class="no-padding-top">
             <h2 class="big text-margin-small">You have accused <strong><ion-text color="primary">{{selectedImposter.name}}</ion-text></strong>.</h2>
-            <h2 class="big text-margin-small">You have wagered <strong><ion-text color="primary">{{selectedWager}}</ion-text></strong> points.</h2>
-            <!-- <p class="big text-margin-small">...</p> -->
+            <h2 class="big text-margin-small" *ngIf="!isImposter">You have wagered <strong><ion-text color="primary">{{selectedWager}}</ion-text></strong> points.</h2>
           </ion-card-content>
         </ion-card>
 
@@ -135,7 +150,7 @@
 
   </ion-slides>
 
-  <!-- <h3>Timer: {{getDisplayTime()}}</h3> -->
+  <app-timer></app-timer>
 </ion-content>
 
 <app-footer [helpSection]="'current-round'"></app-footer>
