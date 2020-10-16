@@ -1,0 +1,13 @@
+.player-answer-list{
+    ion-item{
+        @media (max-height: 600px) {
+            &{
+                --min-height: 30px;
+            }
+        }
+    }
+
+    ion-label{
+        margin: 7px 0;
+    }
+} 

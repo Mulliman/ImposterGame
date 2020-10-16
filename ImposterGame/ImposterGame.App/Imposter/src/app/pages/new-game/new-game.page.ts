@@ -35,7 +35,7 @@ export class NewGamePage extends BaseGameFormPage {
 
   instantiateForm() {
     this.form = this.formBuilder.group({
-      gameCode: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(5)]]
+      gameCode: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(5), Validators.pattern('^[a-zA-Z0-9]+$')]]
     });
   }
 

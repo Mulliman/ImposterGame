@@ -14,7 +14,7 @@
             <ion-label color="primary" position="floating">Name</ion-label>
             <ion-input formControlName="name" type="text"></ion-input>
           </ion-item>
-          <app-error-message [control]="'name'"></app-error-message>
+          <app-error-message [control]="form.get('name')"></app-error-message>
         </form>
 
         <ion-button *ngIf="!gameContext || (gameContext && !gameContext.currentGame)" [disabled]="!form.valid" expand="block" (click)="saveName()">Start!</ion-button>

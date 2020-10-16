@@ -1,3 +1,5 @@
 <div class="text-danger" *ngIf="control && control.errors && (control.dirty || control.touched)">
     <div *ngIf="control.errors.required"><small>This field is required</small></div>
+    <div *ngIf="control.errors.pattern"><small>Please only use letters and numbers</small></div>
+    <div *ngIf="control.errors.maxlength"><small>Max {{control.errors.maxlength.requiredLength}} characters</small></div>
 </div>

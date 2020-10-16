@@ -2,9 +2,9 @@
 
 <ion-content fullscreen padding class="ion-padding green-gradient" *ngIf="isLoaded">
 
-  <ion-row justify-content-center align-items-center class="full-page-row no-margin" *ngIf="isLoaded">
+  <ion-row justify-content-center align-items-center no-padding class="full-page-row no-margin" *ngIf="isLoaded">
 
-    <ion-card class="no-margin" text-center *ngIf="gameContext.currentGame && gameContext.currentGame.isImposter">
+    <ion-card class="no-margin" text-center *ngIf="!isSubmitted && gameContext.currentGame && gameContext.currentGame.isImposter">
       <ion-card-header>
         <ion-card-title *ngIf="gameContext.currentGame.currentRound.imposter.player.name == playerService.currentPlayer.name">
           You were discovered!
@@ -33,7 +33,7 @@
       </ion-card-content>
     </ion-card>
 
-    <div *ngIf="gameContext.currentGame && !gameContext.currentGame.isImposter">
+    <div *ngIf="!isSubmitted && gameContext.currentGame && !gameContext.currentGame.isImposter">
       <ion-card class="no-margin-top" text-center >
         <ion-card-header>
           <ion-card-title>
@@ -48,8 +48,9 @@
       <ion-text class="under-card" color="light">If the imposter guesses incorrectly you will get a bonus point.</ion-text>
     </div>
     
+    <ion-text *ngIf="isSubmitted" class="under-card" color="light">Scoring round...</ion-text>
   </ion-row>
 
 </ion-content>
 
-<app-footer></app-footer>
+<app-footer hideChangeNameButton="true"></app-footer>

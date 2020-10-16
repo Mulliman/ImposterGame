@@ -1,6 +1,6 @@
-<ion-header translucent>
-  <ion-toolbar>
-    <ion-title>Choose Option grid</ion-title>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Choose option grid</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">Close</ion-button>
     </ion-buttons>
@@ -18,7 +18,7 @@
           <ion-item class="ion-no-padding" *ngFor="let grid of group.optionGrids" (click)="selectGrid(grid)">
               <ion-label>{{grid.name}}</ion-label>
             <!-- <button item-right (click)="selectGrid(grid)">{{grid.title}}</button> -->
-            <ion-note slot="end" color="medium">Choose</ion-note>
+            <ion-note slot="end" color="primary">Choose</ion-note>
           </ion-item>
         </ion-list>
       </div>

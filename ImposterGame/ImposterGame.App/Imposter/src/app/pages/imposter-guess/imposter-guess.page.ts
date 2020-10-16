@@ -12,6 +12,7 @@ import { GameStates } from 'src/app/model/GameStates';
 })
 export class ImposterGuessPage extends BaseGamePage {
 
+  isSubmitted: boolean;
   isLoaded: boolean;
   selectedOption:string;
 
@@ -39,7 +40,8 @@ export class ImposterGuessPage extends BaseGamePage {
   }
 
   async submitAnswer(){
-    var finishedGame = await this.gameService.submitImposterGuessAndScoreRound(this.playerService.currentPlayer, this.selectedOption);
+    this.isSubmitted = true;
+    var finishedGame = await this.gameService.submitImposterGuessAndScoreRound(this.playerService.currentPlayer, this.selectedOption);   
     this.appPages.goToRoundScoresPage();
   }
 }

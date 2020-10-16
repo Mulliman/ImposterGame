@@ -69,7 +69,7 @@ export class CurrentRoundPage extends BaseGameFormPage {
 
   instantiateForm() {
     this.form = this.formBuilder.group({
-      answer: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
+      answer: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(15), Validators.pattern('^[a-zA-Z- ]+$')]]
     });
   }
 
