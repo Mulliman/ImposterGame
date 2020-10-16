@@ -1,0 +1,40 @@
+{
+  "id": "55F22AD7-0C8F-4BE6-8076-8FC4AEC7A53F",
+  "name": "Snacks",
+  "options": [
+    "Pizza",
+    "Cake",
+    "Salad",
+    "Soup",
+    "Cheese",
+    "Chocolate",
+    "Crisps",
+    "Biscuit",
+    "Waffle",
+    "Sandwich",
+    "Cracker",
+    "Cereal Bar",
+    "Satsuma",
+    "Banana",
+    "Apple",
+    "Chips",
+    "Toast",
+    "Yoghurt",
+    "Hummus",
+    "Nuts",
+    "Eggs",
+    "Olives",
+    "Crumpets",
+    "Sausage Roll",
+    "Cornish Pasty",
+    "Pork Pie",
+    "Garlic Bread",
+    "Doughnut",
+    "Flapjack",
+    "Jelly"
+      ],
+  "groups": [
+    "All",
+    "Food & Drink"
+      ]
+}

@@ -18,7 +18,9 @@
       "Attic",
       "Basement",
       "Garage",
-      "Pantry"
+      "Pantry",
+      "Dungeon",
+      "Bunker"
   ],
   "groups": [
     "All",

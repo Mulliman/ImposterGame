@@ -1,0 +1,41 @@
+{
+  "id": "043EDC2C-1143-4694-9A0C-0B32DBD83DBB",
+  "name": "Toys",
+  "options": [
+    "Lego",
+    "Rocking Horse",
+    "Water Gun",
+    "Nerf Gun",
+    "Teddy Bear",
+    "Rubik's Cube",
+    "Etch a Sketch",
+    "Play Doh",
+    "Yo-Yo",
+    "Frisbee",
+    "Toy Cars",
+    "Barbie",
+    "Furby",
+    "Tamegotchi",
+    "Slinky",
+    "Action Man",
+    "Hula Hoop",
+    "Swingball",
+    "Jigsaw Puzzle",
+    "Polly Pocket",
+    "Transformers",
+    "Marble Run",
+    "Cabbage Patch Kids",
+    "Kinetic Sand",
+    "Slime",
+    "Spinning Top",
+    "Trolls",
+    "Sylvanian Families",
+    "Beanie Babies",
+    "Mr Potato Head",
+    "Spirograph"
+      ],
+  "groups": [
+    "All",
+    "Childrens"
+      ]
+}

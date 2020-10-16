@@ -1,0 +1,35 @@
+{
+  "id": "84407E04-863F-4497-A951-EA3BBC5B7C85",
+  "name": "Games",
+  "options": [
+    "Monopoly",
+    "Scrabble",
+    "Mouse Trap",
+    "Guess Who",
+    "Risk",
+    "Operation",
+    "Twister",
+    "Pictionary",
+    "Battleship",
+    "Backgammon",
+    "Cluedo",
+    "Chess",
+    "Trivial Pursuit",
+    "Jenga",
+    "Hungry Hungry Hippos",
+    "Diagon Alley",
+    "Pay Day",
+    "Connect 4",
+    "Buckaroo",
+    "Pop Up Pirate",
+    "Crocodile Dentist",
+    "Ker-Plunk",
+    "The Game of Life",
+    "Uno",
+    "Charades"
+      ],
+  "groups": [
+    "All",
+    "Childrens"
+      ]
+}
