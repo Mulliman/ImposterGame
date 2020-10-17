@@ -7,5 +7,7 @@ namespace ImposterGame.Website.Models
         public Guid PlayerId { get; set; }
 
         public string GameCode { get; set; }
+
+        public bool WasKicked { get; set; }
     }
 }

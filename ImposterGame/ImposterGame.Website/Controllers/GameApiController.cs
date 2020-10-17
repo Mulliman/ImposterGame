@@ -95,6 +95,11 @@ namespace ImposterGame.Website.Controllers
 
             await _gameNotifier.SendPlayerJoined(updatedGame);
 
+            if (model.WasKicked)
+            {
+                await _gameNotifier.SendPlayerKicked(game.Id, player);
+            }
+            
             if (mustCancelGame)
             {
                 await _gameNotifier.SendGameCancelled(gameId);

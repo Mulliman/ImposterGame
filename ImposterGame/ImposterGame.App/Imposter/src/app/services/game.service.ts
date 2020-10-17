@@ -127,6 +127,15 @@ export class GameService {
       this.appPages.reloadApp();
     }));
 
+    this.subscriptions.add(this.gameContext.onKicked.subscribe(async () => {
+      await this.uiService.warningToast("You have been kicked from the game!");
+
+      setTimeout(async () => {
+        await this.gameContext.endGame();
+        this.appPages.reloadApp();
+      }, 2000);
+    }));
+
     this.hasSubscribedToGameEvents = true;
   }
 
@@ -266,6 +275,21 @@ export class GameService {
       this.gameContext.endGame();
     } catch (e) {
       console.error("Leave Game Error", e);
+      throw e;
+    }
+  }
+
+  async kickPlayer(player: IPlayer, gameCode: string): Promise<void> {
+    try {
+      var leaveModel = {
+        gameCode: gameCode,
+        playerId: player.id,
+        wasKicked: true
+      } as JoinGameModel;
+
+      await this.gameApi.apiGameApiLeavePost(leaveModel).toPromise();
+    } catch (e) {
+      console.error("Kick Error", e);
       throw e;
     }
   }

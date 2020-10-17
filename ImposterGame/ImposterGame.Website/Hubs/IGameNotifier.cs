@@ -12,6 +12,7 @@ namespace ImposterGame.Website.Hubs
         Task SendGameUpdated(IGame game);
         Task SendNewRoundStarted(IGame game);
         Task SendPlayerJoined(IGame game);
+        Task SendPlayerKicked(Guid gameId, IPlayer player);
         Task SendRoundCancelled(IGame game);
         Task SendScoringComplete(IGame game);
     }

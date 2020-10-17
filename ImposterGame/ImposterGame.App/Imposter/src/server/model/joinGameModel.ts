@@ -14,4 +14,5 @@
 export interface JoinGameModel { 
     playerId?: string;
     gameCode?: string;
+    wasKicked?: boolean;
 }

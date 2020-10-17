@@ -552,6 +552,9 @@
         },
         "gameCode": {
           "type": "string"
+        },
+        "wasKicked": {
+          "type": "boolean"
         }
       }
     },

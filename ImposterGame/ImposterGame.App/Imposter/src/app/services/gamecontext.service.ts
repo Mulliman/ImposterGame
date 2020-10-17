@@ -18,6 +18,7 @@ export class GameContext {
     public onRoundComplete = new EventEmitter<Game>();
     public onRoundCancelled = new EventEmitter<Game>();
     public onGameCancelled = new EventEmitter<Game>();
+    public onKicked = new EventEmitter<Game>();
     
     private _currentGame: Game;
 
@@ -101,13 +102,14 @@ export class GameContext {
     }
     async addListeners() {
         this.addGameUpdateListener();
-        this.addOnNewPlayerListener();
+        this.addOnPlayersChangedListener();
         this.addStartRoundListener();
         this.addOnAllAnsweredListener();
         this.addOnAllAccusedListener();
         this.addOnScoringCompleteListener();
         this.addOnRoundCancelledListener();
         this.addOnGameCancelledListener();
+        this.addOnPlayerKickedListener();
     }
     async disconnect() {
         if (this.isConnectionActive && this.hubConnection) {
@@ -127,7 +129,7 @@ export class GameContext {
             this.onGameUpdated.emit(this.currentGame);
         });
     };
-    public addOnNewPlayerListener = () => {
+    public addOnPlayersChangedListener = () => {
         this.hubConnection.on('NewPlayer', (data) => {
             console.log("Signal - NewPlayer"); 
             this.updateGameFromServer(data);
@@ -174,6 +176,14 @@ export class GameContext {
             console.log("Signal - GameCancelled"); 
             this.updateGameFromServer(null);
             this.onGameCancelled.emit(null);
+        });
+    };
+    public addOnPlayerKickedListener = () => {
+        this.hubConnection.on('PlayerKicked', (data) => {
+            if(this.currentGame && this.currentGame.currentPlayer && this.currentGame.currentPlayer.name == data.name){
+                this.updateGameFromServer(null);
+                this.onKicked.emit(null);
+            }
         });
     };
 

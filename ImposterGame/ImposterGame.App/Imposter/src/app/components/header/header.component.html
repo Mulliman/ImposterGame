@@ -16,6 +16,10 @@
         You are <strong>NOT</strong> the Imposter!
       </ion-title>
 
-
+      <ion-buttons slot="end" *ngIf="isLoaded && currentGameContext && currentGameContext.currentGame && currentGameContext.currentGame.isHost">
+        <ion-button color="light" (click)="openSettings()">
+          <ion-icon name="settings"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>

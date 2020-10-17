@@ -2,6 +2,8 @@ import { Component, NgZone, ChangeDetectionStrategy, Input, ChangeDetectorRef } 
 import { GameService } from 'src/app/services/game.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { BaseGameComponent } from '../BaseGameComponent';
+import { ModalController } from '@ionic/angular';
+import { SettingsComponent } from '../modals/settings/settings.component';
 
 @Component({
   selector: 'app-header',
@@ -15,11 +17,19 @@ export class HeaderComponent extends BaseGameComponent {
   isLoaded: boolean;
 
   constructor(playerService: PlayerService,
-    gameService: GameService) {
+    gameService: GameService,
+    public modalController: ModalController) {
     super(playerService, gameService);
   }
 
   protected async updateScope() {
     this.isLoaded = true;
+  }
+
+  async openSettings(){
+    const modal = await this.modalController.create({
+      component: SettingsComponent
+    });
+    return await modal.present();
   }
 }

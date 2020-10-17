@@ -15,6 +15,7 @@ namespace ImposterGame.Website.Hubs
         public const string ScoringCompleteMethodName = "ScoringComplete";
         public const string RoundCancelledMethodName = "RoundCancelled";
         public const string GameCancelledMethodName = "GameCancelled";
+        public const string PlayerKickedMethodName = "PlayerKicked";
 
         public async Task SendGameUpdate(Guid gameId, IGame game)
         {
@@ -54,6 +55,11 @@ namespace ImposterGame.Website.Hubs
         public async Task SendGameCancelled(Guid gameId, IGame game)
         {
             await Clients.Group(GetGroupName(gameId)).SendAsync(GameCancelledMethodName, game);
+        }
+
+        public async Task SendPlayerKicked(Guid gameId, IPlayer player)
+        {
+            await Clients.Group(GetGroupName(gameId)).SendAsync(PlayerKickedMethodName, player);
         }
 
         public Task AddToGroup(Guid gameId)

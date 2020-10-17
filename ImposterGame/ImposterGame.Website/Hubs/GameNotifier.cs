@@ -75,6 +75,9 @@ namespace ImposterGame.Website.Hubs
             await _hubContext.Clients.Groups(GameHub.GetGroupName(gameId)).SendAsync(GameHub.GameCancelledMethodName);
         }
 
-
+        public async Task SendPlayerKicked(Guid gameId, IPlayer player)
+        {
+            await _hubContext.Clients.Groups(GameHub.GetGroupName(gameId)).SendAsync(GameHub.PlayerKickedMethodName, player);
+        }
     }
 }

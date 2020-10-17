@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Game Settings</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding fullscreen>
+
+  <ion-card>
+    <ion-card-header class="border-bottom">
+      <ion-card-subtitle text-center>
+        Players
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list class="player-list list-with-background alternate" *ngIf="currentGameContext && currentGameContext.currentGame">
+        <ion-item *ngFor="let player of currentGameContext.currentGame.players" lines="none" class="ion-no-padding">
+          <ion-label>{{player.name}}</ion-label>
+          <ion-button *ngIf="playerService.currentPlayer.name != player.name" slot="end" color="primary" (click)="kickPlayer(player)">Kick</ion-button>
+          <ion-button *ngIf="playerService.currentPlayer.name == player.name" slot="end" color="secondary">You</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  
+</ion-content>
