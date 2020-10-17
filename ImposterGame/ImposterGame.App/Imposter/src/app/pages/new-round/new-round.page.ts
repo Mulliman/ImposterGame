@@ -8,6 +8,7 @@ import { OptionGridService } from 'src/app/services/option-grid.service';
 import { ModalController, IonSlides } from '@ionic/angular';
 import { ChooseGridComponent } from 'src/app/components/modals/choose-grid/choose-grid.component';
 import { Game } from 'src/app/model/Game';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-new-round',
@@ -31,6 +32,7 @@ export class NewRoundPage extends BaseGamePage {
     gameService: GameService,
     appPages: AppPagesService,
     public gridService: OptionGridService,
+    private uiService: UiService,
     public modalController: ModalController) {
 
     super(playerService, gameService, appPages);
@@ -52,9 +54,12 @@ export class NewRoundPage extends BaseGamePage {
   }
 
   async startRound(){
-    await this.gameService.startNewRound(this.playerService.currentPlayer, this.gridService.selectedOptionGrid);
-
-    await this.appPages.goToCurrentRoundPage();
+    if(this.gameContext.currentGame.players.length > 2){
+      await this.gameService.startNewRound(this.playerService.currentPlayer, this.gridService.selectedOptionGrid);
+      await this.appPages.goToCurrentRoundPage();
+    } else{
+      await this.uiService.errorToast("You must have at least 3 players to start a round.");
+    }
   }
 
   async goToChooseGridPage(){    
