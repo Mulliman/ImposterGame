@@ -1,4 +1,4 @@
-<ion-list class="player-answer-list list-with-background alternate" *ngIf="scores">
+<ion-list class="player-answer-list list-with-background" *ngIf="scores">
   <ion-item *ngFor="let score of scores" lines="none" class="ion-no-padding" 
   [ngClass]="currentPlayer == score.name ? 'selectedItem' : ''">
     <ion-label>{{score.name}}</ion-label>

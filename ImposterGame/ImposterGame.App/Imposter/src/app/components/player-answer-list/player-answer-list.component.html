@@ -1,4 +1,4 @@
-<ion-list class="player-answer-list list-with-background alternate" *ngIf="participants">
+<ion-list class="player-answer-list list-with-background" *ngIf="participants">
   <ion-item *ngFor="let participant of participants | notIncludingPlayer: hideThisPlayerName" lines="none" class="ion-no-padding" 
   [ngClass]="selectedPlayerName == participant.player.name ? 'selectedItem' : ''" 
   (click)="selectImposter(participant)">
