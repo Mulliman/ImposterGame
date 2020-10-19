@@ -12,7 +12,7 @@ export abstract class BaseGameComponent implements OnInit {
   public player: IPlayer;
   public currentGameContext: GameContext;
 
-  constructor(protected playerService: PlayerService, protected gameService: GameService) { }
+  constructor(public playerService: PlayerService, protected gameService: GameService) { }
 
   async ngOnInit() {
     this.player = await this.playerService.getCurrentPlayer();
