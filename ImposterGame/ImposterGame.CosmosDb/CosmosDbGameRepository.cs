@@ -22,7 +22,7 @@ namespace ImposterGame.CosmosDb
             _config = config.Value;
         }
 
-        public async Task<IGame> Create(IGame game)
+        public async virtual Task<IGame> Create(IGame game)
         {
             var storethis = new GameEntity(game);
 
@@ -45,7 +45,7 @@ namespace ImposterGame.CosmosDb
             }
         }
 
-        public async Task Delete(Guid id)
+        public async virtual Task Delete(Guid id)
         {
             CloudTableClient tableClient = _cosmosClient.CreateCloudTableClient(new TableClientConfiguration());
             CloudTable table = tableClient.GetTableReference(_config.TableName);
@@ -64,20 +64,20 @@ namespace ImposterGame.CosmosDb
             await table.ExecuteAsync(operation);
         }
 
-        public async Task<IGame> Get(Guid id)
+        public async virtual Task<IGame> Get(Guid id)
         {
             var easyCode = Game.Game.GetEasyCodeFromId(id);
 
             return await Get(easyCode);
         }
 
-        public async Task<IGame> Get(string easyCode)
+        public async virtual Task<IGame> Get(string easyCode)
         {
             var game = await GetEntity(easyCode);
             return game?.ToDomainObject();
         }
 
-        public async Task<IGame> Save(IGame game)
+        public async virtual Task<IGame> Save(IGame game)
         {
             var storethis = new GameEntity(game);
 

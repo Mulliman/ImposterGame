@@ -66,7 +66,7 @@ namespace ImposterGame.Website
             var path = Path.Combine(_env.ContentRootPath, "App_Data/OptionGrids");
             services.AddSingleton<IOptionGridService>(new OptionGridService(new[] { new ImposterGame.OptionGrids.FileBased.FileBasedGridProvider(path) }));
             services.AddTransient<IPlayerService, CosmosDbAndInMemoryPlayerService>();
-            services.AddTransient<IGameRepository, CosmosDbGameRepository>();
+            services.AddTransient<IGameRepository, CosmosDbWithCachingGameRepository>();
             services.AddTransient<IGameService, GameService>();
 
             services.AddSwaggerGen(c =>
