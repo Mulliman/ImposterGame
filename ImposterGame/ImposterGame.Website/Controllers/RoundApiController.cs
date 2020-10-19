@@ -45,7 +45,7 @@ namespace ImposterGame.Website.Controllers
 
         private async Task<IGame> StartNewRound(Guid gameId, Guid gridId)
         {
-            var game = _gameService.GetGame(gameId);
+            var game = await _gameService.GetGame(gameId);
 
             if (game == null)
             {
@@ -59,13 +59,13 @@ namespace ImposterGame.Website.Controllers
                 throw new GridDoesNotExistException(gridId);
             }
 
-            return _gameService.StartNewRound(game, grid);
+            return await _gameService.StartNewRound(game, grid);
         }
 
         [HttpPost("[action]")]
         public async Task<IGame> AddAnswer([FromBody] AddAnswerModel model)
         {
-            var game = _gameService.GetGame(model.GameId);
+            var game = await _gameService.GetGame(model.GameId);
 
             if (game == null)
             {
@@ -81,7 +81,7 @@ namespace ImposterGame.Website.Controllers
 
             participant.Answer = model.Word;
 
-            var savedGame = _gameService.SaveGame(game);
+            var savedGame = await _gameService.SaveGame(game);
 
             if (game.CurrentRound.AllAnswered)
             {
@@ -98,7 +98,7 @@ namespace ImposterGame.Website.Controllers
         [HttpPost("[action]")]
         public async Task<IGame> MakeAccusation([FromBody] AccusationModel model)
         {
-            var game = _gameService.GetGame(model.GameId);
+            var game = await _gameService.GetGame(model.GameId);
 
             if (game == null)
             {
@@ -121,7 +121,7 @@ namespace ImposterGame.Website.Controllers
 
             participant.Accusation = new Accusation(accusedParticipant, model.Wager);
 
-            var savedGame = _gameService.SaveGame(game);
+            var savedGame = await _gameService.SaveGame(game);
 
             if (savedGame.CurrentRound.AllAccused)
             {
@@ -138,7 +138,7 @@ namespace ImposterGame.Website.Controllers
         [HttpPost("[action]")]
         public async Task<IGame> ScoreRound(Guid gameId, string guess)
         {
-            var game = _gameService.GetGame(gameId);
+            var game = await _gameService.GetGame(gameId);
 
             if (game == null)
             {
@@ -147,7 +147,7 @@ namespace ImposterGame.Website.Controllers
 
             game.ScoreRound(guess);
 
-            var savedGame = _gameService.SaveGame(game);
+            var savedGame = await _gameService.SaveGame(game);
 
             await _gameNotifier.SendScoringComplete(savedGame);
 

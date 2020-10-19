@@ -11,16 +11,22 @@ namespace ImposterGame.Game.Rounds
         private const int DefaultAmountOfRoundOptions = 16;
         private AccusationStatistics _accusationStatistics;
 
-        private Round()
+        public Round()
         {
             Participants = new List<IRoundParticipant>();
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public string Word { get; private set; }
+        public string Word { get; set; }
 
         public string ImpostersGuess { get; set; }
+
+        public bool IsComplete { get; set; }
+
+        public IList<string> AllOptions { get; set; }
+
+        public IList<IRoundParticipant> Participants { get; set; }
 
         public bool IsImpostersGuessCorrect => Word != null && ImpostersGuess != null && Word.Equals(ImpostersGuess, StringComparison.OrdinalIgnoreCase);
 
@@ -59,10 +65,6 @@ namespace ImposterGame.Game.Rounds
             }
         }
 
-        public IList<string> AllOptions { get; private set; }
-
-        public IList<IRoundParticipant> Participants { get; private set; }
-
         public IRoundParticipant Imposter => Participants.First(p => p.IsImposter);
 
         public IEnumerable<IPlayerScore> RoundScores => Participants.Select(p => new PlayerScore(p.Player, p.ScoredPoints)).OrderByDescending(p => p.Score);
@@ -70,8 +72,6 @@ namespace ImposterGame.Game.Rounds
         public bool AllAnswered => Participants.All(p => p.HasAnswered);
 
         public bool AllAccused => Participants.All(p => p.Accusation != null);
-
-        public bool IsComplete { get; set; }
 
         public static Round NewRound(IOptionGrid optionGrid, IEnumerable<IPlayer> players)
         {

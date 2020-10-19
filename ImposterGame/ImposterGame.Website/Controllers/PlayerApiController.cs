@@ -2,6 +2,7 @@
 using ImposterGame.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace ImposterGame.Website.Controllers
 {
@@ -17,17 +18,17 @@ namespace ImposterGame.Website.Controllers
         }
 
         [HttpPost("[action]")]
-        public IPlayer Create(string name)
+        public async Task<IPlayer> Create(string name)
         {
-            var createdPlayer = _service.CreatePlayer(name);
+            var createdPlayer = await _service.CreatePlayer(name);
 
             return createdPlayer;
         }
 
         [HttpGet("[action]")]
-        public IPlayer Get(Guid id)
+        public async Task<IPlayer> Get(Guid id)
         {
-            var player = _service.GetPlayer(id);
+            var player = await _service.GetPlayer(id);
 
             if (player == null)
             {

@@ -1,24 +1,35 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.Threading.Tasks;
 
 namespace ImposterGame.Game.Players
 {
     public class InMemoryPlayerService : IPlayerService
     {
-        private readonly IMemoryCache _memoryCache;
+        protected readonly IMemoryCache MemoryCache;
 
         private const string PlayerCacheKey = "imposter.players.";
 
         public InMemoryPlayerService(IMemoryCache memoryCache)
         {
-            _memoryCache = memoryCache;
+            MemoryCache = memoryCache;
         }
 
-        public Player CreatePlayer(string name)
+        public virtual Task<Player> CreatePlayer(string name)
         {
             var player = Player.NewPlayer(name);
 
-            var cacheEntry = _memoryCache.GetOrCreate(GetCacheKeyForPlayer(player), entry =>
+            return Task.FromResult(CreateCachedPlayer(player));
+        }
+
+        public virtual Task<Player> GetPlayer(Guid id)
+        {
+            return Task.FromResult(GetCachedPlayer(id));
+        }
+
+        protected virtual Player CreateCachedPlayer(Player player)
+        {
+            var cacheEntry = MemoryCache.GetOrCreate(GetCacheKeyForPlayer(player), entry =>
             {
                 entry.AbsoluteExpiration = DateTime.UtcNow.AddDays(10);
                 return player;
@@ -27,19 +38,19 @@ namespace ImposterGame.Game.Players
             return cacheEntry;
         }
 
-        public Player GetPlayer(Guid id)
+        protected virtual Player GetCachedPlayer(Guid id)
         {
-            var cacheEntry = _memoryCache.Get<Player>(GetCacheKeyForPlayer(id));
+            var cacheEntry = MemoryCache.Get<Player>(GetCacheKeyForPlayer(id));
 
             return cacheEntry;
         }
 
-        private string GetCacheKeyForPlayer(Player player)
+        protected virtual string GetCacheKeyForPlayer(Player player)
         {
             return GetCacheKeyForPlayer(player.Id);
         }
 
-        private string GetCacheKeyForPlayer(Guid id)
+        protected virtual string GetCacheKeyForPlayer(Guid id)
         {
             return (PlayerCacheKey + id.ToString("N")).ToLower();
         }

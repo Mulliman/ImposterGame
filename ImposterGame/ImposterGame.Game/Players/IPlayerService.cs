@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ImposterGame.Game.Players
 {
     public interface IPlayerService
     {
-        Player CreatePlayer(string name);
+        Task<Player> CreatePlayer(string name);
 
-        Player GetPlayer(Guid id);
+        Task<Player> GetPlayer(Guid id);
     }
 }

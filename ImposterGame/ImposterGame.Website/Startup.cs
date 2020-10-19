@@ -1,3 +1,5 @@
+using ImposterGame.CosmosDb;
+using ImposterGame.CosmosDb.Config;
 using ImposterGame.Game;
 using ImposterGame.Game.OptionGrids;
 using ImposterGame.Game.Players;
@@ -20,7 +22,16 @@ namespace ImposterGame.Website
 
         public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"cosmos.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+
+            //Configuration = configuration;
             _env = env;
         }
 
@@ -37,6 +48,8 @@ namespace ImposterGame.Website
                        .AllowCredentials();
             }));
 
+            services.AddOptions();
+
             services.AddControllers(options => options.CacheProfiles.Add("DefaultNoCache",
                 new CacheProfile()
                 {
@@ -47,11 +60,14 @@ namespace ImposterGame.Website
             );
             services.AddMemoryCache();
 
+            services.Configure<CosmosConfig>(Configuration.GetSection("CosmosConfig"));
+
             services.AddTransient<IGameNotifier, GameNotifier>();
             var path = Path.Combine(_env.ContentRootPath, "App_Data/OptionGrids");
             services.AddSingleton<IOptionGridService>(new OptionGridService(new[] { new ImposterGame.OptionGrids.FileBased.FileBasedGridProvider(path) }));
-            services.AddTransient<IPlayerService, InMemoryPlayerService>();
-            services.AddTransient<IGameService, InMemoryGameService>();
+            services.AddTransient<IPlayerService, CosmosDbAndInMemoryPlayerService>();
+            services.AddTransient<IGameRepository, CosmosDbGameRepository>();
+            services.AddTransient<IGameService, GameService>();
 
             services.AddSwaggerGen(c =>
             {

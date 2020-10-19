@@ -29,16 +29,16 @@ namespace ImposterGame.Website.Controllers
         }
 
         [HttpPost("[action]")]
-        public IGame Host(Guid playerId)
+        public async Task<IGame> Host(Guid playerId)
         {
-            var player = _playerService.GetPlayer(playerId);
+            var player = await _playerService.GetPlayer(playerId);
 
             if (player == null)
             {
                 throw new ApiException("Played not found");
             }
 
-            var updatedGame = _gameService.CreateGame(player);
+            var updatedGame = await _gameService.CreateGame(player);
 
             return updatedGame;
         }
@@ -46,16 +46,16 @@ namespace ImposterGame.Website.Controllers
         [HttpPost("[action]")]
         public async Task<IGame> Join([FromBody]JoinGameModel model)
         {
-            var player = _playerService.GetPlayer(model.PlayerId);
+            var player = await _playerService.GetPlayer(model.PlayerId);
 
             if (player == null)
             {
                 throw new ApiException("Player does not exist");
             }
 
-            var game = _gameService.GetGame(model.GameCode);
+            var game = await _gameService.GetGame(model.GameCode);
 
-            var updatedGame = _gameService.JoinGame(game, player);
+            var updatedGame = await _gameService.JoinGame(game, player);
 
             await _gameNotifier.SendPlayerJoined(updatedGame);
 
@@ -63,9 +63,9 @@ namespace ImposterGame.Website.Controllers
         }
 
         [HttpGet("[action]")]
-        public IGame GetGame(Guid gameId)
+        public async Task<IGame> GetGame(Guid gameId)
         {
-            var game = _gameService.GetGame(gameId);
+            var game = await _gameService.GetGame(gameId);
 
             if (game == null)
             {
@@ -78,20 +78,20 @@ namespace ImposterGame.Website.Controllers
         [HttpPost("[action]")]
         public async Task<IGame> Leave([FromBody]JoinGameModel model)
         {
-            var player = _playerService.GetPlayer(model.PlayerId);
+            var player = await _playerService.GetPlayer(model.PlayerId);
 
             if (player == null)
             {
                 throw new PlayerDoesNotExistException(model.PlayerId);
             }
 
-            var game = _gameService.GetGame(model.GameCode);
+            var game = await _gameService.GetGame(model.GameCode);
             var gameId = game.Id;
 
             var mustCancelRound = !game.CanLeaveWithoutRoundCancellation;
             var mustCancelGame = game.Host.Id == model.PlayerId;
 
-            var updatedGame = _gameService.LeaveGame(game, player);
+            var updatedGame = await _gameService.LeaveGame(game, player);
 
             await _gameNotifier.SendPlayerJoined(updatedGame);
 

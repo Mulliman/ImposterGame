@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Config\**" />
+    <Content Remove="Config\**" />
+    <EmbeddedResource Remove="Config\**" />
+    <None Remove="Config\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.Azure.SignalR" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
@@ -20,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ImposterGame.CosmosDb\ImposterGame.CosmosDb.csproj" />
     <ProjectReference Include="..\ImposterGame.Game\ImposterGame.Game.csproj" />
     <ProjectReference Include="..\ImposterGame.Model\ImposterGame.Model.csproj" />
     <ProjectReference Include="..\ImposterGame.OptionGrids.FileBased\ImposterGame.OptionGrids.FileBased.csproj" />

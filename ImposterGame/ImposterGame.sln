@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImposterGame.Game", "Impost
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImposterGame.OptionGrids", "ImposterGame.OptionGrids\ImposterGame.OptionGrids.csproj", "{65F4AD93-7232-4023-A7D9-58AD15E1F80B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.OptionGrids.FileBased", "ImposterGame.OptionGrids.FileBased\ImposterGame.OptionGrids.FileBased.csproj", "{F8D83218-31DE-43FA-A687-5C7733AE3FFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImposterGame.OptionGrids.FileBased", "ImposterGame.OptionGrids.FileBased\ImposterGame.OptionGrids.FileBased.csproj", "{F8D83218-31DE-43FA-A687-5C7733AE3FFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImposterGame.CosmosDb", "ImposterGame.CosmosDb\ImposterGame.CosmosDb.csproj", "{49E37E4F-8DEC-4DA6-9B5D-29FDCE0ED47D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F8D83218-31DE-43FA-A687-5C7733AE3FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8D83218-31DE-43FA-A687-5C7733AE3FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8D83218-31DE-43FA-A687-5C7733AE3FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E37E4F-8DEC-4DA6-9B5D-29FDCE0ED47D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E37E4F-8DEC-4DA6-9B5D-29FDCE0ED47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E37E4F-8DEC-4DA6-9B5D-29FDCE0ED47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E37E4F-8DEC-4DA6-9B5D-29FDCE0ED47D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
