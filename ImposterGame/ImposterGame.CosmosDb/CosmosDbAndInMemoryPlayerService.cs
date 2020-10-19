@@ -64,7 +64,7 @@ namespace ImposterGame.CosmosDb
             {
                 CloudTableClient tableClient = _cosmosClient.CreateCloudTableClient(new TableClientConfiguration());
                 CloudTable table = tableClient.GetTableReference(_config.TableName);
-                TableOperation retrieveOperation = TableOperation.Retrieve<GameEntity>(PlayerEntity.PlayerEntityPartitionKey, PlayerEntity.GetIdAsString(id));
+                TableOperation retrieveOperation = TableOperation.Retrieve<PlayerEntity>(PlayerEntity.PlayerEntityPartitionKey, PlayerEntity.GetIdAsString(id));
                 TableResult result = await table.ExecuteAsync(retrieveOperation);
                 var playerEntity = result.Result as PlayerEntity;
 

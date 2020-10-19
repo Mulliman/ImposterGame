@@ -8,11 +8,18 @@ export class UiService {
 
   constructor(private toastController: ToastController, private alertController: AlertController) { }
 
-  async alert(title, message = "") {
+  async alert(title, message = "", confirmedCallback: () => void = null) {
     const alert = await this.alertController.create({
       header: title,
       message: message,
-      buttons: ['OK']
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          if(confirmedCallback){
+            confirmedCallback();
+          }
+        }
+      }],
     });
 
     await alert.present();

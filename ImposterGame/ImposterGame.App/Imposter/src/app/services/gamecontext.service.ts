@@ -19,7 +19,8 @@ export class GameContext {
     public onRoundCancelled = new EventEmitter<Game>();
     public onGameCancelled = new EventEmitter<Game>();
     public onKicked = new EventEmitter<Game>();
-    
+    public onConnectionLost = new EventEmitter();
+
     private _currentGame: Game;
 
     public get currentGame(): Game{
@@ -99,6 +100,8 @@ export class GameContext {
             this.isConnectionActive = false;
         }
         await this.addListeners();
+
+        this.hubConnection.onclose(() => this.onConnectionLost.emit());
     }
     async addListeners() {
         this.addGameUpdateListener();

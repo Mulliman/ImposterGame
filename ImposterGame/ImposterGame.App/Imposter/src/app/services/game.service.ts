@@ -117,6 +117,11 @@ export class GameService {
     }
 
     // When a round starts, move every user to the current round page. 
+    
+    this.subscriptions.add(this.gameContext.onConnectionLost.subscribe(() => {
+      this.uiService.alert("Your connection has been lost.", "Please reload the page.", () => this.appPages.reloadPage())
+    }));
+
     this.subscriptions.add(this.gameContext.onRoundStarted.subscribe(() => {console.log("onRoundStarted"); this.appPages.goToCurrentRoundPage()}));
     this.subscriptions.add(this.gameContext.onAllAnswered.subscribe(() => this.appPages.goToChooseImposterPage()));
     this.subscriptions.add(this.gameContext.onAllAccused.subscribe(() => this.appPages.goToImposterGuessPage()));

@@ -31,6 +31,10 @@ export class AppPagesService {
     this.document.location.href = '/';
   }
 
+  reloadPage(){
+    this.document.location.reload();
+  }
+
   async ensureOnMostAppropriatePage(player: IPlayer, gameContext: GameContext) {
     console.log("ensureOnMostAppropriatePage");
     if (!player) {
