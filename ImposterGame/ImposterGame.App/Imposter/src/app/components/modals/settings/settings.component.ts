@@ -60,7 +60,54 @@ export class SettingsComponent extends BaseGameComponent {
     }
   }
 
+  async leaveGame() {
+    try {
+      var scope = this;
+
+      const isHost = this.currentGameContext.currentGame
+        && this.currentGameContext.currentGame.host.id == this.playerService.currentPlayer.id;
+
+      if (isHost) {
+        this.uiService.confirm("Finish Game", "You are the host, if you leave you will stop the game for everybody. Are you sure?", async function () {
+          await scope.gameService.leaveGame(scope.playerService.currentPlayer, scope.currentGameContext.currentGame.easyCode);
+          scope.playerService.clearSavedPlayer();
+          await scope.appPages.reloadApp();
+        });
+      } else {
+        const isMidGame =
+          this.currentGameContext.currentGame
+          && this.currentGameContext.currentGame.currentRound
+          && !this.currentGameContext.currentGame.currentRound.isComplete;
+
+        const message = isMidGame
+          ? "If you leave the game now, the round will be cancelled for everyone! Are you sure you want to leave this game?"
+          : `Are you sure you want to leave this game?`;
+
+        this.uiService.confirm("Leave Game", message, async function () {
+          await scope.gameService.leaveGame(scope.playerService.currentPlayer, scope.currentGameContext.currentGame.easyCode);
+          scope.playerService.clearSavedPlayer();
+          await scope.appPages.reloadApp();
+        });
+      }
+    } catch (e) {
+      console.error("Leave game error", e);
+    }
+  }
+
   async dismiss() {
     await this.modalController.dismiss();
+  }
+
+  async reload(){
+    this.appPages.reloadPage();
+  } 
+
+  async clear(){
+    if(this.currentGameContext.currentGame){
+      await this.leaveGame();
+    } else{
+      this.playerService.clearSavedPlayer();
+      this.appPages.reloadApp();
+    }
   }
 }

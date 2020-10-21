@@ -13,7 +13,7 @@
           </ion-card-header>
           <ion-card-content class="no-padding-top">
             <!-- IMPOSTER VIEW-->
-            <ion-list lines="none"
+            <ion-list lines="none" class="round-summary-list"
               *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.previousRound && gameContext.currentGame.wasImposterLastRound">
               <!-- WORD -->
               <ion-item>
@@ -34,14 +34,14 @@
               <!-- IMPOSTER FOUND? -->
               <ion-item *ngIf="!gameContext.currentGame.previousRound.wasImposterFound">
                 <ion-label text-center text-wrap color="success">
-                  <p>You were <strong>not</strong> identified by the team!</p>
+                  You were <strong>not</strong> identified by the team!
                 </ion-label>
                 <ion-icon color="success" name="thumbs-up" slot="start"></ion-icon>
               </ion-item>
 
               <ion-item *ngIf="gameContext.currentGame.previousRound.wasImposterFound">
                 <ion-label text-center text-wrap color="danger">
-                  <p>You were identified by the team!</p>
+                  You were identified by the team!
                 </ion-label>
                 <ion-icon color="danger" name="thumbs-down" slot="start"></ion-icon>
               </ion-item>
@@ -49,14 +49,14 @@
               <!-- IMPOSTER GUESSED WORD? -->
               <ion-item *ngIf="gameContext.currentGame.previousRound.isImpostersGuessCorrect">
                 <ion-label text-center text-wrap color="success">
-                  <p>You guessed the secret word correctly.</p>
+                  You guessed the secret word correctly.
                 </ion-label>
                 <ion-icon color="success" name="thumbs-up" slot="start"></ion-icon>
               </ion-item>
 
               <ion-item *ngIf="!gameContext.currentGame.previousRound.isImpostersGuessCorrect">
                 <ion-label text-center text-wrap color="danger">
-                  <p>You did not guess the secret word. You guessed "{{gameContext.currentGame.previousRound.impostersGuess}}".</p>
+                  You did not guess the secret word. You guessed "{{gameContext.currentGame.previousRound.impostersGuess}}".
                 </ion-label>
                 <ion-icon color="danger" name="thumbs-down" slot="start"></ion-icon>
               </ion-item>
@@ -64,7 +64,7 @@
             </ion-list>
 
             <!-- TEAM PLAYER VIEW -->
-            <ion-list lines="none"
+            <ion-list lines="none"  class="round-summary-list"
               *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.previousRound && !gameContext.currentGame.wasImposterLastRound">
               <!-- WORD -->
               <ion-item>
@@ -86,14 +86,14 @@
               <!-- PLAYER GUESSED IMPOSTER? -->
               <ion-item *ngIf="isUserGuessCorrect(gameContext.currentGame.previousRound, playerService.currentPlayer)">
                 <ion-label text-center text-wrap color="success">
-                  <p>You guessed the imposter correctly.</p>
+                  You guessed the imposter correctly.
                 </ion-label>
                 <ion-icon color="success" name="thumbs-up" slot="start"></ion-icon>
               </ion-item>
 
               <ion-item *ngIf="!isUserGuessCorrect(gameContext.currentGame.previousRound, playerService.currentPlayer)">
                 <ion-label text-center text-wrap color="danger">
-                  <p>You did not guess the imposter correctly.</p>
+                  You did not guess the imposter correctly.
                 </ion-label>
                 <ion-icon color="danger" name="thumbs-down" slot="start"></ion-icon>
               </ion-item>
@@ -101,14 +101,14 @@
               <!-- IMPOSTER FOUND? -->
               <ion-item *ngIf="gameContext.currentGame.previousRound.wasImposterFound">
                 <ion-label text-center text-wrap color="success">
-                  <p>The imposter was identified by the team!</p>
+                  The imposter was identified by the team!
                 </ion-label>
                 <ion-icon color="success" name="thumbs-up" slot="start"></ion-icon>
               </ion-item>
 
               <ion-item *ngIf="!gameContext.currentGame.previousRound.wasImposterFound">
                 <ion-label text-center text-wrap color="danger">
-                  <p>The imposter was <strong>not</strong> identified by the team!</p>
+                  The imposter was <strong>not</strong> identified by the team!
                 </ion-label>
                 <ion-icon color="danger" name="thumbs-down" slot="start"></ion-icon>
               </ion-item>
@@ -116,14 +116,14 @@
               <!-- IMPOSTER GUESSED WORD? -->
               <ion-item *ngIf="!gameContext.currentGame.previousRound.isImpostersGuessCorrect">
                 <ion-label text-center text-wrap color="success">
-                  <p>The imposter did not guess the secret word. They guessed "{{gameContext.currentGame.previousRound.impostersGuess}}".</p>
+                  The imposter did not guess the secret word. They guessed "{{gameContext.currentGame.previousRound.impostersGuess}}".
                 </ion-label>
                 <ion-icon color="success" name="thumbs-up" slot="start"></ion-icon>
               </ion-item>
 
               <ion-item *ngIf="gameContext.currentGame.previousRound.isImpostersGuessCorrect">
                 <ion-label text-center text-wrap color="danger">
-                  <p>The imposter guessed the secret word correctly.</p>
+                  The imposter guessed the secret word correctly.
                 </ion-label>
                 <ion-icon color="danger" name="thumbs-down" slot="start"></ion-icon>
               </ion-item>
