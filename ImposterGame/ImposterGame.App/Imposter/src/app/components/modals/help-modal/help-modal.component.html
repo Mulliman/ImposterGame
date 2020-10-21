@@ -19,11 +19,11 @@
   </div>
 
   <ion-toolbar>
-    <ion-title size="small" class="no-padding" *ngIf="isImposter" color="danger">
+    <ion-title size="small" class="no-padding help-reminder-imposter" *ngIf="isImposter" color="danger">
       Remember, you are the Imposter!
     </ion-title>
 
-    <ion-title size="small" class="no-padding" *ngIf="!isImposter" color="primary">
+    <ion-title size="small" class="no-padding help-reminder-not-imposter" *ngIf="!isImposter" color="primary">
       Remember, you are <strong>NOT</strong> the Imposter!
     </ion-title>
   </ion-toolbar>
@@ -78,26 +78,33 @@
 
   <!-- Choose Imposter -->
   <div class="help-content" *ngIf="isSectionShown('choose-imposter')">
-      <h2 class="ion-text-center">Answer stage</h2>
+      <h2 class="ion-text-center">Choose imposter stage</h2>
   
       <h3>What to do</h3>
   
       <ion-text *ngIf="!showImposterVariant">
-        <p>Write content about choose imposter stage!</p>
+        <p>In this stage you need to interrogate other players if you think their answers are suspicious.
+           If other users ask you to clarify your answer, make sure you don't give away any secrets, the imposter could be listening for any clues.</p>
+           <p>When the discussion is over, you will need to accuse someone and make a wager based on how sure you are.</p>
+           <p>The more points you wager, the more points you get if you accuse the right person. Guess wrong, and the imposter will have the chance to get those points instead!</p>
       </ion-text>
       <ion-text *ngIf="showImposterVariant">
-        <p>Write content about choose imposter stage!</p>
+        <p>If you already know the secret word this is your chance to blend in with the group and cast suspicion on other players. Ask questions to those you think gave the weakest answers.</p>
+        <p>If you are unsure on the secret word you need to use all your misdirection and subterfuge skills to evade capture and discover the secret word.</p>
+        <p>The other players will be on the hunt, and will get points if they find you!</p>
       </ion-text>
   
       <h3>Tips and tricks</h3>
       <ion-text *ngIf="!showImposterVariant">
           <ul>
-            <li>Write a tip.</li>
+            <li>If you are sure someone is not the imposter, try and phrase your answer in a way that they will understand but the imposter will not. They may vouch for you and the word will remain secret.</li>
+            <li>Look out for the person deflecting questions, and constantly checking the option grid.</li>
           </ul>
         </ion-text>
         <ion-text *ngIf="showImposterVariant">
           <ul>
-             <li>Write a tip.</li>
+             <li>The successful hunter targets the weakest in the group. This is the time to be ruthless.</li>
+             <li>Even if you think you may be caught, you can still get points for guessing the secret word; use this time well!</li>
           </ul>
         </ion-text>
     </div>

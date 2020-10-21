@@ -14,7 +14,7 @@
         <ion-card-content  class="no-padding-top single-paragraph-and-button">
           <p>The host chooses grids and coordinate when a round starts.</p>
 
-          <ion-button (click)="hostGame()" expand="block">Host Game</ion-button>
+          <ion-button size="small" (click)="hostGame()" expand="block">Host Game</ion-button>
         </ion-card-content>
       </ion-card>
 
@@ -35,7 +35,7 @@
             <app-error-message [control]="form.get('gameCode')"></app-error-message>
           </form>
 
-          <ion-button [disabled]="!form.valid" (click)="joinGame()" expand="block">Join Game</ion-button>
+          <ion-button size="small" [disabled]="!form.valid" (click)="joinGame()" expand="block">Join Game</ion-button>
         </ion-card-content>
       </ion-card>
 
