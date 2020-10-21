@@ -4,7 +4,7 @@
 
   <div style="display: flex; flex-direction: column; height: 100%;">
     <div style="height: 10%;">
-      <img src="assets/logo.png" [ngClass]="(showHeaderLogo)?'header-logo show-header-logo':'header-logo hide-header-logo'" style="" />
+      <img src="assets/logo.png" [ngClass]="(showHeaderLogo)?'header-logo show-header-logo':'header-logo hide-header-logo'" />
     </div>
   
     <div style="flex: auto;">
@@ -117,7 +117,7 @@
       </ion-slides>
     </div>
   
-    <div style="">
+    <div>
       <div class="play-button-wrapper">
         <ion-button class="play-button" expand="block" (click)="playGame()">Play game</ion-button>
       </div>
