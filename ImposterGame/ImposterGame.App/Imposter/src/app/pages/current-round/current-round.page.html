@@ -5,7 +5,7 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <ion-card *ngIf="gameContext" class="no-margin-top">
+        <ion-card *ngIf="gameContext"  class="bordered no-margin-top">
           <ion-card-header class="no-padding-bottom">
             <ion-card-subtitle>Answers</ion-card-subtitle>
           </ion-card-header>
@@ -33,7 +33,7 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <ion-card *ngIf="gameContext" class="no-margin-top">
+        <ion-card *ngIf="gameContext" class="bordered no-margin-top">
           <ion-card-header class="no-padding-bottom">
             <ion-card-subtitle>Option Grid</ion-card-subtitle>
           </ion-card-header>
@@ -61,7 +61,7 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <ion-card class="white-background" *ngIf="!yourAnswer" class="no-margin-top">
+        <ion-card *ngIf="!yourAnswer" class="white-background bordered no-margin-top">
           <ion-card-header>
             <ion-card-title>Time to answer</ion-card-title>
           </ion-card-header>
@@ -81,7 +81,7 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-card class="white-background" *ngIf="yourAnswer">
+        <ion-card class="white-background bordered" *ngIf="yourAnswer">
           <ion-card-header>
             <ion-card-title>Your Answer</ion-card-title>
           </ion-card-header>

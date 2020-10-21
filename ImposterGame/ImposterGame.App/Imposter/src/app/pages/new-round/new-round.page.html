@@ -6,7 +6,7 @@
 
     <ion-slide *ngIf="gameContext">
       <div class="slide-inner" class="full-width">
-        <ion-card *ngIf="gameContext.currentGame">
+        <ion-card class="bordered" *ngIf="gameContext.currentGame">
           <ion-card-header class="no-padding-bottom">
             <ion-card-subtitle>Players</ion-card-subtitle>
           </ion-card-header>
@@ -28,7 +28,7 @@
         <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
           <div class="ion-text-center">
 
-            <ion-card *ngIf="gameContext.currentGame.isHost && !this.gridService.selectedOptionGrid">
+            <ion-card class="bordered" *ngIf="gameContext.currentGame.isHost && !this.gridService.selectedOptionGrid">
               <ion-card-header>
                 <ion-card-title>Choose a grid for the next round</ion-card-title>
               </ion-card-header>
@@ -40,7 +40,7 @@
               </ion-card-content>
             </ion-card>
 
-            <ion-card *ngIf="gameContext.currentGame.isHost && this.gridService.selectedOptionGrid">
+            <ion-card class="bordered" *ngIf="gameContext.currentGame.isHost && this.gridService.selectedOptionGrid">
               <ion-card-header>
                 <ion-card-subtitle>You have chosen</ion-card-subtitle>
                 <ion-card-title>"{{this.gridService.selectedOptionGrid.name}}"</ion-card-title>
@@ -55,7 +55,7 @@
               </ion-card-content>
             </ion-card>
 
-            <ion-card *ngIf="!gameContext.currentGame.isHost">
+            <ion-card class="bordered" *ngIf="!gameContext.currentGame.isHost">
               <ion-card-header>
                 <ion-card-title>Waiting for host.</ion-card-title>
               </ion-card-header>

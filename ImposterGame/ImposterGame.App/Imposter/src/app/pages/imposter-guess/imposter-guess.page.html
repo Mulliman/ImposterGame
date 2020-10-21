@@ -4,7 +4,7 @@
 
   <ion-row justify-content-center align-items-center no-padding class="full-page-row no-margin" *ngIf="isLoaded">
 
-    <ion-card class="no-margin" text-center *ngIf="!isSubmitted && gameContext.currentGame && gameContext.currentGame.isImposter">
+    <ion-card class="bordered no-margin" text-center *ngIf="!isSubmitted && gameContext.currentGame && gameContext.currentGame.isImposter">
       <ion-card-header>
         <ion-card-title *ngIf="gameContext.currentGame.currentRound.imposter.player.name == playerService.currentPlayer.name">
           You were discovered!
@@ -34,7 +34,7 @@
     </ion-card>
 
     <div *ngIf="!isSubmitted && gameContext.currentGame && !gameContext.currentGame.isImposter">
-      <ion-card class="no-margin-top" text-center >
+      <ion-card class="bordered no-margin-top" text-center >
         <ion-card-header>
           <ion-card-title>
             The imposter was {{gameContext.currentGame.currentRound.imposter.player.name}}

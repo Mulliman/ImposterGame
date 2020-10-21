@@ -1,25 +1,28 @@
-<ion-header no-border >
+<ion-header no-border>
   <ion-toolbar>
     <!-- <ion-buttons slot="start">
       <ion-icon name="people" slot="start"></ion-icon>
     </ion-buttons> -->
 
     <ion-title *ngIf="isLoaded && (!this.currentGameContext.currentGame || this.currentGameContext.currentGame.isImposter == null)">
-        ...
-      </ion-title>
+      <img class="app-header-logo" src="assets/logo.png" style="" />
+    </ion-title>
 
-    <ion-title  class="no-padding"  *ngIf="isLoaded && this.currentGameContext.currentGame && this.currentGameContext.currentGame.isImposter == true">
+    <ion-title class="no-padding"
+      *ngIf="isLoaded && this.currentGameContext.currentGame && this.currentGameContext.currentGame.isImposter == true">
       You are the Imposter!
     </ion-title>
 
-    <ion-title class="no-padding" *ngIf="isLoaded && this.currentGameContext.currentGame && this.currentGameContext.currentGame.isImposter == false">
-        You are <strong>NOT</strong> the Imposter!
-      </ion-title>
+    <ion-title class="no-padding"
+      *ngIf="isLoaded && this.currentGameContext.currentGame && this.currentGameContext.currentGame.isImposter == false">
+      You are <strong>NOT</strong> the Imposter!
+    </ion-title>
 
-      <ion-buttons slot="end" *ngIf="isLoaded && currentGameContext && currentGameContext.currentGame && currentGameContext.currentGame.isHost">
-        <ion-button color="light" (click)="openSettings()">
-          <ion-icon name="settings"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+    <ion-buttons slot="end"
+      *ngIf="isLoaded && currentGameContext && currentGameContext.currentGame && currentGameContext.currentGame.isHost">
+      <ion-button color="light" (click)="openSettings()">
+        <ion-icon name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>

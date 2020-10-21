@@ -4,9 +4,9 @@
 
   <ion-row class="full-page-row ion-justify-content-center ion-align-items-center">
 
-    <ion-card class="no-margin-top" *ngIf="!gameContext || (gameContext && !gameContext.currentGame)">
+    <ion-card class="no-margin-top bordered" *ngIf="!gameContext || (gameContext && !gameContext.currentGame)">
       <ion-card-header>
-        <ion-card-title text-center>Who are you?</ion-card-title>
+        <ion-card-title text-center color="primary">Who are you?</ion-card-title>
       </ion-card-header>
       <ion-card-content class="no-padding-top">
         <form [formGroup]="form" class="margin-bottom imposter-form">

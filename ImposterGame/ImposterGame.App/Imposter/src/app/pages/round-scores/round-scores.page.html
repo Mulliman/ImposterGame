@@ -5,7 +5,7 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <ion-card  class="small-margin-top" text-center *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.previousRound">
+        <ion-card class="bordered small-margin-top" text-center *ngIf="gameContext && gameContext.currentGame && gameContext.currentGame.previousRound">
           <ion-card-header>
             <ion-card-title>
               Round Overview
@@ -140,7 +140,7 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <ion-card class="no-margin-top" text-center>
+        <ion-card class="bordered no-margin-top" text-center>
           <ion-card-header>
             <ion-card-title>
               Round Scores
@@ -168,7 +168,7 @@
 
     <ion-slide>
       <div class="slide-inner" class="full-width">
-        <ion-card class="no-margin-top" text-center>
+        <ion-card class="bordered no-margin-top" text-center>
           <ion-card-header>
             <ion-card-title>
               Game Scores

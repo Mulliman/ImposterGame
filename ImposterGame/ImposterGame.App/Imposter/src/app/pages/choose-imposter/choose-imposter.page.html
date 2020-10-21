@@ -5,7 +5,7 @@
 
     <ion-slide>
       <div class="slide-inner full-width">
-        <ion-card>
+        <ion-card class="bordered">
           <div class="choose-step-1">
             <ion-card-content>
               <app-option-grid *ngIf="currentRound" [options]="currentRound.allOptions"
@@ -24,7 +24,7 @@
 
     <ion-slide>
       <div class="slide-inner full-width">
-        <ion-card>
+        <ion-card class="bordered">
           <div class="choose-step-1">
             <ion-card-header>
               <ion-card-subtitle>Step 1 of 2</ion-card-subtitle>
@@ -65,7 +65,7 @@
 
     <ion-slide>
       <div class="slide-inner full-width">
-        <ion-card *ngIf="!selectedImposter && !hasSubmitted">
+        <ion-card class="bordered" *ngIf="!selectedImposter && !hasSubmitted">
           <ion-card-header>
             <ion-card-subtitle>Step 2 of 2</ion-card-subtitle>
             <ion-card-title>
@@ -80,7 +80,7 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-card *ngIf="selectedImposter && !hasSubmitted && !isImposter">
+        <ion-card class="bordered" *ngIf="selectedImposter && !hasSubmitted && !isImposter">
           <ion-card-header>
             <ion-card-subtitle>Step 2 of 2</ion-card-subtitle>
             <ion-card-title>
@@ -116,7 +116,7 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-card *ngIf="selectedImposter && !hasSubmitted && isImposter">
+        <ion-card class="bordered" *ngIf="selectedImposter && !hasSubmitted && isImposter">
           <ion-card-header>
             <ion-card-subtitle>Step 2 of 2</ion-card-subtitle>
             <ion-card-title>
@@ -132,7 +132,7 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-card *ngIf="hasSubmitted">
+        <ion-card class="bordered" *ngIf="hasSubmitted">
           <ion-card-header>
             <ion-card-title>
               Your accusation
