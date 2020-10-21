@@ -27,5 +27,8 @@
     </ion-buttons>
   </ion-toolbar>
   <!-- <ion-button class="no-margin" color="light" *ngIf="showChangeName" expand="full" (click)="clearPlayer()">Not '{{player.name}}'?</ion-button> -->
-  <ion-button class="no-margin" *ngIf="!hidePlayButton && !this.currentGameContext.currentGame" expand="full" (click)="playGame()" color="dark">Play game</ion-button>
+  
+  <div class="play-button-wrapper" *ngIf="!hidePlayButton && !this.currentGameContext.currentGame">
+    <ion-button class="play-button" expand="block" (click)="playGame()">Play game</ion-button>
+  </div>
 </ion-footer>

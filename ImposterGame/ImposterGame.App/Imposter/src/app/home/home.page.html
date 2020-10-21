@@ -1,109 +1,128 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 
 <ion-content fullscreen scroll-y="false" class="ion-padding green-gradient">
-  <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" pager="true" #HomeSlider>
 
-    <ion-slide>
-      <ion-card class="no-margin-top">
-        <div>
-          <ion-card-header>
-            <ion-card-title>Imposter!</ion-card-title>
-          </ion-card-header>
-          <ion-card-content class="no-padding-top multi-paragraph">
-            <p>Can you blend in with a group and discover the secret word, while avoiding suspicion from the other players?</p>
-            <p>Best played with 4 - 7 players.</p>
-            <ion-button (click)="swipeNext()">Learn to play</ion-button>
-          </ion-card-content>
-        </div>
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card class="no-margin-top">
-        <ion-card-header>
-          <ion-card-title>Friends and family</ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="no-padding-top multi-paragraph">
-          <p>Gather a crowd of budding spies and sleuths and ensure that you can all easily communicate.</p>
-          <p>Ideally play socially distanced in one room, but you can also play over video call!</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card class="no-margin-top">
-        <ion-card-header>
-          <ion-card-title>Secret words</ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="no-padding-top multi-paragraph">
-          <p>At the start of each round, the host will choose a grid. This grid contains 16 relating words, one
-            of which will be randomly selected as the secret word.</p>
-          <p>Most players will see this secret word highlighted on their grid, however one player will not. This person
-            is <strong>The Imposter</strong>.</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card class="no-margin-top">
-        <ion-card-header>
-          <ion-card-title>Pick a word, any word</ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="no-padding-top multi-paragraph">
-          <p>Once the round has started, each player must say a word that relates to the secret word. As the imposter
-            doesn't know what that secret word is, they must attempt to blend in with the answer that they choose.</p>
-          <p>Answers must be clear enough to prove that you are not the imposter, however you don't want to make it too easy 
-            for the imposter to guess what the secret word is!</p>
-          <p>Players can answer at any time. Hot tip - answering early can reduce other's suspicion of you. Do you want to risk
-            being the last to answer?</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card class="no-margin-top">
-        <ion-card-header>
-          <ion-card-title>The Interrogation</ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="no-padding-top multi-paragraph">
-          <p>When all players have answered, it's time to interrogate each other to try and discover who the imposter
-            is <strong>without</strong> revealing the secret word.</p>
-          <p>The imposter needs to use this time to prove that they know what the answer is, still without saying the secret word. 
-             By deflecting accusations to other users, can you avoid suspicion while also picking up clues to help you find
-            the answer?</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card class="no-margin-top">
-        <ion-card-header>
-          <ion-card-title>Accusations and Wagers</ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="no-padding-top multi-paragraph">
-          <p>After the interrogation has concluded, each player must then select the user that they think is the imposter.
-          </p>
-          <p>The more sure you are of your accusation, the more points you can wager. If you are correct, you will get all of those
-            points added to your total.</p>
-          <p>However, if you guess wrong the imposter can win those points instead. Do you trust your detective skills?</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card class="no-margin-top">
-        <ion-card-header>
-          <ion-card-title>Confessions and Conclusions</ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="no-padding-top multi-paragraph">
-          <p>When all wagers are placed, the votes will be tallied. As a collective, have you successfully found the imposter?</p>
-          <p>Once the imposter is revealed, they still have a chance to guess the secret word.</p>
-          <p>If the imposter guesses correctly, your clues were too obvious and the imposter will get a point, plus any incorrect wagers.</p>
-          <p>If the imposter does not guess the secret word, each player gets one bonus point each.</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
+  <div style="display: flex; flex-direction: column; height: 100%;">
+    <div style="height: 10%;">
+      <img src="assets/logo.png" [ngClass]="(showHeaderLogo)?'header-logo show-header-logo':'header-logo hide-header-logo'" style="" />
+    </div>
+  
+    <div style="flex: auto;">
+      <ion-slides class="full-height-slides" slidesPerView="1" [options]="slideOpts" (ionSlideWillChange)="slideChanged()" pager="true" #HomeSlider>
+  
+        <ion-slide>
+          <div>
+            <img src="assets/logo.png" style="max-width:80%; margin: auto auto 20px; display: block;" />
+    
+            <ion-card class="no-margin-top bordered">
+              <div>
+                <ion-card-header>
+                  <ion-card-title></ion-card-title>
+                </ion-card-header>
+                <ion-card-content class="no-padding-top multi-paragraph">
+                  <p>Can you blend in with a group and discover the secret word, while avoiding suspicion from the other players?</p>
+                  <p>Best played with 4 - 7 players.</p>
+                  <ion-button class="card-button" (click)="swipeNext()">Learn to play</ion-button>
+                </ion-card-content>
+              </div>
+            </ion-card>
+          </div>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card class="no-margin-top bordered instruction-card">
+            <ion-card-header>
+              <ion-card-title color="primary"><ion-icon name="people"></ion-icon><br />Friends and family</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="no-padding-top multi-paragraph">
+              <p>Gather a crowd of budding spies and sleuths and ensure that you can all easily communicate.</p>
+              <p>Ideally play socially distanced in one room, but you can also play over video call!</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card class="no-margin-top bordered instruction-card">
+            <ion-card-header>
+              <ion-card-title color="primary"><ion-icon name="key" style="transform: rotate(-90deg);"></ion-icon><br />Secret words</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="no-padding-top multi-paragraph">
+              <p>At the start of each round, the host will choose a grid. This grid contains 16 related words, one
+                of which will be randomly selected as the secret word.</p>
+              <p>Most players will see this secret word highlighted on their grid, however one player will not. This person
+                is <strong>The Imposter</strong>.</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card class="no-margin-top bordered instruction-card">
+            <ion-card-header>
+              <ion-card-title color="primary"><ion-icon name="chatbubbles"></ion-icon><br />Pick a word, any word</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="no-padding-top multi-paragraph">
+              <p>Once the round has started, each player must say a word that relates to the secret word. As the imposter
+                doesn't know what that secret word is, they must attempt to blend in with the answer that they choose.</p>
+              <p>Answers must be clear enough to prove that you are not the imposter, however you don't want to make it too easy 
+                for the imposter to guess what the secret word is!</p>
+              <p>Players can answer at any time. Hot tip - answering early can reduce other's suspicion of you. Do you want to risk
+                being the last to answer?</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card class="no-margin-top bordered instruction-card">
+            <ion-card-header>
+              <ion-card-title color="primary"><ion-icon name="pulse"></ion-icon><br />The Interrogation</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="no-padding-top multi-paragraph">
+              <p>When all players have answered, it's time to interrogate each other to try and discover who the imposter
+                is <strong>without</strong> revealing the secret word.</p>
+              <p>The imposter needs to use this time to prove that they know what the answer is, still without saying the secret word. 
+                 By deflecting accusations to other users, can you avoid suspicion while also picking up clues to help you find
+                the answer?</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card class="no-margin-top bordered instruction-card">
+            <ion-card-header>
+              <ion-card-title color="primary"><ion-icon name="help-circle"></ion-icon><br />Accusations and Wagers</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="no-padding-top multi-paragraph">
+              <p>After the interrogation has concluded, each player must then select the user that they think is the imposter.
+              </p>
+              <p>The more sure you are of your accusation, the more points you can wager. If you are correct, you will get all of those
+                points added to your total.</p>
+              <p>However, if you guess wrong the imposter can win those points instead. Do you trust your detective skills?</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+    
+        <ion-slide>
+          <ion-card class="no-margin-top bordered instruction-card">
+            <ion-card-header>
+              <ion-card-title color="primary"><ion-icon name="star"></ion-icon><br />Confessions and Conclusions</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="no-padding-top multi-paragraph">
+              <p>When all wagers are placed, the votes will be tallied. As a collective, have you successfully found the imposter?</p>
+              <p>Once the imposter is revealed, they still have a chance to guess the secret word.</p>
+              <p>If the imposter guesses correctly, your clues were too obvious and the imposter will get a point, plus any incorrect wagers.</p>
+              <p>If the imposter does not guess the secret word, each player gets one bonus point each.</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  
+    <div style="">
+      <div class="play-button-wrapper">
+        <ion-button class="play-button" expand="block" (click)="playGame()">Play game</ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>
 
-<app-footer [hideChangeNameButton]="true"></app-footer>
+<!-- <app-footer [hideChangeNameButton]="true"></app-footer> -->

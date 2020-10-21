@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { Animation, NavOptions,IonicAnimation } from '@ionic/core';
 import { createAnimation } from '@ionic/core';
 import { TransitionOptions, getIonPageElement } from '@ionic/core/dist/collection/utils/transition';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { TransitionOptions, getIonPageElement } from '@ionic/core/dist/collectio
      AppRoutingModule,
      ComponentsModule,
      HttpClientModule,
+     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
   providers: [
     StatusBar,

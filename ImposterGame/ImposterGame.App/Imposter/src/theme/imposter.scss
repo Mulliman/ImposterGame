@@ -109,12 +109,23 @@ ion-card {
   --background: #fff !important;
   margin-bottom: 12px !important;
 
+  &.bordered{
+    border: 5px solid var(--ion-color-medium);
+    border-radius: 16px;
+  }
+
   ion-card-header {
     padding: 16px 12px 12px;
+    font-family: 'Roboto Slab', serif;
 
     &.border-bottom{
         border-bottom: 1px solid #ddd;
     }
+  }
+
+  ion-button.card-button{
+    letter-spacing: 0.5px;
+    font-size: 15px;
   }
 
   ion-card-title {
@@ -142,6 +153,28 @@ ion-card {
 
     p:last-child {
       margin-bottom: 2px;
+    }
+  }
+}
+
+.instruction-card{
+  @media (max-height: 620px) {
+    ion-card-title{
+      font-size: 20px;
+    }
+
+    ion-card-content p{
+      font-size: 14px;
+    }
+  }
+
+  @media (max-height: 570px) {
+    ion-card-title{
+      font-size: 18px;
+    }
+
+    ion-card-content p{
+      font-size: 12px;
     }
   }
 }

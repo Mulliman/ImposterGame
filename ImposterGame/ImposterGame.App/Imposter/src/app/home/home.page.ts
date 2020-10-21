@@ -8,7 +8,7 @@ import { AppPagesService } from '../services/app-pages.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['home.page.scss']
 })
 export class HomePage extends BaseGamePage {
   
@@ -20,6 +20,8 @@ export class HomePage extends BaseGamePage {
     slidesPerView: 1,
     pager: true,
   };
+
+  showHeaderLogo: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -44,5 +46,15 @@ export class HomePage extends BaseGamePage {
 
   swipeNext() {
     this.slides.slideNext();
+  }
+
+  async slideChanged(){
+    var index = await this.slides.getActiveIndex();
+
+    this.showHeaderLogo = index != 0;
+  }
+
+  async playGame() {
+    await this.appPages.goToYouPage();
   }
 }
