@@ -64,7 +64,10 @@ export class NewRoundPage extends BaseGamePage {
 
   async goToChooseGridPage(){    
       const modal = await this.modalController.create({
-        component: ChooseGridComponent
+        component: ChooseGridComponent,
+        componentProps: {
+          'isHost': this.gameContext && this.gameContext.currentGame && this.gameContext.currentGame.isHost
+        }
       });
       return await modal.present();
   }

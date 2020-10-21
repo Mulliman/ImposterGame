@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { OptionGridGroup, OptionGridModel, OptionGridService } from 'src/app/services/option-grid.service';
 import { ModalController } from '@ionic/angular';
 
@@ -8,6 +8,8 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./choose-grid.component.scss'],
 })
 export class ChooseGridComponent implements OnInit {
+
+  @Input() isHost: boolean;
 
   gridGroups: OptionGridGroup[];
   showSlides: boolean;

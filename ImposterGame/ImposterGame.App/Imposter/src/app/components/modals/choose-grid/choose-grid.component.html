@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>Choose option grid</ion-title>
+    <ion-title *ngIf="isHost">Choose grid</ion-title>
+    <ion-title *ngIf="!isHost">View grids</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">Close</ion-button>
     </ion-buttons>
@@ -14,12 +15,18 @@
       <div class="slide-inner">
         <h1>{{group.name}}</h1>
 
-        <ion-list>
+        <ion-list *ngIf="isHost">
           <ion-item class="ion-no-padding" *ngFor="let grid of group.optionGrids" (click)="selectGrid(grid)">
               <ion-label>{{grid.name}}</ion-label>
             <!-- <button item-right (click)="selectGrid(grid)">{{grid.title}}</button> -->
             <ion-note slot="end" color="primary">Choose</ion-note>
           </ion-item>
+        </ion-list>
+
+        <ion-list *ngIf="!isHost">
+          <ion-item class="ion-no-padding" *ngFor="let grid of group.optionGrids">
+            <ion-label>{{grid.name}}</ion-label>
+        </ion-item>
         </ion-list>
       </div>
     </ion-slide>
