@@ -64,6 +64,8 @@ export class CurrentRoundPage extends BaseGameFormPage {
     {
       this.currentRound = this.gameContext.currentGame.currentRound;
       this.isImposter = this.currentRound.imposter.player.name == this.playerService.currentPlayer.name;
+      var participant = this.currentRound.participants.find(p => p.player.id == this.playerService.currentPlayer.id);
+      this.yourAnswer = participant.answer;
     }
   }
 
