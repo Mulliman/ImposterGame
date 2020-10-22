@@ -4,7 +4,6 @@
   "options": [
     "Refresher",
     "Skittles",
-    "Tutti Frutti",
     "Black Jacks",
     "Fruit Salad",
     "Drumstick",
@@ -23,10 +22,20 @@
     "Jelly Babies",
     "Sherbet Fountain",
     "Liquorice Allsorts",
-    "Fizzers",
     "Wine Gums",
-    "Sherbet Lemons"
-
+    "Sherbet Lemons",
+    "Dip Dab",
+    "Dolly Mixture",
+    "Fruit Pastilles",
+    "Fruit Gums",
+    "Strawberry Shoelaces",
+    "Starburst",
+    "Flump",
+    "Chewits",
+    "Mint Humbug",
+    "Mentos",
+    "Polos",
+    "Werther's Original"
   ],
   "groups": [
     "All",
