@@ -1,0 +1,39 @@
+{
+  "id": "49262e09-7777-4223-bbe0-8f85f413a7ae",
+  "name": "Music Genres",
+  "options": [
+    "Jungle",
+    "R & B",
+    "Soul",
+    "Rock",
+    "Heavy Metal",
+    "Grime",
+    "Jazz",
+    "Musical",
+    "Pop",
+    "Garage",
+    "Techno",
+    "Trance",
+    "Dubstep",
+    "Folk",
+    "Country",
+    "Blues",
+    "Punk",
+    "Funk",
+    "Disco",
+    "Gospel",
+    "Opera",
+    "Classical",
+    "Ska",
+    "Hip Hop",
+    "Reggae",
+    "Emo",
+    "Grunge",
+    "Indie"
+  ],
+  "groups": [
+    "All",
+    "General",
+    "Music"
+  ]
+}
