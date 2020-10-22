@@ -1,0 +1,38 @@
+{
+  "id": "55F22AD7-0C8F-4BE6-8076-8FC4AEC7A53F",
+  "name": "Snacks",
+  "options": [
+    "M&Ms",
+    "Snickers",
+    "Bounty",
+    "Milky Way",
+    "Twix",
+    "Kit Kat",
+    "Crunchie",
+    "Aero",
+    "Yorkie",
+    "Twirl",
+    "Flake",
+    "Galaxy Minstrels",
+    "Mars Bar",
+    "Turkish Delight",
+    "Toblerone",
+    "Lion",
+    "Freddo",
+    "Dairy Milk",
+    "Cadburys Fruit and Nut",
+    "Bournville",
+    "Rolo",
+    "Dime",
+    "Munchies",
+    "Lindor",
+    "Magic Stars",
+    "Chomp",
+    "Ferrero Rocher",
+    "Matchmakers"
+      ],
+  "groups": [
+    "All",
+    "Food & Drink"
+      ]
+}
