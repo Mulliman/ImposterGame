@@ -1,0 +1,43 @@
+{
+  "id": "9e6933ff-3535-4aa4-942b-35d487760ac9",
+  "name": "Chemical Elements",
+  "options": [
+    "Hydrogen",
+    "Helium",
+    "Lithium",
+    "Carbon",
+    "Nitrogen",
+    "Oxygen",
+    "Fluorine",
+    "Neon",
+    "Sodium",
+    "Magnesium",
+    "Aluminium",
+    "Silicon",
+    "Phosphorus",
+    "Sulfur",
+    "Chlorine",
+    "Potassium",
+    "Calcium",
+    "Titanium",
+    "Iron",
+    "Nickel",
+    "Copper",
+    "Zinc",
+    "Palladium",
+    "Silver",
+    "Tin",
+    "Iodine",
+    "Tungsten",
+    "Platinum",
+    "Gold",
+    "Mercury",
+    "Lead",
+    "Uranium",
+    "Plutonium"
+  ],
+  "groups": [
+    "All",
+    "Educational"
+  ]
+}
