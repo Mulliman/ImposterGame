@@ -2,7 +2,6 @@
 using ImposterGame.Game.Rounds;
 using ImposterGame.Game.Scorers;
 using ImposterGame.Model;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,10 +34,8 @@ namespace ImposterGame.Game
             Scorer = new DefaultScorer();
         }
 
-        [JsonIgnore]
         public IScorer Scorer { get; set; }
 
-        [JsonProperty(PropertyName = "id")]
         public Guid Id { get; set; }
 
         public string EasyCode { get; set; }
@@ -53,10 +50,8 @@ namespace ImposterGame.Game
 
         public IList<IRound> PreviousRounds { get; set; }
 
-        [JsonIgnore]
         public IEnumerable<IPlayerScore> GameScores => GetScoreboard();
 
-        [JsonIgnore]
         public string State => GetState();
 
         public void AddPlayer(IPlayer player)
@@ -178,11 +173,6 @@ namespace ImposterGame.Game
             }
 
             return GameStates.RoundStartedValue;
-        }
-
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this);
         }
     }
 }

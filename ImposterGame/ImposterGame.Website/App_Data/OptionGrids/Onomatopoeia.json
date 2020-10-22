@@ -1,0 +1,43 @@
+{
+  "id": "9e6933ff-35fa-4aa4-942b-35d487711a19",
+  "name": "Onomatopoeia",
+  "options": [
+    "Bang",
+    "Beep",
+    "Boing",
+    "Boo",
+    "Buzz",
+    "Clap",
+    "Click",
+    "Crackle",
+    "Crash",
+    "Crunch",
+    "Drip",
+    "Fizz",
+    "Flush",
+    "Honk",
+    "Howl",
+    "Meow",
+    "Moo",
+    "Ping",
+    "Plop",
+    "Pop",
+    "Pow",
+    "Ring",
+    "Shhh",
+    "Smash",
+    "Splash",
+    "Squelch",
+    "Squish",
+    "Swoosh",
+    "Toot",
+    "Whoosh",
+    "Woof",
+    "Yoink",
+    "Zoom"
+  ],
+  "groups": [
+    "All",
+    "General"
+  ]
+}
