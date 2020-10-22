@@ -1,0 +1,29 @@
+{
+  "id": "E85101BB-E1DD-4D39-1234-A1C951ACBD5E",
+  "name": "Things in the Room",
+  "options": [
+    "Clock",
+    "Sofa",
+    "Chair",
+    "Television",
+    "Radio",
+    "Rug",
+    "Mirror",
+    "Fireplace",
+    "Table",
+    "Bookcase",
+    "Pouffe",
+    "Cushion",
+    "Blanket",
+    "Coaster",
+    "Curtains",
+    "Blinds",
+    "Beanbag",
+    "Shelves",
+    "Candle"
+  ],
+  "groups": [
+    "All",
+    "General"
+  ]
+}
