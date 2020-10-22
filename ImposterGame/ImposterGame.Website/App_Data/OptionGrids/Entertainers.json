@@ -1,0 +1,31 @@
+{
+  "id": "4936a9bf-1111-4bd8-b332-5afa4c71af99",
+  "name": "Entertainers",
+  "options": [
+    "Singer",
+    "Clown",
+    "Dancer",
+    "Magician",
+    "Comedian",
+    "Acrobat",
+    "Actor",
+    "Drag Queen",
+    "Impressionist",
+    "Mime",
+    "Painter",
+    "Poet",
+    "Musician",
+    "Stripper",
+    "Contortionist",
+    "Fire Eater",
+    "Juggler",
+    "Ballerina",
+    "Trapeze Artist",
+    "Ventriloquist"
+  ],
+  "groups": [
+    "All",
+    "General",
+    "People"
+  ]
+}
