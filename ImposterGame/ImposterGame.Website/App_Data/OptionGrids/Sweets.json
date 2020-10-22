@@ -1,0 +1,35 @@
+{
+  "id": "55F99AD7-0C8F-4BE6-8076-8FC4AEC7A53F",
+  "name": "Sweets",
+  "options": [
+    "Refresher",
+    "Skittles",
+    "Tutti Frutti",
+    "Black Jacks",
+    "Fruit Salad",
+    "Drumstick",
+    "Parma Violets",
+    "Love Hearts",
+    "Jelly Beans",
+    "Chupa Chups",
+    "Wham",
+    "Alien Saucers",
+    "Bubblegum",
+    "Gobstopper",
+    "Nerds",
+    "Haribo",
+    "Pear Drops",
+    "Bon Bons",
+    "Jelly Babies",
+    "Sherbet Fountain",
+    "Liquorice Allsorts",
+    "Fizzers",
+    "Wine Gums",
+    "Sherbet Lemons"
+
+  ],
+  "groups": [
+    "All",
+    "Food & Drink"
+  ]
+}
