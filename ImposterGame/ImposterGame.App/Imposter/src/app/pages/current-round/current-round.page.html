@@ -83,11 +83,12 @@
 
         <ion-card class="white-background bordered" *ngIf="yourAnswer">
           <ion-card-header>
-            <ion-card-title>Your Answer</ion-card-title>
+            <ion-card-subtitle>Don't forget to</ion-card-subtitle>
+            <ion-card-title color="primary">Say your answer out loud!</ion-card-title>
           </ion-card-header>
 
-          <ion-card-content>
-            <p>You have answered <strong>{{yourAnswer}}</strong></p>
+          <ion-card-content class="multi-paragraph">
+            <p class="big"><strong>"{{yourAnswer}}"</strong></p>
 
             <p>You can now concentrate on the answers provided by the other players to try and figure out who the
               imposter is.</p>

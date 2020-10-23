@@ -54,7 +54,7 @@ export class NewRoundPage extends BaseGamePage {
   }
 
   async startRound(){
-    if(this.gameContext.currentGame.players.length > 2){
+    if(this.gameContext.currentGame.players.length > 1){
       await this.gameService.startNewRound(this.playerService.currentPlayer, this.gridService.selectedOptionGrid);
       await this.appPages.goToCurrentRoundPage();
     } else{
