@@ -22,6 +22,7 @@ export class HomePage extends BaseGamePage {
   };
 
   showHeaderLogo: boolean;
+  hasLoaded: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -34,6 +35,8 @@ export class HomePage extends BaseGamePage {
   }
 
   async gamePageOnInit() {
+    this.hasLoaded = true;
+    
     // The user can't use the home page if already playing.
     if(this.gameContext.currentGame){
       await this.appPages.ensureOnMostAppropriatePage(this.playerService.currentPlayer, this.gameContext);

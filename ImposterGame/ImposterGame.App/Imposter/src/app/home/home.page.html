@@ -126,7 +126,8 @@
   
     <div>
       <div class="play-button-wrapper">
-        <ion-button class="play-button" expand="block" (click)="playGame()">Play game</ion-button>
+        <ion-button *ngIf="hasLoaded" class="play-button" expand="block" (click)="playGame()">Play game</ion-button>
+        <ion-button *ngIf="!hasLoaded" [disabled]="true" expand="block" color="secondary">Checking for existing game...</ion-button>
       </div>
     </div>
   </div>
