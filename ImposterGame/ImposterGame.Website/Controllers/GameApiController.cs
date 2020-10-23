@@ -75,6 +75,18 @@ namespace ImposterGame.Website.Controllers
             return game;
         }
 
+        [HttpDelete("[action]")]
+        public async Task<IGame> CancelCurrentRound(Guid gameId)
+        {
+            var game = await _gameService.GetGame(gameId);
+
+            var updatedGame = await _gameService.CancelRound(game);
+
+            await _gameNotifier.SendRoundCancelled(updatedGame);
+
+            return updatedGame;
+        }
+
         [HttpPost("[action]")]
         public async Task<IGame> Leave([FromBody]JoinGameModel model)
         {

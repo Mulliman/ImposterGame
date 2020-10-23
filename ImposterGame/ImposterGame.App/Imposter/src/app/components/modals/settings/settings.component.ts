@@ -110,4 +110,13 @@ export class SettingsComponent extends BaseGameComponent {
       this.appPages.reloadApp();
     }
   }
+
+  async cancelRound(){
+    if(!this.currentGameContext.currentGame){
+      alert("No game to cancel.");
+    }
+
+    await this.gameService.cancelRound(this.currentGameContext.currentGame.id);
+    await this.modalController.dismiss();
+  }
 }

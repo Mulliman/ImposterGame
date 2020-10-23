@@ -64,6 +64,52 @@ export class GameApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public apiGameApiCancelCurrentRoundDelete(gameId?: string, observe?: 'body', reportProgress?: boolean): Observable<IGame>;
+    public apiGameApiCancelCurrentRoundDelete(gameId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<IGame>>;
+    public apiGameApiCancelCurrentRoundDelete(gameId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<IGame>>;
+    public apiGameApiCancelCurrentRoundDelete(gameId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (gameId !== undefined && gameId !== null) {
+            queryParameters = queryParameters.set('gameId', <any>gameId);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.delete<IGame>(`${this.basePath}/api/GameApi/CancelCurrentRound`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param gameId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
     public apiGameApiGetGameGet(gameId?: string, observe?: 'body', reportProgress?: boolean): Observable<IGame>;
     public apiGameApiGetGameGet(gameId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<IGame>>;
     public apiGameApiGetGameGet(gameId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<IGame>>;

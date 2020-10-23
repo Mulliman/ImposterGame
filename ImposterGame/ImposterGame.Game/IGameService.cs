@@ -6,6 +6,8 @@ namespace ImposterGame.Game
 {
     public interface IGameService
     {
+        Task<IGame> CancelRound(IGame game);
+
         Task<IGame> CreateGame(IPlayer player);
 
         Task<IGame> GetGame(Guid id);

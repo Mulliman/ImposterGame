@@ -266,7 +266,16 @@ export class GameService {
 
   //#endregion 
 
-  //#region Leaving
+  //#region Leaving and Cancelling
+
+  async cancelRound(gameId: string): Promise<void> {
+    try {
+      await this.gameApi.apiGameApiCancelCurrentRoundDelete(gameId).toPromise();
+    } catch (e) {
+      console.error("Cancel Game Error", e);
+      throw e;
+    }
+  }
 
   async leaveGame(player: IPlayer, gameCode: string): Promise<void> {
     try {

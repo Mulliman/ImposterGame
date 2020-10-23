@@ -95,6 +95,34 @@
         }
       }
     },
+    "/api/GameApi/CancelCurrentRound": {
+      "delete": {
+        "tags": [
+          "GameApi"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "gameId",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IGame"
+            }
+          }
+        }
+      }
+    },
     "/api/GameApi/Leave": {
       "post": {
         "tags": [

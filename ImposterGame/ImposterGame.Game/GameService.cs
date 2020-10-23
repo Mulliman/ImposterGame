@@ -65,6 +65,15 @@ namespace ImposterGame.Game
             return game;
         }
 
+        public async Task<IGame> CancelRound(IGame game)
+        {
+            game.CancelCurrentRound();
+
+            await SaveGame(game);
+
+            return game;
+        }
+
         public async Task<IGame> SaveGame(IGame game)
         {
            return await _repo.Save(game);
