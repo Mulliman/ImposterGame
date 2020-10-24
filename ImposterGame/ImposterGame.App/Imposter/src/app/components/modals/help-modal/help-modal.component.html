@@ -1,6 +1,7 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Help</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="isSectionShown('current-round')">Answer stage</ion-title>
+    <ion-title *ngIf="isSectionShown('choose-imposter')">Choose imposter stage</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">Close</ion-button>
     </ion-buttons>
@@ -19,94 +20,124 @@
   </div>
 
   <ion-toolbar>
-    <ion-title size="small" class="no-padding help-reminder-imposter" *ngIf="isImposter" color="danger">
+    <ion-title class="no-padding help-reminder-imposter" *ngIf="isImposter">
       Remember, you are the Imposter!
     </ion-title>
 
-    <ion-title size="small" class="no-padding help-reminder-not-imposter" *ngIf="!isImposter" color="primary">
+    <ion-title class="no-padding help-reminder-not-imposter" *ngIf="!isImposter">
       Remember, you are <strong>NOT</strong> the Imposter!
     </ion-title>
   </ion-toolbar>
-
-
 </ion-header>
 <ion-content class="ion-padding">
 
-<!-- Current Round -->
+  <!-- Current Round -->
   <div class="help-content" *ngIf="isSectionShown('current-round')">
-    <h2 class="ion-text-center">Answer stage</h2>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title text-center  color="primary">
+          What to do
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="multi-paragraph">
+        <ion-text *ngIf="!showImposterVariant">
+          <p>If you are <strong>NOT</strong> the imposter, your goal in this round is to try and convince your fellow
+            players that you know what the secret word is without aiding the imposter.</p>
+          <p>The secret word is highlighted on your option grid. You now need to think of one word (and one
+            word
+            only) that will convince that you know what the secret word is.</p>
+          <p>However, don't be too obvious! Remember, the imposter does not know what the secret word is, and they will
+            be trying to
+            find it out!</p>
+          <p>You can all answer in any order you want. When you have thought of your word, submit it using the app and
+            read it
+            aloud to the other players.</p>
+        </ion-text>
+        <ion-text *ngIf="showImposterVariant">
+          <p>If <strong>you are the imposter</strong>, your goal in this round is to try and convince your fellow
+            players
+            that you know what the secret word is.</p>
+          <p>You do not know what the secret word is, but every other player does. Using all the options on the grid and
+            answers from other players, you now need to think of one word (and one word only) that you think will let
+            the
+            others know that you know what the secret word is.</p>
+          <p>The others are on the lookout for you, so you'll need to be cunning! You can answer at any time, do you
+            wait
+            for
+            clues from all others first, or will this raise suspicion?</p>
+          <p>When you have thought of your word, submit it using the app and read it aloud to the other players.</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
 
-    <h3>What to do</h3>
-
-    <ion-text *ngIf="!showImposterVariant">
-      <p>If you are <strong>NOT</strong> the imposter, your goal in this round is to try and convince your fellow
-        players
-        that you know what the secret word is.</p>
-      <p>The secret word is highlighted in yellow on your option grid. You now need to think of one word (and one word
-        only) that will convince that you know what the secret word is.</p>
-      <p>However, don't be too obvious! Remember, the imposter does not know what the secret word is, and they will be trying to
-        find it out!</p>
-      <p>You can all answer in any order you want. When you have thought of your word, submit it using the app and read it
-        aloud to the other players.</p>
-    </ion-text>
-    <ion-text *ngIf="showImposterVariant">
-      <p>If <strong>you are the imposter</strong>, your goal in this round is to try and convince your fellow players
-        that you know what the secret word is.</p>
-      <p>You do not know what the secret word is, but every other player does. Using all the options on the grid and
-        answers from other players, you now need to think of one word (and one word only) that you think will let the
-        others know that you know what the secret word is.</p>
-      <p>The others are on the lookout for you, so you'll need to be cunning! You can answer at any time, do you wait
-        for
-        clues from all others first, or will this raise suspicion?</p>
-      <p>When you have thought of your word, submit it using the app and read it aloud to the other players.</p>
-    </ion-text>
-
-    <h3>Tips and tricks</h3>
-    <ion-text *ngIf="!showImposterVariant">
-        <ul>
-          <li>Answering earlier in a round is likely to prove that you don't need other answers to help you come up with a word.</li>
-          <li>Try not to choose an answer that is too specific, as this may give the imposter a valuable clue!</li>
-        </ul>
-      </ion-text>
-      <ion-text *ngIf="showImposterVariant">
-        <ul>
-          <li>Going first is risky as you won't have any answers from other players to guide you, however going last may raise a lot of suspicion. Timing is key.</li>
-          <li>Try and give answers that could apply to a few different options. Not too many though, as this could show you're bluffing.</li>
-        </ul>
-      </ion-text>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title text-center color="primary">
+          Tips and tricks
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content text-center class="multi-paragraph">
+        <ion-text *ngIf="!showImposterVariant">
+            <p><ion-icon name="alarm" size="large"></ion-icon><br />Answering earlier in a round is likely to prove that you don't need other answers to help you come up
+              with a word.</p>
+            <p><ion-icon name="help-circle" size="large"></ion-icon><br />Try not to choose an answer that is too specific, as this may give the imposter a valuable clue!</p>
+        </ion-text>
+        <ion-text *ngIf="showImposterVariant">
+            <p><ion-icon name="alarm" size="large"></ion-icon><br />Going first is risky as you won't have any answers from other players to guide you, however going last
+              may raise a lot of suspicion. Timing is key.</p>
+            <p><ion-icon name="help-circle" size="large"></ion-icon><br />if you don't know the secret word, try and give answers that could apply to a few different options. Not too many though, as this could
+              show you're bluffing.</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <!-- Choose Imposter -->
   <div class="help-content" *ngIf="isSectionShown('choose-imposter')">
-      <h2 class="ion-text-center">Choose imposter stage</h2>
-  
-      <h3>What to do</h3>
-  
-      <ion-text *ngIf="!showImposterVariant">
-        <p>In this stage you need to interrogate other players if you think their answers are suspicious.
-           If other users ask you to clarify your answer, make sure you don't give away any secrets, the imposter could be listening for any clues.</p>
-           <p>When the discussion is over, you will need to accuse someone and make a wager based on how sure you are.</p>
-           <p>The more points you wager, the more points you get if you accuse the right person. Guess wrong, and the imposter will have the chance to get those points instead!</p>
-      </ion-text>
-      <ion-text *ngIf="showImposterVariant">
-        <p>If you already know the secret word this is your chance to blend in with the group and cast suspicion on other players. Ask questions to those you think gave the weakest answers.</p>
-        <p>If you are unsure on the secret word you need to use all your misdirection and subterfuge skills to evade capture and discover the secret word.</p>
-        <p>The other players will be on the hunt, and will get points if they find you!</p>
-      </ion-text>
-  
-      <h3>Tips and tricks</h3>
-      <ion-text *ngIf="!showImposterVariant">
-          <ul>
-            <li>If you are sure someone is not the imposter, try and phrase your answer in a way that they will understand but the imposter will not. They may vouch for you and the word will remain secret.</li>
-            <li>Look out for the person deflecting questions, and constantly checking the option grid.</li>
-          </ul>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title text-center color="primary">
+          What to do
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="multi-paragraph">
+        <ion-text *ngIf="!showImposterVariant">
+          <p>If you are not the imposter, this is te time for you to interrogate other players if you think their answers are suspicious.
+            If other users ask you to clarify your answer, make sure you don't give away any secrets, the imposter could
+            be listening for clues.</p>
+          <p>When the discussion is over, you will need to accuse someone and make a wager based on how sure you are.</p>
+          <p>The more points you wager, the more points you get if you accuse the right person. Guess wrong, and the
+            imposter will have the chance to get those points instead!</p>
+          <p>Also remember that you are part of a team; if the majority identify the imposter, everyone in the teams gets a bonus point.</p>
         </ion-text>
         <ion-text *ngIf="showImposterVariant">
-          <ul>
-             <li>The successful hunter targets the weakest in the group. This is the time to be ruthless.</li>
-             <li>Even if you think you may be caught, you can still get points for guessing the secret word; use this time well!</li>
-          </ul>
+          <p>If you are the imposter and you already know the secret word, this is your chance to blend in with the group and cast suspicion on
+            other players. Ask questions to those you think gave the weakest answers.</p>
+          <p>If you are unsure on the secret word you need to use all your misdirection and subterfuge skills to evade
+            capture and discover the secret word.</p>
+          <p>The other players will be on the hunt, and they will get points if they find you!</p>
         </ion-text>
-    </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title text-center color="primary">
+          Tips and tricks
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content text-center class="multi-paragraph">
+        <ion-text *ngIf="!showImposterVariant">
+          <p><ion-icon name="happy" size="large"></ion-icon><br />If you are sure someone is not the imposter, try and phrase your justification in a way that they will
+            understand but the imposter will not. They may vouch for you and the word will remain secret.</p>
+          <p><ion-icon name="move" size="large"></ion-icon><br />Look out for the person deflecting questions, and constantly checking the option grid.</p>
+        </ion-text>
+        <ion-text *ngIf="showImposterVariant">
+            <p><ion-icon name="heart-dislike" size="large"></ion-icon><br />The successful hunter targets the weakest in the group. This is the time to be ruthless.</p>
+            <p><ion-icon name="key" style="transform: rotate(-90deg);" size="large"></ion-icon><br />Even if you think you may be caught, you can still get points for guessing the secret word so make sure you use this time well!</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
 </ion-content>
