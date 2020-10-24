@@ -107,6 +107,32 @@ ion-button {
   &.top-button {
     margin-bottom: 12px;
   }
+
+  &.pulse .pulsable{
+    animation: pulse 1s infinite !important;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+
+    25% {
+      opacity: 0.66;
+    }
+  
+    50% {
+      opacity: 0.33;
+    }
+
+    75% {
+      opacity: 0.66;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
 ion-card {

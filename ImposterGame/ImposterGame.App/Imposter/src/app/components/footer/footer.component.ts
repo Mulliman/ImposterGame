@@ -16,14 +16,17 @@ import { UiService } from 'src/app/services/ui.service';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent extends BaseGameComponent {
-  isLoaded: boolean;
 
+  readonly helpSectionStoragePrefix = "help-opened-";
+  
   @Input() helpSection: string;
   @Input() hidePlayButton: boolean;
   @Input() hideChangeNameButton: boolean;
   @Input() showNextRoundButton: boolean;
 
+  isLoaded: boolean;
   showChangeName: boolean;
+  pulseHelpButton: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -39,6 +42,10 @@ export class FooterComponent extends BaseGameComponent {
     this.showChangeName = !!(!this.hideChangeNameButton
       && ((!this.currentGameContext.currentGame || this.currentGameContext.currentGame.canLeaveWithoutRoundCancellation)
       && this.player));
+
+      if(this.helpSection){
+        this.pulseHelpButton = !this.hasUsedHelp(this.helpSection);
+      }
   }
 
   async playGame() {
@@ -89,6 +96,8 @@ export class FooterComponent extends BaseGameComponent {
   }
 
   async showHelp() {
+    this.setHasUsedHelp(this.helpSection);
+
     const modal = await this.modalController.create({
       component: HelpModalComponent,
       componentProps: {
@@ -101,5 +110,14 @@ export class FooterComponent extends BaseGameComponent {
   
   async goToNextRound(){
     await this.appPages.goToNewRoundPage();
+  }
+
+  hasUsedHelp(sectionName: string): boolean {
+    return !!localStorage.getItem(this.helpSectionStoragePrefix + sectionName);
+  }
+
+  setHasUsedHelp(sectionName: string) {
+    localStorage.setItem(this.helpSectionStoragePrefix + sectionName, "true");
+    this.pulseHelpButton = false;
   }
 }
