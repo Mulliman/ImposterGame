@@ -1,0 +1,35 @@
+{
+  "id": "25e39030-1111-111f-99b8-b0bd1383effc",
+  "name": "Weather",
+  "options": [
+    "Sun",
+    "Rain",
+    "Hail",
+    "Snow",
+    "Cloudy",
+    "Hot",
+    "Cold",
+    "Windy",
+    "Blizzard",
+    "Sleet",
+    "Gale",
+    "Hurricane",
+    "Typhoon",
+    "Tornado",
+    "Drought",
+    "Storm",
+    "Rainbow",
+    "Drizzle",
+    "Fog",
+    "Thunder",
+    "Lightning",
+    "Frost",
+    "Humid",
+    "Showers"
+  ],
+  "groups": [
+    "All",
+    "General",
+    "Educational"
+  ]
+}
