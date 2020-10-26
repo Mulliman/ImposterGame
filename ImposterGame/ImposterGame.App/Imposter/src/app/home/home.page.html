@@ -10,9 +10,8 @@
 
   <div style="display: flex; flex-direction: column; height: 100%;">
     <div style="height: 10%;">
-      <p class="tiny" 
-      [ngClass]="(showHeaderLogo)?'animate-this now-hidden':'animate-this'"
-      class="home-header-message">(BETA) tap the cog to try and fix issues.</p>
+      <p [ngClass]="(showHeaderLogo)?'animate-this now-hidden':'animate-this'"
+      class="tiny home-header-message">(BETA) tap the cog to try and fix issues.</p>
       <img src="assets/logo.png" [ngClass]="(showHeaderLogo)?'header-logo show-header-logo':'header-logo hide-header-logo'" />
 
       <ion-buttons class="home-header-buttons">
