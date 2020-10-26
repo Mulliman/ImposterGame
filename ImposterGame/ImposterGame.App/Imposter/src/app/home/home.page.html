@@ -1,10 +1,26 @@
 <!-- <app-header></app-header> -->
 
 <ion-content fullscreen scroll-y="false" class="ion-padding green-gradient">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <div style="display: flex; flex-direction: column; height: 100%;">
     <div style="height: 10%;">
+      <p class="tiny" 
+      [ngClass]="(showHeaderLogo)?'animate-this now-hidden':'animate-this'"
+      class="home-header-message">(BETA) tap the cog to try and fix issues.</p>
       <img src="assets/logo.png" [ngClass]="(showHeaderLogo)?'header-logo show-header-logo':'header-logo hide-header-logo'" />
+
+      <ion-buttons class="home-header-buttons">
+        <ion-button size="small" (click)="openSettings()">
+          <ion-icon color="light" name="settings"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      
     </div>
   
     <div style="flex: auto;">
@@ -12,7 +28,7 @@
   
         <ion-slide>
           <div class="padding-bottom-large">
-            <img src="assets/logo.png" style="max-width:80%; margin: auto auto 20px; display: block;" />
+            <img src="assets/logo-beta.png" style="max-width:80%; margin: auto auto 20px; display: block;" />
     
             <ion-card class="no-margin-top bordered">
               <div>

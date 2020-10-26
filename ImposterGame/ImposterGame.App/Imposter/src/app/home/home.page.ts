@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { BaseGamePage } from '../pages/baseGamePage';
 import { PlayerService } from '../services/player.service';
 import { GameService } from '../services/game.service';
 import { AppPagesService } from '../services/app-pages.service';
+import { UiService } from '../services/ui.service';
+import { SettingsComponent } from '../components/modals/settings/settings.component';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +28,8 @@ export class HomePage extends BaseGamePage {
 
   constructor(playerService: PlayerService,
     gameService: GameService,
-    appPages: AppPagesService) {
+    appPages: AppPagesService,
+    public modalController: ModalController) {
     super(playerService, gameService, appPages);
   }
 
@@ -59,5 +62,12 @@ export class HomePage extends BaseGamePage {
 
   async playGame() {
     await this.appPages.goToYouPage();
+  }
+
+  async openSettings(){
+    const modal = await this.modalController.create({
+      component: SettingsComponent
+    });
+    return await modal.present();
   }
 }

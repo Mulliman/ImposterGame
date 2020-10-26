@@ -94,6 +94,12 @@
   background: linear-gradient(165deg, var(--ion-color-dark) 0%, var(--ion-color-dark-green) 100%) !important;
 }
 
+ion-refresher{
+  z-index: 1000;
+  --color: white;
+  padding: 20px;;
+}
+
 ion-content,
 ion-title,
 ion-toolbar {
@@ -261,6 +267,14 @@ form.imposter-form {
 }
 
 // TEXT
+
+.tiny {
+  font-size: 0.5rem !important;
+}
+
+.smallest {
+  font-size: 0.7rem !important;
+}
 
 .smaller {
   font-size: 0.8rem !important;

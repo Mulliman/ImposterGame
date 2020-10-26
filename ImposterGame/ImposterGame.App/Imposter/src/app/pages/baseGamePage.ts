@@ -6,6 +6,7 @@ import { AppPagesService } from '../services/app-pages.service';
 import { IPlayer } from 'src/server';
 import { Game } from '../model/Game';
 import { Subscription } from 'rxjs';
+import { UiService } from '../services/ui.service';
 
 @Injectable({
     providedIn: 'root'
@@ -113,5 +114,9 @@ export abstract class BaseGamePage implements OnInit {
 
     async redirectToMostAppropriatePage(){
         await this.appPages.ensureOnMostAppropriatePage(this.playerService.currentPlayer, this.gameContext);
+    }
+
+    async doRefresh($event){
+        this.appPages.reloadApp();
     }
 }

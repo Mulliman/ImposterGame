@@ -57,6 +57,7 @@ export class GameService {
       return this.gameContext;
     }
 
+    //await this.delay(3000)
     var game = await this.getCurrentGame(player);
 
     if (!game) {
@@ -332,4 +333,9 @@ export class GameService {
   async ngOnDestroy () {
     this.subscriptions.unsubscribe();
    }
+
+   // For testing
+   delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 }

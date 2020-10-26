@@ -24,3 +24,29 @@
     opacity: 1;
   }
 }
+
+.animate-this {
+  opacity: 1;
+  height: auto;
+  transition: all 0.1s;
+
+  &.now-hidden{
+    opacity: 0;
+    height: 0;
+    display: none;
+  }
+}
+
+.home-header-message{
+  color:rgba(255,255,255,0.5);
+  padding: 0; 
+  margin: 0 0 -30px; 
+  text-align: center; 
+  height: 30px;
+}
+
+.home-header-buttons{
+  position: absolute;
+  top: 4px;
+  right: 0;
+}
