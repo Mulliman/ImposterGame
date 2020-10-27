@@ -48,5 +48,22 @@
       <ion-button expand="block" color="danger" (click)="clear()">Clear data and reload</ion-button>
     </ion-card-content>
   </ion-card>
+
+  <ion-card>
+    <ion-card-header class="border-bottom">
+      <ion-card-subtitle text-center>
+        About
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content text-center class="multi-paragraph">
+      <p>This app is in public beta, so may potentially have some issues. This is also not been tested with large amounts of connections.</p>
+
+      <p *ngIf="!isInstalled">This app looks best when installed. To install press 'add to homescreen' within your browser.</p>
+
+      <p>
+        Built by <a target="_blank" href="https://twitter.com/_sammullins_">Sam Mullins</a> 
+      </p>
+    </ion-card-content>
+  </ion-card>
   
 </ion-content>

@@ -14,6 +14,7 @@ import { AppPagesService } from 'src/app/services/app-pages.service';
 })
 export class SettingsComponent extends BaseGameComponent {
   isLoaded: boolean;
+  isInstalled: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -25,6 +26,8 @@ export class SettingsComponent extends BaseGameComponent {
 
   protected async updateScope() {
     this.isLoaded = true;
+
+    this.isInstalled = matchMedia("(display-mode: standalone)").matches || navigator && navigator['standalone'];
   }
 
   async kickPlayer(playerToKick: IPlayer){
