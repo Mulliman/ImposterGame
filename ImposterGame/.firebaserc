@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "imposter-beta"
+    "default": "the-imposter",
+    "live": "the-imposter"
   }
 }
