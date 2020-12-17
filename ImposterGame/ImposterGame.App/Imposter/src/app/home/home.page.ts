@@ -41,7 +41,7 @@ export class HomePage extends BaseGamePage {
     this.hasLoaded = true;
     
     // The user can't use the home page if already playing.
-    if(this.gameContext.currentGame){
+    if(this.gameContext && this.gameContext.currentGame){
       await this.appPages.ensureOnMostAppropriatePage(this.playerService.currentPlayer, this.gameContext);
     }
   }

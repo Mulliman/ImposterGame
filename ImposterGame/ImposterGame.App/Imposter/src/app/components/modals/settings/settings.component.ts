@@ -106,10 +106,23 @@ export class SettingsComponent extends BaseGameComponent {
   } 
 
   async clear(){
+    if(!this.currentGameContext){
+      this.playerService.clearSavedPlayer();
+      this.appPages.reloadApp();
+    }
+    
     if(this.currentGameContext.currentGame){
-      await this.leaveGame();
+      try {
+        await this.leaveGame();
+      }
+      catch{
+        this.playerService.clearSavedPlayer();
+        localStorage.clear();
+        this.appPages.reloadApp();
+      }
     } else{
       this.playerService.clearSavedPlayer();
+      localStorage.clear();
       this.appPages.reloadApp();
     }
   }

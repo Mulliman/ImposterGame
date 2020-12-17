@@ -52,6 +52,23 @@
   <ion-card>
     <ion-card-header class="border-bottom">
       <ion-card-subtitle text-center>
+        Go to specific stage
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content text-center class="multi-paragraph">
+      <p>This will take you to a speciic stage, but it will likely redirect you to the most appropriate stage. It might fix an issue if you temporarily lost connection though.</p>
+      <p>Try this after trying a reload in the solve issues section.</p>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToNewRoundPage()">New Round</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToCurrentRoundPage()">Current Round</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToChooseImposterPage()">Choose Imoster</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToImposterGuessPage()">Imposter's Guess</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToRoundScoresPage()">Round Scores</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header class="border-bottom">
+      <ion-card-subtitle text-center>
         About
       </ion-card-subtitle>
     </ion-card-header>

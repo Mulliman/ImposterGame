@@ -53,6 +53,11 @@ export class GameService {
   }
 
   async getCurrentGameContext(player: IPlayer): Promise<GameContext> {
+    if(!player){
+      this.gamePersister.clearSavedGame();
+      return null;
+    }
+
     if (this.gameContext.isGameInitialised) {
       return this.gameContext;
     }
@@ -290,6 +295,8 @@ export class GameService {
       this.gameContext.endGame();
     } catch (e) {
       console.error("Leave Game Error", e);
+
+
       throw e;
     }
   }
