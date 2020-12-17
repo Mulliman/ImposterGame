@@ -3,7 +3,7 @@
   "background_color": "#04bf7b",
   "display": "standalone",
   "app_name": "The Imposter",
-  "short_name": "Imposter",
+  "short_name": "The Imposter",
   "description": "Can you find the Imposter? A game for 4 to 7 people.",
   "scope": "./",
   "start_url": "./",
