@@ -26,6 +26,7 @@ export class CurrentRoundPage extends BaseGameFormPage {
     speed: 400,
     slidesPerView: 1
   };
+  submittingAnswer: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -84,9 +85,17 @@ export class CurrentRoundPage extends BaseGameFormPage {
       return;
     }
 
-    this.yourAnswer = this.form.value.answer;
+    var formAnswer = this.form.value.answer;
 
-    await this.gameService.submitAnswer(this.playerService.currentPlayer, this.yourAnswer);
+    try {
+      this.submittingAnswer = true;
+      await this.gameService.submitAnswer(this.playerService.currentPlayer, formAnswer);
+      this.submittingAnswer = false;
+
+      this.yourAnswer = formAnswer;
+    }catch{
+      this.submittingAnswer = false;
+    }
   }
 
   async simulateRoundEnd(){

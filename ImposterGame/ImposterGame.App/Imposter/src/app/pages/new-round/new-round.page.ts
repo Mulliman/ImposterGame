@@ -27,6 +27,7 @@ export class NewRoundPage extends BaseGamePage {
     slidesPerView: 1
   };
   subscription: any;
+  isStarting: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -55,8 +56,17 @@ export class NewRoundPage extends BaseGamePage {
 
   async startRound(){
     if(this.gameContext.currentGame.players.length > 1){
-      await this.gameService.startNewRound(this.playerService.currentPlayer, this.gridService.selectedOptionGrid);
-      await this.appPages.goToCurrentRoundPage();
+
+      try {
+
+        this.isStarting = true;
+        await this.gameService.startNewRound(this.playerService.currentPlayer, this.gridService.selectedOptionGrid);
+        this.isStarting = false;
+
+        await this.appPages.goToCurrentRoundPage();
+      } catch{
+        this.isStarting = false;
+      }
     } else{
       await this.uiService.errorToast("You must have at least 3 players to start a round.");
     }

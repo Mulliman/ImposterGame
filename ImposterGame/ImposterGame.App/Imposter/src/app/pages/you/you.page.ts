@@ -5,6 +5,7 @@ import { PlayerService } from 'src/app/services/player.service';
 import { GameService } from 'src/app/services/game.service';
 import { AppPagesService } from 'src/app/services/app-pages.service';
 import { BaseGameFormPage } from '../baseGameFormPage';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-you',
@@ -12,11 +13,13 @@ import { BaseGameFormPage } from '../baseGameFormPage';
   styleUrls: ['./you.page.scss'],
 })
 export class YouPage extends BaseGameFormPage {
+  formSubmitting: boolean;
   
   constructor(playerService: PlayerService,
     gameService: GameService,
     appPages: AppPagesService,
-    formBuilder: FormBuilder) {
+    formBuilder: FormBuilder,
+    private uiService: UiService) {
     super(playerService, gameService, appPages, formBuilder);
   }
 
@@ -51,12 +54,16 @@ export class YouPage extends BaseGameFormPage {
       }
 
       let name = this.form.get("name").value;
+
+      this.formSubmitting = true;
       await this.playerService.setCurrentPlayer(name);
+      this.formSubmitting = false;
 
       await this.appPages.goToNewGamePage();
     } catch (e) {
-      alert("Error saving name.");
+      this.uiService.errorToast("There was an error saving your name.");
       console.log(e);
+      this.formSubmitting = false;
     }
   }
 

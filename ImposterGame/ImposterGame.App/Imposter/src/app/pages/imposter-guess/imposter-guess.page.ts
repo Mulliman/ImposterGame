@@ -15,6 +15,7 @@ export class ImposterGuessPage extends BaseGamePage {
   isSubmitted: boolean;
   isLoaded: boolean;
   selectedOption:string;
+  isSubmitting: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -40,8 +41,16 @@ export class ImposterGuessPage extends BaseGamePage {
   }
 
   async submitAnswer(){
-    this.isSubmitted = true;
-    var finishedGame = await this.gameService.submitImposterGuessAndScoreRound(this.playerService.currentPlayer, this.selectedOption);   
-    this.appPages.goToRoundScoresPage();
+
+    try {
+      this.isSubmitting = true;
+      var finishedGame = await this.gameService.submitImposterGuessAndScoreRound(this.playerService.currentPlayer, this.selectedOption); 
+      this.isSubmitting = false;
+      this.isSubmitted = true;
+      this.appPages.goToRoundScoresPage();
+    } catch{
+      this.isSubmitting = false;
+    }
+    
   }
 }

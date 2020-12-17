@@ -11,6 +11,8 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./new-game.page.scss'],
 })
 export class NewGamePage extends BaseGameFormPage {
+  submittingHost: boolean;
+  submittingJoin: boolean;
 
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -41,11 +43,13 @@ export class NewGamePage extends BaseGameFormPage {
 
   async hostGame() {
     try {
+      this.submittingHost = true;
       var newGame = await this.gameService.hostGame(this.playerService.currentPlayer);
-      
+      this.submittingHost = false;
+
       await this.appPages.goToNewRoundPage();
     } catch (e) {
-      alert(e);
+      this.submittingHost = false;
     }
   }
 
@@ -59,10 +63,13 @@ export class NewGamePage extends BaseGameFormPage {
       var field = this.form.value.gameCode;
       var gameCodeValue = field;
 
+      this.submittingJoin = true;
       var newGame = await this.gameService.joinGame(this.playerService.currentPlayer, gameCodeValue);
+      this.submittingJoin = false;
 
       await this.appPages.goToNewRoundPage();
     } catch (e) {
+      this.submittingJoin = false;
       console.log(e);
     }
   }

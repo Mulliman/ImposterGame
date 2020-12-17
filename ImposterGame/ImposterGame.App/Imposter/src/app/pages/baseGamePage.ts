@@ -13,7 +13,7 @@ import { UiService } from '../services/ui.service';
 })
 export abstract class BaseGamePage implements OnInit {
 
-    states: string[] = null;
+    //states: string[] = null;
 
     isLoaded = false;
 
@@ -94,7 +94,7 @@ export abstract class BaseGamePage implements OnInit {
 
     isInAllowedState() : boolean{
 
-        if(!this.states){
+        if(!this.allowedStates){
             console.log("In allowed state - No States");
             return true;
         }
@@ -105,7 +105,7 @@ export abstract class BaseGamePage implements OnInit {
 
         console.log("Check In allowed state");
 
-        var isInAllowedState = this.states.includes(this.gameContext.currentGame.state);
+        var isInAllowedState = this.allowedStates.includes(this.gameContext.currentGame.state);
 
         console.log("In allowed state?", isInAllowedState, this.gameContext.currentGame.state);
 

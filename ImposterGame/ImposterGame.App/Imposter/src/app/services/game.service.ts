@@ -109,8 +109,15 @@ export class GameService {
 
       return this.gameContext;
     } catch (e) {
+
       console.error("Join Game Error", e);
-      this.uiService.errorToast("The was an error joining this game.", "Please check your code is correct and your connection and try again.");
+
+      if(e.status == 409){
+        this.uiService.errorToast("Player with same name already exists in this game.", "Please change your name by clicking the 'Not you' button bottom right.");
+      }else{
+        this.uiService.errorToast("The was an error joining this game.", "Please check your code is correct and your connection and try again.");
+      }
+
       throw e;
     }
   }
@@ -175,6 +182,7 @@ export class GameService {
     }
     catch (e) {
       console.log(e);
+      this.uiService.errorToast("There was an error starting a new round.", "Please try again, and if you still have issues, try reloading the page.");
       throw "Error starting new round.";
     }
   }
@@ -200,6 +208,7 @@ export class GameService {
     }
     catch (e) {
       console.log(e);
+      this.uiService.errorToast("There was an error submitting your answer.", "Please try again, and if you still have issues, try reloading the page.");
       throw "Error submitting answer.";
     }
   }
@@ -241,7 +250,8 @@ export class GameService {
     }
     catch (e) {
       console.log(e);
-      throw "Error submitting answer.";
+      this.uiService.errorToast("There was an error submitting your accusation.", "Please try again, and if you still have issues, try reloading the page.");
+      throw "Error submitting accusation.";
     }
   }
 
@@ -266,7 +276,8 @@ export class GameService {
     }
     catch (e) {
       console.log(e);
-      throw "Error submitting answer.";
+      this.uiService.errorToast("There was an error submitting your imposter guess.", "Please try again, and if you still have issues, try reloading the page.");
+      throw "There was an error submitting your imposter guess.";
     }
   }
 

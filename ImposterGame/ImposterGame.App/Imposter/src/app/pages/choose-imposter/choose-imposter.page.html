@@ -111,7 +111,8 @@
             </ion-list>
 
             <div *ngIf="!hasSubmitted" class="choose-step-3">
-              <ion-button expand="block" [disabled]="!selectedWager" (click)="submitAnswer()">Submit answer</ion-button>
+              <ion-button expand="block" *ngIf="!isSubmitting" [disabled]="!selectedWager" (click)="submitAnswer()">Submit answer</ion-button>
+              <ion-button expand="block" *ngIf="isSubmitting" [disabled]="true">Submitting...</ion-button>
             </div>
           </ion-card-content>
         </ion-card>
@@ -127,7 +128,8 @@
             <p>As you are the imposter, you don't set a wager.</p>
 
             <div *ngIf="!hasSubmitted" class="choose-step-3">
-              <ion-button expand="block" (click)="setWager(5);submitAnswer()">Submit answer</ion-button>
+              <ion-button *ngIf="!isSubmitting" expand="block" (click)="setWager(5);submitAnswer()">Submit answer</ion-button>
+              <ion-button *ngIf="isSubmitting" [disabled]="true" expand="block">Submitting...</ion-button>
             </div>
           </ion-card-content>
         </ion-card>

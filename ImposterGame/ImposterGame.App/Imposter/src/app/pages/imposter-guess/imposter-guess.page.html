@@ -29,7 +29,8 @@
           class="full-width">
         </app-option-grid>
 
-        <ion-button expand="block" (click)="submitAnswer()" [disabled]="!selectedOption">Submit your answer</ion-button>
+        <ion-button expand="block" *ngIf="!isSubmitting" (click)="submitAnswer()" [disabled]="!selectedOption">Submit your answer</ion-button>
+        <ion-button expand="block" *ngIf="isSubmitting" [disabled]="true">Submitting...</ion-button>
       </ion-card-content>
     </ion-card>
 

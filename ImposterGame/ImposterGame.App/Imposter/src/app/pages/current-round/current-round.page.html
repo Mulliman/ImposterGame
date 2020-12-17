@@ -77,7 +77,8 @@
               <app-error-message [control]="form.get('answer')"></app-error-message>
             </form>
 
-            <ion-button [disabled]="!form.valid" expand="block" (click)="submitAnswer()">Submit answer</ion-button>
+            <ion-button [disabled]="!form.valid" expand="block" *ngIf="!submittingAnswer" (click)="submitAnswer()">Submit answer</ion-button>
+            <ion-button [disabled]="true" expand="block" *ngIf="submittingAnswer">Submitting...</ion-button>
           </ion-card-content>
         </ion-card>
 

@@ -7,6 +7,8 @@ using ImposterGame.Website.Hubs;
 using ImposterGame.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ImposterGame.Website.Controllers
@@ -44,7 +46,7 @@ namespace ImposterGame.Website.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IGame> Join([FromBody]JoinGameModel model)
+        public async Task<ActionResult<IGame>> Join([FromBody]JoinGameModel model)
         {
             var player = await _playerService.GetPlayer(model.PlayerId);
 
@@ -55,11 +57,18 @@ namespace ImposterGame.Website.Controllers
 
             var game = await _gameService.GetGame(model.GameCode);
 
-            var updatedGame = await _gameService.JoinGame(game, player);
+            try
+            {
+                var updatedGame = await _gameService.JoinGame(game, player);
 
-            await _gameNotifier.SendPlayerJoined(updatedGame);
+                await _gameNotifier.SendPlayerJoined(updatedGame);
 
-            return updatedGame;
+                return Ok(updatedGame);
+            }
+            catch (PlayerWithSameNameAlreadyExistsException)
+            {
+                return Conflict("Player with same name already exists in this game, please change your name to join.");
+            }
         }
 
         [HttpGet("[action]")]

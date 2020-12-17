@@ -49,7 +49,8 @@
               <ion-card-content>
                 <p>Make sure all of your players are ready, and then start the round.</p>
 
-                <ion-button (click)="startRound()" expand="block" margin-top class="top-button">Start new round</ion-button>
+                <ion-button *ngIf="!isStarting" (click)="startRound()" expand="block" margin-top class="top-button">Start new round</ion-button>
+                <ion-button *ngIf="isStarting" [disabled]="true" expand="block" margin-top class="top-button">Starting...</ion-button>
 
                 <ion-button (click)="goToChooseGridPage()" expand="block" color="light">Choose a different grid</ion-button>
               </ion-card-content>

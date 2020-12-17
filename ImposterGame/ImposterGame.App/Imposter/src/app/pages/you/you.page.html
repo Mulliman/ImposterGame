@@ -1,10 +1,9 @@
 <app-header></app-header>
 
 <ion-content fullscreen scroll-y="false" class="ion-padding green-gradient">
-
   <ion-row class="full-page-row ion-justify-content-center ion-align-items-center">
 
-    <ion-card class="no-margin-top bordered" *ngIf="!gameContext || (gameContext && !gameContext.currentGame)">
+    <ion-card class="no-margin-top bordered" *ngIf="isLoaded && (!gameContext || (gameContext && !gameContext.currentGame))">
       <ion-card-header>
         <ion-card-title text-center color="primary">Who are you?</ion-card-title>
       </ion-card-header>
@@ -17,7 +16,8 @@
           <app-error-message [control]="form.get('name')"></app-error-message>
         </form>
 
-        <ion-button *ngIf="!gameContext || (gameContext && !gameContext.currentGame)" [disabled]="!form.valid" expand="block" (click)="saveName()">Start!</ion-button>
+        <ion-button *ngIf="!formSubmitting && (!gameContext || (gameContext && !gameContext.currentGame))" [disabled]="!form.valid" expand="block" (click)="saveName()">Start!</ion-button>
+        <ion-button *ngIf="formSubmitting" [disabled]="true" expand="block">Saving...</ion-button>
       </ion-card-content>
     </ion-card>
   </ion-row>

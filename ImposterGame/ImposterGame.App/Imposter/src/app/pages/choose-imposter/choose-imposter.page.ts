@@ -30,6 +30,7 @@ export class ChooseImposterPage extends BaseGamePage {
     speed: 400,
     slidesPerView: 1
   };
+  isSubmitting: boolean;
   
   constructor(playerService: PlayerService,
     gameService: GameService,
@@ -78,7 +79,13 @@ export class ChooseImposterPage extends BaseGamePage {
   }
 
   async submitAnswer() {
-    await this.gameService.submitAccusation(this.playerService.currentPlayer, this.selectedImposter.id, this.selectedWager);
-    this.hasSubmitted = true;
+    try {
+      this.isSubmitting = true;
+      await this.gameService.submitAccusation(this.playerService.currentPlayer, this.selectedImposter.id, this.selectedWager);
+      this.isSubmitting = false;
+      this.hasSubmitted = true;
+    } catch{
+      this.isSubmitting = false;
+    }
   }
 }

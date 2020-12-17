@@ -58,11 +58,11 @@
     <ion-card-content text-center class="multi-paragraph">
       <p>This will take you to a speciic stage, but it will likely redirect you to the most appropriate stage. It might fix an issue if you temporarily lost connection though.</p>
       <p>Try this after trying a reload in the solve issues section.</p>
-      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToNewRoundPage()">New Round</ion-button>
-      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToCurrentRoundPage()">Current Round</ion-button>
-      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToChooseImposterPage()">Choose Imoster</ion-button>
-      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToImposterGuessPage()">Imposter's Guess</ion-button>
-      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToRoundScoresPage()">Round Scores</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToNewRoundPage();dismiss();">New Round</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToCurrentRoundPage();dismiss();">Current Round</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToChooseImposterPage();dismiss();">Choose Imposter</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToImposterGuessPage();dismiss();">Imposter's Guess</ion-button>
+      <ion-button expand="block" color="secondary" size="small" (click)="appPages.goToRoundScoresPage();dismiss();">Round Scores</ion-button>
     </ion-card-content>
   </ion-card>
 
