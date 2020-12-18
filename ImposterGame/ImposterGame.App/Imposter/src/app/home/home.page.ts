@@ -70,4 +70,8 @@ export class HomePage extends BaseGamePage {
     });
     return await modal.present();
   }
+
+  watchVideo(){
+    window.open("https://www.youtube.com/watch?v=0hkNWgQmSYI", "_blank");
+  }
 }
