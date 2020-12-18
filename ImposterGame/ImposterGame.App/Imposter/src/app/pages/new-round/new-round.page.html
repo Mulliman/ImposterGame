@@ -1,10 +1,10 @@
 <app-header></app-header>
 
-<ion-content fullscreen padding class="ion-padding green-gradient" >
+<ion-content fullscreen padding class="ion-padding green-gradient">
 
   <ion-slides class="full-height-slides-with-game-code" style="flex-grow: 1;" slidesPerView="1" [options]="slideOpts" #NewRoundSlider>
 
-    <ion-slide *ngIf="gameContext">
+    <ion-slide *ngIf="gameContext && gameContext.currentGame">
       <div class="slide-inner" class="full-width">
         <ion-card class="bordered" *ngIf="gameContext.currentGame">
           <ion-card-header class="no-padding-bottom">
@@ -23,7 +23,7 @@
       </div>
     </ion-slide>
 
-    <ion-slide *ngIf="gameContext">
+    <ion-slide *ngIf="gameContext && gameContext.currentGame">
       <div class="slide-inner" class="full-width">
         <ion-row justify-content-center align-items-center class="full-page-row" *ngIf="isLoaded">
           <div class="ion-text-center">

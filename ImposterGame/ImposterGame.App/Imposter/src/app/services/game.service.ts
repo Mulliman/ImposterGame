@@ -330,22 +330,30 @@ export class GameService {
   //#endregion
 
   private async getCurrentGame(player: IPlayer): Promise<Game> {
-    var game = this.gamePersister.getCurrentGame();
 
-    if (!game) {
-      return null;
+    try{
+      var game = this.gamePersister.getCurrentGame();
+
+      if (!game) {
+        return null;
+      }
+  
+      var serverGame = await this.gameApi.apiGameApiGetGameGet(game.id).toPromise();
+  
+      if (!serverGame) {
+        this.gamePersister.clearSavedGame();
+        return null;
+      }
+  
+      var game = GameFactory.fromServerGame(serverGame, game.currentPlayer);
+  
+      return game;
+    } catch{
+      this.uiService.confirm("There is an issue getting your game from the server.", "Do you want you clear your data and reload?", () => {
+        this.gamePersister.clearSavedGame();
+        this.appPages.reloadApp();
+      });
     }
-
-    var serverGame = await this.gameApi.apiGameApiGetGameGet(game.id).toPromise();
-
-    if (!serverGame) {
-      this.gamePersister.clearSavedGame();
-      return null;
-    }
-
-    var game = GameFactory.fromServerGame(serverGame, game.currentPlayer);
-
-    return game;
   }
 
   async ngOnDestroy () {

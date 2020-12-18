@@ -23,6 +23,11 @@ namespace ImposterGame.CosmosDb
 
         public async override Task<IGame> Create(IGame game)
         {
+            if(game == null)
+            {
+                throw new ArgumentNullException(nameof(game));
+            }
+
             var cacheEntry = _memoryCache.GetOrCreate(GetCacheKeyForGame(game), entry =>
             {
                 return game;
@@ -57,6 +62,11 @@ namespace ImposterGame.CosmosDb
 
             var persisted = await base.Get(easyCode);
 
+            if(persisted == null)
+            {
+                return null;
+            }
+
             var newlyCached = _memoryCache.GetOrCreate(GetCacheKeyForGame(persisted), entry =>
             {
                 return persisted;
@@ -68,12 +78,23 @@ namespace ImposterGame.CosmosDb
         public async override Task<IGame> Save(IGame game)
         {
             var savedGame = await base.Save(game);
+
+            if(savedGame == null)
+            {
+                return null;
+            }
+
             var updated = _memoryCache.Set(GetCacheKeyForGame(savedGame), savedGame);
             return updated;
         }
 
         private string GetCacheKeyForGame(IGame game)
         {
+            if(game == null)
+            {
+                return null;
+            }
+
             return GetCacheKeyForGame(game.Id);
         }
 

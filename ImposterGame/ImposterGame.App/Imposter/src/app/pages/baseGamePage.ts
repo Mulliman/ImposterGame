@@ -34,6 +34,8 @@ export abstract class BaseGamePage implements OnInit {
     }
 
     async ionViewWillEnter(){
+        this.allowedStates = this.setAllowedStates();
+
         this.ticks = new Date().getTime();
 
         console.log("ionViewWillEnter ticks set to - " + this.ticks);
@@ -60,6 +62,7 @@ export abstract class BaseGamePage implements OnInit {
 
         if(!this.isInAllowedState())
         {
+            console.log("Not in allowed state.");
             await this.redirectToMostAppropriatePage();
             return;
         }

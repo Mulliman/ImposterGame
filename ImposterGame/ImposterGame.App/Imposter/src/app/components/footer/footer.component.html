@@ -1,5 +1,5 @@
 <ion-footer no-border *ngIf="isLoaded">
-    <ion-toolbar *ngIf="this.currentGameContext.currentGame">
+    <ion-toolbar *ngIf="this.currentGameContext && this.currentGameContext.currentGame">
     <ion-buttons slot="secondary" *ngIf="helpSection">
       <ion-button color="light" (click)="showHelp()" *ngIf="!pulseHelpButton">
         <div class="pulsable"><ion-icon name="help-circle"></ion-icon> Tips &amp; tricks</div>
@@ -31,7 +31,7 @@
   </ion-toolbar>
   <!-- <ion-button class="no-margin" color="light" *ngIf="showChangeName" expand="full" (click)="clearPlayer()">Not '{{player.name}}'?</ion-button> -->
   
-  <div class="play-button-wrapper" *ngIf="!hidePlayButton && !this.currentGameContext.currentGame">
+  <div class="play-button-wrapper" *ngIf="!hidePlayButton && (!this.currentGameContext || !this.currentGameContext.currentGame)">
     <ion-button class="play-button" expand="block" (click)="playGame()">Play game</ion-button>
   </div>
 </ion-footer>
