@@ -42,7 +42,7 @@
     "@angular-devkit/schematics": "~8.2.1",
     "@angular/cli": "~8.2.1",
     "@angular/compiler": "~8.2.1",
-    "@angular/compiler-cli": "~8.2.1",
+    "@angular/compiler-cli": "~15.0.3",
     "@angular/language-service": "~8.2.1",
     "@babel/preset-env": "^7.8.7",
     "@ionic/angular-toolkit": "~2.0.0",
